@@ -82,6 +82,7 @@
     <string name="menu_pin">FIJAR EN INICIO</string>
     <string name="menu_pin_replaces">FIJAR // REEMPLAZA A %s</string>
     <string name="menu_info">INFORMACIÓN DE LA APP</string>
+    <string name="menu_hide">OCULTAR</string>
     <string name="menu_sound_on">SONIDO ACTIVADO // DESACTIVAR</string>
     <string name="menu_sound_off">SONIDO DESACTIVADO // ACTIVAR</string>
     <string name="menu_input_on">BOTÓN INPUT: SÍ // APAGAR</string>
@@ -159,6 +160,7 @@
     <string name="log_logos_on">LOGOS SÍ</string>
     <string name="log_logos_off">LOGOS NO</string>
     <string name="log_playing">SUENA %s</string>
+    <string name="menu_restore">RESTAURAR APLICACIONES OCULTAS</string>
 
     <string name="panel_title">ENTRADAS</string>
     <string name="panel_hint">ELIGE UNA FUENTE // ATRÁS CERRAR</string>

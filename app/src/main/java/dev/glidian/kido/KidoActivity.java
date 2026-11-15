@@ -60,6 +60,9 @@ import java.util.Map;
 import java.util.Random;
 import java.util.function.Consumer;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * KIDŌ home screen. The screen is a big board with three sections (main panels, a honeycomb of the
  * other apps, inputs and settings). Moving between sections pans the board and the new section draws
@@ -279,14 +282,30 @@ public class KidoActivity extends Activity {
         root.post(() -> intro(zone));
     }
 
+    private Set<String> userHiddenApps() {
+    	return new HashSet<>(prefs.getStringSet("hidden_apps", Collections.emptySet()));
+    }
+    
+    private void setAppHidden(String pkg, boolean hidden) {
+    	Set<String> apps = userHiddenApps();
+    	if (hidden) {
+    		apps.add(pkg);
+    	} else {
+    		apps.remove(pkg);
+    	}
+    	prefs.edit().putStringSet("hidden_apps", apps).apply();
+    }
+
+
     private List<App> loadApps() {
         PackageManager pm = getPackageManager();
         Intent probe = new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LEANBACK_LAUNCHER);
         List<App> out = new ArrayList<>();
         List<String> hidden = Arrays.asList(Kido.HIDDEN);
+        Set<String> userHidden = userHiddenApps();
         for (ResolveInfo ri : pm.queryIntentActivities(probe, 0)) {
             String pkg = ri.activityInfo.packageName;
-            if (pkg.equals(getPackageName()) || hidden.contains(pkg)) continue;
+            if (pkg.equals(getPackageName()) || hidden.contains(pkg) || userHidden.contains(pkg)) continue;
             Intent i = pm.getLeanbackLaunchIntentForPackage(pkg);
             if (i == null) continue;
             String label = String.valueOf(ri.loadLabel(pm));
@@ -1543,6 +1562,7 @@ public class KidoActivity extends Activity {
         if (nowPlaying.active() && app.pkg.equals(nowPlaying.packageName())) {
             rows.add(new String[]{"再生", str(nowPlaying.playing() ? R.string.menu_pause : R.string.menu_play), "playpause"});
         }
+        rows.add(new String[]{"隠蔽", str(R.string.menu_hide), "hide"});
         if (pinned ? pins.size() > 1 : hexViews.size() > 1) rows.add(new String[]{"移動", str(R.string.menu_move), "move"});
         if (pinned) {
             rows.add(new String[]{"解除", str(R.string.menu_unpin), "unpin"});
@@ -1565,6 +1585,9 @@ public class KidoActivity extends Activity {
         rows.add(new String[]{"入力", str(inputKeyOn() ? R.string.menu_input_on : R.string.menu_input_off), "inputkey"});
         rows.add(new String[]{"音楽", str(prefs.getBoolean("nowplaying", false) ? R.string.menu_np_on : R.string.menu_np_off), "nowplaying"});
         rows.add(new String[]{"標記", str(prefs.getBoolean("logos", true) ? R.string.menu_logos_on : R.string.menu_logos_off), "logos"});
+        if (!userHiddenApps().isEmpty()) {
+	        rows.add(new String[]{"復帰", str(R.string.menu_restore), "restore"});
+        }
         String[] themes = getResources().getStringArray(R.array.theme_names);
         for (int i = 0; i < Kido.THEME_KANJI.length; i++) {
             rows.add(new String[]{Kido.THEME_KANJI[i], str(R.string.menu_theme, themes[i]) + (i == Kido.theme ? "  ◀" : ""), "theme" + i});
@@ -1594,6 +1617,14 @@ public class KidoActivity extends Activity {
                 build();
                 if (!sysViews.isEmpty()) sysViews.get(sysViews.size() - 1).requestFocus();
                 return;
+            }
+            if (action.equals("restore")) {
+            	prefs.edit().remove("hidden_apps").apply();
+            	log("RESTORED ALL HIDDEN APPS");
+            	closeMenu();
+            	build();
+            	if (!sysViews.isEmpty()) sysViews.get(sysViews.size() - 1).requestFocus();
+            	return;
             }
             int t = Integer.parseInt(action.substring(5));
             prefs.edit().putInt("theme", t).apply();
@@ -1696,6 +1727,19 @@ public class KidoActivity extends Activity {
                 if (pins.size() >= 5) pins.remove(pins.size() - 1);
                 pins.add(app.pkg);
                 break;
+            case "hide": {
+            	Item item = (Item) menuOrigin.getTag();
+            	int index = item.zone == 1
+            			? hexViews.indexOf(menuOrigin)
+            			: favViews.indexOf(menuOrigin);
+            	int currentZone = item.zone;
+
+            	closeMenu();
+            	setAppHidden(app.pkg, true);
+            	log("HIDDEN // " + app.look.name.toUpperCase(Locale.ROOT));
+            	rebuildAt(currentZone, Math.max(0, index));
+            	return;
+            }
             default:
                 closeMenu();
                 open(new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + app.pkg)));
@@ -1727,6 +1771,36 @@ public class KidoActivity extends Activity {
         }
         if (it.zone == 1) scrollHive(it.row, false);
         target.requestFocus();
+    }
+
+    private void rebuildAt(int targetZone, int index) {
+    	build();
+
+    	View target = null;
+    	List<? extends View> views = targetZone == 0 ? favViews
+    			: targetZone == 1 ? hexViews : sysViews;
+
+    	if (!views.isEmpty()) {
+    		target = views.get(Math.min(index, views.size() - 1));
+    	}
+
+    	// If the section is empty, fall back to another available section.
+    	if (target == null && !favViews.isEmpty()) target = favViews.get(0);
+    	if (target == null && !hexViews.isEmpty()) target = hexViews.get(0);
+    	if (target == null && !sysViews.isEmpty()) target = sysViews.get(sysViews.size() - 1);
+    	if (target == null) return;
+
+    	Item item = (Item) target.getTag();
+    	zone = item.zone;
+
+    	board.animate().cancel();
+    	board.setTranslationX(-Kido.px(ZONES[zone][0]));
+    	board.setTranslationY(-Kido.px(ZONES[zone][1]));
+    	showTabs(zone);
+    	footerZone.setText("SEC-0" + (zone + 1) + " // " + str(ZONE_TABS[zone]));
+
+    	if (zone == 1) scrollHive(item.row, false);
+    	target.requestFocus();
     }
 
     // ---------------------------------------------------------------- moving an app
