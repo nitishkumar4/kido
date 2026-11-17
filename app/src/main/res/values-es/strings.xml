@@ -85,6 +85,8 @@
     <string name="menu_hide">OCULTAR</string>
     <string name="menu_sound_on">SONIDO ACTIVADO // DESACTIVAR</string>
     <string name="menu_sound_off">SONIDO DESACTIVADO // ACTIVAR</string>
+    <string name="menu_auto_on">TEMA AUTOMÁTICO: ON // TURN OFF</string>
+    <string name="menu_auto_off">TEMA AUTOMÁTICO: OFF // TURN ON</string>
     <string name="menu_input_on">BOTÓN INPUT: SÍ // APAGAR</string>
     <string name="menu_input_off">BOTÓN INPUT: NO // ENCENDER</string>
     <string name="menu_theme">TEMA // %s</string>

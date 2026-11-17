@@ -60,7 +60,8 @@ public class KidoDream extends DreamService {
         setFullscreen(true);
         Kido.scale = getResources().getDisplayMetrics().widthPixels / 1920f;
         Kido.loadFonts(this);
-        Kido.applyTheme(getSharedPreferences("kido", MODE_PRIVATE).getInt("theme", 0));
+        // Kido.applyTheme(getSharedPreferences("kido", MODE_PRIVATE).getInt("theme", 0));
+        Kido.loadTheme(this);
 
         FrameLayout root = new FrameLayout(this);
         root.setBackgroundColor(0xFF000000);

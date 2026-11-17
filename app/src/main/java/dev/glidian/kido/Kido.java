@@ -41,6 +41,40 @@ final class Kido {
 
     static int theme = -1;
 
+    // Returns theme index for current time: 0=morning, 1=afternoon, 2=evening
+    static int getAutoThemeIndex() {
+		java.util.Calendar cal = java.util.Calendar.getInstance();
+		int hour = cal.get(java.util.Calendar.HOUR_OF_DAY);
+
+		if (hour >= 6 && hour < 12) return 0; // Morning
+		if (hour >= 12 && hour < 18) return 1; // Afternoon
+		return 2; // Evening & Night
+	}
+
+
+    static int loadTheme(Context context) {
+    	android.content.SharedPreferences prefs =
+    			context.getSharedPreferences("kido", Context.MODE_PRIVATE);
+
+    	int index = prefs.getInt("theme", 0);
+
+    	if (prefs.getBoolean("auto_theme", false)) {
+    		index = getAutoThemeIndex();
+    	}
+
+    	if (index < 0 || index >= PALETTES.length) {
+    		index = 0;
+    	}
+
+    	if (prefs.getInt("theme", 0) != index) {
+    		prefs.edit().putInt("theme", index).apply();
+    	}
+
+    	applyTheme(index);
+    	return index;
+    }
+
+
     static void applyTheme(int index) {
         if (index < 0 || index >= PALETTES.length) index = 0;
         int[] p = PALETTES[index];
