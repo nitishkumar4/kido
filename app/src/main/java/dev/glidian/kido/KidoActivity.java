@@ -1602,16 +1602,19 @@ public class KidoActivity extends Activity {
         rows.add(new String[]{"音楽", str(prefs.getBoolean("nowplaying", false) ? R.string.menu_np_on : R.string.menu_np_off), "nowplaying"});
         rows.add(new String[]{"標記", str(prefs.getBoolean("logos", true) ? R.string.menu_logos_on : R.string.menu_logos_off), "logos"});
 
-        if (!userHiddenApps().isEmpty()) {
-	        rows.add(new String[]{"復帰", str(R.string.menu_restore), "restore"});
-        }
-
         boolean autoTheme = prefs.getBoolean("auto_theme", false);
         rows.add(new String[]{"自動", str(prefs.getBoolean("auto_theme", false) ? R.string.menu_auto_on : R.string.menu_auto_off), "autotheme"});
         
         String[] themes = getResources().getStringArray(R.array.theme_names);
         for (int i = 0; i < Kido.THEME_KANJI.length; i++) {
-            rows.add(new String[]{Kido.THEME_KANJI[i], str(R.string.menu_theme, themes[i]) + (i == Kido.theme ? "  ◀" : ""), "theme" + i});
+            if (!autoTheme) {
+                rows.add(new String[]{Kido.THEME_KANJI[i], str(R.string.menu_theme, themes[i]) + (i == Kido.theme ? "  ◀" : ""), "theme" + i});
+            }
+            
+        }
+
+        if (!userHiddenApps().isEmpty()) {
+	        rows.add(new String[]{"復帰", str(R.string.menu_restore), "restore"});
         }
 
         showMenu(origin, "KIDŌ v" + versionName() + " // GLIDIAN.DEV", rows, action -> {
@@ -1661,7 +1664,7 @@ public class KidoActivity extends Activity {
 
             	closeMenu();
             	build();
-            	if (!sysViews.isEmpty()) sysViews.get(sysViews.size() - 1).requestFocus();
+            	//if (!sysViews.isEmpty()) sysViews.get(sysViews.size() - 1).requestFocus();
             	return;
             }
 
