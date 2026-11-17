@@ -195,7 +195,8 @@ public class KidoActivity extends Activity {
         root.setBackgroundColor(Kido.VOID);
         setContentView(root);
         prefs = getSharedPreferences("kido", MODE_PRIVATE);
-        Kido.applyTheme(prefs.getInt("theme", 0));
+        //Kido.applyTheme(prefs.getInt("theme", 0));
+        Kido.loadTheme(this);
         beeps = new Beeps(prefs.getBoolean("sound", true));
         nowPlaying = new NowPlaying(this, handler, this::showNowPlaying);
         build();
@@ -1483,6 +1484,19 @@ public class KidoActivity extends Activity {
     protected void onResume() {
         super.onResume();
         resumed = true;
+
+        boolean themeChanged = false;
+
+        if (prefs.getBoolean("auto_theme", false)) {
+	        int themeIndex = Kido.getAutoThemeIndex();
+
+	        if (themeIndex != Kido.theme) {
+		        Kido.loadTheme(this);
+		        build();
+		        themeChanged = true;
+	        }
+        }
+        
         handler.removeCallbacksAndMessages(null);
         handler.postDelayed(goIdle, IDLE_MS);
         handler.post(dataTick);
@@ -1493,6 +1507,8 @@ public class KidoActivity extends Activity {
             appsChanged = false;
             Item last = lastFocused != null ? (Item) lastFocused.getTag() : null;
             rebuild(last != null && last.app != null ? last.app.pkg : null);
+        } else if (themeChanged) {
+	        if (!favViews.isEmpty()) favViews.get(0).requestFocus();
         } else if (lastFocused != null) {
             lastFocused.requestFocus();
         }
@@ -1585,13 +1601,22 @@ public class KidoActivity extends Activity {
         rows.add(new String[]{"入力", str(inputKeyOn() ? R.string.menu_input_on : R.string.menu_input_off), "inputkey"});
         rows.add(new String[]{"音楽", str(prefs.getBoolean("nowplaying", false) ? R.string.menu_np_on : R.string.menu_np_off), "nowplaying"});
         rows.add(new String[]{"標記", str(prefs.getBoolean("logos", true) ? R.string.menu_logos_on : R.string.menu_logos_off), "logos"});
+
+        boolean autoTheme = prefs.getBoolean("auto_theme", false);
+        rows.add(new String[]{"自動", str(prefs.getBoolean("auto_theme", false) ? R.string.menu_auto_on : R.string.menu_auto_off), "autotheme"});
+        
+        String[] themes = getResources().getStringArray(R.array.theme_names);
+        for (int i = 0; i < Kido.THEME_KANJI.length; i++) {
+            if (!autoTheme) {
+                rows.add(new String[]{Kido.THEME_KANJI[i], str(R.string.menu_theme, themes[i]) + (i == Kido.theme ? "  ◀" : ""), "theme" + i});
+            }
+            
+        }
+
         if (!userHiddenApps().isEmpty()) {
 	        rows.add(new String[]{"復帰", str(R.string.menu_restore), "restore"});
         }
-        String[] themes = getResources().getStringArray(R.array.theme_names);
-        for (int i = 0; i < Kido.THEME_KANJI.length; i++) {
-            rows.add(new String[]{Kido.THEME_KANJI[i], str(R.string.menu_theme, themes[i]) + (i == Kido.theme ? "  ◀" : ""), "theme" + i});
-        }
+
         showMenu(origin, "KIDŌ v" + versionName() + " // GLIDIAN.DEV", rows, action -> {
             if (action.equals("sound")) {
                 closeMenu();
@@ -1626,8 +1651,25 @@ public class KidoActivity extends Activity {
             	if (!sysViews.isEmpty()) sysViews.get(sysViews.size() - 1).requestFocus();
             	return;
             }
+            if (action.equals("autotheme")) {
+            	boolean on = !prefs.getBoolean("auto_theme", false);
+            	int themeIndex = on ? Kido.getAutoThemeIndex() : Kido.theme;
+
+            	prefs.edit()
+            		.putBoolean("auto_theme", on)
+            		.putInt("theme", themeIndex)
+            		.apply();
+
+            	if (on) Kido.applyTheme(themeIndex);
+
+            	closeMenu();
+            	build();
+            	//if (!sysViews.isEmpty()) sysViews.get(sysViews.size() - 1).requestFocus();
+            	return;
+            }
+
             int t = Integer.parseInt(action.substring(5));
-            prefs.edit().putInt("theme", t).apply();
+            prefs.edit().putBoolean("auto_theme", false).putInt("theme", t).apply();
             Kido.applyTheme(t);
             log(str(R.string.log_theme, themes[t]));
             build();
