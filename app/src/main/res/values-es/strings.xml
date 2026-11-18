@@ -144,6 +144,9 @@
 
     <string name="dream_title">EN ESPERA // KIDŌ v%s</string>
     <string name="dream_data">ACTIVO %1$02d:%2$02d:%3$02d   //   MEM LIBRE %4$d MB   //   SIN ACTIVIDAD</string>
+    
+    <string name="menu_main_order_manual">ORDEN PRINCIPAL // MANUAL</string>
+	<string name="menu_main_order_recent">ORDEN PRINCIPAL // RECIENTE</string>
 
     <string name="np_service_name">KIDŌ En reproducción</string>
     <string name="now_playing">EN REPRODUCCIÓN</string>

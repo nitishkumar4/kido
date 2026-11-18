@@ -100,6 +100,7 @@ public class KidoActivity extends Activity {
     private TextView dateText;
     private View menuOrigin;
     private boolean appsChanged;
+    private boolean mainOrderChanged;
     private boolean holding;
     private long lastMoveAt, landedAt;
     private View pendingStatus;
@@ -250,6 +251,11 @@ public class KidoActivity extends Activity {
         for (String pkg : pins(apps)) {
             for (App a : apps) if (a.pkg.equals(pkg)) favs.add(a);
         }
+		if ("recent".equals(prefs.getString("main_order", "manual"))) {
+			Collections.sort(favs, (a, b) -> Long.compare(
+				prefs.getLong("last_opened:" + b.pkg, 0L),
+				prefs.getLong("last_opened:" + a.pkg, 0L)));
+		}         
         for (App a : apps) if (!favs.contains(a)) rest.add(a);
         // The honeycomb keeps the order set with MOVER; apps it has never seen go last, alphabetically.
         List<String> order = savedOrder();
@@ -1334,7 +1340,7 @@ public class KidoActivity extends Activity {
                 states.get(k).setTextColor(Kido.GREEN);
             }, 90L + i * 70L);
         }
-        handler.postDelayed(() -> open(app.launch), 90L + phases.length * 70L + 120L);
+        handler.postDelayed(() -> openApp(app), 90L + phases.length * 70L + 120L);
     }
 
     private void openInput(String inputId, String label) {
@@ -1351,6 +1357,23 @@ public class KidoActivity extends Activity {
     private void flashToast(String kanji, String message) {
         toast.setText(kanji + "   " + message);
     }
+		
+	private void openApp(App app) {
+		Intent intent = new Intent(app.launch).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		try {
+			startActivity(intent);
+			prefs.edit().putLong("last_opened:" + app.pkg,
+				System.currentTimeMillis()).apply();
+
+			if ("recent".equals(prefs.getString("main_order", "manual"))
+					&& shownPins().contains(app.pkg)) {
+				mainOrderChanged = true;
+			}
+		} catch (ActivityNotFoundException e) {
+			launch.setVisibility(View.GONE);
+			Toast.makeText(this, R.string.cant_open, Toast.LENGTH_SHORT).show();
+		}
+	}
 
     private void open(Intent i) {
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1503,11 +1526,12 @@ public class KidoActivity extends Activity {
         launch.setVisibility(View.GONE);
         hideAlert.run();
         if (prefs.getBoolean("nowplaying", false)) nowPlaying.start();
-        if (appsChanged) {
-            appsChanged = false;
-            Item last = lastFocused != null ? (Item) lastFocused.getTag() : null;
-            rebuild(last != null && last.app != null ? last.app.pkg : null);
-        } else if (themeChanged) {
+		if (appsChanged || mainOrderChanged) {
+			appsChanged = false;
+			mainOrderChanged = false;
+			Item last = lastFocused != null ? (Item) lastFocused.getTag() : null;
+			rebuild(last != null && last.app != null ? last.app.pkg : null);
+		} else if (themeChanged) {
 	        if (!favViews.isEmpty()) favViews.get(0).requestFocus();
         } else if (lastFocused != null) {
             lastFocused.requestFocus();
@@ -1602,6 +1626,12 @@ public class KidoActivity extends Activity {
         rows.add(new String[]{"音楽", str(prefs.getBoolean("nowplaying", false) ? R.string.menu_np_on : R.string.menu_np_off), "nowplaying"});
         rows.add(new String[]{"標記", str(prefs.getBoolean("logos", true) ? R.string.menu_logos_on : R.string.menu_logos_off), "logos"});
 
+		rows.add(new String[]{"整列",
+			str("recent".equals(prefs.getString("main_order", "manual"))
+				? R.string.menu_main_order_recent
+				: R.string.menu_main_order_manual),
+			"mainorder"});
+	
         boolean autoTheme = prefs.getBoolean("auto_theme", false);
         rows.add(new String[]{"自動", str(prefs.getBoolean("auto_theme", false) ? R.string.menu_auto_on : R.string.menu_auto_off), "autotheme"});
         
@@ -1650,7 +1680,16 @@ public class KidoActivity extends Activity {
             	build();
             	if (!sysViews.isEmpty()) sysViews.get(sysViews.size() - 1).requestFocus();
             	return;
-            }
+            }	
+			if (action.equals("mainorder")) {
+				String next = "recent".equals(prefs.getString("main_order", "manual"))
+					? "manual" : "recent";
+				prefs.edit().putString("main_order", next).apply();
+				closeMenu();
+				build();
+				if (!sysViews.isEmpty()) sysViews.get(sysViews.size() - 1).requestFocus();
+				return;
+			}
             if (action.equals("autotheme")) {
             	boolean on = !prefs.getBoolean("auto_theme", false);
             	int themeIndex = on ? Kido.getAutoThemeIndex() : Kido.theme;
