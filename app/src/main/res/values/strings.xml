@@ -86,6 +86,8 @@
     <string name="idle">IDLE</string>
 
     <!-- Options menus -->
+    <string name="menu_main_order_manual">MAIN SELECTION ORDER // MANUAL</string>
+	<string name="menu_main_order_recent">MAIN SELECTION ORDER // RECENT</string>
     <string name="hold_ok_options">HOLD OK // OPTIONS</string>
     <string name="options">OPTIONS</string>
     <string name="menu_move">MOVE</string>
