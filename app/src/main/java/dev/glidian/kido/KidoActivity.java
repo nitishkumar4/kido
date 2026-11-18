@@ -1703,7 +1703,7 @@ public class KidoActivity extends Activity {
 
             	closeMenu();
             	build();
-            	//if (!sysViews.isEmpty()) sysViews.get(sysViews.size() - 1).requestFocus();
+            	if (!sysViews.isEmpty()) sysViews.get(sysViews.size() - 1).requestFocus();
             	return;
             }
 
