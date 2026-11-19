@@ -97,6 +97,7 @@ public class KidoActivity extends Activity {
     private FrameLayout root, board, launch, menu, hud;
     private MusicView musicView;
     private View musicReturn;
+    private View musicStatusReturn;
     private MusicPlayer musicPlayer;
     private static final int REQUEST_MUSIC_PERMISSION = 7101;
     private View glow;
@@ -1577,6 +1578,7 @@ public class KidoActivity extends Activity {
             animateMusicViewIn();
             return;
         }
+        musicStatusReturn = lastFocused;
         log("SCANNING LOCAL FILES...");
         new Thread(() -> {
             scanDownloadsForAudio();
@@ -1641,8 +1643,15 @@ public class KidoActivity extends Activity {
         hud.setVisibility(View.VISIBLE);
     }
 
-    private void updateMusicFocus(String title) {
-        log(str(R.string.log_focus, title.toUpperCase(Locale.ROOT)));
+    private void updateMusicFocus(MusicLibrary.Track track) {
+        log(str(R.string.log_focus, track.title.toUpperCase(Locale.ROOT)));
+        long seconds = Math.max(0, track.duration / 1000);
+        String duration = String.format(Locale.ROOT, "%02d:%02d", seconds / 60, seconds % 60);
+        String artist = track.artist == null || track.artist.trim().isEmpty()
+                || track.artist.equals("<unknown>") ? "UNKNOWN ARTIST"
+                : track.artist.toUpperCase(Locale.ROOT);
+        setStatus("音楽", track.format, artist + " // " + duration,
+                "NOW SELECTED", Kido.ORANGE);
     }
 
     private void restoreMusicHud() {
@@ -1680,6 +1689,10 @@ public class KidoActivity extends Activity {
                     board.setTranslationX(0);
                     board.setTranslationY(0);
                     restoreMusicHud();
+                    View statusTarget = musicStatusReturn;
+                    musicStatusReturn = null;
+                    if (statusTarget == null && !favViews.isEmpty()) statusTarget = favViews.get(0);
+                    if (statusTarget != null) showStatus(statusTarget);
                     hud.setVisibility(View.VISIBLE);
                     scan.setVisibility(View.VISIBLE);
                     View target = musicReturn != null ? musicReturn
