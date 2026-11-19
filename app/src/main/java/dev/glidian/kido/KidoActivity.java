@@ -1588,7 +1588,7 @@ public class KidoActivity extends Activity {
                 }
                 musicView = new MusicView(this, tracks, track -> {
                     if (musicPlayer == null) musicPlayer = new MusicPlayer(this);
-                    if (!musicPlayer.play(track.uri)) {
+                    if (!musicPlayer.play(track.uri, track.title)) {
                         Toast.makeText(this, "Unable to play: " + track.title, Toast.LENGTH_SHORT).show();
                     }
                 });
