@@ -102,6 +102,9 @@ public class KidoActivity extends Activity {
     private View glow;
     private FrameLayout plate;
     private TextView plateKanji, plateEn, subLeft, subRight, footerZone, toast;
+    private View footerMark;
+    private int[] musicHudVisibility;
+    private String previousFooterZone;
     private GradientDrawable plateBg, subBg, glowBg;
     private final TextView[] tabText = new TextView[6];
     private final GlowView[] tabBar = new GlowView[3];
@@ -830,6 +833,7 @@ public class KidoActivity extends Activity {
         mark.addView(text("KIDŌ", Kido.condBold, 22, Kido.DIM, 0.16f));
         mark.addView(gap(10));
         mark.addView(text("v" + versionName(), Kido.mono, 20, Kido.DIM, 0.08f));
+        footerMark = mark;
         place(hud, mark, 100, 1046, -1, -1);
         ticker = text("", Kido.mono, 18, Kido.DIM, 0.06f);
         ticker.setSingleLine(true);
@@ -1573,12 +1577,14 @@ public class KidoActivity extends Activity {
             musicView.requestFocus();
             return;
         }
-        Toast.makeText(this, "Scanning local files…", Toast.LENGTH_SHORT).show();
+        log("SCANNING LOCAL FILES...");
         new Thread(() -> {
             scanDownloadsForAudio();
             List<MusicLibrary.Track> tracks = MusicLibrary.load(this);
             runOnUiThread(() -> {
                 if (isFinishing() || root == null) return;
+                log(tracks.isEmpty() ? "NO LOCAL TRACKS FOUND"
+                        : tracks.size() + " LOCAL TRACKS FOUND");
                 musicView = new MusicView(this, tracks, track -> {
                     if (musicPlayer == null) musicPlayer = new MusicPlayer(this);
                     if (!musicPlayer.toggle(track.uri, track.title, track.artist, track.duration)) {
@@ -1586,7 +1592,7 @@ public class KidoActivity extends Activity {
                     }
                 });
                 board.setVisibility(View.GONE);
-                hud.setVisibility(View.GONE);
+                showMusicFooterOnly();
                 scan.setVisibility(View.GONE);
                 launch.setVisibility(View.GONE);
                 if (alert != null) alert.setVisibility(View.GONE);
@@ -1596,11 +1602,39 @@ public class KidoActivity extends Activity {
         }, "Kido-MusicScan").start();
     }
 
+    private void showMusicFooterOnly() {
+        previousFooterZone = footerZone.getText().toString();
+        footerZone.setText("SEC-04 // MUSIC LIBRARY");
+        musicHudVisibility = new int[hud.getChildCount()];
+        for (int i = 0; i < hud.getChildCount(); i++) {
+            View child = hud.getChildAt(i);
+            musicHudVisibility[i] = child.getVisibility();
+            if (child != footerMark && child != ticker && child != footerZone) {
+                child.setVisibility(View.GONE);
+            }
+        }
+        hud.setVisibility(View.VISIBLE);
+    }
+
+    private void restoreMusicHud() {
+        if (musicHudVisibility != null && hud != null) {
+            for (int i = 0; i < Math.min(musicHudVisibility.length, hud.getChildCount()); i++) {
+                hud.getChildAt(i).setVisibility(musicHudVisibility[i]);
+            }
+            musicHudVisibility = null;
+        }
+        if (previousFooterZone != null && footerZone != null) {
+            footerZone.setText(previousFooterZone);
+            previousFooterZone = null;
+        }
+    }
+
     private void closeMusicView() {
         if (musicView != null) {
             root.removeView(musicView);
             musicView = null;
         }
+        restoreMusicHud();
         board.setVisibility(View.VISIBLE);
         hud.setVisibility(View.VISIBLE);
         scan.setVisibility(View.VISIBLE);
