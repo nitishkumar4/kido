@@ -1936,6 +1936,7 @@ public class KidoActivity extends Activity {
         }
         menu.addView(panel, new FrameLayout.LayoutParams(Kido.px(720), -2, Gravity.CENTER));
         root.addView(menu, root.indexOfChild(scan), match());
+        menu.bringToFront();
         menu.setAlpha(0f);
         menu.animate().alpha(1f).setDuration(150).start();
         options.get(0).requestFocus();
