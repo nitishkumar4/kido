@@ -39,7 +39,7 @@ final class MusicView extends FrameLayout {
 	private boolean rowsMoved;
 
 	MusicView(Context context, List<MusicLibrary.Track> tracks, Consumer<MusicLibrary.Track> onSelect,
-			Consumer<String> onFocus, View nowPlayingTarget, Consumer<View> onNowPlayingFocus) {
+			Consumer<MusicLibrary.Track> onFocus, View nowPlayingTarget, Consumer<View> onNowPlayingFocus) {
 		super(context);
 		this.nowPlayingTarget = nowPlayingTarget;
 		this.onNowPlayingFocus = onNowPlayingFocus;
@@ -160,7 +160,7 @@ final class MusicView extends FrameLayout {
 
 				tile.setOnFocusChangeListener((v, focused) -> {
 					if (focused) {
-						onFocus.accept(track.title);
+						onFocus.accept(track);
 						selectedTitle.setText(track.title);
 						selectedArtist.setText(artistName(track));
 						selectedMeta.setText(trackMeta(track));
