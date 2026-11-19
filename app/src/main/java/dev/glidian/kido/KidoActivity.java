@@ -1574,7 +1574,7 @@ public class KidoActivity extends Activity {
     private void loadMusicLibrary() {
         if (musicView != null) {
             musicView.setVisibility(View.VISIBLE);
-            musicView.requestFocus();
+            animateMusicViewIn();
             return;
         }
         log("SCANNING LOCAL FILES...");
@@ -1596,11 +1596,25 @@ public class KidoActivity extends Activity {
                 scan.setVisibility(View.GONE);
                 launch.setVisibility(View.GONE);
                 if (alert != null) alert.setVisibility(View.GONE);
+                musicView.setTranslationX(-Kido.px(1920));
                 root.addView(musicView, new FrameLayout.LayoutParams(-1, -1));
                 hud.bringToFront();
-                musicView.post(musicView::focusFirstTrack);
+                animateMusicViewIn();
             });
         }, "Kido-MusicScan").start();
+    }
+
+    private void animateMusicViewIn() {
+        musicView.post(() -> {
+            if (musicView == null || musicView.getVisibility() != View.VISIBLE) return;
+            musicView.setTranslationX(-root.getWidth());
+            musicView.animate().translationX(0).setDuration(620).setInterpolator(fluid)
+                    .withEndAction(() -> {
+                        if (musicView != null && musicView.getVisibility() == View.VISIBLE) {
+                            musicView.focusFirstTrack();
+                        }
+                    }).start();
+        });
     }
 
     private void showMusicFooterOnly() {
