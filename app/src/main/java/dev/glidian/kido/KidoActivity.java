@@ -89,9 +89,10 @@ public class KidoActivity extends Activity {
     // Starts fast and settles softly: the motion answers the remote at once, so the TV feels quick.
     private final PathInterpolator fluid = new PathInterpolator(0.2f, 0f, 0f, 1f);
 
-    private FrameLayout root, board, launch, menu;
+    private FrameLayout root, board, launch, menu, hud;
     private MusicView musicView;
     private View musicReturn;
+    private MusicPlayer musicPlayer;
     private static final int REQUEST_MUSIC_PERMISSION = 7101;
     private View glow;
     private FrameLayout plate;
@@ -222,6 +223,7 @@ public class KidoActivity extends Activity {
         if (tvInputs != null) tvInputs.unregisterCallback(inputWatch);
         unregisterReceiver(packageWatch);
         beeps.release();
+        if (musicPlayer != null) musicPlayer.release();
         super.onDestroy();
     }
 
@@ -229,6 +231,8 @@ public class KidoActivity extends Activity {
 
     private void build() {
         root.removeAllViews();
+        musicView = null;
+        musicReturn = null;
         favViews.clear();
         hexViews.clear();
         hints.clear();
@@ -737,7 +741,7 @@ public class KidoActivity extends Activity {
     }
 
     private void buildHud() {
-        FrameLayout hud = new FrameLayout(this);
+        hud = new FrameLayout(this);
         root.addView(hud, match());
         View mask = new View(this);
         mask.setBackground(new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
@@ -1519,10 +1523,10 @@ public class KidoActivity extends Activity {
     }
 
     private void openMusicView() {
+        musicReturn = getCurrentFocus();
         String permission = Build.VERSION.SDK_INT >= 33
                 ? Manifest.permission.READ_MEDIA_AUDIO : Manifest.permission.READ_EXTERNAL_STORAGE;
         if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
-            musicReturn = getCurrentFocus();
             requestPermissions(new String[]{permission}, REQUEST_MUSIC_PERMISSION);
             return;
         }
@@ -1540,16 +1544,31 @@ public class KidoActivity extends Activity {
             List<MusicLibrary.Track> tracks = MusicLibrary.load(this);
             runOnUiThread(() -> {
                 if (isFinishing() || root == null) return;
-                musicView = new MusicView(this, tracks, track ->
-                        Toast.makeText(this, "Selected: " + track.title, Toast.LENGTH_SHORT).show());
+                musicView = new MusicView(this, tracks, track -> {
+                    if (musicPlayer == null) musicPlayer = new MusicPlayer(this);
+                    if (!musicPlayer.play(track.uri)) {
+                        Toast.makeText(this, "Unable to play: " + track.title, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                board.setVisibility(View.GONE);
+                hud.setVisibility(View.GONE);
+                scan.setVisibility(View.GONE);
+                launch.setVisibility(View.GONE);
+                if (alert != null) alert.setVisibility(View.GONE);
                 root.addView(musicView, new FrameLayout.LayoutParams(-1, -1));
-                musicView.requestFocus();
+                musicView.post(musicView::focusFirstTrack);
             });
         }, "Kido-MusicScan").start();
     }
 
     private void closeMusicView() {
-        if (musicView != null) musicView.setVisibility(View.GONE);
+        if (musicView != null) {
+            root.removeView(musicView);
+            musicView = null;
+        }
+        board.setVisibility(View.VISIBLE);
+        hud.setVisibility(View.VISIBLE);
+        scan.setVisibility(View.VISIBLE);
         View target = musicReturn != null ? musicReturn : favViews.isEmpty() ? null : favViews.get(0);
         if (target != null) target.requestFocus();
         musicReturn = null;
