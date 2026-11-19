@@ -295,6 +295,12 @@ final class MusicView extends FrameLayout {
 		return track.format + "  //  " + duration;
 	}
 
+	private View gap(int width) {
+		View view = new View(getContext());
+		view.setLayoutParams(new LinearLayout.LayoutParams(Kido.px(width), 1));
+		return view;
+	}
+
 	private TextView label(String value, android.graphics.Typeface typeface, int size, int color) {
 		return label(value, typeface, size, color, 0f);
 	}
