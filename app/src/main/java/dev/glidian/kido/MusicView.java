@@ -86,7 +86,7 @@ final class MusicView extends FrameLayout {
             grid.addView(row);
         }
 
-        place(this, label("BACK  //  MAIN", Kido.mono, 18, Kido.DIM), 110, 970, 500, 34);
+        place(label("BACK  //  MAIN", Kido.mono, 18, Kido.DIM), 110, 970, 500, 34);
         if (tracks.isEmpty()) {
             TextView empty = label("Open MusicView after adding audio to local storage.",
                     Kido.mono, 20, Kido.DIM);
