@@ -88,4 +88,18 @@ final class MusicLibrary {
 
         return tracks;
     }
+
+    private static String audioFormat(String displayName, String mimeType) {
+        if (displayName != null) {
+            int extension = displayName.lastIndexOf('.');
+            if (extension >= 0 && extension < displayName.length() - 1) {
+                return displayName.substring(extension + 1).toUpperCase(Locale.ROOT);
+            }
+        }
+        if (mimeType != null && mimeType.startsWith("audio/")) {
+            return mimeType.substring("audio/".length()).toUpperCase(Locale.ROOT);
+        }
+        return "AUDIO";
+    }
+
 }
