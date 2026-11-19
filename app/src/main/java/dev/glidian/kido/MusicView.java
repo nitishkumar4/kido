@@ -96,8 +96,6 @@ final class MusicView extends FrameLayout {
             listPanel.setFocusable(false);
             // The first tile is the entry point; subsequent tiles follow in reading order.
             gridScroll.setNextFocusDownId(View.NO_ID);
-            addView(gridScroll);
-            addView(listPanel);
             gridScroll.post(() -> {
                 View first = grid.getChildAt(0);
                 if (first instanceof LinearLayout && ((LinearLayout) first).getChildCount() > 0) {
