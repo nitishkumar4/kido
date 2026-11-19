@@ -31,12 +31,14 @@ final class MusicLibrary {
         final String title;
         final String artist;
         final long duration;
+        final String format;
 
-        Track(Uri uri, String title, String artist, long duration) {
+        Track(Uri uri, String title, String artist, long duration, String format) {
             this.uri = uri;
             this.title = title;
             this.artist = artist;
             this.duration = duration;
+            this.format = format;
         }
     }
 
@@ -44,12 +46,10 @@ final class MusicLibrary {
         List<Track> tracks = new ArrayList<>();
         Uri collection = MediaStore.Files.getContentUri("external");
         String selection = "(" + MediaStore.Files.FileColumns.MEDIA_TYPE + "=?"
-                + " OR " + MediaStore.MediaColumns.MIME_TYPE + " LIKE ?"
-                + " OR " + MediaStore.MediaColumns.DISPLAY_NAME + " LIKE ?)";
+                + " OR " + MediaStore.MediaColumns.MIME_TYPE + " LIKE ?)";
         String[] selectionArgs = {
                 String.valueOf(MediaStore.Files.FileColumns.MEDIA_TYPE_AUDIO),
-                "audio/%",
-                "%.mp3"
+                "audio/%"
         };
         String sortOrder = MediaStore.MediaColumns.TITLE + " COLLATE NOCASE ASC";
 
@@ -68,14 +68,19 @@ final class MusicLibrary {
                 String title = cursor.getString(titleColumn);
                 if (title == null || title.trim().isEmpty()) {
                     title = cursor.getString(nameColumn);
-                    if (title != null && title.toLowerCase(Locale.ROOT).endsWith(".mp3")) {
-                        title = title.substring(0, title.length() - 4);
+                    if (title != null) {
+                        int extension = title.lastIndexOf('.');
+                        if (extension > 0) title = title.substring(0, extension);
                     }
                 }
                 String artist = cursor.getString(artistColumn);
                 long duration = cursor.getLong(durationColumn);
+                String displayName = cursor.getString(nameColumn);
+                String mimeType = cursor.getString(cursor.getColumnIndexOrThrow(
+                        MediaStore.MediaColumns.MIME_TYPE));
+                String format = audioFormat(displayName, mimeType);
                 tracks.add(new Track(ContentUris.withAppendedId(collection, id),
-                        title == null ? "Unknown track" : title, artist, duration));
+                        title == null ? "Unknown track" : title, artist, duration, format));
             }
         } catch (Exception e) {
             Log.e(TAG, "Unable to query indexed audio files", e);
