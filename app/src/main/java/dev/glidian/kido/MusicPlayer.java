@@ -65,7 +65,6 @@ final class MusicPlayer {
 		session.setMetadata(new MediaMetadata.Builder()
 				.putString(MediaMetadata.METADATA_KEY_TITLE, title)
 				.build());
-		session.setActive(true);
 		player = new MediaPlayer();
 		try {
 			player.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -73,6 +72,7 @@ final class MusicPlayer {
 			player.setOnPreparedListener(mp -> {
 				prepared = true;
 				if (focusHeld) mp.start();
+				session.setActive(true);
 				updateState();
 			});
 			player.setOnCompletionListener(mp -> stop());
