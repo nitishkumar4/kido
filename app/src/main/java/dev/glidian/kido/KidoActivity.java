@@ -1591,12 +1591,12 @@ public class KidoActivity extends Activity {
                         Toast.makeText(this, "Unable to play: " + track.title, Toast.LENGTH_SHORT).show();
                     }
                 }, this::updateMusicFocus, npPanel, view -> npReturn = view);
-                board.setVisibility(View.GONE);
                 showMusicFooterOnly();
                 scan.setVisibility(View.GONE);
                 launch.setVisibility(View.GONE);
                 if (alert != null) alert.setVisibility(View.GONE);
-                musicView.setTranslationX(-Kido.px(1920));
+                musicView.setTranslationX(-root.getWidth());
+                musicView.setTranslationY(root.getHeight());
                 root.addView(musicView, new FrameLayout.LayoutParams(-1, -1));
                 hud.bringToFront();
                 animateMusicViewIn();
@@ -1607,10 +1607,19 @@ public class KidoActivity extends Activity {
     private void animateMusicViewIn() {
         musicView.post(() -> {
             if (musicView == null || musicView.getVisibility() != View.VISIBLE) return;
-            musicView.setTranslationX(-root.getWidth());
-            musicView.animate().translationX(0).setDuration(620).setInterpolator(fluid)
+            float width = root.getWidth(), height = root.getHeight();
+            musicView.setTranslationX(-width);
+            musicView.setTranslationY(height);
+            board.setVisibility(View.VISIBLE);
+            board.animate().translationX(width).translationY(-height)
+                    .setDuration(620).setInterpolator(fluid).start();
+            musicView.animate().translationX(0).translationY(0)
+                    .setDuration(620).setInterpolator(fluid)
                     .withEndAction(() -> {
                         if (musicView != null && musicView.getVisibility() == View.VISIBLE) {
+                            board.setVisibility(View.GONE);
+                            board.setTranslationX(0);
+                            board.setTranslationY(0);
                             musicView.focusFirstTrack();
                         }
                     }).start();
@@ -1651,6 +1660,9 @@ public class KidoActivity extends Activity {
             musicView = null;
         }
         restoreMusicHud();
+        board.animate().cancel();
+        board.setTranslationX(0);
+        board.setTranslationY(0);
         board.setVisibility(View.VISIBLE);
         hud.setVisibility(View.VISIBLE);
         scan.setVisibility(View.VISIBLE);
