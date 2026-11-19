@@ -48,15 +48,15 @@ final class MusicPlayer {
 		});
 	}
 
-	boolean toggle(Uri uri, String title) {
+	boolean toggle(Uri uri, String title, String artist, long duration) {
 		if (player != null && uri.equals(currentUri) && prepared && player.isPlaying()) {
 			pause();
 			return true;
 		}
-		return play(uri, title);
+		return play(uri, title, artist, duration);
 	}
 
-	boolean play(Uri uri, String title) {
+	boolean play(Uri uri, String title, String artist, long duration) {
 		if (player != null && uri.equals(currentUri)) {
 			if (prepared && !player.isPlaying()) {
 				if (!requestFocus()) return false;
@@ -72,6 +72,8 @@ final class MusicPlayer {
 		currentUri = uri;
 		session.setMetadata(new MediaMetadata.Builder()
 				.putString(MediaMetadata.METADATA_KEY_TITLE, title)
+				.putString(MediaMetadata.METADATA_KEY_ARTIST, artist)
+				.putLong(MediaMetadata.METADATA_KEY_DURATION, duration)
 				.build());
 		player = new MediaPlayer();
 		try {
