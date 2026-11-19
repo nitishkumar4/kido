@@ -64,7 +64,7 @@ final class MusicView extends FrameLayout {
             for (int i = start; i < Math.min(start + 4, tracks.size()); i++) {
                 final int index = i;
                 MusicLibrary.Track track = tracks.get(i);
-                Kido.Look look = new Kido.Look("MP3", "音楽", "LOCAL AUDIO", Kido.GREEN, 0);
+                Kido.Look look = new Kido.Look(track.format, "音楽", "LOCAL AUDIO", Kido.GREEN, 0);
                 HexView tile = new HexView(context, look, String.format(Locale.ROOT, "%02d", i + 1));
                 LinearLayout.LayoutParams tileParams = new LinearLayout.LayoutParams(Kido.px(205), Kido.px(235));
                 tileParams.setMargins(0, 0, Kido.px(18), Kido.px(12));
