@@ -243,8 +243,6 @@ final class MusicView extends FrameLayout {
 					+ "TR." + String.format(Locale.ROOT, "%02d ", i + 1)
 					+ trackTitles.get(i).toUpperCase(Locale.ROOT));
 			names.get(i).setTextColor(active ? Kido.INK : Kido.DIM);
-			names.get(i).setBackgroundColor(active
-					? Kido.withAlpha(Kido.GREEN, 0.16f) : Color.TRANSPARENT);
 		}
 	}
 
