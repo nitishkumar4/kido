@@ -20,6 +20,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
+import android.media.MediaScannerConnection;
 import android.media.tv.TvContract;
 import android.media.tv.TvInputInfo;
 import android.media.tv.TvInputManager;
@@ -30,6 +31,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
@@ -50,6 +52,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,6 +63,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 import java.util.HashSet;
@@ -1533,6 +1538,35 @@ public class KidoActivity extends Activity {
         loadMusicLibrary();
     }
 
+
+    /** Ask Android's media scanner to index audio files newly added to Downloads. */
+    private void scanDownloadsForAudio() {
+        File downloads = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        File[] files = downloads.listFiles();
+        if (files == null || files.length == 0) return;
+
+        List<String> paths = new ArrayList<>();
+        for (File file : files) {
+            if (!file.isFile()) continue;
+            String name = file.getName().toLowerCase(Locale.ROOT);
+            if (name.endsWith(".mp3") || name.endsWith(".flac") || name.endsWith(".m4a")
+                    || name.endsWith(".aac") || name.endsWith(".ogg") || name.endsWith(".opus")
+                    || name.endsWith(".wav") || name.endsWith(".wma") || name.endsWith(".amr")) {
+                paths.add(file.getAbsolutePath());
+            }
+        }
+        if (paths.isEmpty()) return;
+
+        CountDownLatch scanned = new CountDownLatch(paths.size());
+        MediaScannerConnection.scanFile(this, paths.toArray(new String[0]), null,
+                (path, uri) -> scanned.countDown());
+        try {
+            scanned.await(10, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
     private void loadMusicLibrary() {
         if (musicView != null) {
             musicView.setVisibility(View.VISIBLE);
@@ -1541,6 +1575,7 @@ public class KidoActivity extends Activity {
         }
         Toast.makeText(this, "Loading local music…", Toast.LENGTH_SHORT).show();
         new Thread(() -> {
+            scanDownloadsForAudio();
             List<MusicLibrary.Track> tracks = MusicLibrary.load(this);
             runOnUiThread(() -> {
                 if (isFinishing() || root == null) return;
