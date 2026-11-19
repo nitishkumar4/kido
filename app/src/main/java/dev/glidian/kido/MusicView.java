@@ -95,12 +95,12 @@ final class MusicView extends FrameLayout {
 		sectionTitle.addView(label("SEC-04", Kido.mono, 22, Kido.DIM));
 		place(sectionTitle, 120, 360, -1, 58);
 
-		TextView trackCount = label("LOCAL TRACKS  //  "
+		TextView trackCount = label("AUDIO NODES  //  "
 				+ String.format(Locale.ROOT, "%02d", tracks.size()), Kido.mono, 22, Kido.DIM, 0.06f);
 		trackCount.setGravity(Gravity.END);
 		place(trackCount, 1300, 380, 500, 30);
 
-		selectedTitle = label(tracks.isEmpty() ? "NO LOCAL MUSIC FOUND" : tracks.get(0).title,
+		selectedTitle = label(tracks.isEmpty() ? "NO AUDIO SIGNAL FOUND" : tracks.get(0).title,
 				Kido.mincho, 26, Kido.CREAM);
 		selectedTitle.setGravity(Gravity.CENTER_VERTICAL);
 		selectedTitle.setMaxLines(2);
