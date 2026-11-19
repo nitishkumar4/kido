@@ -24,6 +24,15 @@ final class MusicLibrary {
             MediaStore.MediaColumns.MIME_TYPE,
             MediaStore.MediaColumns.TITLE,
             MediaStore.Audio.AudioColumns.ARTIST,
+            MediaStore.Audio.AudioColumns.DURATION
+    };
+
+    private static final String[] ARTWORK_PROJECTION = {
+            MediaStore.Files.FileColumns._ID,
+            MediaStore.MediaColumns.DISPLAY_NAME,
+            MediaStore.MediaColumns.MIME_TYPE,
+            MediaStore.MediaColumns.TITLE,
+            MediaStore.Audio.AudioColumns.ARTIST,
             MediaStore.Audio.AudioColumns.DURATION,
             MediaStore.Audio.AudioColumns.ALBUM_ID
     };
@@ -50,6 +59,11 @@ final class MusicLibrary {
     }
 
     static List<Track> load(Context context) {
+        List<Track> tracks = query(context, ARTWORK_PROJECTION, true);
+        return tracks != null ? tracks : query(context, PROJECTION, false);
+    }
+
+    private static List<Track> query(Context context, String[] projection, boolean hasAlbumId) {
         List<Track> tracks = new ArrayList<>();
         Uri collection = MediaStore.Files.getContentUri("external");
         String selection = "(" + MediaStore.Files.FileColumns.MEDIA_TYPE + "=?"
@@ -69,7 +83,8 @@ final class MusicLibrary {
             int titleColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.TITLE);
             int artistColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.AudioColumns.ARTIST);
             int durationColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.AudioColumns.DURATION);
-            int albumColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.AudioColumns.ALBUM_ID);
+            int albumColumn = hasAlbumId
+                    ? cursor.getColumnIndexOrThrow(MediaStore.Audio.AudioColumns.ALBUM_ID) : -1;
 
             while (cursor.moveToNext()) {
                 long id = cursor.getLong(idColumn);
@@ -83,7 +98,7 @@ final class MusicLibrary {
                 }
                 String artist = cursor.getString(artistColumn);
                 long duration = cursor.getLong(durationColumn);
-                long albumId = cursor.getLong(albumColumn);
+                long albumId = albumColumn >= 0 ? cursor.getLong(albumColumn) : -1;
                 String displayName = cursor.getString(nameColumn);
                 String mimeType = cursor.getString(cursor.getColumnIndexOrThrow(
                         MediaStore.MediaColumns.MIME_TYPE));
