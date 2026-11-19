@@ -69,13 +69,14 @@ final class MusicView extends FrameLayout {
 		listPanel.addView(namesScroll, new FrameLayout.LayoutParams(-1, -1));
 
 		FrameLayout grid = new FrameLayout(context);
-		grid.setClipChildren(true);
+		grid.setClipChildren(false);
 		place(grid, 110, 270, 1270, 650);
 
-		GlowView focusGlow = new GlowView(context, Kido.px(40), false, true);
-		focusGlow.setColor(Kido.withAlpha(Kido.ORANGE, 0.38f));
+		GlowView focusGlow = new GlowView(context, Kido.px(44), true);
+		focusGlow.setColor(Kido.withAlpha(Kido.ORANGE, 0.7f));
 		focusGlow.setAlpha(0f);
-		place(grid, focusGlow, 0, 0, 312, 346);
+		place(grid, focusGlow, 0, 0, 312, 312);
+		unclip(focusGlow);
 
 		int index = 0;
 		int rowIndex = 0;
@@ -182,7 +183,7 @@ final class MusicView extends FrameLayout {
 		FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) tile.getLayoutParams();
 		float pad = Kido.px(40);
 		float x = params.leftMargin - pad;
-		float y = params.topMargin - Kido.px(topRow * HEX_PITCH) - pad;
+		float y = params.topMargin - Kido.px(topRow * HEX_PITCH) - Kido.px(23);
 		if (!animate || glow.getAlpha() < 0.05f) {
 			glow.animate().cancel();
 			glow.setTranslationX(x);
@@ -192,6 +193,13 @@ final class MusicView extends FrameLayout {
 		}
 		glow.animate().translationX(x).translationY(y)
 				.setDuration(240).start();
+	}
+
+	private static void unclip(View view) {
+		for (android.view.ViewParent parent = view.getParent(); parent instanceof ViewGroup;
+				parent = parent.getParent()) {
+			((ViewGroup) parent).setClipChildren(false);
+		}
 	}
 
 	private void highlight(int selected) {
