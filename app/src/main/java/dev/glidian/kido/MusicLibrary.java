@@ -4,12 +4,11 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaMetadataRetriever;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
-
-import java.io.InputStream;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,16 +26,6 @@ final class MusicLibrary {
             MediaStore.Audio.AudioColumns.DURATION
     };
 
-    private static final String[] ARTWORK_PROJECTION = {
-            MediaStore.Files.FileColumns._ID,
-            MediaStore.MediaColumns.DISPLAY_NAME,
-            MediaStore.MediaColumns.MIME_TYPE,
-            MediaStore.MediaColumns.TITLE,
-            MediaStore.Audio.AudioColumns.ARTIST,
-            MediaStore.Audio.AudioColumns.DURATION,
-            MediaStore.Audio.AudioColumns.ALBUM_ID
-    };
-
     private MusicLibrary() {
     }
 
@@ -46,24 +35,20 @@ final class MusicLibrary {
         final String artist;
         final long duration;
         final String format;
-        final long albumId;
-
-        Track(Uri uri, String title, String artist, long duration, String format, long albumId) {
+        Track(Uri uri, String title, String artist, long duration, String format) {
             this.uri = uri;
             this.title = title;
             this.artist = artist;
             this.duration = duration;
             this.format = format;
-            this.albumId = albumId;
         }
     }
 
     static List<Track> load(Context context) {
-        List<Track> tracks = query(context, ARTWORK_PROJECTION, true);
-        return tracks != null ? tracks : query(context, PROJECTION, false);
+        return query(context);
     }
 
-    private static List<Track> query(Context context, String[] projection, boolean hasAlbumId) {
+    private static List<Track> query(Context context) {
         List<Track> tracks = new ArrayList<>();
         Uri collection = MediaStore.Files.getContentUri("external");
         String selection = "(" + MediaStore.Files.FileColumns.MEDIA_TYPE + "=?"
@@ -75,7 +60,7 @@ final class MusicLibrary {
         String sortOrder = MediaStore.MediaColumns.TITLE + " COLLATE NOCASE ASC";
 
         try (Cursor cursor = context.getContentResolver().query(
-                collection, projection, selection, selectionArgs, sortOrder)) {
+                collection, PROJECTION, selection, selectionArgs, sortOrder)) {
             if (cursor == null) return null;
 
             int idColumn = cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID);
@@ -83,8 +68,6 @@ final class MusicLibrary {
             int titleColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.TITLE);
             int artistColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.AudioColumns.ARTIST);
             int durationColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.AudioColumns.DURATION);
-            int albumColumn = hasAlbumId
-                    ? cursor.getColumnIndexOrThrow(MediaStore.Audio.AudioColumns.ALBUM_ID) : -1;
 
             while (cursor.moveToNext()) {
                 long id = cursor.getLong(idColumn);
@@ -98,13 +81,12 @@ final class MusicLibrary {
                 }
                 String artist = cursor.getString(artistColumn);
                 long duration = cursor.getLong(durationColumn);
-                long albumId = albumColumn >= 0 ? cursor.getLong(albumColumn) : -1;
                 String displayName = cursor.getString(nameColumn);
                 String mimeType = cursor.getString(cursor.getColumnIndexOrThrow(
                         MediaStore.MediaColumns.MIME_TYPE));
                 String format = audioFormat(displayName, mimeType);
                 tracks.add(new Track(ContentUris.withAppendedId(collection, id),
-                        title == null ? "Unknown track" : title, artist, duration, format, albumId));
+                        title == null ? "Unknown track" : title, artist, duration, format));
             }
         } catch (Exception e) {
             Log.e(TAG, "Unable to query indexed audio files", e);
@@ -115,34 +97,31 @@ final class MusicLibrary {
     }
 
 
-    /** Samples a tiny album-art bitmap and releases it immediately; no disk or memory cache. */
-    static int albumColor(Context context, long albumId, int fallback) {
-        if (albumId < 0) return fallback;
-        Uri artwork = Uri.parse("content://media/external/audio/albumart/" + albumId);
+    /** Samples embedded artwork from the focused track; no disk or memory cache. */
+    static int albumColor(Context context, Uri trackUri, int fallback) {
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
         Bitmap bitmap = null;
         try {
+            retriever.setDataSource(context, trackUri);
+            byte[] artwork = retriever.getEmbeddedPicture();
+            if (artwork == null || artwork.length == 0) return fallback;
+
             BitmapFactory.Options bounds = new BitmapFactory.Options();
             bounds.inJustDecodeBounds = true;
-            try (InputStream input = context.getContentResolver().openInputStream(artwork)) {
-                if (input == null) return fallback;
-                BitmapFactory.decodeStream(input, null, bounds);
-            }
+            BitmapFactory.decodeByteArray(artwork, 0, artwork.length, bounds);
             if (bounds.outWidth <= 0 || bounds.outHeight <= 0) return fallback;
+
             int sample = 1;
             while (Math.max(bounds.outWidth / sample, bounds.outHeight / sample) > 32) sample *= 2;
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = sample;
             options.inPreferredConfig = Bitmap.Config.RGB_565;
-            try (InputStream input = context.getContentResolver().openInputStream(artwork)) {
-                if (input == null) return fallback;
-                bitmap = BitmapFactory.decodeStream(input, null, options);
-            }
+            bitmap = BitmapFactory.decodeByteArray(artwork, 0, artwork.length, options);
             if (bitmap == null) return fallback;
 
             int[] counts = new int[4096];
-            int width = bitmap.getWidth(), height = bitmap.getHeight();
-            for (int y = 0; y < height; y++) {
-                for (int x = 0; x < width; x++) {
+            for (int y = 0; y < bitmap.getHeight(); y++) {
+                for (int x = 0; x < bitmap.getWidth(); x++) {
                     int pixel = bitmap.getPixel(x, y);
                     int red = (pixel >> 20) & 0x0F;
                     int green = (pixel >> 12) & 0x0F;
@@ -157,12 +136,16 @@ final class MusicLibrary {
             return 0xFF000000 | (((dominant >> 8) & 0x0F) * 17 << 16)
                     | (((dominant >> 4) & 0x0F) * 17 << 8) | ((dominant & 0x0F) * 17);
         } catch (Exception e) {
+            Log.d(TAG, "No readable embedded artwork for focused track", e);
             return fallback;
         } finally {
             if (bitmap != null && !bitmap.isRecycled()) bitmap.recycle();
+            try {
+                retriever.release();
+            } catch (Exception ignored) {
+            }
         }
     }
-
     private static String audioFormat(String displayName, String mimeType) {
         if (displayName != null) {
             int extension = displayName.lastIndexOf('.');
