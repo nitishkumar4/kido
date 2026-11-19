@@ -2,9 +2,6 @@ package dev.glidian.kido;
 
 import android.content.ContentUris;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.MediaMetadataRetriever;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -97,55 +94,6 @@ final class MusicLibrary {
     }
 
 
-    /** Samples embedded artwork from the focused track; no disk or memory cache. */
-    static int albumColor(Context context, Uri trackUri, int fallback) {
-        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-        Bitmap bitmap = null;
-        try {
-            retriever.setDataSource(context, trackUri);
-            byte[] artwork = retriever.getEmbeddedPicture();
-            if (artwork == null || artwork.length == 0) return fallback;
-
-            BitmapFactory.Options bounds = new BitmapFactory.Options();
-            bounds.inJustDecodeBounds = true;
-            BitmapFactory.decodeByteArray(artwork, 0, artwork.length, bounds);
-            if (bounds.outWidth <= 0 || bounds.outHeight <= 0) return fallback;
-
-            int sample = 1;
-            while (Math.max(bounds.outWidth / sample, bounds.outHeight / sample) > 32) sample *= 2;
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = sample;
-            options.inPreferredConfig = Bitmap.Config.RGB_565;
-            bitmap = BitmapFactory.decodeByteArray(artwork, 0, artwork.length, options);
-            if (bitmap == null) return fallback;
-
-            int[] counts = new int[4096];
-            for (int y = 0; y < bitmap.getHeight(); y++) {
-                for (int x = 0; x < bitmap.getWidth(); x++) {
-                    int pixel = bitmap.getPixel(x, y);
-                    int red = (pixel >> 20) & 0x0F;
-                    int green = (pixel >> 12) & 0x0F;
-                    int blue = (pixel >> 4) & 0x0F;
-                    counts[(red << 8) | (green << 4) | blue]++;
-                }
-            }
-            int dominant = 0;
-            for (int i = 1; i < counts.length; i++) {
-                if (counts[i] > counts[dominant]) dominant = i;
-            }
-            return 0xFF000000 | (((dominant >> 8) & 0x0F) * 17 << 16)
-                    | (((dominant >> 4) & 0x0F) * 17 << 8) | ((dominant & 0x0F) * 17);
-        } catch (Exception e) {
-            Log.d(TAG, "No readable embedded artwork for focused track", e);
-            return fallback;
-        } finally {
-            if (bitmap != null && !bitmap.isRecycled()) bitmap.recycle();
-            try {
-                retriever.release();
-            } catch (Exception ignored) {
-            }
-        }
-    }
     private static String audioFormat(String displayName, String mimeType) {
         if (displayName != null) {
             int extension = displayName.lastIndexOf('.');
