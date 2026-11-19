@@ -33,7 +33,7 @@ final class MusicView extends FrameLayout {
 	private int topRow;
 	private boolean rowsMoved;
 
-	MusicView(Context context, List<MusicLibrary.Track> tracks, Consumer<MusicLibrary.Track> onSelect) {
+	MusicView(Context context, List<MusicLibrary.Track> tracks, Consumer<MusicLibrary.Track> onSelect, Consumer<String> onFocus) {
 		super(context);
 		setFocusableInTouchMode(true);
 		setBackgroundColor(0xF5040404);
@@ -152,6 +152,7 @@ final class MusicView extends FrameLayout {
 
 				tile.setOnFocusChangeListener((v, focused) -> {
 					if (focused) {
+						onFocus.accept(track.title);
 						selectedTitle.setText(track.title);
 						selectedArtist.setText(artistName(track));
 						selectedMeta.setText(trackMeta(track));
