@@ -1233,7 +1233,7 @@ public class KidoActivity extends Activity {
 
     private void showTabs(int z) {
         for (int i = 0; i < 4; i++) {
-            boolean on = i == 0 ? audioTabActive : i == z + 1;
+            boolean on = audioTabActive ? i == 0 : i == z + 1;
             tabBg[i].setColor(on ? Kido.withAlpha(Kido.RED, 0.18f) : Kido.withAlpha(Kido.GREEN, 0.1f));
             tabBg[i].setStroke(Kido.px(2), on ? Kido.RED : Kido.withAlpha(Kido.GREEN, 0.45f));
             tabText[i * 2].setTextColor(on ? Kido.RED : Kido.withAlpha(Kido.LIME, 0.75f));
