@@ -1651,7 +1651,7 @@ public class KidoActivity extends Activity {
                 || track.artist.equals("<unknown>") ? "UNKNOWN ARTIST"
                 : track.artist.toUpperCase(Locale.ROOT);
         setStatus("音楽", track.format, artist + " // " + duration,
-                "NOW SELECTED", Kido.ORANGE);
+                "NOW SELECTED", MusicView.colorForDuration(track.duration));
     }
     private void restoreMusicHud() {
         renderTicker();
