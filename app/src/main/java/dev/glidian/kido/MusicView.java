@@ -118,13 +118,13 @@ final class MusicView extends FrameLayout {
 				float x = 40 + column * 246 + (rowIndex % 2 == 1 ? 123 : 0);
 				place(grid, tile, Math.round(x), rowIndex * HEX_PITCH, 232, 266);
 
-				TextView name = label("", Kido.mono, 20, Kido.DIM);
+				TextView name = label("", Kido.mono, 22, Kido.DIM);
+				name.setTextSize(android.util.TypedValue.COMPLEX_UNIT_PX, Kido.px(22));
+				name.setIncludeFontPadding(false);
 				name.setSingleLine(true);
 				name.setEllipsize(TextUtils.TruncateAt.END);
-				name.setGravity(Gravity.CENTER_VERTICAL);
 				name.setTag(trackIndex);
-				name.setPadding(Kido.px(14), Kido.px(8), Kido.px(12), Kido.px(8));
-				list.addView(name, new LinearLayout.LayoutParams(-1, Kido.px(54)));
+				list.addView(name, new LinearLayout.LayoutParams(-1, -2));
 				names.add(name);
 				trackTitles.add(track.title);
 
@@ -239,8 +239,9 @@ final class MusicView extends FrameLayout {
 	private void highlight(int selected) {
 		for (int i = 0; i < names.size(); i++) {
 			boolean active = i == selected;
-			names.get(i).setText((active ? "▶  " : "   ")
-					+ String.format(Locale.ROOT, "%02d  ", i + 1) + trackTitles.get(i));
+			names.get(i).setText((active ? "▶ " : "  ")
+					+ "TR." + String.format(Locale.ROOT, "%02d ", i + 1)
+					+ trackTitles.get(i).toUpperCase(Locale.ROOT));
 			names.get(i).setTextColor(active ? Kido.INK : Kido.DIM);
 			names.get(i).setBackgroundColor(active
 					? Kido.withAlpha(Kido.GREEN, 0.16f) : Color.TRANSPARENT);
