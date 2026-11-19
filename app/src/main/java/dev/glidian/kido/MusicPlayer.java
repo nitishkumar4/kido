@@ -48,6 +48,14 @@ final class MusicPlayer {
 		});
 	}
 
+	boolean toggle(Uri uri, String title) {
+		if (player != null && uri.equals(currentUri) && prepared && player.isPlaying()) {
+			pause();
+			return true;
+		}
+		return play(uri, title);
+	}
+
 	boolean play(Uri uri, String title) {
 		if (player != null && uri.equals(currentUri)) {
 			if (prepared && !player.isPlaying()) {
