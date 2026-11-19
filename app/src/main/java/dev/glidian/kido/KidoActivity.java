@@ -1658,7 +1658,7 @@ public class KidoActivity extends Activity {
         if (musicColorLoad != null) handler.removeCallbacks(musicColorLoad);
         final int token = ++musicColorToken;
         musicColorLoad = () -> new Thread(() -> {
-            int color = MusicLibrary.albumColor(this, track.albumId, Kido.ORANGE);
+            int color = MusicLibrary.albumColor(this, track.uri, Kido.ORANGE);
             runOnUiThread(() -> {
                 if (token != musicColorToken || musicView == null) return;
                 setStatus("音楽", track.format, artist + " // " + duration,
