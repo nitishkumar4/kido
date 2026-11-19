@@ -53,11 +53,20 @@ final class MusicView extends FrameLayout {
 		accent.setScaleX(0f);
 		place(accent, 30, 344, 1500, 8);
 
-		place(label("音楽", Kido.mincho, 46, Kido.AMBER), 120, 360, 90, 58);
-		place(label("MUSIC LIBRARY", Kido.condBold, 30, Kido.INK, 0.14f), 240, 374, 360, 38);
-		place(label("SEC-04", Kido.mono, 22, Kido.DIM), 620, 380, 140, 30);
-		place(label("LOCAL TRACKS  //  " + String.format(Locale.ROOT, "%02d", tracks.size()),
-				Kido.mono, 22, Kido.DIM, 0.06f), 1300, 380, 500, 30);
+		LinearLayout sectionTitle = new LinearLayout(context);
+		sectionTitle.setOrientation(LinearLayout.HORIZONTAL);
+		sectionTitle.setGravity(Gravity.BOTTOM);
+		sectionTitle.addView(label("音楽", Kido.mincho, 46, Kido.AMBER));
+		sectionTitle.addView(gap(18));
+		sectionTitle.addView(label("MUSIC LIBRARY", Kido.condBold, 30, Kido.INK, 0.14f));
+		sectionTitle.addView(gap(14));
+		sectionTitle.addView(label("SEC-04", Kido.mono, 22, Kido.DIM));
+		place(sectionTitle, 120, 360, -1, 58);
+
+		TextView trackCount = label("LOCAL TRACKS  //  "
+				+ String.format(Locale.ROOT, "%02d", tracks.size()), Kido.mono, 22, Kido.DIM, 0.06f);
+		trackCount.setGravity(Gravity.END);
+		place(trackCount, 1300, 380, 500, 30);
 
 		selectedTitle = label(tracks.isEmpty() ? "NO LOCAL MUSIC FOUND" : tracks.get(0).title,
 				Kido.mincho, 26, Kido.CREAM);
@@ -106,6 +115,8 @@ final class MusicView extends FrameLayout {
 		place(listPanel, selectedTitle, 18, 382, 334, 48);
 		place(listPanel, selectedArtist, 18, 432, 334, 24);
 		place(listPanel, selectedMeta, 18, 460, 334, 24);
+
+		place(new RulerView(context, 440), 36, 452, 64, 500);
 
 		FrameLayout grid = new FrameLayout(context);
 		grid.setClipChildren(false);
@@ -167,7 +178,9 @@ final class MusicView extends FrameLayout {
 		}
 
 		place(label("◀ 主要  MAIN", Kido.condBold, 26, Kido.DIM, 0.14f), 122, 966, 420, 34);
-		place(label("OK  //  PLAY    ARROWS  //  BROWSE", Kido.mono, 20, Kido.DIM, 0.06f), 560, 970, 800, 30);
+		TextView controlsHint = label("OK  //  PLAY    ARROWS  //  BROWSE", Kido.mono, 20, Kido.DIM, 0.06f);
+		controlsHint.setGravity(Gravity.CENTER);
+		place(controlsHint, 560, 970, 800, 30);
 		if (tracks.isEmpty()) {
 			TextView empty = label("Open MusicView after adding audio to local storage.",
 					Kido.mono, 20, Kido.DIM);
