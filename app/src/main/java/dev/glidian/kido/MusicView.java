@@ -43,7 +43,7 @@ final class MusicView extends FrameLayout {
 		addView(hexGrid, new FrameLayout.LayoutParams(-1, -1));
 
 		TraceView frame = new TraceView(context);
-		place(frame, 30, 250, 1840, 670);
+		place(frame, 30, 432, 1840, 608);
 
 		View accent = new View(context);
 		accent.setBackground(new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
@@ -51,44 +51,42 @@ final class MusicView extends FrameLayout {
 						Kido.withAlpha(Kido.RED, 0.55f)}));
 		accent.setPivotX(0);
 		accent.setScaleX(0f);
-		place(accent, 30, 205, 1500, 8);
+		place(accent, 30, 344, 1500, 8);
 
-		TextView heading = label("音楽   MUSIC LIBRARY", Kido.condBold, 34, Kido.AMBER, 0.12f);
-		place(heading, 110, 76, 1100, 62);
+		place(label("音楽", Kido.mincho, 46, Kido.AMBER), 120, 360, 90, 58);
+		place(label("MUSIC LIBRARY", Kido.condBold, 30, Kido.INK, 0.14f), 240, 374, 360, 38);
+		place(label("SEC-04", Kido.mono, 22, Kido.DIM), 620, 380, 140, 30);
+		place(label("LOCAL TRACKS  //  " + String.format(Locale.ROOT, "%02d", tracks.size()),
+				Kido.mono, 22, Kido.DIM, 0.06f), 1300, 380, 500, 30);
 
-		place(label("NOW SELECTED", Kido.mono, 18, Kido.DIM, 0.06f), 1430, 112, 370, 24);
 		selectedTitle = label(tracks.isEmpty() ? "NO LOCAL MUSIC FOUND" : tracks.get(0).title,
-				Kido.mincho, 28, Kido.CREAM);
-		selectedTitle.setTextSize(android.util.TypedValue.COMPLEX_UNIT_PX, Kido.px(28));
+				Kido.mincho, 26, Kido.CREAM);
 		selectedTitle.setGravity(Gravity.CENTER_VERTICAL);
 		selectedTitle.setMaxLines(2);
 		selectedTitle.setEllipsize(TextUtils.TruncateAt.END);
 		selectedTitle.setAutoSizeTextTypeUniformWithConfiguration(
-				Kido.px(18), Kido.px(28), Kido.px(1), android.util.TypedValue.COMPLEX_UNIT_PX);
-		place(selectedTitle, 1430, 140, 370, 58);
+				Kido.px(20), Kido.px(26), Kido.px(1), android.util.TypedValue.COMPLEX_UNIT_PX);
 
 		selectedArtist = label(tracks.isEmpty() ? "" : artistName(tracks.get(0)),
-				Kido.condBold, 20, Kido.AMBER, 0.12f);
+				Kido.condBold, 22, Kido.AMBER, 0.12f);
 		selectedArtist.setGravity(Gravity.CENTER_VERTICAL);
 		selectedArtist.setSingleLine(true);
 		selectedArtist.setEllipsize(TextUtils.TruncateAt.END);
-		place(selectedArtist, 1430, 202, 370, 26);
 
 		selectedMeta = label(tracks.isEmpty() ? "" : trackMeta(tracks.get(0)),
-				Kido.mono, 19, Kido.DIM, 0.06f);
+				Kido.mono, 20, Kido.DIM, 0.06f);
 		selectedMeta.setGravity(Gravity.CENTER_VERTICAL);
-		place(selectedMeta, 1430, 232, 370, 24);
 
 		FrameLayout listPanel = new FrameLayout(context);
 		listPanel.setBackground(background(Kido.PANEL, Kido.LINE));
-		place(listPanel, 1430, 270, 370, 650);
+		place(listPanel, 1430, 452, 370, 500);
 
 		place(listPanel, label("曲目", Kido.mincho, 28, Kido.AMBER), 20, 12, 76, 42);
-		place(listPanel, label("TRACK LIST", Kido.condBold, 22, Kido.INK, 0.12f), 94, 20, 190, 30);
+		place(listPanel, label("TRACK LIST", Kido.condBold, 26, Kido.INK, 0.12f), 94, 18, 210, 32);
 		TextView count = label(String.format(Locale.ROOT, "%02d", tracks.size()),
-				Kido.mono, 18, Kido.DIM);
+				Kido.mono, 22, Kido.DIM);
 		count.setGravity(Gravity.END);
-		place(listPanel, count, 312, 22, 40, 26);
+		place(listPanel, count, 312, 20, 40, 28);
 		View listDivider = new View(context);
 		listDivider.setBackgroundColor(Kido.LINE);
 		place(listPanel, listDivider, 18, 62, 334, 2);
@@ -99,11 +97,19 @@ final class MusicView extends FrameLayout {
 		namesScroll.setVerticalScrollBarEnabled(false);
 		namesScroll.setOverScrollMode(View.OVER_SCROLL_NEVER);
 		namesScroll.addView(list);
-		place(listPanel, namesScroll, 12, 76, 346, 560);
+		place(listPanel, namesScroll, 12, 76, 346, 258);
+
+		View selectedDivider = new View(context);
+		selectedDivider.setBackgroundColor(Kido.LINE);
+		place(listPanel, selectedDivider, 18, 346, 334, 2);
+		place(listPanel, label("NOW SELECTED", Kido.mono, 16, Kido.DIM, 0.06f), 18, 358, 334, 22);
+		place(listPanel, selectedTitle, 18, 382, 334, 48);
+		place(listPanel, selectedArtist, 18, 432, 334, 24);
+		place(listPanel, selectedMeta, 18, 460, 334, 24);
 
 		FrameLayout grid = new FrameLayout(context);
 		grid.setClipChildren(false);
-		place(grid, 110, 300, 1270, 620);
+		place(grid, 110, 452, 1270, 500);
 
 		GlowView focusGlow = new GlowView(context, Kido.px(44), true);
 		focusGlow.setColor(Kido.withAlpha(Kido.ORANGE, 0.7f));
@@ -129,7 +135,7 @@ final class MusicView extends FrameLayout {
 				name.setSingleLine(true);
 				name.setEllipsize(TextUtils.TruncateAt.END);
 				name.setTag(trackIndex);
-				list.addView(name, new LinearLayout.LayoutParams(-1, Kido.px(40)));
+				list.addView(name, new LinearLayout.LayoutParams(-1, Kido.px(38)));
 				names.add(name);
 				trackTitles.add(track.title);
 
@@ -162,12 +168,13 @@ final class MusicView extends FrameLayout {
 
 		View footerRule = new View(context);
 		footerRule.setBackgroundColor(Kido.LINE);
-		place(footerRule, 110, 950, 1700, 2);
-		place(label("BACK  //  MAIN", Kido.mono, 18, Kido.DIM), 110, 978, 500, 34);
+		place(footerRule, 110, 940, 1700, 2);
+		place(label("◀ 主要  MAIN", Kido.condBold, 26, Kido.DIM, 0.14f), 122, 966, 420, 34);
+		place(label("OK  //  PLAY    ARROWS  //  BROWSE", Kido.mono, 20, Kido.DIM, 0.06f), 560, 970, 800, 30);
 		if (tracks.isEmpty()) {
 			TextView empty = label("Open MusicView after adding audio to local storage.",
 					Kido.mono, 20, Kido.DIM);
-			place(empty, 110, 300, 900, 50);
+			place(empty, 150, 452, 900, 50);
 		} else {
 			listPanel.setFocusable(false);
 			scrollRows(0, false);
