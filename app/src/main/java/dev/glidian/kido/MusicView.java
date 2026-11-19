@@ -3,7 +3,6 @@ package dev.glidian.kido;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -17,131 +16,148 @@ import java.util.function.Consumer;
 
 /** Lightweight local music browser. The Activity owns permission and playback. */
 final class MusicView extends FrameLayout {
-    private final List<TextView> names = new ArrayList<>();
-    private final TextView selectedTitle;
-    private final List<HexView> tiles = new ArrayList<>();
+	private static final int HEX_PITCH = 214;
+	private final List<TextView> names = new ArrayList<>();
+	private final List<HexView> tiles = new ArrayList<>();
+	private final List<Integer> tileRows = new ArrayList<>();
+	private final TextView selectedTitle;
+	private int topRow;
 
-    MusicView(Context context, List<MusicLibrary.Track> tracks, Consumer<MusicLibrary.Track> onSelect) {
-        super(context);
-        setFocusableInTouchMode(true);
-        setBackgroundColor(0xF5040404);
+	MusicView(Context context, List<MusicLibrary.Track> tracks, Consumer<MusicLibrary.Track> onSelect) {
+		super(context);
+		setFocusableInTouchMode(true);
+		setBackgroundColor(0xF5040404);
 
-        TextView heading = label("音楽   MUSIC LIBRARY", Kido.condBold, 34, Kido.AMBER);
-        place(heading, 110, 70, 900, 54);
+		TextView heading = label("音楽   MUSIC LIBRARY", Kido.condBold, 34, Kido.AMBER);
+		place(heading, 110, 70, 900, 54);
 
-        selectedTitle = label(tracks.isEmpty() ? "NO LOCAL MUSIC FOUND" : tracks.get(0).title,
-                Kido.mincho, 30, Kido.CREAM);
-        selectedTitle.setSingleLine(true);
-        place(selectedTitle, 1130, 150, 650, 54);
+		selectedTitle = label(tracks.isEmpty() ? "NO LOCAL MUSIC FOUND" : tracks.get(0).title,
+				Kido.mincho, 30, Kido.CREAM);
+		selectedTitle.setSingleLine(true);
+		place(selectedTitle, 1430, 150, 430, 54);
 
-        TextView count = label(String.format(Locale.ROOT, "%02d TRACKS", tracks.size()),
-                Kido.mono, 20, Kido.DIM);
-        place(count, 1130, 210, 650, 34);
+		TextView count = label(String.format(Locale.ROOT, "%02d TRACKS", tracks.size()),
+				Kido.mono, 20, Kido.DIM);
+		place(count, 1430, 210, 370, 34);
 
-        FrameLayout listPanel = new FrameLayout(context);
-        listPanel.setBackground(background(Kido.PANEL, Kido.LINE));
-        place(listPanel, 1120, 270, 660, 650);
+		FrameLayout listPanel = new FrameLayout(context);
+		listPanel.setBackground(background(Kido.PANEL, Kido.LINE));
+		place(listPanel, 1430, 270, 370, 650);
 
-        LinearLayout list = new LinearLayout(context);
-        list.setOrientation(LinearLayout.VERTICAL);
-        ScrollView namesScroll = new ScrollView(context);
-        namesScroll.setVerticalScrollBarEnabled(false);
-        namesScroll.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        namesScroll.addView(list);
-        listPanel.addView(namesScroll, new FrameLayout.LayoutParams(-1, -1));
+		LinearLayout list = new LinearLayout(context);
+		list.setOrientation(LinearLayout.VERTICAL);
+		ScrollView namesScroll = new ScrollView(context);
+		namesScroll.setVerticalScrollBarEnabled(false);
+		namesScroll.setOverScrollMode(View.OVER_SCROLL_NEVER);
+		namesScroll.addView(list);
+		listPanel.addView(namesScroll, new FrameLayout.LayoutParams(-1, -1));
 
-        ScrollView gridScroll = new ScrollView(context);
-        gridScroll.setVerticalScrollBarEnabled(false);
-        gridScroll.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        LinearLayout grid = new LinearLayout(context);
-        grid.setOrientation(LinearLayout.VERTICAL);
-        gridScroll.addView(grid);
-        place(gridScroll, 110, 270, 930, 650);
+		FrameLayout grid = new FrameLayout(context);
+		grid.setClipChildren(true);
+		place(grid, 110, 270, 1270, 650);
 
-        for (int start = 0; start < tracks.size(); start += 4) {
-            LinearLayout row = new LinearLayout(context);
-            row.setGravity(Gravity.CENTER_VERTICAL);
-            for (int i = start; i < Math.min(start + 4, tracks.size()); i++) {
-                final int index = i;
-                MusicLibrary.Track track = tracks.get(i);
-                Kido.Look look = new Kido.Look(track.format, "音楽", "LOCAL AUDIO", Kido.GREEN, 0);
-                HexView tile = new HexView(context, look, String.format(Locale.ROOT, "%02d", i + 1));
-                LinearLayout.LayoutParams tileParams = new LinearLayout.LayoutParams(Kido.px(205), Kido.px(235));
-                tileParams.setMargins(0, 0, Kido.px(18), Kido.px(12));
-                row.addView(tile, tileParams);
-                TextView name = label(track.title, Kido.mono, 18, Kido.DIM);
-                name.setSingleLine(true);
-                name.setTag(index);
-                name.setPadding(Kido.px(12), Kido.px(14), Kido.px(12), Kido.px(14));
-                list.addView(name);
-                names.add(name);
-                tile.setOnFocusChangeListener((v, focused) -> {
-                    if (focused) {
-                        selectedTitle.setText(track.title);
-                        highlight(index);
-                    }
-                });
-                tile.setFocusable(true);
-                tile.setClickable(true);
-                // DPAD focus only previews the title; OK/Enter activates the tile and starts playback.
-                tile.setOnClickListener(v -> onSelect.accept(track));
-                tiles.add(tile);
-                if (i == 0) tile.setId(View.generateViewId());
-            }
-            grid.addView(row);
-        }
+		int index = 0;
+		int rowIndex = 0;
+		while (index < tracks.size()) {
+			int perRow = rowIndex % 2 == 0 ? 5 : 4;
+			for (int column = 0; column < perRow && index < tracks.size(); column++, index++) {
+				final int trackIndex = index;
+				MusicLibrary.Track track = tracks.get(index);
+				Kido.Look look = new Kido.Look(track.format, "音楽", "LOCAL AUDIO", Kido.GREEN, 0);
+				HexView tile = new HexView(context, look,
+						String.format(Locale.ROOT, "%02d", index + 1));
+				float x = 40 + column * 246 + (rowIndex % 2 == 1 ? 123 : 0);
+				place(grid, tile, Math.round(x), rowIndex * HEX_PITCH, 232, 266);
 
-        place(label("BACK  //  MAIN", Kido.mono, 18, Kido.DIM), 110, 970, 500, 34);
-        if (tracks.isEmpty()) {
-            TextView empty = label("Open MusicView after adding audio to local storage.",
-                    Kido.mono, 20, Kido.DIM);
-            place(empty, 110, 300, 900, 50);
-        } else {
-            gridScroll.setFocusable(false);
-            listPanel.setFocusable(false);
-            // The first tile is the entry point; subsequent tiles follow in reading order.
-            gridScroll.setNextFocusDownId(View.NO_ID);
-            gridScroll.post(() -> {
-                View first = grid.getChildAt(0);
-                if (first instanceof LinearLayout && ((LinearLayout) first).getChildCount() > 0) {
-                    ((LinearLayout) first).getChildAt(0).requestFocus();
-                }
-            });
-        }
-    }
+				TextView name = label(track.title, Kido.mono, 18, Kido.DIM);
+				name.setSingleLine(true);
+				name.setTag(trackIndex);
+				name.setPadding(Kido.px(12), Kido.px(14), Kido.px(12), Kido.px(14));
+				list.addView(name);
+				names.add(name);
 
-    void focusFirstTrack() {
-        if (!tiles.isEmpty()) tiles.get(0).requestFocus();
-    }
+				tile.setOnFocusChangeListener((v, focused) -> {
+					if (focused) {
+						selectedTitle.setText(track.title);
+						highlight(trackIndex);
+						scrollRows(tileRows.get(trackIndex), true);
+					}
+				});
+				tile.setOnClickListener(v -> onSelect.accept(track));
+				tiles.add(tile);
+				tileRows.add(rowIndex);
+			}
+			rowIndex++;
+		}
 
-    private void highlight(int selected) {
-        for (int i = 0; i < names.size(); i++) {
-            names.get(i).setTextColor(i == selected ? Kido.INK : Kido.DIM);
-            names.get(i).setBackgroundColor(i == selected ? Kido.withAlpha(Kido.GREEN, 0.18f) : Color.TRANSPARENT);
-        }
-    }
+		place(label("BACK  //  MAIN", Kido.mono, 18, Kido.DIM), 110, 970, 500, 34);
+		if (tracks.isEmpty()) {
+			TextView empty = label("Open MusicView after adding audio to local storage.",
+					Kido.mono, 20, Kido.DIM);
+			place(empty, 110, 300, 900, 50);
+		} else {
+			listPanel.setFocusable(false);
+			scrollRows(0, false);
+			grid.post(() -> tiles.get(0).requestFocus());
+		}
+	}
 
-    private TextView label(String value, android.graphics.Typeface typeface, int size, int color) {
-        TextView view = new TextView(getContext());
-        view.setText(value);
-        view.setTypeface(typeface);
-        view.setTextSize(size);
-        view.setTextColor(color);
-        return view;
-    }
+	void focusFirstTrack() {
+		if (!tiles.isEmpty()) tiles.get(0).requestFocus();
+	}
 
-    private GradientDrawable background(int color, int stroke) {
-        GradientDrawable drawable = new GradientDrawable();
-        drawable.setColor(color);
-        drawable.setStroke(Kido.px(2), stroke);
-        return drawable;
-    }
+	private void scrollRows(int row, boolean animate) {
+		if (tiles.isEmpty()) return;
+		int lastRow = tileRows.get(tileRows.size() - 1);
+		int nextTop = Math.max(0, Math.min(row - 1, Math.max(0, lastRow - 1)));
+		topRow = nextTop;
+		float shift = -Kido.px(topRow * HEX_PITCH);
+		for (int i = 0; i < tiles.size(); i++) {
+			HexView tile = tiles.get(i);
+			int tileRow = tileRows.get(i);
+			float alpha = tileRow >= topRow && tileRow <= topRow + 1 ? 1f : 0f;
+			if (animate) {
+				tile.animate().translationY(shift).alpha(alpha).setDuration(340).start();
+			} else {
+				tile.setTranslationY(shift);
+				tile.setAlpha(alpha);
+			}
+		}
+	}
 
-    private void place(View view, int x, int y, int width, int height) {
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                width < 0 ? width : Kido.px(width), height < 0 ? height : Kido.px(height));
-        params.leftMargin = Kido.px(x);
-        params.topMargin = Kido.px(y);
-        addView(view, params);
-    }
+	private void highlight(int selected) {
+		for (int i = 0; i < names.size(); i++) {
+			names.get(i).setTextColor(i == selected ? Kido.INK : Kido.DIM);
+			names.get(i).setBackgroundColor(i == selected
+					? Kido.withAlpha(Kido.GREEN, 0.18f) : Color.TRANSPARENT);
+		}
+	}
+
+	private TextView label(String value, android.graphics.Typeface typeface, int size, int color) {
+		TextView view = new TextView(getContext());
+		view.setText(value);
+		view.setTypeface(typeface);
+		view.setTextSize(size);
+		view.setTextColor(color);
+		return view;
+	}
+
+	private GradientDrawable background(int color, int stroke) {
+		GradientDrawable drawable = new GradientDrawable();
+		drawable.setColor(color);
+		drawable.setStroke(Kido.px(2), stroke);
+		return drawable;
+	}
+
+	private void place(ViewGroup parent, View view, int x, int y, int width, int height) {
+		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+				width < 0 ? width : Kido.px(width), height < 0 ? height : Kido.px(height));
+		params.leftMargin = Kido.px(x);
+		params.topMargin = Kido.px(y);
+		parent.addView(view, params);
+	}
+
+	private void place(View view, int x, int y, int width, int height) {
+		place(this, view, x, y, width, height);
+	}
 }
