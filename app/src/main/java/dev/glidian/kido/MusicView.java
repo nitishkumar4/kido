@@ -29,6 +29,21 @@ final class MusicView extends FrameLayout {
 		setFocusableInTouchMode(true);
 		setBackgroundColor(0xF5040404);
 
+		View hexGrid = new View(context);
+		hexGrid.setBackground(Backdrop.hexGrid(getResources(), Kido.withAlpha(Kido.AMBER, 0.07f)));
+		addView(hexGrid, new FrameLayout.LayoutParams(-1, -1));
+
+		TraceView frame = new TraceView(context);
+		place(frame, 30, 240, 1840, 700);
+
+		View accent = new View(context);
+		accent.setBackground(new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+				new int[]{Kido.withAlpha(Kido.LIME, 0.55f), Kido.withAlpha(Kido.AMBER, 0.5f),
+						Kido.withAlpha(Kido.RED, 0.55f)}));
+		accent.setPivotX(0);
+		accent.setScaleX(0f);
+		place(accent, 30, 190, 1500, 8);
+
 		TextView heading = label("音楽   MUSIC LIBRARY", Kido.condBold, 34, Kido.AMBER);
 		place(heading, 110, 70, 900, 54);
 
@@ -110,6 +125,16 @@ final class MusicView extends FrameLayout {
 			scrollRows(0, false);
 			grid.post(() -> tiles.get(0).requestFocus());
 		}
+
+		View scanlines = new View(context);
+		scanlines.setBackground(Backdrop.scanlines(getResources(), 0x30000000));
+		scanlines.setFocusable(false);
+		addView(scanlines, new FrameLayout.LayoutParams(-1, -1));
+
+		post(() -> {
+			frame.trace(620);
+			accent.animate().scaleX(1f).setDuration(560).start();
+		});
 	}
 
 	@Override
