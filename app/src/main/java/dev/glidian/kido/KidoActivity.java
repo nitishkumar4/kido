@@ -80,13 +80,13 @@ public class KidoActivity extends Activity {
     private static final int[][] ZONES = {{0, 0}, {1900, 220}, {720, 1180}};
     // Each section has a big kanji beside its title and a short one on its tab; the words are in strings.xml.
     private static final String[] ZONE_KANJI = {"主要", "アプリ", "制御系統"};
-    private static final String[] TAB_KANJI = {"主要", "アプリ", "制御"};
+    private static final String[] TAB_KANJI = {"主要", "アプリ", "制御", "音楽"};
     private static final int[] ZONE_TITLES = {R.string.zone_main, R.string.zone_apps, R.string.zone_system};
     private static final int[] ZONE_TABS = {R.string.zone_main_tab, R.string.zone_apps_tab, R.string.zone_system_tab};
     // The section tabs under the clock: left edge, step from one tab to the next, and tab width. The data block and
     // the NOW PLAYING panel above them span exactly the same width.
-    private static final int TAB_X = 730, TAB_STEP = 146, TAB_W = 136;
-    private static final int NP_W = TAB_STEP * 2 + TAB_W;
+    private static final int TAB_X = 730, TAB_STEP = 108, TAB_W = 100;
+    private static final int NP_W = TAB_STEP * 3 + TAB_W;
     private static final long IDLE_MS = 45_000;
 
     private final Handler handler = new Handler(Looper.getMainLooper());
@@ -107,11 +107,12 @@ public class KidoActivity extends Activity {
     private int[] musicHudVisibility;
     private String previousFooterZone;
     private GradientDrawable plateBg, subBg, glowBg;
-    private final TextView[] tabText = new TextView[6];
-    private final GlowView[] tabBar = new GlowView[3];
+    private final TextView[] tabText = new TextView[8];
+    private final GlowView[] tabBar = new GlowView[4];
     private final GlowView[] zoneGlow = new GlowView[3];
     private GlowView plateHalo;
-    private final GradientDrawable[] tabBg = new GradientDrawable[3];
+    private final GradientDrawable[] tabBg = new GradientDrawable[4];
+    private boolean audioTabActive;
     private TextView dateText;
     private View menuOrigin;
     private boolean appsChanged;
@@ -788,14 +789,15 @@ public class KidoActivity extends Activity {
         place(hud, dataValues, TAB_X + 148, 76, 220, -1);
         buildNowPlaying(hud);
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             FrameLayout tab = new FrameLayout(this);
             tabBg[i] = box(Kido.withAlpha(Kido.GREEN, 0.1f), Kido.withAlpha(Kido.GREEN, 0.45f), 2);
             tab.setBackground(tabBg[i]);
             tabText[i * 2] = text(TAB_KANJI[i], Kido.mincho, 22, Kido.withAlpha(Kido.LIME, 0.75f), 0);
-            tabText[i * 2 + 1] = text(str(ZONE_TABS[i]), Kido.condBold, 22, Kido.withAlpha(Kido.LIME, 0.85f), 0.12f);
-            place(tab, tabText[i * 2], 12, 6, -1, -1);
-            place(tab, tabText[i * 2 + 1], 12, 38, -1, -1);
+            String tabLabel = i == 3 ? "AUDIO" : str(ZONE_TABS[i]);
+            tabText[i * 2 + 1] = text(tabLabel, Kido.condBold, 20, Kido.withAlpha(Kido.LIME, 0.85f), 0.1f);
+            place(tab, tabText[i * 2], 10, 6, -1, -1);
+            place(tab, tabText[i * 2 + 1], 10, 38, -1, -1);
             place(hud, tab, TAB_X + i * TAB_STEP, 214, TAB_W, 74);
             tabBar[i] = new GlowView(this, Kido.px(12), false);
             tabBar[i].setColor(Kido.RED);
@@ -1230,14 +1232,19 @@ public class KidoActivity extends Activity {
     }
 
     private void showTabs(int z) {
-        for (int i = 0; i < 3; i++) {
-            boolean on = i == z;
+        for (int i = 0; i < 4; i++) {
+            boolean on = i == 3 ? audioTabActive : i == z;
             tabBg[i].setColor(on ? Kido.withAlpha(Kido.RED, 0.18f) : Kido.withAlpha(Kido.GREEN, 0.1f));
             tabBg[i].setStroke(Kido.px(2), on ? Kido.RED : Kido.withAlpha(Kido.GREEN, 0.45f));
             tabText[i * 2].setTextColor(on ? Kido.RED : Kido.withAlpha(Kido.LIME, 0.75f));
             tabText[i * 2 + 1].setTextColor(on ? Kido.RED : Kido.withAlpha(Kido.LIME, 0.85f));
             tabBar[i].setVisibility(on ? View.VISIBLE : View.INVISIBLE);
         }
+    }
+
+    private void showAudioTab(boolean active) {
+        audioTabActive = active;
+        showTabs(zone);
     }
 
     /** Long names are shortened with "…" before the " // CH.xx" part, so the status line stays on one line. */
@@ -1595,6 +1602,7 @@ public class KidoActivity extends Activity {
                         Toast.makeText(this, "Unable to play: " + track.title, Toast.LENGTH_SHORT).show();
                     }
                 }, this::updateMusicFocus, npPanel, view -> npReturn = view);
+                showAudioTab(true);
                 showMusicFooterOnly();
                 scan.setVisibility(View.GONE);
                 launch.setVisibility(View.GONE);
@@ -1692,6 +1700,7 @@ public class KidoActivity extends Activity {
                     board.setTranslationX(0);
                     board.setTranslationY(0);
                     restoreMusicHud();
+                    showAudioTab(false);
                     View statusTarget = musicStatusReturn;
                     musicStatusReturn = null;
                     if (statusTarget == null && !favViews.isEmpty()) statusTarget = favViews.get(0);
