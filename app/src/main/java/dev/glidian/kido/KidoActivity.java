@@ -105,6 +105,7 @@ public class KidoActivity extends Activity {
     private View footerMark;
     private int[] musicHudVisibility;
     private String previousFooterZone;
+    private String musicFocusTitle;
     private GradientDrawable plateBg, subBg, glowBg;
     private final TextView[] tabText = new TextView[6];
     private final GlowView[] tabBar = new GlowView[3];
@@ -1590,7 +1591,7 @@ public class KidoActivity extends Activity {
                     if (!musicPlayer.toggle(track.uri, track.title, track.artist, track.duration)) {
                         Toast.makeText(this, "Unable to play: " + track.title, Toast.LENGTH_SHORT).show();
                     }
-                });
+                }, this::updateMusicFocus);
                 board.setVisibility(View.GONE);
                 showMusicFooterOnly();
                 scan.setVisibility(View.GONE);
@@ -1617,7 +1618,14 @@ public class KidoActivity extends Activity {
         hud.setVisibility(View.VISIBLE);
     }
 
+    private void updateMusicFocus(String title) {
+        musicFocusTitle = title;
+        renderTicker();
+    }
+
     private void restoreMusicHud() {
+        musicFocusTitle = null;
+        renderTicker();
         if (musicHudVisibility != null && hud != null) {
             for (int i = 0; i < Math.min(musicHudVisibility.length, hud.getChildCount()); i++) {
                 hud.getChildAt(i).setVisibility(musicHudVisibility[i]);
@@ -2308,11 +2316,18 @@ public class KidoActivity extends Activity {
         String now = new SimpleDateFormat("HH:mm:ss", Locale.US).format(new Date());
         sb.append(now);
         sb.setSpan(new ForegroundColorSpan(Kido.AMBER), 0, sb.length(), 0);
-        for (int i = 0; i < logLines.size(); i++) {
+        int visibleLogs = musicFocusTitle == null ? logLines.size() : Math.min(1, logLines.size());
+        for (int i = 0; i < visibleLogs; i++) {
             sb.append(i == 0 ? "  " : "   //   ");
             int start = sb.length();
             sb.append(logLines.get(i));
             if (i == 0) sb.setSpan(new ForegroundColorSpan(Kido.INK), start, sb.length(), 0);
+        }
+        if (musicFocusTitle != null) {
+            sb.append("   //   ");
+            int start = sb.length();
+            sb.append("FOCUS: ").append(musicFocusTitle);
+            sb.setSpan(new ForegroundColorSpan(Kido.LIME), start, sb.length(), 0);
         }
         ticker.setText(sb);
     }
