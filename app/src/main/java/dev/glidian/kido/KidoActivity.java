@@ -4,6 +4,7 @@ import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -27,6 +28,7 @@ import android.net.NetworkCapabilities;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -88,6 +90,9 @@ public class KidoActivity extends Activity {
     private final PathInterpolator fluid = new PathInterpolator(0.2f, 0f, 0f, 1f);
 
     private FrameLayout root, board, launch, menu;
+    private MusicView musicView;
+    private View musicReturn;
+    private static final int REQUEST_MUSIC_PERMISSION = 7101;
     private View glow;
     private FrameLayout plate;
     private TextView plateKanji, plateEn, subLeft, subRight, footerZone, toast;
@@ -1403,6 +1408,19 @@ public class KidoActivity extends Activity {
             if (up) endBoot();
             return true;
         }
+        if (musicView != null && musicView.getVisibility() == View.VISIBLE) {
+            if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+                if (up) closeMusicView();
+                return true;
+            }
+            return super.dispatchKeyEvent(event);
+        }
+        View current = getCurrentFocus();
+        if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_LEFT && current != null
+                && !favViews.isEmpty() && current == favViews.get(0)) {
+            if (down && event.getRepeatCount() == 0) openMusicView();
+            return true;
+        }
         if (menu != null && event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
             if (up) closeMenu();
             return true;
@@ -1492,8 +1510,62 @@ public class KidoActivity extends Activity {
 
     @Override
     public void onBackPressed() {
+        if (musicView != null && musicView.getVisibility() == View.VISIBLE) {
+            closeMusicView();
+            return;
+        }
         // Home has nowhere to go back to: Back returns to the main panels instead.
         if (zone != 0 && !favViews.isEmpty()) favViews.get(0).requestFocus();
+    }
+
+    private void openMusicView() {
+        String permission = Build.VERSION.SDK_INT >= 33
+                ? Manifest.permission.READ_MEDIA_AUDIO : Manifest.permission.READ_EXTERNAL_STORAGE;
+        if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
+            musicReturn = getCurrentFocus();
+            requestPermissions(new String[]{permission}, REQUEST_MUSIC_PERMISSION);
+            return;
+        }
+        loadMusicLibrary();
+    }
+
+    private void loadMusicLibrary() {
+        if (musicView != null) {
+            musicView.setVisibility(View.VISIBLE);
+            musicView.requestFocus();
+            return;
+        }
+        Toast.makeText(this, "Loading local music…", Toast.LENGTH_SHORT).show();
+        new Thread(() -> {
+            List<MusicLibrary.Track> tracks = MusicLibrary.load(this);
+            runOnUiThread(() -> {
+                if (isFinishing() || root == null) return;
+                musicView = new MusicView(this, tracks, track ->
+                        Toast.makeText(this, "Selected: " + track.title, Toast.LENGTH_SHORT).show());
+                root.addView(musicView, new FrameLayout.LayoutParams(-1, -1));
+                musicView.requestFocus();
+            });
+        }, "Kido-MusicScan").start();
+    }
+
+    private void closeMusicView() {
+        if (musicView != null) musicView.setVisibility(View.GONE);
+        View target = musicReturn != null ? musicReturn : favViews.isEmpty() ? null : favViews.get(0);
+        if (target != null) target.requestFocus();
+        musicReturn = null;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode != REQUEST_MUSIC_PERMISSION) return;
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            loadMusicLibrary();
+        } else {
+            Toast.makeText(this, "Audio permission is needed to browse local music.", Toast.LENGTH_LONG).show();
+            if (musicReturn != null) musicReturn.requestFocus();
+            musicReturn = null;
+        }
     }
 
     @Override
@@ -1533,6 +1605,8 @@ public class KidoActivity extends Activity {
 			rebuild(last != null && last.app != null ? last.app.pkg : null);
 		} else if (themeChanged) {
 	        if (!favViews.isEmpty()) favViews.get(0).requestFocus();
+        } else if (musicView != null && musicView.getVisibility() == View.VISIBLE) {
+            musicView.requestFocus();
         } else if (lastFocused != null) {
             lastFocused.requestFocus();
         }
