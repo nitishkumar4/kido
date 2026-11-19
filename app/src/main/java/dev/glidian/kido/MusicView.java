@@ -29,12 +29,17 @@ final class MusicView extends FrameLayout {
 	private final TextView selectedTitle;
 	private final TextView selectedArtist;
 	private final TextView selectedMeta;
+	private final View nowPlayingTarget;
+	private final Consumer<View> onNowPlayingFocus;
 	private ScrollView namesScroll;
 	private int topRow;
 	private boolean rowsMoved;
 
-	MusicView(Context context, List<MusicLibrary.Track> tracks, Consumer<MusicLibrary.Track> onSelect, Consumer<String> onFocus) {
+	MusicView(Context context, List<MusicLibrary.Track> tracks, Consumer<MusicLibrary.Track> onSelect,
+			Consumer<String> onFocus, View nowPlayingTarget, Consumer<View> onNowPlayingFocus) {
 		super(context);
+		this.nowPlayingTarget = nowPlayingTarget;
+		this.onNowPlayingFocus = onNowPlayingFocus;
 		setFocusableInTouchMode(true);
 		setBackgroundColor(0xF5040404);
 
@@ -210,11 +215,17 @@ final class MusicView extends FrameLayout {
 	public View focusSearch(View focused, int direction) {
 		int index = tiles.indexOf(focused);
 		if (index >= 0) {
+			if (direction == View.FOCUS_UP && tileRows.get(index) == 0
+					&& nowPlayingTarget.getVisibility() == View.VISIBLE) {
+				onNowPlayingFocus.accept(focused);
+				return nowPlayingTarget;
+			}
 			if (direction == View.FOCUS_LEFT && index > 0) return tiles.get(index - 1);
 			if (direction == View.FOCUS_RIGHT && index + 1 < tiles.size()) return tiles.get(index + 1);
 		}
 		View next = super.focusSearch(focused, direction);
-		if (index >= 0 && !tiles.contains(next)) return focused;
+		if (index >= 0 && (direction == View.FOCUS_LEFT || direction == View.FOCUS_RIGHT)
+				&& !tiles.contains(next)) return focused;
 		return next;
 	}
 
