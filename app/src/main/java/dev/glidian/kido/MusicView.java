@@ -53,41 +53,45 @@ final class MusicView extends FrameLayout {
 		accent.setScaleX(0f);
 		place(accent, 30, 205, 1500, 8);
 
-		TextView heading = label("音楽   MUSIC LIBRARY", Kido.condBold, 34, Kido.AMBER);
+		TextView heading = label("音楽   MUSIC LIBRARY", Kido.condBold, 34, Kido.AMBER, 0.12f);
 		place(heading, 110, 76, 1100, 62);
 
-		place(label("NOW SELECTED", Kido.mono, 18, Kido.DIM), 1400, 112, 430, 26);
+		place(label("NOW SELECTED", Kido.mono, 18, Kido.DIM, 0.06f), 1430, 112, 370, 24);
 		selectedTitle = label(tracks.isEmpty() ? "NO LOCAL MUSIC FOUND" : tracks.get(0).title,
 				Kido.mincho, 28, Kido.CREAM);
+		selectedTitle.setTextSize(android.util.TypedValue.COMPLEX_UNIT_PX, Kido.px(28));
+		selectedTitle.setGravity(Gravity.CENTER_VERTICAL);
 		selectedTitle.setMaxLines(2);
 		selectedTitle.setEllipsize(TextUtils.TruncateAt.END);
 		selectedTitle.setAutoSizeTextTypeUniformWithConfiguration(
 				Kido.px(18), Kido.px(28), Kido.px(1), android.util.TypedValue.COMPLEX_UNIT_PX);
-		place(selectedTitle, 1400, 140, 430, 72);
+		place(selectedTitle, 1430, 140, 370, 58);
 
 		selectedArtist = label(tracks.isEmpty() ? "" : artistName(tracks.get(0)),
-				Kido.condBold, 20, Kido.AMBER);
+				Kido.condBold, 20, Kido.AMBER, 0.12f);
+		selectedArtist.setGravity(Gravity.CENTER_VERTICAL);
 		selectedArtist.setSingleLine(true);
 		selectedArtist.setEllipsize(TextUtils.TruncateAt.END);
-		place(selectedArtist, 1400, 216, 430, 28);
+		place(selectedArtist, 1430, 202, 370, 26);
 
 		selectedMeta = label(tracks.isEmpty() ? "" : trackMeta(tracks.get(0)),
-				Kido.mono, 17, Kido.DIM);
-		place(selectedMeta, 1400, 246, 430, 24);
+				Kido.mono, 19, Kido.DIM, 0.06f);
+		selectedMeta.setGravity(Gravity.CENTER_VERTICAL);
+		place(selectedMeta, 1430, 232, 370, 24);
 
 		FrameLayout listPanel = new FrameLayout(context);
 		listPanel.setBackground(background(Kido.PANEL, Kido.LINE));
-		place(listPanel, 1400, 282, 430, 638);
+		place(listPanel, 1430, 270, 370, 650);
 
-		place(listPanel, label("曲目", Kido.mincho, 32, Kido.AMBER), 20, 8, 76, 48);
-		place(listPanel, label("TRACK LIST", Kido.condBold, 22, Kido.INK), 104, 20, 210, 30);
+		place(listPanel, label("曲目", Kido.mincho, 28, Kido.AMBER), 20, 12, 76, 42);
+		place(listPanel, label("TRACK LIST", Kido.condBold, 22, Kido.INK, 0.12f), 94, 20, 190, 30);
 		TextView count = label(String.format(Locale.ROOT, "%02d", tracks.size()),
 				Kido.mono, 18, Kido.DIM);
 		count.setGravity(Gravity.END);
-		place(listPanel, count, 362, 22, 48, 26);
+		place(listPanel, count, 312, 22, 40, 26);
 		View listDivider = new View(context);
 		listDivider.setBackgroundColor(Kido.LINE);
-		place(listPanel, listDivider, 18, 62, 394, 2);
+		place(listPanel, listDivider, 18, 62, 334, 2);
 
 		LinearLayout list = new LinearLayout(context);
 		list.setOrientation(LinearLayout.VERTICAL);
@@ -95,7 +99,7 @@ final class MusicView extends FrameLayout {
 		namesScroll.setVerticalScrollBarEnabled(false);
 		namesScroll.setOverScrollMode(View.OVER_SCROLL_NEVER);
 		namesScroll.addView(list);
-		place(listPanel, namesScroll, 12, 72, 406, 548);
+		place(listPanel, namesScroll, 12, 76, 346, 560);
 
 		FrameLayout grid = new FrameLayout(context);
 		grid.setClipChildren(false);
@@ -120,13 +124,12 @@ final class MusicView extends FrameLayout {
 				float x = 40 + column * 246 + (rowIndex % 2 == 1 ? 123 : 0);
 				place(grid, tile, Math.round(x), rowIndex * HEX_PITCH, 232, 266);
 
-				TextView name = label("", Kido.mono, 18, Kido.DIM);
-				name.setTextSize(android.util.TypedValue.COMPLEX_UNIT_PX, Kido.px(18));
+				TextView name = label("", Kido.mono, 22, Kido.DIM);
 				name.setGravity(Gravity.CENTER_VERTICAL);
 				name.setSingleLine(true);
 				name.setEllipsize(TextUtils.TruncateAt.END);
 				name.setTag(trackIndex);
-				list.addView(name, new LinearLayout.LayoutParams(-1, Kido.px(36)));
+				list.addView(name, new LinearLayout.LayoutParams(-1, Kido.px(40)));
 				names.add(name);
 				trackTitles.add(track.title);
 
@@ -276,12 +279,17 @@ final class MusicView extends FrameLayout {
 	}
 
 	private TextView label(String value, android.graphics.Typeface typeface, int size, int color) {
+		return label(value, typeface, size, color, 0f);
+	}
+
+	private TextView label(String value, android.graphics.Typeface typeface, int size, int color, float spacing) {
 		TextView view = new TextView(getContext());
 		view.setText(value);
 		view.setTypeface(typeface);
-		view.setTextSize(size);
+		view.setTextSize(android.util.TypedValue.COMPLEX_UNIT_PX, Kido.px(size));
 		view.setTextColor(color);
 		view.setIncludeFontPadding(false);
+		if (spacing != 0f) view.setLetterSpacing(spacing);
 		return view;
 	}
 
