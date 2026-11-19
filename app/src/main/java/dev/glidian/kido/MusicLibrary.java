@@ -38,11 +38,10 @@ final class MusicLibrary {
     static List<Track> load(Context context) {
         List<Track> tracks = new ArrayList<>();
         Uri collection = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-        String selection = MediaStore.Audio.Media.IS_MUSIC + "!=0";
         String sortOrder = MediaStore.Audio.Media.TITLE + " COLLATE NOCASE ASC";
 
         try (Cursor cursor = context.getContentResolver().query(
-                collection, PROJECTION, selection, null, sortOrder)) {
+                collection, PROJECTION, null, null, sortOrder)) {
             if (cursor == null) return tracks;
 
             int idColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID);
