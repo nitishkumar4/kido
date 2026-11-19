@@ -14,7 +14,7 @@ final class MusicPlayer {
     private boolean focusHeld;
 
     private final AudioManager.OnAudioFocusChangeListener focusListener = change -> {
-        if (change <= AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) pauseForFocusLoss();
+        if (change < 0) pauseForFocusLoss();
     };
 
     MusicPlayer(Context context) {
@@ -39,7 +39,7 @@ final class MusicPlayer {
             player.setDataSource(context, uri);
             player.setOnPreparedListener(mp -> {
                 prepared = true;
-                mp.start();
+                if (focusHeld) mp.start();
             });
             player.setOnCompletionListener(mp -> stop());
             player.setOnErrorListener((mp, what, extra) -> {
