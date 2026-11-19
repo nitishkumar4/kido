@@ -1608,8 +1608,12 @@ public class KidoActivity extends Activity {
         musicView.post(() -> {
             if (musicView == null || musicView.getVisibility() != View.VISIBLE) return;
             float width = root.getWidth(), height = root.getHeight();
+            musicView.animate().cancel();
+            board.animate().cancel();
             musicView.setTranslationX(-width);
             musicView.setTranslationY(height);
+            board.setTranslationX(0);
+            board.setTranslationY(0);
             board.setVisibility(View.VISIBLE);
             board.animate().translationX(width).translationY(-height)
                     .setDuration(620).setInterpolator(fluid).start();
@@ -1620,6 +1624,7 @@ public class KidoActivity extends Activity {
                             board.setVisibility(View.GONE);
                             board.setTranslationX(0);
                             board.setTranslationY(0);
+                            musicView.intro();
                             musicView.focusFirstTrack();
                         }
                     }).start();
@@ -1655,20 +1660,33 @@ public class KidoActivity extends Activity {
     }
 
     private void closeMusicView() {
-        if (musicView != null) {
-            root.removeView(musicView);
-            musicView = null;
-        }
-        restoreMusicHud();
+        if (musicView == null) return;
+        float width = root.getWidth(), height = root.getHeight();
+        musicView.animate().cancel();
         board.animate().cancel();
-        board.setTranslationX(0);
-        board.setTranslationY(0);
+        if (board.getVisibility() != View.VISIBLE) {
+            board.setTranslationX(width);
+            board.setTranslationY(-height);
+        }
         board.setVisibility(View.VISIBLE);
-        hud.setVisibility(View.VISIBLE);
-        scan.setVisibility(View.VISIBLE);
-        View target = musicReturn != null ? musicReturn : favViews.isEmpty() ? null : favViews.get(0);
-        if (target != null) target.requestFocus();
-        musicReturn = null;
+        board.animate().translationX(0).translationY(0)
+                .setDuration(620).setInterpolator(fluid).start();
+        musicView.animate().translationX(-width).translationY(height)
+                .setDuration(620).setInterpolator(fluid)
+                .withEndAction(() -> {
+                    if (musicView == null) return;
+                    root.removeView(musicView);
+                    musicView = null;
+                    board.setTranslationX(0);
+                    board.setTranslationY(0);
+                    restoreMusicHud();
+                    hud.setVisibility(View.VISIBLE);
+                    scan.setVisibility(View.VISIBLE);
+                    View target = musicReturn != null ? musicReturn
+                            : favViews.isEmpty() ? null : favViews.get(0);
+                    if (target != null) target.requestFocus();
+                    musicReturn = null;
+                }).start();
     }
 
     @Override
