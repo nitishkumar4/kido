@@ -166,9 +166,6 @@ final class MusicView extends FrameLayout {
 			tile.setNextFocusRightId(next);
 		}
 
-		View footerRule = new View(context);
-		footerRule.setBackgroundColor(Kido.LINE);
-		place(footerRule, 110, 940, 1700, 2);
 		place(label("◀ 主要  MAIN", Kido.condBold, 26, Kido.DIM, 0.14f), 122, 966, 420, 34);
 		place(label("OK  //  PLAY    ARROWS  //  BROWSE", Kido.mono, 20, Kido.DIM, 0.06f), 560, 970, 800, 30);
 		if (tracks.isEmpty()) {
