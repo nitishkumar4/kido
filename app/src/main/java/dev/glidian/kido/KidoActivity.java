@@ -809,6 +809,8 @@ public class KidoActivity extends Activity {
         plateKanji = text("映画", Kido.mincho, 104, 0xFF0A0505, 0);
         place(plate, plateKanji, 26, 6, 470, -1);
         plateEn = text(str(R.string.cat_film), Kido.condBold, 38, 0xFF0A0505, 0.1f);
+        plateEn.setAutoSizeTextTypeUniformWithConfiguration(
+                Kido.px(20), Kido.px(38), Kido.px(1), android.util.TypedValue.COMPLEX_UNIT_PX);
         place(plate, plateEn, 30, 136, 470, -1);
         place(plate, new Stripes(this, 0x8C000000), 490, 0, 150, 196);
         plateHalo = new GlowView(this, Kido.px(60), false);
@@ -1635,7 +1637,7 @@ public class KidoActivity extends Activity {
 
     private void showMusicFooterOnly() {
         previousFooterZone = footerZone.getText().toString();
-        footerZone.setText("SEC-04 // MUSIC LIBRARY");
+        footerZone.setText("SEC-04 // SONIC ARCHIVE");
         musicHudVisibility = new int[hud.getChildCount()];
         for (int i = 0; i < hud.getChildCount(); i++) {
             musicHudVisibility[i] = hud.getChildAt(i).getVisibility();
@@ -1650,7 +1652,9 @@ public class KidoActivity extends Activity {
         String artist = track.artist == null || track.artist.trim().isEmpty()
                 || track.artist.equals("<unknown>") ? "UNKNOWN ARTIST"
                 : track.artist.toUpperCase(Locale.ROOT);
-        setStatus("音楽", track.format, artist + " // " + duration,
+        String format = MusicView.fullFormat(track.format);
+        String kanji = MusicView.formatKanji(track.format);
+        setStatus(kanji, format, artist + " // " + duration,
                 "NOW SELECTED", MusicView.colorForDuration(track.duration));
     }
     private void restoreMusicHud() {
