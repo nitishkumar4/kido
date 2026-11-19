@@ -72,6 +72,11 @@ final class MusicView extends FrameLayout {
 		grid.setClipChildren(true);
 		place(grid, 110, 270, 1270, 650);
 
+		GlowView focusGlow = new GlowView(context, Kido.px(40), false);
+		focusGlow.setColor(Kido.withAlpha(Kido.GREEN, 0.7f));
+		focusGlow.setAlpha(0f);
+		place(grid, focusGlow, 0, 0, 312, 346);
+
 		int index = 0;
 		int rowIndex = 0;
 		while (index < tracks.size()) {
@@ -97,6 +102,7 @@ final class MusicView extends FrameLayout {
 						selectedTitle.setText(track.title);
 						highlight(trackIndex);
 						scrollRows(tileRows.get(trackIndex), true);
+						moveFocusGlow(focusGlow, tile, true);
 					}
 				});
 				tile.setOnClickListener(v -> onSelect.accept(track));
@@ -170,6 +176,22 @@ final class MusicView extends FrameLayout {
 				tile.setAlpha(alpha);
 			}
 		}
+	}
+
+	private void moveFocusGlow(GlowView glow, HexView tile, boolean animate) {
+		FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) tile.getLayoutParams();
+		float pad = Kido.px(40);
+		float x = params.leftMargin - pad;
+		float y = params.topMargin - Kido.px(topRow * HEX_PITCH) - pad;
+		if (!animate || glow.getAlpha() < 0.05f) {
+			glow.animate().cancel();
+			glow.setTranslationX(x);
+			glow.setTranslationY(y);
+			glow.animate().alpha(1f).setDuration(220).start();
+			return;
+		}
+		glow.animate().translationX(x).translationY(y)
+				.setDuration(240).start();
 	}
 
 	private void highlight(int selected) {
