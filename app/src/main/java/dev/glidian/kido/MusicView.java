@@ -19,6 +19,7 @@ import java.util.function.Consumer;
 final class MusicView extends FrameLayout {
     private final List<TextView> names = new ArrayList<>();
     private final TextView selectedTitle;
+    private final List<HexView> tiles = new ArrayList<>();
 
     MusicView(Context context, List<MusicLibrary.Track> tracks, Consumer<MusicLibrary.Track> onSelect) {
         super(context);
@@ -80,7 +81,11 @@ final class MusicView extends FrameLayout {
                         highlight(index);
                     }
                 });
+                tile.setFocusable(true);
+                tile.setClickable(true);
+                // DPAD focus only previews the title; OK/Enter activates the tile and starts playback.
                 tile.setOnClickListener(v -> onSelect.accept(track));
+                tiles.add(tile);
                 if (i == 0) tile.setId(View.generateViewId());
             }
             grid.addView(row);
@@ -103,6 +108,10 @@ final class MusicView extends FrameLayout {
                 }
             });
         }
+    }
+
+    void focusFirstTrack() {
+        if (!tiles.isEmpty()) tiles.get(0).requestFocus();
     }
 
     private void highlight(int selected) {
