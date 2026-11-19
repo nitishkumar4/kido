@@ -1544,6 +1544,13 @@ public class KidoActivity extends Activity {
             List<MusicLibrary.Track> tracks = MusicLibrary.load(this);
             runOnUiThread(() -> {
                 if (isFinishing() || root == null) return;
+                if (tracks.isEmpty()) {
+                    Toast.makeText(this, "No indexed audio files found. Check Logcat: KidoMusic.",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this, tracks.size() + " audio tracks found.",
+                            Toast.LENGTH_SHORT).show();
+                }
                 musicView = new MusicView(this, tracks, track -> {
                     if (musicPlayer == null) musicPlayer = new MusicPlayer(this);
                     if (!musicPlayer.play(track.uri)) {
