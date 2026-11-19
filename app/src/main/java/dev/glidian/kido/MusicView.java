@@ -91,6 +91,15 @@ final class MusicView extends FrameLayout {
 			rowIndex++;
 		}
 
+		for (int i = 0; i < tiles.size(); i++) {
+			HexView tile = tiles.get(i);
+			tile.setId(View.generateViewId());
+			int previous = i > 0 ? tiles.get(i - 1).getId() : tile.getId();
+			int next = i + 1 < tiles.size() ? tiles.get(i + 1).getId() : tile.getId();
+			tile.setNextFocusLeftId(previous);
+			tile.setNextFocusRightId(next);
+		}
+
 		place(label("BACK  //  MAIN", Kido.mono, 18, Kido.DIM), 110, 970, 500, 34);
 		if (tracks.isEmpty()) {
 			TextView empty = label("Open MusicView after adding audio to local storage.",
@@ -101,6 +110,13 @@ final class MusicView extends FrameLayout {
 			scrollRows(0, false);
 			grid.post(() -> tiles.get(0).requestFocus());
 		}
+	}
+
+	@Override
+	public View focusSearch(View focused, int direction) {
+		View next = super.focusSearch(focused, direction);
+		if (tiles.contains(focused) && !tiles.contains(next)) return focused;
+		return next;
 	}
 
 	void focusFirstTrack() {
