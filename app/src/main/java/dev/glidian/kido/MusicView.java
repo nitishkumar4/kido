@@ -26,6 +26,20 @@ final class MusicView extends FrameLayout {
 		0xFF00E6A0, 0xFFA5E635, 0xFFF2E635, 0xFFFF4D4D, 0xFFFFFFFF
 	};
 
+	static String formatKanji(String format) {
+		if ("MP3".equalsIgnoreCase(format)) return "圧縮";
+		if ("FLAC".equalsIgnoreCase(format)) return "無損";
+		if ("AAC".equalsIgnoreCase(format)) return "先進";
+		return "音声";
+	}
+
+	static String fullFormat(String format) {
+		if ("MP3".equalsIgnoreCase(format)) return "MPEG AUDIO LAYER III";
+		if ("FLAC".equalsIgnoreCase(format)) return "FREE LOSSLESS AUDIO CODEC";
+		if ("AAC".equalsIgnoreCase(format)) return "ADVANCED AUDIO CODING";
+		return format == null || format.trim().isEmpty() ? "UNKNOWN AUDIO" : format.toUpperCase(Locale.ROOT);
+	}
+
 	static int colorForDuration(long duration) {
 		int minute = (int) Math.max(0, duration / 60000L);
 		return TRACK_COLORS[Math.min(Math.max(0, minute - 1), TRACK_COLORS.length - 1)];
@@ -76,7 +90,7 @@ final class MusicView extends FrameLayout {
 		sectionTitle.setGravity(Gravity.BOTTOM);
 		sectionTitle.addView(label("音楽", Kido.mincho, 46, Kido.AMBER));
 		sectionTitle.addView(gap(18));
-		sectionTitle.addView(label("MUSIC LIBRARY", Kido.condBold, 30, Kido.INK, 0.14f));
+		sectionTitle.addView(label("SONIC ARCHIVE", Kido.condBold, 30, Kido.INK, 0.14f));
 		sectionTitle.addView(gap(14));
 		sectionTitle.addView(label("SEC-04", Kido.mono, 22, Kido.DIM));
 		place(sectionTitle, 120, 360, -1, 58);
@@ -109,7 +123,7 @@ final class MusicView extends FrameLayout {
 		place(listPanel, 1430, 452, 370, 500);
 
 		place(listPanel, label("曲目", Kido.mincho, 28, Kido.AMBER), 20, 12, 76, 42);
-		place(listPanel, label("TRACK LIST", Kido.condBold, 26, Kido.INK, 0.12f), 94, 18, 210, 32);
+		place(listPanel, label("SIGNAL INDEX", Kido.condBold, 26, Kido.INK, 0.12f), 94, 18, 210, 32);
 		TextView count = label(String.format(Locale.ROOT, "%02d", tracks.size()),
 				Kido.mono, 22, Kido.DIM);
 		count.setGravity(Gravity.END);
