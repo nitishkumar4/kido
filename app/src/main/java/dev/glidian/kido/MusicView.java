@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.PathInterpolator;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -18,11 +19,13 @@ import java.util.function.Consumer;
 /** Lightweight local music browser. The Activity owns permission and playback. */
 final class MusicView extends FrameLayout {
 	private static final int HEX_PITCH = 214;
+	private final PathInterpolator fluid = new PathInterpolator(0.2f, 0f, 0f, 1f);
 	private final List<TextView> names = new ArrayList<>();
 	private final List<HexView> tiles = new ArrayList<>();
 	private final List<Integer> tileRows = new ArrayList<>();
 	private final TextView selectedTitle;
 	private int topRow;
+	private boolean rowsMoved;
 
 	MusicView(Context context, List<MusicLibrary.Track> tracks, Consumer<MusicLibrary.Track> onSelect) {
 		super(context);
@@ -164,6 +167,7 @@ final class MusicView extends FrameLayout {
 		if (tiles.isEmpty()) return;
 		int lastRow = tileRows.get(tileRows.size() - 1);
 		int nextTop = Math.max(0, Math.min(row - 1, Math.max(0, lastRow - 1)));
+		rowsMoved = nextTop != topRow;
 		topRow = nextTop;
 		float shift = -Kido.px(topRow * HEX_PITCH);
 		for (int i = 0; i < tiles.size(); i++) {
@@ -192,7 +196,7 @@ final class MusicView extends FrameLayout {
 			return;
 		}
 		glow.animate().translationX(x).translationY(y)
-				.setDuration(240).start();
+				.setDuration(rowsMoved ? 340 : 240).setInterpolator(fluid).start();
 	}
 
 	private static void unclip(View view) {
