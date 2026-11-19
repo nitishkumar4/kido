@@ -21,6 +21,16 @@ import java.util.function.Consumer;
 /** Lightweight local music browser. The Activity owns permission and playback. */
 final class MusicView extends FrameLayout {
 	private static final int HEX_PITCH = 214;
+	private static final int[] TRACK_COLORS = {
+		0xFFFF8C00, 0xFFFF3D9A, 0xFFB44CFF, 0xFF397BFF, 0xFF00D9FF,
+		0xFF00E6A0, 0xFFA5E635, 0xFFF2E635, 0xFFFF4D4D, 0xFFFFFFFF
+	};
+
+	static int colorForDuration(long duration) {
+		int minute = (int) Math.max(0, duration / 60000L);
+		return TRACK_COLORS[Math.min(Math.max(0, minute - 1), TRACK_COLORS.length - 1)];
+	}
+
 	private final PathInterpolator fluid = new PathInterpolator(0.2f, 0f, 0f, 1f);
 	private final PathInterpolator snap = new PathInterpolator(0.77f, 0f, 0.18f, 1f);
 	private final TraceView frame;
@@ -143,7 +153,8 @@ final class MusicView extends FrameLayout {
 			for (int column = 0; column < perRow && index < tracks.size(); column++, index++) {
 				final int trackIndex = index;
 				MusicLibrary.Track track = tracks.get(index);
-				Kido.Look look = new Kido.Look(track.format, "音楽", "LOCAL AUDIO", Kido.GREEN, 0);
+				Kido.Look look = new Kido.Look(track.format, "音楽", "LOCAL AUDIO",
+						colorForDuration(track.duration), 0);
 				HexView tile = new HexView(context, look,
 						String.format(Locale.ROOT, "%02d", index + 1));
 				float x = 40 + column * 246 + (rowIndex % 2 == 1 ? 123 : 0);
