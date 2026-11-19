@@ -2,10 +2,14 @@ package dev.glidian.kido;
 
 import android.content.ContentUris;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
+
+import java.io.InputStream;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +24,8 @@ final class MusicLibrary {
             MediaStore.MediaColumns.MIME_TYPE,
             MediaStore.MediaColumns.TITLE,
             MediaStore.Audio.AudioColumns.ARTIST,
-            MediaStore.Audio.AudioColumns.DURATION
+            MediaStore.Audio.AudioColumns.DURATION,
+            MediaStore.Audio.AudioColumns.ALBUM_ID
     };
 
     private MusicLibrary() {
@@ -32,13 +37,15 @@ final class MusicLibrary {
         final String artist;
         final long duration;
         final String format;
+        final long albumId;
 
-        Track(Uri uri, String title, String artist, long duration, String format) {
+        Track(Uri uri, String title, String artist, long duration, String format, long albumId) {
             this.uri = uri;
             this.title = title;
             this.artist = artist;
             this.duration = duration;
             this.format = format;
+            this.albumId = albumId;
         }
     }
 
@@ -62,6 +69,7 @@ final class MusicLibrary {
             int titleColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.TITLE);
             int artistColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.AudioColumns.ARTIST);
             int durationColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.AudioColumns.DURATION);
+            int albumColumn = cursor.getColumnIndexOrThrow(MediaStore.Audio.AudioColumns.ALBUM_ID);
 
             while (cursor.moveToNext()) {
                 long id = cursor.getLong(idColumn);
@@ -75,18 +83,68 @@ final class MusicLibrary {
                 }
                 String artist = cursor.getString(artistColumn);
                 long duration = cursor.getLong(durationColumn);
+                long albumId = cursor.getLong(albumColumn);
                 String displayName = cursor.getString(nameColumn);
                 String mimeType = cursor.getString(cursor.getColumnIndexOrThrow(
                         MediaStore.MediaColumns.MIME_TYPE));
                 String format = audioFormat(displayName, mimeType);
                 tracks.add(new Track(ContentUris.withAppendedId(collection, id),
-                        title == null ? "Unknown track" : title, artist, duration, format));
+                        title == null ? "Unknown track" : title, artist, duration, format, albumId));
             }
         } catch (Exception e) {
             Log.e(TAG, "Unable to query indexed audio files", e);
         }
 
         return tracks;
+    }
+
+
+    /** Samples a tiny album-art bitmap and releases it immediately; no disk or memory cache. */
+    static int albumColor(Context context, long albumId, int fallback) {
+        if (albumId < 0) return fallback;
+        Uri artwork = Uri.parse("content://media/external/audio/albumart/" + albumId);
+        Bitmap bitmap = null;
+        try {
+            BitmapFactory.Options bounds = new BitmapFactory.Options();
+            bounds.inJustDecodeBounds = true;
+            try (InputStream input = context.getContentResolver().openInputStream(artwork)) {
+                if (input == null) return fallback;
+                BitmapFactory.decodeStream(input, null, bounds);
+            }
+            if (bounds.outWidth <= 0 || bounds.outHeight <= 0) return fallback;
+            int sample = 1;
+            while (Math.max(bounds.outWidth / sample, bounds.outHeight / sample) > 32) sample *= 2;
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = sample;
+            options.inPreferredConfig = Bitmap.Config.RGB_565;
+            try (InputStream input = context.getContentResolver().openInputStream(artwork)) {
+                if (input == null) return fallback;
+                bitmap = BitmapFactory.decodeStream(input, null, options);
+            }
+            if (bitmap == null) return fallback;
+
+            int[] counts = new int[4096];
+            int width = bitmap.getWidth(), height = bitmap.getHeight();
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    int pixel = bitmap.getPixel(x, y);
+                    int red = (pixel >> 20) & 0x0F;
+                    int green = (pixel >> 12) & 0x0F;
+                    int blue = (pixel >> 4) & 0x0F;
+                    counts[(red << 8) | (green << 4) | blue]++;
+                }
+            }
+            int dominant = 0;
+            for (int i = 1; i < counts.length; i++) {
+                if (counts[i] > counts[dominant]) dominant = i;
+            }
+            return 0xFF000000 | (((dominant >> 8) & 0x0F) * 17 << 16)
+                    | (((dominant >> 4) & 0x0F) * 17 << 8) | ((dominant & 0x0F) * 17);
+        } catch (Exception e) {
+            return fallback;
+        } finally {
+            if (bitmap != null && !bitmap.isRecycled()) bitmap.recycle();
+        }
     }
 
     private static String audioFormat(String displayName, String mimeType) {
