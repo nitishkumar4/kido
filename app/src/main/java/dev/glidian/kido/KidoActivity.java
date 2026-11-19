@@ -1475,7 +1475,8 @@ public class KidoActivity extends Activity {
         if (cur == npPanel && npKey(event)) return true;
         // Up from the main panels reaches the NOW PLAYING panel when it shows; otherwise Up there does nothing.
         if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_UP && npPanel.getVisibility() == View.VISIBLE
-                && cur != null && favViews.contains(cur)) {
+                && cur != null && (favViews.contains(cur)
+                || musicView != null && musicView.getVisibility() == View.VISIBLE && musicView.isTopRowFocused(cur))) {
             if (down && event.getRepeatCount() == 0) {
                 npReturn = cur;
                 npPanel.requestFocus();
