@@ -177,16 +177,6 @@ final class MusicView extends FrameLayout {
 			tile.setNextFocusRightId(next);
 		}
 
-		place(label("◀ 主要  MAIN", Kido.condBold, 26, Kido.DIM, 0.14f), 122, 966, 420, 34);
-		String status = tracks.isEmpty() ? "NO LOCAL TRACKS FOUND"
-				: String.format(Locale.ROOT, "%02d TRACKS FOUND  //  LIBRARY READY", tracks.size());
-		TextView notification = label(status, Kido.mono, 20,
-				tracks.isEmpty() ? Kido.DIM : Kido.LIME, 0.06f);
-		notification.setGravity(Gravity.CENTER);
-		place(notification, 560, 970, 800, 30);
-		TextView controlsHint = label("OK // PLAY    ARROWS // BROWSE", Kido.mono, 18, Kido.DIM, 0.06f);
-		controlsHint.setGravity(Gravity.END);
-		place(controlsHint, 1380, 970, 420, 30);
 		if (tracks.isEmpty()) {
 			TextView empty = label("Open MusicView after adding audio to local storage.",
 					Kido.mono, 20, Kido.DIM);
