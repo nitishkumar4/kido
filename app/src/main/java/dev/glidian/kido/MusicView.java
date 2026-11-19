@@ -3,9 +3,11 @@ package dev.glidian.kido;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.PathInterpolator;
+import android.text.TextUtils;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -23,7 +25,11 @@ final class MusicView extends FrameLayout {
 	private final List<TextView> names = new ArrayList<>();
 	private final List<HexView> tiles = new ArrayList<>();
 	private final List<Integer> tileRows = new ArrayList<>();
+	private final List<String> trackTitles = new ArrayList<>();
 	private final TextView selectedTitle;
+	private final TextView selectedArtist;
+	private final TextView selectedMeta;
+	private ScrollView namesScroll;
 	private int topRow;
 	private boolean rowsMoved;
 
@@ -50,26 +56,44 @@ final class MusicView extends FrameLayout {
 		TextView heading = label("音楽   MUSIC LIBRARY", Kido.condBold, 34, Kido.AMBER);
 		place(heading, 110, 70, 900, 54);
 
+		place(label("NOW SELECTED", Kido.mono, 18, Kido.DIM), 1430, 132, 370, 28);
 		selectedTitle = label(tracks.isEmpty() ? "NO LOCAL MUSIC FOUND" : tracks.get(0).title,
 				Kido.mincho, 30, Kido.CREAM);
 		selectedTitle.setSingleLine(true);
-		place(selectedTitle, 1430, 150, 430, 54);
+		selectedTitle.setEllipsize(TextUtils.TruncateAt.END);
+		place(selectedTitle, 1430, 164, 370, 46);
 
-		TextView count = label(String.format(Locale.ROOT, "%02d TRACKS", tracks.size()),
-				Kido.mono, 20, Kido.DIM);
-		place(count, 1430, 210, 370, 34);
+		selectedArtist = label(tracks.isEmpty() ? "" : artistName(tracks.get(0)),
+				Kido.condBold, 20, Kido.AMBER);
+		selectedArtist.setSingleLine(true);
+		selectedArtist.setEllipsize(TextUtils.TruncateAt.END);
+		place(selectedArtist, 1430, 210, 370, 30);
+
+		selectedMeta = label(tracks.isEmpty() ? "" : trackMeta(tracks.get(0)),
+				Kido.mono, 17, Kido.DIM);
+		place(selectedMeta, 1430, 242, 370, 24);
 
 		FrameLayout listPanel = new FrameLayout(context);
 		listPanel.setBackground(background(Kido.PANEL, Kido.LINE));
 		place(listPanel, 1430, 270, 370, 650);
 
+		place(listPanel, label("曲目", Kido.mincho, 34, Kido.AMBER), 20, 10, 76, 48);
+		place(listPanel, label("TRACK LIST", Kido.condBold, 22, Kido.INK), 104, 22, 170, 30);
+		TextView count = label(String.format(Locale.ROOT, "%02d", tracks.size()),
+				Kido.mono, 18, Kido.DIM);
+		count.setGravity(Gravity.END);
+		place(listPanel, count, 300, 24, 48, 26);
+		View listDivider = new View(context);
+		listDivider.setBackgroundColor(Kido.LINE);
+		place(listPanel, listDivider, 18, 66, 334, 2);
+
 		LinearLayout list = new LinearLayout(context);
 		list.setOrientation(LinearLayout.VERTICAL);
-		ScrollView namesScroll = new ScrollView(context);
+		namesScroll = new ScrollView(context);
 		namesScroll.setVerticalScrollBarEnabled(false);
 		namesScroll.setOverScrollMode(View.OVER_SCROLL_NEVER);
 		namesScroll.addView(list);
-		listPanel.addView(namesScroll, new FrameLayout.LayoutParams(-1, -1));
+		place(listPanel, namesScroll, 12, 78, 346, 556);
 
 		FrameLayout grid = new FrameLayout(context);
 		grid.setClipChildren(false);
@@ -94,17 +118,23 @@ final class MusicView extends FrameLayout {
 				float x = 40 + column * 246 + (rowIndex % 2 == 1 ? 123 : 0);
 				place(grid, tile, Math.round(x), rowIndex * HEX_PITCH, 232, 266);
 
-				TextView name = label(track.title, Kido.mono, 18, Kido.DIM);
+				TextView name = label("", Kido.mono, 20, Kido.DIM);
 				name.setSingleLine(true);
+				name.setEllipsize(TextUtils.TruncateAt.END);
+				name.setGravity(Gravity.CENTER_VERTICAL);
 				name.setTag(trackIndex);
-				name.setPadding(Kido.px(12), Kido.px(14), Kido.px(12), Kido.px(14));
-				list.addView(name);
+				name.setPadding(Kido.px(14), Kido.px(8), Kido.px(12), Kido.px(8));
+				list.addView(name, new LinearLayout.LayoutParams(-1, Kido.px(54)));
 				names.add(name);
+				trackTitles.add(track.title);
 
 				tile.setOnFocusChangeListener((v, focused) -> {
 					if (focused) {
 						selectedTitle.setText(track.title);
+						selectedArtist.setText(artistName(track));
+						selectedMeta.setText(trackMeta(track));
 						highlight(trackIndex);
+						scrollListTo(name);
 						scrollRows(tileRows.get(trackIndex), true);
 						moveFocusGlow(focusGlow, tile, true);
 					}
@@ -208,10 +238,37 @@ final class MusicView extends FrameLayout {
 
 	private void highlight(int selected) {
 		for (int i = 0; i < names.size(); i++) {
-			names.get(i).setTextColor(i == selected ? Kido.INK : Kido.DIM);
-			names.get(i).setBackgroundColor(i == selected
-					? Kido.withAlpha(Kido.GREEN, 0.18f) : Color.TRANSPARENT);
+			boolean active = i == selected;
+			names.get(i).setText((active ? "▶  " : "   ")
+					+ String.format(Locale.ROOT, "%02d  ", i + 1) + trackTitles.get(i));
+			names.get(i).setTextColor(active ? Kido.INK : Kido.DIM);
+			names.get(i).setBackgroundColor(active
+					? Kido.withAlpha(Kido.GREEN, 0.16f) : Color.TRANSPARENT);
 		}
+	}
+
+	private void scrollListTo(TextView row) {
+		if (namesScroll == null) return;
+		namesScroll.post(() -> {
+			int top = namesScroll.getScrollY();
+			int bottom = top + namesScroll.getHeight();
+			if (row.getTop() < top || row.getBottom() > bottom) {
+				namesScroll.smoothScrollTo(0,
+						Math.max(0, row.getTop() - namesScroll.getHeight() / 2 + row.getHeight() / 2));
+			}
+		});
+	}
+
+	private static String artistName(MusicLibrary.Track track) {
+		return track.artist == null || track.artist.trim().isEmpty()
+				|| track.artist.equals("<unknown>") ? "UNKNOWN ARTIST"
+				: track.artist.toUpperCase(Locale.ROOT);
+	}
+
+	private static String trackMeta(MusicLibrary.Track track) {
+		long seconds = Math.max(0, track.duration / 1000);
+		String duration = String.format(Locale.ROOT, "%02d:%02d", seconds / 60, seconds % 60);
+		return track.format + "  //  " + duration;
 	}
 
 	private TextView label(String value, android.graphics.Typeface typeface, int size, int color) {
