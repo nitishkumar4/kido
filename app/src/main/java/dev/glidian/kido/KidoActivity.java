@@ -1597,6 +1597,7 @@ public class KidoActivity extends Activity {
                 launch.setVisibility(View.GONE);
                 if (alert != null) alert.setVisibility(View.GONE);
                 root.addView(musicView, new FrameLayout.LayoutParams(-1, -1));
+                hud.bringToFront();
                 musicView.post(musicView::focusFirstTrack);
             });
         }, "Kido-MusicScan").start();
