@@ -1608,11 +1608,7 @@ public class KidoActivity extends Activity {
         footerZone.setText("SEC-04 // MUSIC LIBRARY");
         musicHudVisibility = new int[hud.getChildCount()];
         for (int i = 0; i < hud.getChildCount(); i++) {
-            View child = hud.getChildAt(i);
-            musicHudVisibility[i] = child.getVisibility();
-            if (child != footerMark && child != ticker && child != footerZone) {
-                child.setVisibility(View.GONE);
-            }
+            musicHudVisibility[i] = hud.getChildAt(i).getVisibility();
         }
         hud.setVisibility(View.VISIBLE);
     }
