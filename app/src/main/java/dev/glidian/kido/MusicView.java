@@ -215,6 +215,7 @@ final class MusicView extends FrameLayout {
 		accent.setScaleX(0f);
 		accent.animate().scaleX(1f).setDuration(560)
 				.setInterpolator(snap).start();
+	}
 
 	@Override
 	public View focusSearch(View focused, int direction) {
