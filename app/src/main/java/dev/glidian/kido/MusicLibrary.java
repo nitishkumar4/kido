@@ -75,8 +75,8 @@ final class MusicLibrary {
         String sortOrder = MediaStore.MediaColumns.TITLE + " COLLATE NOCASE ASC";
 
         try (Cursor cursor = context.getContentResolver().query(
-                collection, PROJECTION, selection, selectionArgs, sortOrder)) {
-            if (cursor == null) return tracks;
+                collection, projection, selection, selectionArgs, sortOrder)) {
+            if (cursor == null) return null;
 
             int idColumn = cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID);
             int nameColumn = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME);
@@ -108,6 +108,7 @@ final class MusicLibrary {
             }
         } catch (Exception e) {
             Log.e(TAG, "Unable to query indexed audio files", e);
+            return null;
         }
 
         return tracks;
