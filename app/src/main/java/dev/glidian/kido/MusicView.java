@@ -178,8 +178,8 @@ final class MusicView extends FrameLayout {
 			tile.setNextFocusRightId(next);
 		}
 
-		place(label("◀ 主要  MAIN", Kido.condBold, 26, Kido.DIM, 0.14f), 122, 966, 420, 34);
-		TextView controlsHint = label("OK // PLAY    ARROWS // BROWSE", Kido.mono, 18, Kido.DIM, 0.06f);
+		place(label("MAIN 主要  ▶", Kido.condBold, 26, Kido.DIM, 0.14f), 122, 966, 420, 34);
+		TextView controlsHint = label("OK // PLAY    ARROWS // BROWSE", Kido.mono, 20, Kido.DIM, 0.08f);
 		controlsHint.setGravity(Gravity.CENTER);
 		place(controlsHint, 560, 970, 800, 30);
 
