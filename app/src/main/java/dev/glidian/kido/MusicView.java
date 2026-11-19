@@ -22,6 +22,9 @@ import java.util.function.Consumer;
 final class MusicView extends FrameLayout {
 	private static final int HEX_PITCH = 214;
 	private final PathInterpolator fluid = new PathInterpolator(0.2f, 0f, 0f, 1f);
+	private final PathInterpolator snap = new PathInterpolator(0.77f, 0f, 0.18f, 1f);
+	private final TraceView frame;
+	private final View accent;
 	private final List<TextView> names = new ArrayList<>();
 	private final List<HexView> tiles = new ArrayList<>();
 	private final List<Integer> tileRows = new ArrayList<>();
@@ -47,10 +50,10 @@ final class MusicView extends FrameLayout {
 		hexGrid.setBackground(Backdrop.hexGrid(getResources(), Kido.withAlpha(Kido.AMBER, 0.07f)));
 		addView(hexGrid, new FrameLayout.LayoutParams(-1, -1));
 
-		TraceView frame = new TraceView(context);
+		frame = new TraceView(context);
 		place(frame, 30, 432, 1840, 608);
 
-		View accent = new View(context);
+		accent = new View(context);
 		accent.setBackground(new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
 				new int[]{Kido.withAlpha(Kido.LIME, 0.55f), Kido.withAlpha(Kido.AMBER, 0.5f),
 						Kido.withAlpha(Kido.RED, 0.55f)}));
@@ -205,11 +208,13 @@ final class MusicView extends FrameLayout {
 		scanlines.setFocusable(false);
 		addView(scanlines, new FrameLayout.LayoutParams(-1, -1));
 
-		post(() -> {
-			frame.trace(620);
-			accent.animate().scaleX(1f).setDuration(560).start();
-		});
 	}
+
+	void intro() {
+		frame.trace(620);
+		accent.setScaleX(0f);
+		accent.animate().scaleX(1f).setDuration(560)
+				.setInterpolator(snap).start();
 
 	@Override
 	public View focusSearch(View focused, int direction) {
