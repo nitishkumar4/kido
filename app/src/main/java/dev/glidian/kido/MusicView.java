@@ -35,9 +35,9 @@ final class MusicView extends FrameLayout {
 
 	static String fullFormat(String format) {
 		if ("MP3".equalsIgnoreCase(format)) return "MPEG AUDIO LAYER III";
-		if ("FLAC".equalsIgnoreCase(format)) return "FREE LOSSLESS AUDIO";
+		if ("FLAC".equalsIgnoreCase(format)) return "LOSSLESS AUDIO";
 		if ("AAC".equalsIgnoreCase(format)) return "ADVANCED AUDIO CODING";
-		return format == null || format.trim().isEmpty() ? "UNKNOWN AUDIO" : format.toUpperCase(Locale.ROOT);
+		return format == null || format.trim().isEmpty() ? "AUDIO" : format.toUpperCase(Locale.ROOT);
 	}
 
 	static int colorForDuration(long duration) {
