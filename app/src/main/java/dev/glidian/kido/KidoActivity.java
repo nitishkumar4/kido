@@ -98,6 +98,8 @@ public class KidoActivity extends Activity {
     private MusicView musicView;
     private View musicReturn;
     private View musicStatusReturn;
+    private Runnable musicColorLoad;
+    private int musicColorToken;
     private MusicPlayer musicPlayer;
     private static final int REQUEST_MUSIC_PERMISSION = 7101;
     private View glow;
@@ -1652,9 +1654,24 @@ public class KidoActivity extends Activity {
                 : track.artist.toUpperCase(Locale.ROOT);
         setStatus("音楽", track.format, artist + " // " + duration,
                 "NOW SELECTED", Kido.ORANGE);
+
+        if (musicColorLoad != null) handler.removeCallbacks(musicColorLoad);
+        final int token = ++musicColorToken;
+        musicColorLoad = () -> new Thread(() -> {
+            int color = MusicLibrary.albumColor(this, track.albumId, Kido.ORANGE);
+            runOnUiThread(() -> {
+                if (token != musicColorToken || musicView == null) return;
+                setStatus("音楽", track.format, artist + " // " + duration,
+                        "NOW SELECTED", color);
+            });
+        }, "Kido-AlbumColor").start();
+        handler.postDelayed(musicColorLoad, 180);
     }
 
     private void restoreMusicHud() {
+        musicColorToken++;
+        if (musicColorLoad != null) handler.removeCallbacks(musicColorLoad);
+        musicColorLoad = null;
         renderTicker();
         if (musicHudVisibility != null && hud != null) {
             for (int i = 0; i < Math.min(musicHudVisibility.length, hud.getChildCount()); i++) {
