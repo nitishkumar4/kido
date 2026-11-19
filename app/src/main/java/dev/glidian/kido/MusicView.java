@@ -35,7 +35,7 @@ final class MusicView extends FrameLayout {
 
 	static String fullFormat(String format) {
 		if ("MP3".equalsIgnoreCase(format)) return "MPEG AUDIO LAYER III";
-		if ("FLAC".equalsIgnoreCase(format)) return "FREE LOSSLESS AUDIO CODEC";
+		if ("FLAC".equalsIgnoreCase(format)) return "FREE LOSSLESS AUDIO";
 		if ("AAC".equalsIgnoreCase(format)) return "ADVANCED AUDIO CODING";
 		return format == null || format.trim().isEmpty() ? "UNKNOWN AUDIO" : format.toUpperCase(Locale.ROOT);
 	}
@@ -53,9 +53,6 @@ final class MusicView extends FrameLayout {
 	private final List<HexView> tiles = new ArrayList<>();
 	private final List<Integer> tileRows = new ArrayList<>();
 	private final List<String> trackTitles = new ArrayList<>();
-	private final TextView selectedTitle;
-	private final TextView selectedArtist;
-	private final TextView selectedMeta;
 	private final View nowPlayingTarget;
 	private final Consumer<View> onNowPlayingFocus;
 	private ScrollView namesScroll;
@@ -100,23 +97,6 @@ final class MusicView extends FrameLayout {
 		trackCount.setGravity(Gravity.END);
 		place(trackCount, 1300, 380, 500, 30);
 
-		selectedTitle = label(tracks.isEmpty() ? "NO AUDIO SIGNAL FOUND" : tracks.get(0).title,
-				Kido.mincho, 26, Kido.CREAM);
-		selectedTitle.setGravity(Gravity.CENTER_VERTICAL);
-		selectedTitle.setMaxLines(2);
-		selectedTitle.setEllipsize(TextUtils.TruncateAt.END);
-		selectedTitle.setAutoSizeTextTypeUniformWithConfiguration(
-				Kido.px(20), Kido.px(26), Kido.px(1), android.util.TypedValue.COMPLEX_UNIT_PX);
-
-		selectedArtist = label(tracks.isEmpty() ? "" : artistName(tracks.get(0)),
-				Kido.condBold, 22, Kido.AMBER, 0.12f);
-		selectedArtist.setGravity(Gravity.CENTER_VERTICAL);
-		selectedArtist.setSingleLine(true);
-		selectedArtist.setEllipsize(TextUtils.TruncateAt.END);
-
-		selectedMeta = label(tracks.isEmpty() ? "" : trackMeta(tracks.get(0)),
-				Kido.mono, 20, Kido.DIM, 0.06f);
-		selectedMeta.setGravity(Gravity.CENTER_VERTICAL);
 
 		FrameLayout listPanel = new FrameLayout(context);
 		listPanel.setBackground(background(Kido.PANEL, Kido.LINE));
@@ -138,15 +118,7 @@ final class MusicView extends FrameLayout {
 		namesScroll.setVerticalScrollBarEnabled(false);
 		namesScroll.setOverScrollMode(View.OVER_SCROLL_NEVER);
 		namesScroll.addView(list);
-		place(listPanel, namesScroll, 12, 76, 346, 258);
-
-		View selectedDivider = new View(context);
-		selectedDivider.setBackgroundColor(Kido.LINE);
-		place(listPanel, selectedDivider, 18, 346, 334, 2);
-		place(listPanel, label("NOW SELECTED", Kido.mono, 16, Kido.DIM, 0.06f), 18, 358, 334, 22);
-		place(listPanel, selectedTitle, 18, 382, 334, 48);
-		place(listPanel, selectedArtist, 18, 432, 334, 24);
-		place(listPanel, selectedMeta, 18, 460, 334, 24);
+		place(listPanel, namesScroll, 12, 76, 346, 412);
 
 		place(new RulerView(context, 440), 36, 452, 64, 500);
 
@@ -186,9 +158,6 @@ final class MusicView extends FrameLayout {
 				tile.setOnFocusChangeListener((v, focused) -> {
 					if (focused) {
 						onFocus.accept(track);
-						selectedTitle.setText(track.title);
-						selectedArtist.setText(artistName(track));
-						selectedMeta.setText(trackMeta(track));
 						highlight(trackIndex);
 						scrollListTo(name);
 						scrollRows(tileRows.get(trackIndex), true);
