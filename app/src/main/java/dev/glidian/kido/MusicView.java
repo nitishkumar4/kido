@@ -72,8 +72,8 @@ final class MusicView extends FrameLayout {
 		grid.setClipChildren(true);
 		place(grid, 110, 270, 1270, 650);
 
-		GlowView focusGlow = new GlowView(context, Kido.px(40), false);
-		focusGlow.setColor(Kido.withAlpha(Kido.GREEN, 0.7f));
+		GlowView focusGlow = new GlowView(context, Kido.px(40), false, true);
+		focusGlow.setColor(Kido.withAlpha(Kido.ORANGE, 0.38f));
 		focusGlow.setAlpha(0f);
 		place(grid, focusGlow, 0, 0, 312, 346);
 
