@@ -61,7 +61,7 @@ final class NowPlaying {
 
     private final MediaSessionManager.OnActiveSessionsChangedListener sessionsChanged = this::pick;
 
-    /** Prefer playing sessions; retain the current paused session only during its one-minute grace period. */
+    /** Prefer playing sessions; otherwise follow one paused session without displaying it. */
     private void pick(List<MediaController> list) {
         MediaController best = null;
         if (list != null) {
@@ -71,10 +71,18 @@ final class NowPlaying {
                     break;
                 }
             }
-            if (best == null && pauseGrace && current != null) {
+            if (best == null && current != null) {
                 for (MediaController c : list) {
                     if (sameSession(c, current) && hasTitle(c)
                             && stateOf(c) == PlaybackState.STATE_PAUSED) {
+                        best = c;
+                        break;
+                    }
+                }
+            }
+            if (best == null) {
+                for (MediaController c : list) {
+                    if (hasTitle(c) && stateOf(c) == PlaybackState.STATE_PAUSED) {
                         best = c;
                         break;
                     }
@@ -101,7 +109,7 @@ final class NowPlaying {
     private final Runnable pauseExpired = () -> {
         if (!pauseGrace || stateOf(current) != PlaybackState.STATE_PAUSED) return;
         pauseGrace = false;
-        start();
+        onChange.run();
     };
 
     private final MediaController.Callback callback = new MediaController.Callback() {
@@ -148,9 +156,10 @@ final class NowPlaying {
         return m != null && m.getString(MediaMetadata.METADATA_KEY_TITLE) != null;
     }
 
-    /** True when there is something to show, including a recently paused track. */
+    /** True while playing or during the one-minute pause grace period. */
     boolean active() {
-        return current != null && hasTitle(current);
+        return current != null && hasTitle(current)
+                && (stateOf(current) == PlaybackState.STATE_PLAYING || pauseGrace);
     }
 
     String packageName() {
