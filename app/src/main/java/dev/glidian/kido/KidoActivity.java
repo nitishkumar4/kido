@@ -96,6 +96,8 @@ public class KidoActivity extends Activity {
 
     private FrameLayout root, board, launch, menu, hud;
     private MusicView musicView;
+    private boolean rebuildPending;
+    private String rebuildFocusPkg;
     private View musicReturn;
     private View musicStatusReturn;
     private MusicPlayer musicPlayer;
@@ -240,6 +242,10 @@ public class KidoActivity extends Activity {
     // ---------------------------------------------------------------- building
 
     private void build() {
+        if (musicView != null && musicView.getVisibility() == View.VISIBLE) {
+            rebuildPending = true;
+            return;
+        }
         root.removeAllViews();
         musicView = null;
         musicReturn = null;
@@ -1711,6 +1717,25 @@ public class KidoActivity extends Activity {
                             : favViews.isEmpty() ? null : favViews.get(0);
                     if (target != null) target.requestFocus();
                     musicReturn = null;
+                    if (rebuildPending) {
+                        String focusPkg = rebuildFocusPkg;
+                        rebuildPending = false;
+                        rebuildFocusPkg = null;
+                        build();
+                        View focusTarget = null;
+                        if (focusPkg != null) {
+                            for (View v : favViews) {
+                                Item item = (Item) v.getTag();
+                                if (item.app != null && item.app.pkg.equals(focusPkg)) focusTarget = v;
+                            }
+                            for (HexView h : hexViews) {
+                                Item item = (Item) h.getTag();
+                                if (item.app != null && item.app.pkg.equals(focusPkg)) focusTarget = h;
+                            }
+                        }
+                        if (focusTarget == null && !favViews.isEmpty()) focusTarget = favViews.get(0);
+                        if (focusTarget != null) focusTarget.requestFocus();
+                    }
                 }).start();
     }
 
@@ -1757,13 +1782,15 @@ public class KidoActivity extends Activity {
         launch.setVisibility(View.GONE);
         hideAlert.run();
         if (prefs.getBoolean("nowplaying", false)) nowPlaying.start();
-		if (appsChanged || mainOrderChanged) {
+		if (musicView != null && musicView.getVisibility() == View.VISIBLE) {
+            // Keep MusicView focused until the user exits it.
+        } else if (appsChanged || mainOrderChanged) {
 			appsChanged = false;
 			mainOrderChanged = false;
 			Item last = lastFocused != null ? (Item) lastFocused.getTag() : null;
 			rebuild(last != null && last.app != null ? last.app.pkg : null);
 		} else if (themeChanged) {
-	        if (!favViews.isEmpty()) favViews.get(0).requestFocus();
+	        if (musicView == null && !favViews.isEmpty()) favViews.get(0).requestFocus();
         } else if (musicView != null && musicView.getVisibility() == View.VISIBLE) {
             musicView.requestFocus();
         } else if (lastFocused != null) {
@@ -2068,6 +2095,11 @@ public class KidoActivity extends Activity {
 
     /** Rebuilds the whole screen (after pins or installed apps change) and puts focus back on an app if it can. */
     private void rebuild(String focusPkg) {
+        if (musicView != null && musicView.getVisibility() == View.VISIBLE) {
+            rebuildPending = true;
+            rebuildFocusPkg = focusPkg;
+            return;
+        }
         build();
         if (focusPkg == null) return;
         View target = null;
@@ -2089,6 +2121,12 @@ public class KidoActivity extends Activity {
     }
 
     private void rebuildAt(int targetZone, int index) {
+        if (musicView != null && musicView.getVisibility() == View.VISIBLE) {
+            rebuildPending = true;
+            Item current = lastFocused != null ? (Item) lastFocused.getTag() : null;
+            rebuildFocusPkg = current != null && current.app != null ? current.app.pkg : null;
+            return;
+        }
     	build();
 
     	View target = null;
