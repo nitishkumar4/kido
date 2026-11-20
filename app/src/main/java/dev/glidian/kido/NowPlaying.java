@@ -16,15 +16,12 @@ import java.util.List;
  * Nothing is stored or sent anywhere. Needs the user to give KIDŌ notification access (see NowPlayingListener).
  */
 final class NowPlaying {
-    private static final long PAUSE_GRACE_MS = 60_000L;
-
     private final Context context;
     private final Handler handler;
     private final Runnable onChange;
     private final MediaSessionManager sessions;
     private MediaController current;
     private boolean watching;
-    private boolean pauseGrace;
 
     NowPlaying(Context c, Handler handler, Runnable onChange) {
         this.context = c;
@@ -38,7 +35,7 @@ final class NowPlaying {
         return new ComponentName(c, NowPlayingListener.class);
     }
 
-    /** Starts following active playback. A paused session is shown only if KIDŌ observed its pause. */
+    /** Starts following the active sessions. False when the user hasn't given access (or the TV has no sessions). */
     boolean start() {
         if (sessions == null) return false;
         try {
@@ -61,73 +58,36 @@ final class NowPlaying {
 
     private final MediaSessionManager.OnActiveSessionsChangedListener sessionsChanged = this::pick;
 
-    /** Prefer playing sessions; otherwise follow one paused session without displaying it. */
+    /** Prefers a session that is playing; otherwise one that is paused with something loaded. */
     private void pick(List<MediaController> list) {
         MediaController best = null;
         if (list != null) {
             for (MediaController c : list) {
-                if (hasTitle(c) && stateOf(c) == PlaybackState.STATE_PLAYING) {
+                if (!hasTitle(c)) continue;
+                if (stateOf(c) == PlaybackState.STATE_PLAYING) {
                     best = c;
                     break;
                 }
-            }
-            if (best == null && current != null) {
-                for (MediaController c : list) {
-                    if (sameSession(c, current) && hasTitle(c)
-                            && stateOf(c) == PlaybackState.STATE_PAUSED) {
-                        best = c;
-                        break;
-                    }
-                }
-            }
-            if (best == null) {
-                for (MediaController c : list) {
-                    if (hasTitle(c) && stateOf(c) == PlaybackState.STATE_PAUSED) {
-                        best = c;
-                        break;
-                    }
-                }
+                if (best == null && stateOf(c) == PlaybackState.STATE_PAUSED) best = c;
             }
         }
         follow(best);
     }
 
     private void follow(MediaController c) {
-        if (sameSession(current, c)) {
-            current = c;
-            onChange.run();
-            return;
-        }
-        handler.removeCallbacks(pauseExpired);
-        pauseGrace = false;
         if (current != null) current.unregisterCallback(callback);
         current = c;
         if (c != null) c.registerCallback(callback, handler);
         onChange.run();
     }
 
-    private final Runnable pauseExpired = () -> {
-        if (!pauseGrace || stateOf(current) != PlaybackState.STATE_PAUSED) return;
-        pauseGrace = false;
-        onChange.run();
-    };
-
     private final MediaController.Callback callback = new MediaController.Callback() {
         @Override
         public void onPlaybackStateChanged(PlaybackState state) {
-            int playback = stateOf(current);
-            if (playback == PlaybackState.STATE_PLAYING) {
-                handler.removeCallbacks(pauseExpired);
-                pauseGrace = false;
-                onChange.run();
-            } else if (playback == PlaybackState.STATE_PAUSED) {
-                if (!pauseGrace) {
-                    pauseGrace = true;
-                    handler.postDelayed(pauseExpired, PAUSE_GRACE_MS);
-                }
-                onChange.run();
+            if (stateOf(current) == PlaybackState.STATE_STOPPED || stateOf(current) == PlaybackState.STATE_NONE) {
+                start();     // finished: look for another session, or hide
             } else {
-                start();
+                onChange.run();
             }
         }
 
@@ -142,10 +102,6 @@ final class NowPlaying {
         }
     };
 
-    private static boolean sameSession(MediaController a, MediaController b) {
-        return a != null && b != null && a.getSessionToken().equals(b.getSessionToken());
-    }
-
     private static int stateOf(MediaController c) {
         PlaybackState s = c != null ? c.getPlaybackState() : null;
         return s != null ? s.getState() : PlaybackState.STATE_NONE;
@@ -156,10 +112,9 @@ final class NowPlaying {
         return m != null && m.getString(MediaMetadata.METADATA_KEY_TITLE) != null;
     }
 
-    /** True while playing or during the one-minute pause grace period. */
+    /** True when there is something to show. */
     boolean active() {
-        return current != null && hasTitle(current)
-                && (stateOf(current) == PlaybackState.STATE_PLAYING || pauseGrace);
+        return current != null && hasTitle(current);
     }
 
     String packageName() {
