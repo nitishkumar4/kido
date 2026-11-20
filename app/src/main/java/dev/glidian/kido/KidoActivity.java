@@ -1783,6 +1783,8 @@ public class KidoActivity extends Activity {
         hideAlert.run();
         if (prefs.getBoolean("nowplaying", false)) nowPlaying.start();
 		if (musicView != null && musicView.getVisibility() == View.VISIBLE) {
+            appsChanged = false;
+            mainOrderChanged = false;
             // Keep MusicView focused until the user exits it.
         } else if (appsChanged || mainOrderChanged) {
 			appsChanged = false;
