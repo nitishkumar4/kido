@@ -64,12 +64,8 @@ final class MusicView extends FrameLayout {
 		super(context);
 		this.nowPlayingTarget = nowPlayingTarget;
 		this.onNowPlayingFocus = onNowPlayingFocus;
+		setFocusable(true);
 		setFocusableInTouchMode(true);
-		setBackgroundColor(0xF5040404);
-
-		View hexGrid = new View(context);
-		hexGrid.setBackground(Backdrop.hexGrid(getResources(), Kido.withAlpha(Kido.AMBER, 0.07f)));
-		addView(hexGrid, new FrameLayout.LayoutParams(-1, -1));
 
 		frame = new TraceView(context);
 		place(frame, 30, 432, 1840, 608);
@@ -180,7 +176,7 @@ final class MusicView extends FrameLayout {
 			tile.setNextFocusRightId(next);
 		}
 
-		TextView mainHint = label("MAIN 主要  ▶", Kido.condBold, 26, Kido.DIM, 0.14f);
+		TextView mainHint = label("SYSTEM 制御系統  ▲", Kido.condBold, 26, Kido.DIM, 0.14f);
 		mainHint.setGravity(Gravity.END);
 		place(mainHint, 1380, 966, 420, 34);
 		TextView controlsHint = label("OK // PLAY    ARROWS // BROWSE", Kido.mono, 20, Kido.DIM, 0.08f);
@@ -194,13 +190,7 @@ final class MusicView extends FrameLayout {
 		} else {
 			listPanel.setFocusable(false);
 			scrollRows(0, false);
-			grid.post(() -> tiles.get(0).requestFocus());
 		}
-
-		View scanlines = new View(context);
-		scanlines.setBackground(Backdrop.scanlines(getResources(), 0x30000000));
-		scanlines.setFocusable(false);
-		addView(scanlines, new FrameLayout.LayoutParams(-1, -1));
 
 	}
 
@@ -229,8 +219,15 @@ final class MusicView extends FrameLayout {
 		return next;
 	}
 
-	void focusFirstTrack() {
-		if (!tiles.isEmpty()) tiles.get(0).requestFocus();
+	boolean focusFirstTrack() {
+		return !tiles.isEmpty() && tiles.get(0).requestFocus();
+	}
+
+	void setReturnTarget(View target) {
+		if (target == null) return;
+		for (int i = 0; i < tiles.size(); i++) {
+			if (tileRows.get(i) == 0) tiles.get(i).setNextFocusUpId(target.getId());
+		}
 	}
 
 	boolean isTopRowFocused(View focused) {
