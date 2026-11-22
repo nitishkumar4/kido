@@ -123,7 +123,7 @@ public class KidoActivity extends Activity {
     private boolean holding;
     private long lastMoveAt, landedAt;
     private View pendingStatus;
-    private static final long HOLD_STEP_MS = 500, EDGE_PAUSE_MS = 550, SETTLE_MS = 180;
+    private static final long HOLD_STEP_MS = 125, EDGE_PAUSE_MS = 550, SETTLE_MS = 180;
     private TextView readLink, readUpdated;
     private float wifiLevel = 1f;
     private String wifiRate = "";
@@ -1476,6 +1476,8 @@ public class KidoActivity extends Activity {
             if (isArrow(key)) {
                 if (up) {
                     holding = false;
+                    handler.removeCallbacks(settle);
+                    settle.run();
                 } else if (down && event.getRepeatCount() > 0) {
                     holding = true;
                     if (!holdStepAllowed(key)) return true;
