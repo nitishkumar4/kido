@@ -92,7 +92,7 @@ final class MusicView extends FrameLayout {
 
 		FrameLayout listPanel = new FrameLayout(context);
 		listPanel.setBackground(background(Kido.PANEL, Kido.LINE));
-		place(listPanel, 1370, 452, 430, 500);
+		place(listPanel, 1400, 452, 430, 500);
 
 		place(listPanel, label("曲目", Kido.mincho, 28, Kido.AMBER), 20, 12, 76, 42);
 		place(listPanel, label("SIGNAL INDEX", Kido.condBold, 26, Kido.INK, 0.12f), 94, 18, 210, 32);
@@ -172,7 +172,7 @@ final class MusicView extends FrameLayout {
 			tile.setNextFocusRightId(next);
 		}
 
-		TextView mainHint = label("SYSTEM 制御系統  ▲", Kido.condBold, 26, Kido.DIM, 0.14f);
+		TextView mainHint = label("▲ SYSTEM 制御系統", Kido.condBold, 26, Kido.DIM, 0.14f);
 		mainHint.setGravity(Gravity.START);
 		place(mainHint, 110, 966, 420, 34);
 		TextView controlsHint = label("OK // PLAY    ARROWS // BROWSE", Kido.mono, 20, Kido.DIM, 0.08f);
@@ -267,7 +267,7 @@ final class MusicView extends FrameLayout {
 		for (int i = 0; i < names.size(); i++) {
 			boolean active = i == selected;
 			names.get(i).setText((active ? "▶ " : "  ")
-					+ "TR." + String.format(Locale.ROOT, "%02d ", i + 1)
+					"+ "T." + String.format(Locale.ROOT, "%02d ", i + 1)
 					+ trackTitles.get(i).toUpperCase(Locale.ROOT));
 			names.get(i).setTextColor(active ? Kido.INK : Kido.DIM);
 		}
