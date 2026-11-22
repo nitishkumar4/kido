@@ -1211,7 +1211,13 @@ public class KidoActivity extends Activity {
             // Music is the fourth room, but owns its own view, intro and focus glow.
             handler.removeCallbacks(arrive);
             board.animate().translationX(-Kido.px(ZONES[z][0])).translationY(-Kido.px(ZONES[z][1]))
-                    .setDuration(620).setInterpolator(fluid).withEndAction(onPanEnd).start();
+                    .setDuration(620).setInterpolator(fluid).withEndAction(() -> {
+                        if (musicActive && musicView != null) {
+                            musicView.intro();
+                            if (!musicView.focusFirstTrack()) musicView.requestFocus();
+                        }
+                        if (onPanEnd != null) onPanEnd.run();
+                    }).start();
             return;
         }
         board.animate().translationX(-Kido.px(ZONES[z][0])).translationY(-Kido.px(ZONES[z][1]))
@@ -1654,11 +1660,7 @@ public class KidoActivity extends Activity {
         launch.setVisibility(View.GONE);
         if (alert != null) alert.setVisibility(View.GONE);
         board.animate().cancel();
-        moveTo(3, () -> {
-            if (!musicActive || musicView == null) return;
-            musicView.intro();
-            if (!musicView.focusFirstTrack()) musicView.requestFocus();
-        });
+        moveTo(3);
     }
 
     private void showMusicFooterOnly() {
