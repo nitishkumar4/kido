@@ -123,7 +123,7 @@ public class KidoActivity extends Activity {
     private boolean holding;
     private long lastMoveAt, landedAt;
     private View pendingStatus;
-    private static final long HOLD_STEP_MS = 125, EDGE_PAUSE_MS = 550, SETTLE_MS = 180;
+    private static final long HOLD_STEP_MS = 500, EDGE_PAUSE_MS = 550, SETTLE_MS = 180;
     private TextView readLink, readUpdated;
     private float wifiLevel = 1f;
     private String wifiRate = "";
