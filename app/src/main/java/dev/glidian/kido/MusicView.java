@@ -53,17 +53,13 @@ final class MusicView extends FrameLayout {
 	private final List<HexView> tiles = new ArrayList<>();
 	private final List<Integer> tileRows = new ArrayList<>();
 	private final List<String> trackTitles = new ArrayList<>();
-	private final View nowPlayingTarget;
-	private final Consumer<View> onNowPlayingFocus;
 	private ScrollView namesScroll;
 	private int topRow;
 	private boolean rowsMoved;
 
 	MusicView(Context context, List<MusicLibrary.Track> tracks, Consumer<MusicLibrary.Track> onSelect,
-			Consumer<MusicLibrary.Track> onFocus, View nowPlayingTarget, Consumer<View> onNowPlayingFocus) {
+			Consumer<MusicLibrary.Track> onFocus) {
 		super(context);
-		this.nowPlayingTarget = nowPlayingTarget;
-		this.onNowPlayingFocus = onNowPlayingFocus;
 		setFocusable(true);
 		setFocusableInTouchMode(true);
 
@@ -204,17 +200,7 @@ final class MusicView extends FrameLayout {
 	@Override
 	public View focusSearch(View focused, int direction) {
 		int index = tiles.indexOf(focused);
-		if (index < 0 && focused == this && direction == View.FOCUS_UP
-				&& nowPlayingTarget.getVisibility() == View.VISIBLE) {
-			onNowPlayingFocus.accept(focused);
-			return nowPlayingTarget;
-		}
 		if (index >= 0) {
-			if (direction == View.FOCUS_UP && tileRows.get(index) == 0
-					&& nowPlayingTarget.getVisibility() == View.VISIBLE) {
-				onNowPlayingFocus.accept(focused);
-				return nowPlayingTarget;
-			}
 			if (direction == View.FOCUS_LEFT && index > 0) return tiles.get(index - 1);
 			if (direction == View.FOCUS_RIGHT && index + 1 < tiles.size()) return tiles.get(index + 1);
 		}
@@ -226,13 +212,6 @@ final class MusicView extends FrameLayout {
 
 	boolean focusFirstTrack() {
 		return !tiles.isEmpty() && tiles.get(0).requestFocus();
-	}
-
-	void setReturnTarget(View target) {
-		if (target == null) return;
-		for (int i = 0; i < tiles.size(); i++) {
-			if (tileRows.get(i) == 0) tiles.get(i).setNextFocusUpId(target.getId());
-		}
 	}
 
 	boolean isTopRowFocused(View focused) {
