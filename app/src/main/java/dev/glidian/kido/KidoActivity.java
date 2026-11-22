@@ -1442,6 +1442,13 @@ public class KidoActivity extends Activity {
             return true;
         }
         if (musicActive) {
+            View current = getCurrentFocus();
+            if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_UP && current != null
+                    && musicView != null && musicView.isTopRowFocused(current)
+                    && npPanel.getVisibility() != View.VISIBLE) {
+                if (down && event.getRepeatCount() == 0) closeMusicView();
+                return true;
+            }
             if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
                 if (up) closeMusicView();
                 return true;
