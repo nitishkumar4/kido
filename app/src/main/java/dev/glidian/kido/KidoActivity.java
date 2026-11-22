@@ -78,6 +78,7 @@ import java.util.Set;
  */
 public class KidoActivity extends Activity {
     private static final int[][] ZONES = {{0, 0}, {1900, 220}, {720, 1180}};
+    private static final int MUSIC_X = 720, MUSIC_Y = 2260;
     // Each section has a big kanji beside its title and a short one on its tab; the words are in strings.xml.
     private static final String[] ZONE_KANJI = {"主要", "アプリ", "制御系統"};
     private static final String[] TAB_KANJI = {"音楽", "主要", "アプリ", "制御"};
@@ -96,6 +97,7 @@ public class KidoActivity extends Activity {
 
     private FrameLayout root, board, launch, menu, hud;
     private MusicView musicView;
+    private boolean musicActive, musicLoading;
     private boolean rebuildPending;
     private String rebuildFocusPkg;
     private View musicReturn;
@@ -242,12 +244,13 @@ public class KidoActivity extends Activity {
     // ---------------------------------------------------------------- building
 
     private void build() {
-        if (musicView != null && musicView.getVisibility() == View.VISIBLE) {
+        if (musicActive) {
             rebuildPending = true;
             return;
         }
         root.removeAllViews();
         musicView = null;
+        musicActive = false;
         musicReturn = null;
         favViews.clear();
         hexViews.clear();
@@ -267,7 +270,7 @@ public class KidoActivity extends Activity {
 
         board = new FrameLayout(this);
         board.setBackground(Backdrop.hexGrid(getResources(), Kido.withAlpha(Kido.AMBER, 0.07f)));
-        root.addView(board, new FrameLayout.LayoutParams(Kido.px(3900), Kido.px(2300)));
+        root.addView(board, new FrameLayout.LayoutParams(Kido.px(3900), Kido.px(3340)));
         List<App> apps = loadApps();
         channelCount = apps.size();
         appsByPkg.clear();
@@ -701,6 +704,7 @@ public class KidoActivity extends Activity {
         strip.addView(toast);
         place(z, strip, 122, 830, 1676, 74);
         place(z, text("▲ 主要 " + str(R.string.zone_main_tab), Kido.condBold, 26, Kido.DIM, 0.14f), 122, 940, -1, -1);
+        place(z, text("▼ 音楽  SONIC ARCHIVE", Kido.condBold, 24, Kido.DIM, 0.14f), 122, 990, -1, -1);
     }
 
     /** Explicit moves at section edges, so the remote always lands where the arrows on screen point. */
@@ -1437,7 +1441,7 @@ public class KidoActivity extends Activity {
             if (up) endBoot();
             return true;
         }
-        if (musicView != null && musicView.getVisibility() == View.VISIBLE) {
+        if (musicActive) {
             if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
                 if (up) closeMusicView();
                 return true;
@@ -1445,8 +1449,8 @@ public class KidoActivity extends Activity {
             return super.dispatchKeyEvent(event);
         }
         View current = getCurrentFocus();
-        if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_LEFT && current != null
-                && !favViews.isEmpty() && current == favViews.get(0)) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_DOWN && current != null
+                && sysViews.contains(current)) {
             if (down && event.getRepeatCount() == 0) openMusicView();
             return true;
         }
@@ -1539,7 +1543,7 @@ public class KidoActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        if (musicView != null && musicView.getVisibility() == View.VISIBLE) {
+        if (musicActive) {
             closeMusicView();
             return;
         }
@@ -1549,6 +1553,11 @@ public class KidoActivity extends Activity {
 
     private void openMusicView() {
         musicReturn = getCurrentFocus();
+        musicStatusReturn = lastFocused;
+        if (musicView != null) {
+            activateMusicRoom();
+            return;
+        }
         String permission = Build.VERSION.SDK_INT >= 33
                 ? Manifest.permission.READ_MEDIA_AUDIO : Manifest.permission.READ_EXTERNAL_STORAGE;
         if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
@@ -1589,16 +1598,17 @@ public class KidoActivity extends Activity {
 
     private void loadMusicLibrary() {
         if (musicView != null) {
-            musicView.setVisibility(View.VISIBLE);
-            animateMusicViewIn();
+            activateMusicRoom();
             return;
         }
-        musicStatusReturn = lastFocused;
+        if (musicLoading) return;
+        musicLoading = true;
         log("SCANNING LOCAL FILES...");
         new Thread(() -> {
             scanDownloadsForAudio();
             List<MusicLibrary.Track> tracks = MusicLibrary.load(this);
             runOnUiThread(() -> {
+                musicLoading = false;
                 if (isFinishing() || root == null) return;
                 log(tracks.isEmpty() ? "NO LOCAL TRACKS FOUND"
                         : tracks.size() + " LOCAL TRACKS FOUND");
@@ -1608,45 +1618,32 @@ public class KidoActivity extends Activity {
                         Toast.makeText(this, "Unable to play: " + track.title, Toast.LENGTH_SHORT).show();
                     }
                 }, this::updateMusicFocus, npPanel, view -> npReturn = view);
-                showAudioTab(true);
-                showMusicFooterOnly();
-                scan.setVisibility(View.GONE);
-                launch.setVisibility(View.GONE);
-                if (alert != null) alert.setVisibility(View.GONE);
-                musicView.setTranslationX(-root.getWidth());
-                musicView.setTranslationY(root.getHeight());
-                root.addView(musicView, new FrameLayout.LayoutParams(-1, -1));
-                hud.bringToFront();
-                animateMusicViewIn();
+                FrameLayout.LayoutParams room = new FrameLayout.LayoutParams(
+                        Kido.px(1920), Kido.px(1080));
+                room.leftMargin = Kido.px(MUSIC_X);
+                room.topMargin = Kido.px(MUSIC_Y);
+                board.addView(musicView, room);
+                activateMusicRoom();
             });
         }, "Kido-MusicScan").start();
     }
 
-    private void animateMusicViewIn() {
-        musicView.post(() -> {
-            if (musicView == null || musicView.getVisibility() != View.VISIBLE) return;
-            float width = root.getWidth(), height = root.getHeight();
-            musicView.animate().cancel();
-            board.animate().cancel();
-            musicView.setTranslationX(-width);
-            musicView.setTranslationY(height);
-            board.setTranslationX(0);
-            board.setTranslationY(0);
-            board.setVisibility(View.VISIBLE);
-            board.animate().translationX(width).translationY(-height)
-                    .setDuration(620).setInterpolator(fluid).start();
-            musicView.animate().translationX(0).translationY(0)
-                    .setDuration(620).setInterpolator(fluid)
-                    .withEndAction(() -> {
-                        if (musicView != null && musicView.getVisibility() == View.VISIBLE) {
-                            board.setVisibility(View.GONE);
-                            board.setTranslationX(0);
-                            board.setTranslationY(0);
-                            musicView.intro();
-                            musicView.focusFirstTrack();
-                        }
-                    }).start();
-        });
+    private void activateMusicRoom() {
+        if (musicView == null || musicActive) return;
+        musicView.setReturnTarget(musicReturn);
+        musicActive = true;
+        showAudioTab(true);
+        showMusicFooterOnly();
+        launch.setVisibility(View.GONE);
+        if (alert != null) alert.setVisibility(View.GONE);
+        board.animate().cancel();
+        board.animate().translationX(-Kido.px(MUSIC_X)).translationY(-Kido.px(MUSIC_Y))
+                .setDuration(620).setInterpolator(fluid)
+                .withEndAction(() -> {
+                    if (!musicActive || musicView == null) return;
+                    musicView.intro();
+                    if (!musicView.focusFirstTrack()) musicView.requestFocus();
+                }).start();
     }
 
     private void showMusicFooterOnly() {
@@ -1686,35 +1683,22 @@ public class KidoActivity extends Activity {
     }
 
     private void closeMusicView() {
-        if (musicView == null) return;
-        float width = root.getWidth(), height = root.getHeight();
-        musicView.animate().cancel();
+        if (!musicActive || musicView == null) return;
         board.animate().cancel();
-        if (board.getVisibility() != View.VISIBLE) {
-            board.setTranslationX(width);
-            board.setTranslationY(-height);
-        }
-        board.setVisibility(View.VISIBLE);
-        board.animate().translationX(0).translationY(0)
-                .setDuration(620).setInterpolator(fluid).start();
-        musicView.animate().translationX(-width).translationY(height)
+        board.animate().translationX(-Kido.px(ZONES[2][0])).translationY(-Kido.px(ZONES[2][1]))
                 .setDuration(620).setInterpolator(fluid)
                 .withEndAction(() -> {
-                    if (musicView == null) return;
-                    root.removeView(musicView);
-                    musicView = null;
-                    board.setTranslationX(0);
-                    board.setTranslationY(0);
+                    if (!musicActive || musicView == null) return;
+                    musicActive = false;
                     restoreMusicHud();
                     showAudioTab(false);
                     View statusTarget = musicStatusReturn;
                     musicStatusReturn = null;
-                    if (statusTarget == null && !favViews.isEmpty()) statusTarget = favViews.get(0);
+                    if (statusTarget == null && !sysViews.isEmpty()) statusTarget = sysViews.get(0);
                     if (statusTarget != null) showStatus(statusTarget);
                     hud.setVisibility(View.VISIBLE);
-                    scan.setVisibility(View.VISIBLE);
                     View target = musicReturn != null ? musicReturn
-                            : favViews.isEmpty() ? null : favViews.get(0);
+                            : sysViews.isEmpty() ? null : sysViews.get(0);
                     if (target != null) target.requestFocus();
                     musicReturn = null;
                     if (rebuildPending) {
@@ -1782,10 +1766,10 @@ public class KidoActivity extends Activity {
         launch.setVisibility(View.GONE);
         hideAlert.run();
         if (prefs.getBoolean("nowplaying", false)) nowPlaying.start();
-		if (musicView != null && musicView.getVisibility() == View.VISIBLE) {
+		if (musicActive) {
             appsChanged = false;
             mainOrderChanged = false;
-            // Keep MusicView focused until the user exits it.
+            // Keep the Music room active until the user exits it.
         } else if (appsChanged || mainOrderChanged) {
 			appsChanged = false;
 			mainOrderChanged = false;
@@ -1793,8 +1777,6 @@ public class KidoActivity extends Activity {
 			rebuild(last != null && last.app != null ? last.app.pkg : null);
 		} else if (themeChanged) {
 	        if (musicView == null && !favViews.isEmpty()) favViews.get(0).requestFocus();
-        } else if (musicView != null && musicView.getVisibility() == View.VISIBLE) {
-            musicView.requestFocus();
         } else if (lastFocused != null) {
             lastFocused.requestFocus();
         }
@@ -2097,7 +2079,7 @@ public class KidoActivity extends Activity {
 
     /** Rebuilds the whole screen (after pins or installed apps change) and puts focus back on an app if it can. */
     private void rebuild(String focusPkg) {
-        if (musicView != null && musicView.getVisibility() == View.VISIBLE) {
+        if (musicActive) {
             rebuildPending = true;
             rebuildFocusPkg = focusPkg;
             return;
@@ -2123,7 +2105,7 @@ public class KidoActivity extends Activity {
     }
 
     private void rebuildAt(int targetZone, int index) {
-        if (musicView != null && musicView.getVisibility() == View.VISIBLE) {
+        if (musicActive) {
             rebuildPending = true;
             Item current = lastFocused != null ? (Item) lastFocused.getTag() : null;
             rebuildFocusPkg = current != null && current.app != null ? current.app.pkg : null;
