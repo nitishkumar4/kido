@@ -1464,8 +1464,7 @@ public class KidoActivity extends Activity {
         if (musicActive) {
             View current = getCurrentFocus();
             if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_UP && current != null
-                    && musicView != null && musicView.isTopRowFocused(current)
-                    && npPanel.getVisibility() != View.VISIBLE) {
+                    && musicView != null && musicView.isTopRowFocused(current)) {
                 if (down && event.getRepeatCount() == 0) closeMusicView();
                 return true;
             }
@@ -1644,7 +1643,7 @@ public class KidoActivity extends Activity {
                     if (!musicPlayer.toggle(track.uri, track.title, track.artist, track.duration)) {
                         Toast.makeText(this, "Unable to play: " + track.title, Toast.LENGTH_SHORT).show();
                     }
-                }, this::updateMusicFocus, npPanel, view -> npReturn = view);
+                }, this::updateMusicFocus);
                 FrameLayout.LayoutParams room = new FrameLayout.LayoutParams(
                         Kido.px(1920), Kido.px(1080));
                 room.leftMargin = Kido.px(ZONES[3][0]);
