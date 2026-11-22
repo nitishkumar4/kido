@@ -204,6 +204,11 @@ final class MusicView extends FrameLayout {
 	@Override
 	public View focusSearch(View focused, int direction) {
 		int index = tiles.indexOf(focused);
+		if (index < 0 && focused == this && direction == View.FOCUS_UP
+				&& nowPlayingTarget.getVisibility() == View.VISIBLE) {
+			onNowPlayingFocus.accept(focused);
+			return nowPlayingTarget;
+		}
 		if (index >= 0) {
 			if (direction == View.FOCUS_UP && tileRows.get(index) == 0
 					&& nowPlayingTarget.getVisibility() == View.VISIBLE) {
