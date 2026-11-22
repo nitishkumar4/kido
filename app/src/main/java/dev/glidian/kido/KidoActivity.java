@@ -77,8 +77,7 @@ import java.util.Set;
  * color of whatever is focused.
  */
 public class KidoActivity extends Activity {
-    private static final int[][] ZONES = {{0, 0}, {1900, 220}, {720, 1180}};
-    private static final int MUSIC_X = 720, MUSIC_Y = 2260;
+    private static final int[][] ZONES = {{0, 0}, {1900, 220}, {720, 1180}, {720, 2260}};
     // Each section has a big kanji beside its title and a short one on its tab; the words are in strings.xml.
     private static final String[] ZONE_KANJI = {"主要", "アプリ", "制御系統"};
     private static final String[] TAB_KANJI = {"音楽", "主要", "アプリ", "制御"};
@@ -1208,6 +1207,13 @@ public class KidoActivity extends Activity {
 
     private void moveTo(int z, Runnable onPanEnd) {
         zone = z;
+        if (z == 3) {
+            // Music is the fourth room, but owns its own view, intro and focus glow.
+            handler.removeCallbacks(arrive);
+            board.animate().translationX(-Kido.px(ZONES[z][0])).translationY(-Kido.px(ZONES[z][1]))
+                    .setDuration(620).setInterpolator(fluid).withEndAction(onPanEnd).start();
+            return;
+        }
         board.animate().translationX(-Kido.px(ZONES[z][0])).translationY(-Kido.px(ZONES[z][1]))
                 .setDuration(620).setInterpolator(fluid).withEndAction(onPanEnd).start();
         showTabs(z);
@@ -1631,8 +1637,8 @@ public class KidoActivity extends Activity {
                 }, this::updateMusicFocus, npPanel, view -> npReturn = view);
                 FrameLayout.LayoutParams room = new FrameLayout.LayoutParams(
                         Kido.px(1920), Kido.px(1080));
-                room.leftMargin = Kido.px(MUSIC_X);
-                room.topMargin = Kido.px(MUSIC_Y);
+                room.leftMargin = Kido.px(ZONES[3][0]);
+                room.topMargin = Kido.px(ZONES[3][1]);
                 board.addView(musicView, room);
                 activateMusicRoom();
             });
@@ -1648,13 +1654,11 @@ public class KidoActivity extends Activity {
         launch.setVisibility(View.GONE);
         if (alert != null) alert.setVisibility(View.GONE);
         board.animate().cancel();
-        board.animate().translationX(-Kido.px(MUSIC_X)).translationY(-Kido.px(MUSIC_Y))
-                .setDuration(620).setInterpolator(fluid)
-                .withEndAction(() -> {
-                    if (!musicActive || musicView == null) return;
-                    musicView.intro();
-                    if (!musicView.focusFirstTrack()) musicView.requestFocus();
-                }).start();
+        moveTo(3, () -> {
+            if (!musicActive || musicView == null) return;
+            musicView.intro();
+            if (!musicView.focusFirstTrack()) musicView.requestFocus();
+        });
     }
 
     private void showMusicFooterOnly() {
