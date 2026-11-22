@@ -1234,6 +1234,10 @@ public class KidoActivity extends Activity {
 
     /** Draws a section in: the frame traces itself, the accent bar extends and the header count runs up. */
     private void intro(int z) {
+        if (z == 3) {
+            if (musicView != null) musicView.intro();
+            return;
+        }
         if (zoneFrames[z] == null) return;
         zoneFrames[z].trace(620);
         View a = zoneAccents[z];
