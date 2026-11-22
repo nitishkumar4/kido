@@ -1203,9 +1203,13 @@ public class KidoActivity extends Activity {
     }
 
     private void moveTo(int z) {
+        moveTo(z, null);
+    }
+
+    private void moveTo(int z, Runnable onPanEnd) {
         zone = z;
         board.animate().translationX(-Kido.px(ZONES[z][0])).translationY(-Kido.px(ZONES[z][1]))
-                .setDuration(620).setInterpolator(fluid).start();
+                .setDuration(620).setInterpolator(fluid).withEndAction(onPanEnd).start();
         showTabs(z);
         footerZone.setText("SEC-0" + (z + 1) + " // " + str(ZONE_TABS[z]));
         log(str(R.string.log_sector, z + 1, str(ZONE_TITLES[z])));
@@ -1691,43 +1695,40 @@ public class KidoActivity extends Activity {
 
     private void closeMusicView() {
         if (!musicActive || musicView == null) return;
-        board.animate().cancel();
-        board.animate().translationX(-Kido.px(ZONES[2][0])).translationY(-Kido.px(ZONES[2][1]))
-                .setDuration(620).setInterpolator(fluid)
-                .withEndAction(() -> {
-                    if (!musicActive || musicView == null) return;
-                    musicActive = false;
-                    restoreMusicHud();
-                    showAudioTab(false);
-                    View statusTarget = musicStatusReturn;
-                    musicStatusReturn = null;
-                    if (statusTarget == null && !sysViews.isEmpty()) statusTarget = sysViews.get(0);
-                    if (statusTarget != null) showStatus(statusTarget);
-                    hud.setVisibility(View.VISIBLE);
-                    View target = musicReturn != null ? musicReturn
-                            : sysViews.isEmpty() ? null : sysViews.get(0);
-                    if (target != null) target.requestFocus();
-                    musicReturn = null;
-                    if (rebuildPending) {
-                        String focusPkg = rebuildFocusPkg;
-                        rebuildPending = false;
-                        rebuildFocusPkg = null;
-                        build();
-                        View focusTarget = null;
-                        if (focusPkg != null) {
-                            for (View v : favViews) {
-                                Item item = (Item) v.getTag();
-                                if (item.app != null && item.app.pkg.equals(focusPkg)) focusTarget = v;
-                            }
-                            for (HexView h : hexViews) {
-                                Item item = (Item) h.getTag();
-                                if (item.app != null && item.app.pkg.equals(focusPkg)) focusTarget = h;
-                            }
-                        }
-                        if (focusTarget == null && !favViews.isEmpty()) focusTarget = favViews.get(0);
-                        if (focusTarget != null) focusTarget.requestFocus();
+        moveTo(2, () -> {
+            if (!musicActive || musicView == null) return;
+            musicActive = false;
+            restoreMusicHud();
+            showAudioTab(false);
+            View statusTarget = musicStatusReturn;
+            musicStatusReturn = null;
+            if (statusTarget == null && !sysViews.isEmpty()) statusTarget = sysViews.get(0);
+            if (statusTarget != null) showStatus(statusTarget);
+            hud.setVisibility(View.VISIBLE);
+            View target = musicReturn != null ? musicReturn
+                    : sysViews.isEmpty() ? null : sysViews.get(0);
+            if (target != null) target.requestFocus();
+            musicReturn = null;
+            if (rebuildPending) {
+                String focusPkg = rebuildFocusPkg;
+                rebuildPending = false;
+                rebuildFocusPkg = null;
+                build();
+                View focusTarget = null;
+                if (focusPkg != null) {
+                    for (View v : favViews) {
+                        Item item = (Item) v.getTag();
+                        if (item.app != null && item.app.pkg.equals(focusPkg)) focusTarget = v;
                     }
-                }).start();
+                    for (HexView h : hexViews) {
+                        Item item = (Item) h.getTag();
+                        if (item.app != null && item.app.pkg.equals(focusPkg)) focusTarget = h;
+                    }
+                }
+                if (focusTarget == null && !favViews.isEmpty()) focusTarget = favViews.get(0);
+                if (focusTarget != null) focusTarget.requestFocus();
+            }
+        });
     }
 
     @Override
