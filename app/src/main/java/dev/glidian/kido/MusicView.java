@@ -122,10 +122,10 @@ final class MusicView extends FrameLayout {
 		grid.setClipChildren(false);
 		place(grid, 110, 452, 1270, 500);
 
-		GlowView focusGlow = new GlowView(context, Kido.px(44), true);
-		focusGlow.setColor(Kido.withAlpha(Kido.ORANGE, 0.7f));
+		GlowView focusGlow = new GlowView(context, Kido.px(60), true);
+		focusGlow.setColor(Kido.withAlpha(Kido.ORANGE, 0.8f));
 		focusGlow.setAlpha(0f);
-		place(grid, focusGlow, 0, 0, 312, 312);
+		place(grid, focusGlow, 0, 0, 352, 352);
 		unclip(focusGlow);
 
 		int index = 0;
@@ -263,9 +263,9 @@ final class MusicView extends FrameLayout {
 
 	private void moveFocusGlow(GlowView glow, HexView tile, boolean animate) {
 		FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) tile.getLayoutParams();
-		float pad = Kido.px(40);
+		float pad = Kido.px(60);
 		float x = params.leftMargin - pad;
-		float y = params.topMargin - Kido.px(topRow * HEX_PITCH) - Kido.px(23);
+		float y = params.topMargin - Kido.px(topRow * HEX_PITCH) - Kido.px(43);
 		if (!animate || glow.getAlpha() < 0.05f) {
 			glow.animate().cancel();
 			glow.setTranslationX(x);
