@@ -1462,15 +1462,28 @@ public class KidoActivity extends Activity {
             return true;
         }
         if (musicActive) {
+            int key = event.getKeyCode();
             View current = getCurrentFocus();
-            if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_UP && current != null
+            if (key == KeyEvent.KEYCODE_DPAD_UP && current != null
                     && musicView != null && musicView.isTopRowFocused(current)) {
                 if (down && event.getRepeatCount() == 0) closeMusicView();
                 return true;
             }
-            if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            if (key == KeyEvent.KEYCODE_BACK) {
                 if (up) closeMusicView();
                 return true;
+            }
+            if (isArrow(key)) {
+                if (up) {
+                    holding = false;
+                } else if (down && event.getRepeatCount() > 0) {
+                    holding = true;
+                    if (!holdStepAllowed(key)) return true;
+                    lastMoveAt = SystemClock.uptimeMillis();
+                } else if (down) {
+                    holding = false;
+                    lastMoveAt = SystemClock.uptimeMillis();
+                }
             }
             return super.dispatchKeyEvent(event);
         }
