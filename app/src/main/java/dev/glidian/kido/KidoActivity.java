@@ -1656,7 +1656,6 @@ public class KidoActivity extends Activity {
 
     private void activateMusicRoom() {
         if (musicView == null || musicActive) return;
-        musicView.setReturnTarget(musicReturn);
         musicActive = true;
         showAudioTab(true);
         showMusicFooterOnly();
