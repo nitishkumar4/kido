@@ -92,17 +92,17 @@ final class MusicView extends FrameLayout {
 
 		FrameLayout listPanel = new FrameLayout(context);
 		listPanel.setBackground(background(Kido.PANEL, Kido.LINE));
-		place(listPanel, 1430, 452, 370, 500);
+		place(listPanel, 1370, 452, 430, 500);
 
 		place(listPanel, label("曲目", Kido.mincho, 28, Kido.AMBER), 20, 12, 76, 42);
 		place(listPanel, label("SIGNAL INDEX", Kido.condBold, 26, Kido.INK, 0.12f), 94, 18, 210, 32);
 		TextView count = label(String.format(Locale.ROOT, "%02d", tracks.size()),
 				Kido.mono, 22, Kido.DIM);
 		count.setGravity(Gravity.END);
-		place(listPanel, count, 312, 20, 40, 28);
+		place(listPanel, count, 372, 20, 40, 28);
 		View listDivider = new View(context);
 		listDivider.setBackgroundColor(Kido.LINE);
-		place(listPanel, listDivider, 18, 62, 334, 2);
+		place(listPanel, listDivider, 18, 62, 394, 2);
 
 		LinearLayout list = new LinearLayout(context);
 		list.setOrientation(LinearLayout.VERTICAL);
@@ -110,7 +110,7 @@ final class MusicView extends FrameLayout {
 		namesScroll.setVerticalScrollBarEnabled(false);
 		namesScroll.setOverScrollMode(View.OVER_SCROLL_NEVER);
 		namesScroll.addView(list);
-		place(listPanel, namesScroll, 12, 76, 346, 412);
+		place(listPanel, namesScroll, 12, 76, 406, 412);
 
 		place(new RulerView(context, 440), 36, 452, 64, 500);
 
@@ -173,8 +173,8 @@ final class MusicView extends FrameLayout {
 		}
 
 		TextView mainHint = label("SYSTEM 制御系統  ▲", Kido.condBold, 26, Kido.DIM, 0.14f);
-		mainHint.setGravity(Gravity.END);
-		place(mainHint, 1380, 966, 420, 34);
+		mainHint.setGravity(Gravity.START);
+		place(mainHint, 110, 966, 420, 34);
 		TextView controlsHint = label("OK // PLAY    ARROWS // BROWSE", Kido.mono, 20, Kido.DIM, 0.08f);
 		controlsHint.setGravity(Gravity.CENTER);
 		place(controlsHint, 560, 970, 800, 30);
