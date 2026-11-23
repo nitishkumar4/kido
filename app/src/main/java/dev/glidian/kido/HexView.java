@@ -23,6 +23,10 @@ final class HexView extends View {
     private final Path outer = new Path(), inner = new Path();
 
     HexView(Context c, Kido.Look look, String code) {
+        this(c, look, code, Kido.mincho);
+    }
+
+    HexView(Context c, Kido.Look look, String code, android.graphics.Typeface nameTypeface) {
         super(c);
         this.look = look;
         this.code = code;
@@ -30,7 +34,7 @@ final class HexView extends View {
         setClickable(true);
         codePaint.setTypeface(Kido.mono);
         codePaint.setTextAlign(Paint.Align.CENTER);
-        namePaint.setTypeface(Kido.mincho);
+        namePaint.setTypeface(nameTypeface);
         namePaint.setTextAlign(Paint.Align.CENTER);
         dot.setColor(look.glow);
     }
