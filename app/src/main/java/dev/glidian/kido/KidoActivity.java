@@ -238,6 +238,7 @@ public class KidoActivity extends Activity {
 
     @Override
     protected void onDestroy() {
+        musicBuildGeneration++;
         if (tvInputs != null) tvInputs.unregisterCallback(inputWatch);
         unregisterReceiver(packageWatch);
         beeps.release();
