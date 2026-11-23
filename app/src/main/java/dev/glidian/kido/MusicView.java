@@ -22,8 +22,8 @@ import java.util.function.Consumer;
 final class MusicView extends FrameLayout {
 	private static final int HEX_PITCH = 214;
 	private static final int[] TRACK_COLORS = {
-		0xFFFF8C00, 0xFFFF3D9A, 0xFFB44CFF, 0xFF397BFF, 0xFF00D9FF,
-		0xFF00E6A0, 0xFFA5E635, 0xFFF2E635, 0xFFFF4D4D, 0xFFFFFFFF
+		0xFFFF8C00, 0xFFF2E635, 0xFFFF3D9A, 0xFF00D9FF, 0xFFA5E635, 
+		0xFFB44CFF, 0xFFFF4D4D, 0xFFFFFFFF, 0xFF397BFF, 0xFF00E6A0
 	};
 
 	static String formatKanji(String format) {
