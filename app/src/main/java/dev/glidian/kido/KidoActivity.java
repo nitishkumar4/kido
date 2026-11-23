@@ -1681,7 +1681,7 @@ public class KidoActivity extends Activity {
         if (alert != null) alert.setVisibility(View.GONE);
         board.animate().cancel();
         // Request focus first; the shared focused() callback starts the room pan.
-        musicView.requestEntryFocus();
+        musicView.requestEntryFocus(musicPlayer != null ? musicPlayer.currentUri() : null);
     }
 
     private void showMusicFooterOnly() {
