@@ -1732,6 +1732,8 @@ public class KidoActivity extends Activity {
             footerZone.setText(previousFooterZone);
             previousFooterZone = null;
         }
+        // The media session may have changed while Audio was open; never restore stale HUD visibility.
+        showNowPlaying();
     }
 
     private void closeMusicView() {
