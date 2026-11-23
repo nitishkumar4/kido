@@ -702,8 +702,10 @@ public class KidoActivity extends Activity {
         toast = text("待機中   " + str(R.string.system_hint), Kido.mono, 25, Kido.INK, 0);
         strip.addView(toast);
         place(z, strip, 122, 830, 1676, 74);
-        place(z, text("▲ 主要 " + str(R.string.zone_main_tab), Kido.condBold, 26, Kido.DIM, 0.14f), 122, 940, -1, -1);
-        place(z, text("▼ 音楽  SONIC ARCHIVE", Kido.condBold, 24, Kido.DIM, 0.14f), 122, 990, -1, -1);
+        place(z, text("▲ 主要 " + str(R.string.zone_main_tab), Kido.condBold, 26, Kido.DIM, 0.14f), 122, 990, -1, -1);
+        TextView audioHint = text("▼ 音楽  AUDIO", Kido.condBold, 26, Kido.DIM, 0.14f);
+        audioHint.setGravity(Gravity.END);
+        place(z, audioHint, 122, 990, 1676, 34);
     }
 
     /** Explicit moves at section edges, so the remote always lands where the arrows on screen point. */
@@ -1681,7 +1683,7 @@ public class KidoActivity extends Activity {
 
     private void showMusicFooterOnly() {
         previousFooterZone = footerZone.getText().toString();
-        footerZone.setText("SEC-04 // SONIC ARCHIVE");
+        footerZone.setText("SEC-04 // AUDIO ARCHIVE");
         musicHudVisibility = new int[hud.getChildCount()];
         for (int i = 0; i < hud.getChildCount(); i++) {
             musicHudVisibility[i] = hud.getChildAt(i).getVisibility();
