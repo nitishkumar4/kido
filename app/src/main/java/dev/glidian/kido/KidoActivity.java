@@ -99,7 +99,7 @@ public class KidoActivity extends Activity {
     private List<MusicLibrary.Track> musicTracks;
     private boolean musicActive, musicLoading, musicOpenPending;
     private boolean musicPreparationRequested, musicPreparing, musicReady;
-    private int musicBuildIndex;
+    private int musicBuildIndex, musicBuildGeneration;
     private static final int MUSIC_BUILD_BATCH_SIZE = 10;
     private boolean rebuildPending;
     private String rebuildFocusPkg;
@@ -258,7 +258,9 @@ public class KidoActivity extends Activity {
         musicPreparationRequested = false;
         musicPreparing = false;
         musicReady = false;
+        musicOpenPending = false;
         musicBuildIndex = 0;
+        musicBuildGeneration++;
         musicReturn = null;
         favViews.clear();
         hexViews.clear();
@@ -1712,10 +1714,11 @@ public class KidoActivity extends Activity {
         board.addView(musicView, room);
         musicPreparing = true;
         musicBuildIndex = 0;
-        buildMusicViewBatch();
+        buildMusicViewBatch(++musicBuildGeneration);
     }
 
-    private void buildMusicViewBatch() {
+    private void buildMusicViewBatch(int generation) {
+        if (generation != musicBuildGeneration) return;
         if (musicView == null || musicTracks == null || isFinishing()) {
             musicPreparing = false;
             return;
@@ -1724,7 +1727,7 @@ public class KidoActivity extends Activity {
         musicView.addTrackBatch(musicTracks, musicBuildIndex, end);
         musicBuildIndex = end;
         if (musicBuildIndex < musicTracks.size()) {
-            musicView.postOnAnimation(this::buildMusicViewBatch);
+            musicView.postOnAnimation(() -> buildMusicViewBatch(generation));
             return;
         }
         musicView.finishTrackBuild();
