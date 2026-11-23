@@ -176,7 +176,7 @@ final class MusicView extends FrameLayout {
 			Kido.Look look = new Kido.Look(trackCode(track.title, index + 1), "音楽", "LOCAL AUDIO",
 					colorForDuration(track.duration), 0);
 			HexView tile = new HexView(getContext(), look,
-					String.format(Locale.ROOT, "%02d", index + 1));
+					String.format(Locale.ROOT, "%d", Math.max(0L, track.duration / 1000L)), Kido.mono);
 			tile.setTag(new KidoActivity.Item(3, null, rowIndex));
 			tile.setId(View.generateViewId());
 			float x = 40 + column * 246 + (rowIndex % 2 == 1 ? 123 : 0);
