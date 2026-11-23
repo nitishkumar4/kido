@@ -58,7 +58,7 @@ final class MusicView extends FrameLayout {
 	private boolean rowsMoved;
 
 	MusicView(Context context, List<MusicLibrary.Track> tracks, Consumer<MusicLibrary.Track> onSelect,
-			Consumer<MusicLibrary.Track> onFocus) {
+			Consumer<MusicLibrary.Track> onFocus, Consumer<View> onCommonFocus) {
 		super(context);
 		setFocusable(true);
 		setFocusableInTouchMode(true);
@@ -135,6 +135,7 @@ final class MusicView extends FrameLayout {
 						colorForDuration(track.duration), 0);
 				HexView tile = new HexView(context, look,
 						String.format(Locale.ROOT, "%02d", index + 1));
+				tile.setTag(new KidoActivity.Item(3, null, rowIndex));
 				float x = 40 + column * 246 + (rowIndex % 2 == 1 ? 123 : 0);
 				place(grid, tile, Math.round(x), rowIndex * HEX_PITCH, 232, 266);
 
@@ -149,6 +150,7 @@ final class MusicView extends FrameLayout {
 
 				tile.setOnFocusChangeListener((v, focused) -> {
 					if (focused) {
+						onCommonFocus.accept(v);
 						onFocus.accept(track);
 						highlight(trackIndex);
 						scrollListTo(name);
@@ -250,6 +252,10 @@ final class MusicView extends FrameLayout {
 		}
 		glow.animate().translationX(x).translationY(y)
 				.setDuration(rowsMoved ? 340 : 240).setInterpolator(fluid).start();
+	}
+
+	void requestEntryFocus() {
+		if (!tiles.isEmpty() && !hasFocus()) tiles.get(0).requestFocus();
 	}
 
 	private static void unclip(View view) {
