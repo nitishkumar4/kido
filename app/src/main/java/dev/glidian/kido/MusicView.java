@@ -79,7 +79,7 @@ final class MusicView extends FrameLayout {
 		sectionTitle.setGravity(Gravity.BOTTOM);
 		sectionTitle.addView(label("音楽", Kido.mincho, 46, Kido.AMBER));
 		sectionTitle.addView(gap(18));
-		sectionTitle.addView(label("SONIC ARCHIVE", Kido.condBold, 30, Kido.INK, 0.14f));
+		sectionTitle.addView(label("AUDIO ARCHIVE", Kido.condBold, 30, Kido.INK, 0.14f));
 		sectionTitle.addView(gap(14));
 		sectionTitle.addView(label("SEC-04", Kido.mono, 22, Kido.DIM));
 		place(sectionTitle, 120, 360, -1, 58);
