@@ -9,6 +9,11 @@
     <!-- Wi-Fi strength and link speed for the signal readouts. -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- Local music access; requested only when MusicView is opened. -->
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
     <!-- Optional. Only lets the settings menu switch KIDŌ's own Input button helper on and off. Android never
          grants it to an installed app by itself: the user grants it once over ADB, and can revoke it. -->
     <uses-permission
