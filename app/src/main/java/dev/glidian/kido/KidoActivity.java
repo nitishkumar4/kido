@@ -1679,9 +1679,8 @@ public class KidoActivity extends Activity {
         launch.setVisibility(View.GONE);
         if (alert != null) alert.setVisibility(View.GONE);
         board.animate().cancel();
-        moveTo(3, () -> {
-            if (musicView != null) musicView.requestEntryFocus();
-        });
+        // Request focus first; the shared focused() callback starts the room pan.
+        musicView.requestEntryFocus();
     }
 
     private void showMusicFooterOnly() {
@@ -1722,40 +1721,35 @@ public class KidoActivity extends Activity {
 
     private void closeMusicView() {
         if (!musicActive || musicView == null) return;
-        moveTo(2, () -> {
-            if (!musicActive || musicView == null) return;
-            musicActive = false;
-            restoreMusicHud();
-            showAudioTab(false);
-            View statusTarget = musicStatusReturn;
-            musicStatusReturn = null;
-            if (statusTarget == null && !sysViews.isEmpty()) statusTarget = sysViews.get(0);
-            if (statusTarget != null) showStatus(statusTarget);
-            hud.setVisibility(View.VISIBLE);
-            View target = musicReturn != null ? musicReturn
-                    : sysViews.isEmpty() ? null : sysViews.get(0);
-            if (target != null) target.requestFocus();
-            musicReturn = null;
-            if (rebuildPending) {
-                String focusPkg = rebuildFocusPkg;
-                rebuildPending = false;
-                rebuildFocusPkg = null;
-                build();
-                View focusTarget = null;
-                if (focusPkg != null) {
-                    for (View v : favViews) {
-                        Item item = (Item) v.getTag();
-                        if (item.app != null && item.app.pkg.equals(focusPkg)) focusTarget = v;
-                    }
-                    for (HexView h : hexViews) {
-                        Item item = (Item) h.getTag();
-                        if (item.app != null && item.app.pkg.equals(focusPkg)) focusTarget = h;
-                    }
+        View target = musicReturn != null ? musicReturn
+                : sysViews.isEmpty() ? null : sysViews.get(0);
+        // Restore focus first; the shared focused() callback starts the pan to System.
+        if (target != null) target.requestFocus();
+        musicActive = false;
+        restoreMusicHud();
+        showAudioTab(false);
+        musicStatusReturn = null;
+        musicReturn = null;
+        hud.setVisibility(View.VISIBLE);
+        if (rebuildPending) {
+            String focusPkg = rebuildFocusPkg;
+            rebuildPending = false;
+            rebuildFocusPkg = null;
+            build();
+            View focusTarget = null;
+            if (focusPkg != null) {
+                for (View v : favViews) {
+                    Item item = (Item) v.getTag();
+                    if (item.app != null && item.app.pkg.equals(focusPkg)) focusTarget = v;
                 }
-                if (focusTarget == null && !favViews.isEmpty()) focusTarget = favViews.get(0);
-                if (focusTarget != null) focusTarget.requestFocus();
+                for (HexView h : hexViews) {
+                    Item item = (Item) h.getTag();
+                    if (item.app != null && item.app.pkg.equals(focusPkg)) focusTarget = h;
+                }
             }
-        });
+            if (focusTarget == null && !favViews.isEmpty()) focusTarget = favViews.get(0);
+            if (focusTarget != null) focusTarget.requestFocus();
+        }
     }
 
     @Override
