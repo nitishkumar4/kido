@@ -96,7 +96,8 @@ public class KidoActivity extends Activity {
 
     private FrameLayout root, board, launch, menu, hud;
     private MusicView musicView;
-    private boolean musicActive, musicLoading;
+    private List<MusicLibrary.Track> musicTracks;
+    private boolean musicActive, musicLoading, musicOpenPending;
     private boolean rebuildPending;
     private String rebuildFocusPkg;
     private View musicReturn;
@@ -220,6 +221,7 @@ public class KidoActivity extends Activity {
         beeps = new Beeps(prefs.getBoolean("sound", true));
         nowPlaying = new NowPlaying(this, handler, this::showNowPlaying);
         build();
+        startMusicLibraryScan();
         tvInputs = (TvInputManager) getSystemService(TV_INPUT_SERVICE);
         if (tvInputs != null) tvInputs.registerCallback(inputWatch, handler);
         IntentFilter pf = new IntentFilter();
@@ -1601,6 +1603,7 @@ public class KidoActivity extends Activity {
             activateMusicRoom();
             return;
         }
+        musicOpenPending = true;
         String permission = Build.VERSION.SDK_INT >= 33
                 ? Manifest.permission.READ_MEDIA_AUDIO : Manifest.permission.READ_EXTERNAL_STORAGE;
         if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
@@ -1609,7 +1612,6 @@ public class KidoActivity extends Activity {
         }
         loadMusicLibrary();
     }
-
 
     /** Ask Android's media scanner to index audio files newly added to Downloads. */
     private void scanDownloadsForAudio() {
@@ -1639,37 +1641,57 @@ public class KidoActivity extends Activity {
         }
     }
 
-    private void loadMusicLibrary() {
-        if (musicView != null) {
-            activateMusicRoom();
-            return;
-        }
-        if (musicLoading) return;
+    /** Start once in the background; Main and System remain responsive during indexing. */
+    private void startMusicLibraryScan() {
+        if (musicLoading || musicTracks != null) return;
+        String permission = Build.VERSION.SDK_INT >= 33
+                ? Manifest.permission.READ_MEDIA_AUDIO : Manifest.permission.READ_EXTERNAL_STORAGE;
+        if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) return;
+
         musicLoading = true;
-        log("SCANNING LOCAL FILES...");
         new Thread(() -> {
             scanDownloadsForAudio();
             List<MusicLibrary.Track> tracks = MusicLibrary.load(this);
             runOnUiThread(() -> {
                 musicLoading = false;
                 if (isFinishing() || root == null) return;
-                log(tracks.isEmpty() ? "NO LOCAL TRACKS FOUND"
-                        : tracks.size() + " LOCAL TRACKS FOUND");
-                musicView = new MusicView(this, tracks, track -> {
-                    if (musicPlayer == null) musicPlayer = new MusicPlayer(this,
-                            completedUri -> playNextMusicTrack(tracks, completedUri));
-                    if (!musicPlayer.toggle(track.uri, track.title, track.artist, track.duration)) {
-                        Toast.makeText(this, "Unable to play: " + track.title, Toast.LENGTH_SHORT).show();
-                    }
-                }, this::updateMusicFocus, this::focused);
-                FrameLayout.LayoutParams room = new FrameLayout.LayoutParams(
-                        Kido.px(1920), Kido.px(1080));
-                room.leftMargin = Kido.px(ZONES[3][0]);
-                room.topMargin = Kido.px(ZONES[3][1]);
-                board.addView(musicView, room);
-                activateMusicRoom();
+                musicTracks = tracks != null ? tracks : new ArrayList<>();
+                log(musicTracks.isEmpty() ? "NO LOCAL TRACKS FOUND"
+                        : musicTracks.size() + " LOCAL TRACKS FOUND");
+                if (musicOpenPending) createMusicView();
             });
         }, "Kido-MusicScan").start();
+    }
+
+    private void loadMusicLibrary() {
+        if (musicView != null) {
+            activateMusicRoom();
+            return;
+        }
+        if (musicTracks != null) {
+            createMusicView();
+            return;
+        }
+        startMusicLibraryScan();
+    }
+
+    private void createMusicView() {
+        if (!musicOpenPending || musicView != null || musicTracks == null) return;
+        musicOpenPending = false;
+        List<MusicLibrary.Track> tracks = musicTracks;
+        musicView = new MusicView(this, tracks, track -> {
+            if (musicPlayer == null) musicPlayer = new MusicPlayer(this,
+                    completedUri -> playNextMusicTrack(tracks, completedUri));
+            if (!musicPlayer.toggle(track.uri, track.title, track.artist, track.duration)) {
+                Toast.makeText(this, "Unable to play: " + track.title, Toast.LENGTH_SHORT).show();
+            }
+        }, this::updateMusicFocus, this::focused);
+        FrameLayout.LayoutParams room = new FrameLayout.LayoutParams(
+                Kido.px(1920), Kido.px(1080));
+        room.leftMargin = Kido.px(ZONES[3][0]);
+        room.topMargin = Kido.px(ZONES[3][1]);
+        board.addView(musicView, room);
+        activateMusicRoom();
     }
 
     private void activateMusicRoom() {
@@ -1776,6 +1798,7 @@ public class KidoActivity extends Activity {
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             loadMusicLibrary();
         } else {
+            musicOpenPending = false;
             Toast.makeText(this, "Audio permission is needed to browse local music.", Toast.LENGTH_LONG).show();
             if (musicReturn != null) musicReturn.requestFocus();
             musicReturn = null;
