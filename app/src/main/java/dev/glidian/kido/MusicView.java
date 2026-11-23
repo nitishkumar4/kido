@@ -51,6 +51,7 @@ final class MusicView extends FrameLayout {
 	private final View accent;
 	private final List<TextView> names = new ArrayList<>();
 	private final List<HexView> tiles = new ArrayList<>();
+	private HexView lastFocusedTile;
 	private final List<Integer> tileRows = new ArrayList<>();
 	private final List<String> trackTitles = new ArrayList<>();
 	private ScrollView namesScroll;
@@ -150,6 +151,7 @@ final class MusicView extends FrameLayout {
 
 				tile.setOnFocusChangeListener((v, focused) -> {
 					if (focused) {
+						lastFocusedTile = tile;
 						onCommonFocus.accept(v);
 						onFocus.accept(track);
 						highlight(trackIndex);
@@ -255,7 +257,10 @@ final class MusicView extends FrameLayout {
 	}
 
 	void requestEntryFocus() {
-		if (!tiles.isEmpty() && !hasFocus()) tiles.get(0).requestFocus();
+		if (hasFocus()) return;
+		HexView target = lastFocusedTile != null ? lastFocusedTile
+				: tiles.isEmpty() ? null : tiles.get(0);
+		if (target != null) target.requestFocus();
 	}
 
 	private static void unclip(View view) {
