@@ -57,12 +57,22 @@ final class MusicView extends FrameLayout {
 	private final List<Integer> tileRows = new ArrayList<>();
 	private final List<String> trackTitles = new ArrayList<>();
 	private ScrollView namesScroll;
+	private LinearLayout list;
+	private FrameLayout grid;
+	private GlowView focusGlow;
+	private TextView trackCountLabel, listCountLabel, emptyLabel;
+	private final Consumer<MusicLibrary.Track> onSelect;
+	private final Consumer<MusicLibrary.Track> onFocus;
+	private final Consumer<View> onCommonFocus;
 	private int topRow;
 	private boolean rowsMoved;
 
-	MusicView(Context context, List<MusicLibrary.Track> tracks, Consumer<MusicLibrary.Track> onSelect,
+	MusicView(Context context, int trackCount, Consumer<MusicLibrary.Track> onSelect,
 			Consumer<MusicLibrary.Track> onFocus, Consumer<View> onCommonFocus) {
 		super(context);
+		this.onSelect = onSelect;
+		this.onFocus = onFocus;
+		this.onCommonFocus = onCommonFocus;
 		setFocusable(true);
 		setFocusableInTouchMode(true);
 
@@ -87,10 +97,10 @@ final class MusicView extends FrameLayout {
 		sectionTitle.addView(label("SEC-04", Kido.mono, 22, Kido.DIM));
 		place(sectionTitle, 120, 360, -1, 58);
 
-		TextView trackCount = label("AUDIO NODES  //  "
-				+ String.format(Locale.ROOT, "%02d", tracks.size()), Kido.mono, 22, Kido.DIM, 0.06f);
-		trackCount.setGravity(Gravity.END);
-		place(trackCount, 1300, 380, 500, 30);
+		trackCountLabel = label("AUDIO NODES  //  "
+				+ String.format(Locale.ROOT, "%02d", trackCount), Kido.mono, 22, Kido.DIM, 0.06f);
+		trackCountLabel.setGravity(Gravity.END);
+		place(trackCountLabel, 1300, 380, 500, 30);
 
 
 		FrameLayout listPanel = new FrameLayout(context);
@@ -99,15 +109,15 @@ final class MusicView extends FrameLayout {
 
 		place(listPanel, label("曲目", Kido.mincho, 28, Kido.AMBER), 20, 12, 76, 42);
 		place(listPanel, label("SIGNAL INDEX", Kido.condBold, 26, Kido.INK, 0.12f), 94, 18, 210, 32);
-		TextView count = label(String.format(Locale.ROOT, "%02d", tracks.size()),
+		listCountLabel = label(String.format(Locale.ROOT, "%02d", trackCount),
 				Kido.mono, 22, Kido.DIM);
-		count.setGravity(Gravity.END);
-		place(listPanel, count, 372, 20, 40, 28);
+		listCountLabel.setGravity(Gravity.END);
+		place(listPanel, listCountLabel, 372, 20, 40, 28);
 		View listDivider = new View(context);
 		listDivider.setBackgroundColor(Kido.LINE);
 		place(listPanel, listDivider, 18, 62, 394, 2);
 
-		LinearLayout list = new LinearLayout(context);
+		list = new LinearLayout(context);
 		list.setOrientation(LinearLayout.VERTICAL);
 		namesScroll = new ScrollView(context);
 		namesScroll.setVerticalScrollBarEnabled(false);
@@ -117,67 +127,15 @@ final class MusicView extends FrameLayout {
 
 		place(new RulerView(context, 440), 36, 452, 64, 500);
 
-		FrameLayout grid = new FrameLayout(context);
+		grid = new FrameLayout(context);
 		grid.setClipChildren(false);
 		place(grid, 110, 452, 1270, 500);
 
-		GlowView focusGlow = new GlowView(context, Kido.px(60), true);
+		focusGlow = new GlowView(context, Kido.px(60), true);
 		focusGlow.setColor(Kido.withAlpha(Kido.ORANGE, 0.8f));
 		focusGlow.setAlpha(0f);
 		place(grid, focusGlow, 0, 0, 352, 352);
 		unclip(focusGlow);
-
-		int index = 0;
-		int rowIndex = 0;
-		while (index < tracks.size()) {
-			int perRow = rowIndex % 2 == 0 ? 5 : 4;
-			for (int column = 0; column < perRow && index < tracks.size(); column++, index++) {
-				final int trackIndex = index;
-				MusicLibrary.Track track = tracks.get(index);
-				Kido.Look look = new Kido.Look(track.format, "音楽", "LOCAL AUDIO",
-						colorForDuration(track.duration), 0);
-				HexView tile = new HexView(context, look,
-						String.format(Locale.ROOT, "%02d", index + 1));
-				tile.setTag(new KidoActivity.Item(3, null, rowIndex));
-				float x = 40 + column * 246 + (rowIndex % 2 == 1 ? 123 : 0);
-				place(grid, tile, Math.round(x), rowIndex * HEX_PITCH, 232, 266);
-
-				TextView name = label("", Kido.mono, 22, Kido.DIM);
-				name.setGravity(Gravity.CENTER_VERTICAL);
-				name.setSingleLine(true);
-				name.setEllipsize(TextUtils.TruncateAt.END);
-				name.setTag(trackIndex);
-				list.addView(name, new LinearLayout.LayoutParams(-1, Kido.px(38)));
-				names.add(name);
-				trackTitles.add(track.title);
-				trackUris.add(track.uri);
-
-				tile.setOnFocusChangeListener((v, focused) -> {
-					if (focused) {
-						lastFocusedTile = tile;
-						onCommonFocus.accept(v);
-						onFocus.accept(track);
-						highlight(trackIndex);
-						scrollListTo(name);
-						scrollRows(tileRows.get(trackIndex), true);
-						moveFocusGlow(focusGlow, tile, true);
-					}
-				});
-				tile.setOnClickListener(v -> onSelect.accept(track));
-				tiles.add(tile);
-				tileRows.add(rowIndex);
-			}
-			rowIndex++;
-		}
-
-		for (int i = 0; i < tiles.size(); i++) {
-			HexView tile = tiles.get(i);
-			tile.setId(View.generateViewId());
-			int previous = i > 0 ? tiles.get(i - 1).getId() : tile.getId();
-			int next = i + 1 < tiles.size() ? tiles.get(i + 1).getId() : tile.getId();
-			tile.setNextFocusLeftId(previous);
-			tile.setNextFocusRightId(next);
-		}
 
 		TextView mainHint = label("▲ 制御系統 SYSTEM", Kido.condBold, 26, Kido.DIM, 0.14f);
 		mainHint.setGravity(Gravity.START);
@@ -186,15 +144,72 @@ final class MusicView extends FrameLayout {
 		controlsHint.setGravity(Gravity.CENTER);
 		place(controlsHint, 560, 970, 800, 30);
 
-		if (tracks.isEmpty()) {
-			TextView empty = label("Open MusicView after adding audio to local storage.",
-					Kido.mono, 20, Kido.DIM);
-			place(empty, 150, 452, 900, 50);
+		emptyLabel = label("Open MusicView after adding audio to local storage.",
+				Kido.mono, 20, Kido.DIM);
+		place(emptyLabel, 150, 452, 900, 50);
+		emptyLabel.setVisibility(View.GONE);
+
+	}
+
+
+	void addTrackBatch(List<MusicLibrary.Track> tracks, int start, int end) {
+		for (int index = start; index < end; index++) {
+			final int trackIndex = index;
+			MusicLibrary.Track track = tracks.get(index);
+			int pairIndex = index / 9;
+			int withinPair = index % 9;
+			int rowIndex = pairIndex * 2 + (withinPair >= 5 ? 1 : 0);
+			int column = withinPair >= 5 ? withinPair - 5 : withinPair;
+			Kido.Look look = new Kido.Look(track.format, "音楽", "LOCAL AUDIO",
+					colorForDuration(track.duration), 0);
+			HexView tile = new HexView(getContext(), look,
+					String.format(Locale.ROOT, "%02d", index + 1));
+			tile.setTag(new KidoActivity.Item(3, null, rowIndex));
+			tile.setId(View.generateViewId());
+			float x = 40 + column * 246 + (rowIndex % 2 == 1 ? 123 : 0);
+			place(grid, tile, Math.round(x), rowIndex * HEX_PITCH, 232, 266);
+
+			TextView name = label("", Kido.mono, 22, Kido.DIM);
+			name.setGravity(Gravity.CENTER_VERTICAL);
+			name.setSingleLine(true);
+			name.setEllipsize(TextUtils.TruncateAt.END);
+			name.setTag(trackIndex);
+			list.addView(name, new LinearLayout.LayoutParams(-1, Kido.px(38)));
+			names.add(name);
+			trackTitles.add(track.title);
+			trackUris.add(track.uri);
+
+			tile.setOnFocusChangeListener((v, focused) -> {
+				if (focused) {
+					lastFocusedTile = tile;
+					onCommonFocus.accept(v);
+					onFocus.accept(track);
+					highlight(trackIndex);
+					scrollListTo(name);
+					scrollRows(tileRows.get(trackIndex), true);
+					moveFocusGlow(focusGlow, tile, true);
+				}
+			});
+			tile.setOnClickListener(v -> onSelect.accept(track));
+			tiles.add(tile);
+			tileRows.add(rowIndex);
+
+			int previous = index > 0 ? tiles.get(index - 1).getId() : tile.getId();
+			tile.setNextFocusLeftId(previous);
+			tile.setNextFocusRightId(tile.getId());
+			if (index > 0) tiles.get(index - 1).setNextFocusRightId(tile.getId());
+		}
+	}
+
+	void finishTrackBuild() {
+		if (tiles.isEmpty()) {
+			emptyLabel.setVisibility(View.VISIBLE);
 		} else {
-			listPanel.setFocusable(false);
+			listCountLabel.setText(String.format(Locale.ROOT, "%02d", tiles.size()));
+			trackCountLabel.setText("AUDIO NODES  //  "
+					+ String.format(Locale.ROOT, "%02d", tiles.size()));
 			scrollRows(0, false);
 		}
-
 	}
 
 	void intro() {
