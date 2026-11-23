@@ -8,11 +8,14 @@ import android.media.session.MediaSession;
 import android.media.session.PlaybackState;
 import android.net.Uri;
 
+import java.util.function.Consumer;
+
 /** Small platform-only music player. No service or third-party playback dependency. */
 final class MusicPlayer {
 	private final Context context;
 	private final AudioManager audio;
 	private final MediaSession session;
+	private final Consumer<Uri> onCompletion;
 	private MediaPlayer player;
 	private Uri currentUri;
 	private boolean prepared;
@@ -22,7 +25,8 @@ final class MusicPlayer {
 		if (change < 0) pauseForFocusLoss();
 	};
 
-	MusicPlayer(Context context) {
+	MusicPlayer(Context context, Consumer<Uri> onCompletion) {
+		this.onCompletion = onCompletion;
 		this.context = context.getApplicationContext();
 		audio = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 		session = new MediaSession(this.context, "KidoMusic");
@@ -85,7 +89,11 @@ final class MusicPlayer {
 				session.setActive(true);
 				updateState();
 			});
-			player.setOnCompletionListener(mp -> stop());
+			player.setOnCompletionListener(mp -> {
+				Uri completedUri = currentUri;
+				stop();
+				if (onCompletion != null && completedUri != null) onCompletion.accept(completedUri);
+			});
 			player.setOnErrorListener((mp, what, extra) -> {
 				stop();
 				return true;
