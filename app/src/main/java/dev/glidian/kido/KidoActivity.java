@@ -1656,8 +1656,6 @@ public class KidoActivity extends Activity {
                 musicLoading = false;
                 if (isFinishing() || root == null) return;
                 musicTracks = tracks != null ? tracks : new ArrayList<>();
-                log(musicTracks.isEmpty() ? "NO LOCAL TRACKS FOUND"
-                        : musicTracks.size() + " LOCAL TRACKS FOUND");
                 if (musicOpenPending) createMusicView();
             });
         }, "Kido-MusicScan").start();
@@ -1678,6 +1676,8 @@ public class KidoActivity extends Activity {
     private void createMusicView() {
         if (!musicOpenPending || musicView != null || musicTracks == null) return;
         musicOpenPending = false;
+        log(musicTracks.isEmpty() ? "NO LOCAL TRACKS FOUND"
+                : musicTracks.size() + " LOCAL TRACKS FOUND");
         List<MusicLibrary.Track> tracks = musicTracks;
         musicView = new MusicView(this, tracks, track -> {
             if (musicPlayer == null) musicPlayer = new MusicPlayer(this,
