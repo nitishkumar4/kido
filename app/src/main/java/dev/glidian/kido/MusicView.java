@@ -210,10 +210,6 @@ final class MusicView extends FrameLayout {
 		return next;
 	}
 
-	boolean focusFirstTrack() {
-		return !tiles.isEmpty() && tiles.get(0).requestFocus();
-	}
-
 	boolean isTopRowFocused(View focused) {
 		if (tiles.isEmpty()) return focused == this;
 		int index = tiles.indexOf(focused);
