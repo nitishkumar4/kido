@@ -56,7 +56,6 @@ final class MusicView extends FrameLayout {
 	private final List<String> trackTitles = new ArrayList<>();
 	private ScrollView namesScroll;
 	private int topRow;
-	private int highlightedIndex = -1;
 	private boolean rowsMoved;
 
 	MusicView(Context context, List<MusicLibrary.Track> tracks, Consumer<MusicLibrary.Track> onSelect,
@@ -226,24 +225,17 @@ final class MusicView extends FrameLayout {
 		int lastRow = tileRows.get(tileRows.size() - 1);
 		int nextTop = Math.max(0, Math.min(row - 1, Math.max(0, lastRow - 1)));
 		rowsMoved = nextTop != topRow;
-		if (animate && !rowsMoved) return;
 		topRow = nextTop;
 		float shift = -Kido.px(topRow * HEX_PITCH);
 		for (int i = 0; i < tiles.size(); i++) {
 			HexView tile = tiles.get(i);
 			int tileRow = tileRows.get(i);
-			boolean visible = tileRow >= topRow && tileRow <= topRow + 1;
-			float alpha = visible ? 1f : 0f;
-			if (!animate) {
+			float alpha = tileRow >= topRow && tileRow <= topRow + 1 ? 1f : 0f;
+			if (animate) {
+				tile.animate().translationY(shift).alpha(alpha).setDuration(340).start();
+			} else {
 				tile.setTranslationY(shift);
 				tile.setAlpha(alpha);
-			} else if (visible) {
-				tile.animate().translationY(shift).alpha(1f)
-						.setDuration(340).setInterpolator(fluid).start();
-			} else {
-				tile.animate().cancel();
-				tile.setTranslationY(shift);
-				tile.setAlpha(0f);
 			}
 		}
 	}
@@ -279,28 +271,24 @@ final class MusicView extends FrameLayout {
 	}
 
 	private void highlight(int selected) {
-		if (selected == highlightedIndex) return;
-		if (highlightedIndex >= 0) updateName(highlightedIndex, false);
-		updateName(selected, true);
-		highlightedIndex = selected;
-	}
-
-	private void updateName(int index, boolean active) {
-		TextView name = names.get(index);
-		name.setText((active ? "▶ " : "  ")
-				+ "T." + String.format(Locale.ROOT, "%02d ", index + 1)
-				+ trackTitles.get(index).toUpperCase(Locale.ROOT));
-		name.setTextColor(active ? Kido.INK : Kido.DIM);
-	}
+		for (int i = 0; i < names.size(); i++) {
+			boolean active = i == selected;
+			names.get(i).setText((active ? "▶ " : "  ")
+					+ "T." + String.format(Locale.ROOT, "%02d ", i + 1)
+					+ trackTitles.get(i).toUpperCase(Locale.ROOT));
+			names.get(i).setTextColor(active ? Kido.INK : Kido.DIM);
+		}
 
 	private void scrollListTo(TextView row) {
 		if (namesScroll == null) return;
-		int top = namesScroll.getScrollY();
-		int bottom = top + namesScroll.getHeight();
-		if (row.getTop() < top || row.getBottom() > bottom) {
-			namesScroll.smoothScrollTo(0,
-					Math.max(0, row.getTop() - namesScroll.getHeight() / 2 + row.getHeight() / 2));
-		}
+		namesScroll.post(() -> {
+			int top = namesScroll.getScrollY();
+			int bottom = top + namesScroll.getHeight();
+			if (row.getTop() < top || row.getBottom() > bottom) {
+				namesScroll.smoothScrollTo(0,
+						Math.max(0, row.getTop() - namesScroll.getHeight() / 2 + row.getHeight() / 2));
+			}
+		});
 	}
 
 	private static String artistName(MusicLibrary.Track track) {
