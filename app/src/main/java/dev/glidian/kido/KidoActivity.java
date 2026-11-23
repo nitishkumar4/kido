@@ -1068,7 +1068,7 @@ public class KidoActivity extends Activity {
         lastFocused = v;
         Item item = (Item) v.getTag();
         hiveMoved = item.zone == 1 && item.app != null && scrollHive(item.row, true);
-        glowBehind(v);
+        if (item.zone != 3) glowBehind(v);
         boolean byKey = SystemClock.uptimeMillis() - lastKeyAt < 400;
         boolean newZone = item.zone != zone;
         if (newZone) {
@@ -1081,7 +1081,9 @@ public class KidoActivity extends Activity {
         // While an arrow is held, the status block waits until focus comes to rest, so it doesn't
         // flash through every app's color on the way past.
         handler.removeCallbacks(settle);
-        if (holding) {
+        if (item.zone == 3) {
+            pendingStatus = null;
+        } else if (holding) {
             pendingStatus = v;
             handler.postDelayed(settle, SETTLE_MS);
         } else {
@@ -1658,7 +1660,7 @@ public class KidoActivity extends Activity {
                     if (!musicPlayer.toggle(track.uri, track.title, track.artist, track.duration)) {
                         Toast.makeText(this, "Unable to play: " + track.title, Toast.LENGTH_SHORT).show();
                     }
-                }, this::updateMusicFocus);
+                }, this::updateMusicFocus, this::focused);
                 FrameLayout.LayoutParams room = new FrameLayout.LayoutParams(
                         Kido.px(1920), Kido.px(1080));
                 room.leftMargin = Kido.px(ZONES[3][0]);
@@ -1677,7 +1679,9 @@ public class KidoActivity extends Activity {
         launch.setVisibility(View.GONE);
         if (alert != null) alert.setVisibility(View.GONE);
         board.animate().cancel();
-        moveTo(3);
+        moveTo(3, () -> {
+            if (musicView != null) musicView.requestEntryFocus();
+        });
     }
 
     private void showMusicFooterOnly() {
