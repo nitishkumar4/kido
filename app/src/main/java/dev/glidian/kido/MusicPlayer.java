@@ -52,6 +52,10 @@ final class MusicPlayer {
 		});
 	}
 
+	Uri currentUri() {
+		return currentUri;
+	}
+
 	boolean toggle(Uri uri, String title, String artist, long duration) {
 		if (player != null && uri.equals(currentUri) && prepared && player.isPlaying()) {
 			stop();
