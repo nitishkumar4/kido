@@ -1710,7 +1710,7 @@ public class KidoActivity extends Activity {
                 Kido.px(1920), Kido.px(1080));
         room.leftMargin = Kido.px(ZONES[3][0]);
         room.topMargin = Kido.px(ZONES[3][1]);
-        musicView.setVisibility(View.INVISIBLE);
+        // Keep the room visible in the off-screen board so Android can measure and lay it out as tiles arrive.
         board.addView(musicView, room);
         musicPreparing = true;
         musicBuildIndex = 0;
