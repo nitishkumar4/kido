@@ -152,6 +152,19 @@ final class MusicView extends FrameLayout {
 	}
 
 
+	private static String trackCode(String title, int sequence) {
+		StringBuilder initials = new StringBuilder(2);
+		if (title != null) {
+			for (int i = 0; i < title.length() && initials.length() < 2; ) {
+				int codePoint = title.codePointAt(i);
+				if (Character.isLetter(codePoint)) initials.appendCodePoint(codePoint);
+				i += Character.charCount(codePoint);
+			}
+		}
+		return initials.toString().toUpperCase(Locale.ROOT)
+				+ "-" + String.format(Locale.ROOT, "%02d", sequence);
+	}
+
 	void addTrackBatch(List<MusicLibrary.Track> tracks, int start, int end) {
 		for (int index = start; index < end; index++) {
 			final int trackIndex = index;
@@ -160,7 +173,7 @@ final class MusicView extends FrameLayout {
 			int withinPair = index % 9;
 			int rowIndex = pairIndex * 2 + (withinPair >= 5 ? 1 : 0);
 			int column = withinPair >= 5 ? withinPair - 5 : withinPair;
-			Kido.Look look = new Kido.Look(track.format, "音楽", "LOCAL AUDIO",
+			Kido.Look look = new Kido.Look(trackCode(track.title, index + 1), "音楽", "LOCAL AUDIO",
 					colorForDuration(track.duration), 0);
 			HexView tile = new HexView(getContext(), look,
 					String.format(Locale.ROOT, "%02d", index + 1));
