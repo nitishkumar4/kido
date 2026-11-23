@@ -98,6 +98,9 @@ public class KidoActivity extends Activity {
     private MusicView musicView;
     private List<MusicLibrary.Track> musicTracks;
     private boolean musicActive, musicLoading, musicOpenPending;
+    private boolean musicPreparationRequested, musicPreparing, musicReady;
+    private int musicBuildIndex;
+    private static final int MUSIC_BUILD_BATCH_SIZE = 10;
     private boolean rebuildPending;
     private String rebuildFocusPkg;
     private View musicReturn;
@@ -252,6 +255,10 @@ public class KidoActivity extends Activity {
         root.removeAllViews();
         musicView = null;
         musicActive = false;
+        musicPreparationRequested = false;
+        musicPreparing = false;
+        musicReady = false;
+        musicBuildIndex = 0;
         musicReturn = null;
         favViews.clear();
         hexViews.clear();
@@ -1071,6 +1078,7 @@ public class KidoActivity extends Activity {
         Item item = (Item) v.getTag();
         hiveMoved = item.zone == 1 && item.app != null && scrollHive(item.row, true);
         if (item.zone != 3) glowBehind(v);
+        if (item.zone == 2) requestMusicPreparation();
         boolean byKey = SystemClock.uptimeMillis() - lastKeyAt < 400;
         boolean newZone = item.zone != zone;
         if (newZone) {
@@ -1599,11 +1607,12 @@ public class KidoActivity extends Activity {
     private void openMusicView() {
         musicReturn = getCurrentFocus();
         musicStatusReturn = lastFocused;
-        if (musicView != null) {
+        if (musicReady) {
             activateMusicRoom();
             return;
         }
         musicOpenPending = true;
+        musicPreparationRequested = true;
         String permission = Build.VERSION.SDK_INT >= 33
                 ? Manifest.permission.READ_MEDIA_AUDIO : Manifest.permission.READ_EXTERNAL_STORAGE;
         if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
@@ -1656,13 +1665,23 @@ public class KidoActivity extends Activity {
                 musicLoading = false;
                 if (isFinishing() || root == null) return;
                 musicTracks = tracks != null ? tracks : new ArrayList<>();
-                if (musicOpenPending) createMusicView();
+                if (musicPreparationRequested) createMusicView();
             });
         }, "Kido-MusicScan").start();
     }
 
+    private void requestMusicPreparation() {
+        if (musicPreparationRequested) return;
+        musicPreparationRequested = true;
+        String permission = Build.VERSION.SDK_INT >= 33
+                ? Manifest.permission.READ_MEDIA_AUDIO : Manifest.permission.READ_EXTERNAL_STORAGE;
+        if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) return;
+        if (musicTracks != null) createMusicView();
+        else startMusicLibraryScan();
+    }
+
     private void loadMusicLibrary() {
-        if (musicView != null) {
+        if (musicReady) {
             activateMusicRoom();
             return;
         }
@@ -1674,12 +1693,11 @@ public class KidoActivity extends Activity {
     }
 
     private void createMusicView() {
-        if (!musicOpenPending || musicView != null || musicTracks == null) return;
-        musicOpenPending = false;
-        log(musicTracks.isEmpty() ? "NO LOCAL TRACKS FOUND"
-                : musicTracks.size() + " LOCAL TRACKS FOUND");
+        if (!musicPreparationRequested || musicPreparing || musicView != null || musicTracks == null) return;
         List<MusicLibrary.Track> tracks = musicTracks;
-        musicView = new MusicView(this, tracks, track -> {
+        log(tracks.isEmpty() ? "NO LOCAL TRACKS FOUND"
+                : tracks.size() + " LOCAL TRACKS FOUND");
+        musicView = new MusicView(this, tracks.size(), track -> {
             if (musicPlayer == null) musicPlayer = new MusicPlayer(this,
                     completedUri -> playNextMusicTrack(tracks, completedUri));
             if (!musicPlayer.toggle(track.uri, track.title, track.artist, track.duration)) {
@@ -1690,12 +1708,35 @@ public class KidoActivity extends Activity {
                 Kido.px(1920), Kido.px(1080));
         room.leftMargin = Kido.px(ZONES[3][0]);
         room.topMargin = Kido.px(ZONES[3][1]);
+        musicView.setVisibility(View.INVISIBLE);
         board.addView(musicView, room);
-        activateMusicRoom();
+        musicPreparing = true;
+        musicBuildIndex = 0;
+        buildMusicViewBatch();
+    }
+
+    private void buildMusicViewBatch() {
+        if (musicView == null || musicTracks == null || isFinishing()) {
+            musicPreparing = false;
+            return;
+        }
+        int end = Math.min(musicBuildIndex + MUSIC_BUILD_BATCH_SIZE, musicTracks.size());
+        musicView.addTrackBatch(musicTracks, musicBuildIndex, end);
+        musicBuildIndex = end;
+        if (musicBuildIndex < musicTracks.size()) {
+            musicView.postOnAnimation(this::buildMusicViewBatch);
+            return;
+        }
+        musicView.finishTrackBuild();
+        musicPreparing = false;
+        musicReady = true;
+        musicView.setVisibility(View.VISIBLE);
+        if (musicOpenPending) activateMusicRoom();
     }
 
     private void activateMusicRoom() {
-        if (musicView == null || musicActive) return;
+        if (musicView == null || !musicReady || musicActive) return;
+        musicOpenPending = false;
         musicActive = true;
         showAudioTab(true);
         showMusicFooterOnly();
@@ -1799,6 +1840,7 @@ public class KidoActivity extends Activity {
             loadMusicLibrary();
         } else {
             musicOpenPending = false;
+            musicPreparationRequested = false;
             Toast.makeText(this, "Audio permission is needed to browse local music.", Toast.LENGTH_LONG).show();
             if (musicReturn != null) musicReturn.requestFocus();
             musicReturn = null;
