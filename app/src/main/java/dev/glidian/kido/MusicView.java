@@ -276,8 +276,9 @@ final class MusicView extends FrameLayout {
 			names.get(i).setText((active ? "▶ " : "  ")
 					+ "T." + String.format(Locale.ROOT, "%02d ", i + 1)
 					+ trackTitles.get(i).toUpperCase(Locale.ROOT));
-			names.get(i).setTextColor(active ? Kido.INK : Kido.DIM);
+				names.get(i).setTextColor(active ? Kido.INK : Kido.DIM);
 		}
+	}
 
 	private void scrollListTo(TextView row) {
 		if (namesScroll == null) return;
