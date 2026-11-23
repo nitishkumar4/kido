@@ -702,10 +702,10 @@ public class KidoActivity extends Activity {
         toast = text("待機中   " + str(R.string.system_hint), Kido.mono, 25, Kido.INK, 0);
         strip.addView(toast);
         place(z, strip, 122, 830, 1676, 74);
-        place(z, text("▲ 主要 " + str(R.string.zone_main_tab), Kido.condBold, 26, Kido.DIM, 0.14f), 122, 940, -1, -1);
+        place(z, text("▲ 主要 " + str(R.string.zone_main_tab), Kido.condBold, 26, Kido.DIM, 0.14f), 122, 966, -1, -1);
         TextView audioHint = text("▼ 音楽  AUDIO", Kido.condBold, 26, Kido.DIM, 0.14f);
         audioHint.setGravity(Gravity.END);
-        place(z, audioHint, 122, 940, 1676, 34);
+        place(z, audioHint, 122, 966, 1676, 34);
     }
 
     /** Explicit moves at section edges, so the remote always lands where the arrows on screen point. */
