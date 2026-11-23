@@ -1216,7 +1216,6 @@ public class KidoActivity extends Activity {
                     .setDuration(620).setInterpolator(fluid).withEndAction(() -> {
                         if (musicActive && musicView != null) {
                             musicView.intro();
-                            if (!musicView.focusFirstTrack()) musicView.requestFocus();
                         }
                         if (onPanEnd != null) onPanEnd.run();
                     }).start();
