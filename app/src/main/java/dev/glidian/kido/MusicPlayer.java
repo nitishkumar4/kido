@@ -54,7 +54,7 @@ final class MusicPlayer {
 
 	boolean toggle(Uri uri, String title, String artist, long duration) {
 		if (player != null && uri.equals(currentUri) && prepared && player.isPlaying()) {
-			pause();
+			stop();
 			return true;
 		}
 		return play(uri, title, artist, duration);
