@@ -3,6 +3,7 @@ package dev.glidian.kido;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,7 @@ final class MusicView extends FrameLayout {
 	private final View accent;
 	private final List<TextView> names = new ArrayList<>();
 	private final List<HexView> tiles = new ArrayList<>();
+	private final List<Uri> trackUris = new ArrayList<>();
 	private HexView lastFocusedTile;
 	private final List<Integer> tileRows = new ArrayList<>();
 	private final List<String> trackTitles = new ArrayList<>();
@@ -148,6 +150,7 @@ final class MusicView extends FrameLayout {
 				list.addView(name, new LinearLayout.LayoutParams(-1, Kido.px(38)));
 				names.add(name);
 				trackTitles.add(track.title);
+				trackUris.add(track.uri);
 
 				tile.setOnFocusChangeListener((v, focused) -> {
 					if (focused) {
@@ -256,9 +259,18 @@ final class MusicView extends FrameLayout {
 				.setDuration(rowsMoved ? 340 : 240).setInterpolator(fluid).start();
 	}
 
-	void requestEntryFocus() {
+	void requestEntryFocus(Uri playingUri) {
 		if (hasFocus()) return;
-		HexView target = lastFocusedTile != null ? lastFocusedTile
+		HexView target = null;
+		if (playingUri != null) {
+			for (int i = 0; i < trackUris.size(); i++) {
+				if (playingUri.equals(trackUris.get(i))) {
+					target = tiles.get(i);
+					break;
+				}
+			}
+		}
+		if (target == null) target = lastFocusedTile != null ? lastFocusedTile
 				: tiles.isEmpty() ? null : tiles.get(0);
 		if (target != null) target.requestFocus();
 	}
