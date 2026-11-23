@@ -1656,7 +1656,8 @@ public class KidoActivity extends Activity {
                 log(tracks.isEmpty() ? "NO LOCAL TRACKS FOUND"
                         : tracks.size() + " LOCAL TRACKS FOUND");
                 musicView = new MusicView(this, tracks, track -> {
-                    if (musicPlayer == null) musicPlayer = new MusicPlayer(this);
+                    if (musicPlayer == null) musicPlayer = new MusicPlayer(this,
+                            completedUri -> playNextMusicTrack(tracks, completedUri));
                     if (!musicPlayer.toggle(track.uri, track.title, track.artist, track.duration)) {
                         Toast.makeText(this, "Unable to play: " + track.title, Toast.LENGTH_SHORT).show();
                     }
@@ -1691,6 +1692,20 @@ public class KidoActivity extends Activity {
             musicHudVisibility[i] = hud.getChildAt(i).getVisibility();
         }
         hud.setVisibility(View.VISIBLE);
+    }
+
+    private void playNextMusicTrack(List<MusicLibrary.Track> tracks, Uri completedUri) {
+        for (int i = 0; i < tracks.size(); i++) {
+            if (!tracks.get(i).uri.equals(completedUri)) continue;
+            int nextIndex = i + 1;
+            if (nextIndex >= tracks.size()) return;
+
+            MusicLibrary.Track next = tracks.get(nextIndex);
+            if (!musicPlayer.play(next.uri, next.title, next.artist, next.duration)) {
+                Toast.makeText(this, "Unable to play: " + next.title, Toast.LENGTH_SHORT).show();
+            }
+            return;
+        }
     }
 
     private void updateMusicFocus(MusicLibrary.Track track) {
