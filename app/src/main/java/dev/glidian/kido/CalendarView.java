@@ -71,7 +71,7 @@ final class CalendarView extends FrameLayout {
 		place(system, 122, 966, 400, 34);
 
 		TextView monthControls = label("UP // PREVIOUS       DOWN // NEXT",
-				Kido.mono, 24, Kido.DIM, 0);
+				Kido.mono, 20, Kido.DIM, 0.08f);
 		monthControls.setGravity(Gravity.CENTER);
 		place(monthControls, 500, 966, 1000, 34);
 	}
