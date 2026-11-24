@@ -1,0 +1,20 @@
+EVENT ARCHIVE DATA ATTRIBUTION
+
+The calendar_events.json file contains selected and abridged historical event descriptions adapted from the English Wikipedia "On this day" articles.
+
+Source dataset:
+- Wikipedia On This Day dataset by mneedham:
+  https://github.com/mneedham/wikipedia-onthisday
+- The dataset's NOTICE.md lists the original Wikipedia source page for each calendar date:
+  https://github.com/mneedham/wikipedia-onthisday/blob/main/NOTICE.md
+
+The underlying Wikipedia text is contributed by Wikipedia contributors and licensed under the Creative Commons Attribution-ShareAlike 4.0 International license (CC BY-SA 4.0):
+https://creativecommons.org/licenses/by-sa/4.0/
+
+Changes made for this archive:
+- Selected four historical events for each month/day, including February 29.
+- Excluded synthetic entries and future events.
+- Abridged selected descriptions for the launcher display.
+- Added local category tags.
+
+This adapted calendar dataset is distributed under CC BY-SA 4.0.
