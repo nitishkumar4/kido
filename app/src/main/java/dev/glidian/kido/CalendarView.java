@@ -144,17 +144,17 @@ final class CalendarView extends FrameLayout {
 	private void buildEvents(Context context) {
 		LocalDate today = LocalDate.now();
 		FrameLayout panel = panel();
-		place(monthPanel, 910, 452, 900, 500);
+		place(panel, 910, 452, 900, 500);
 
-		place(monthPanel, label("本日", Kido.mincho, 30, Kido.AMBER), 24, 14, 80, 42);
-		place(monthPanel, label("WHAT HAPPENED ON THIS DAY", Kido.condBold, 26, Kido.INK, 0.12f),
+		place(panel, label("本日", Kido.mincho, 30, Kido.AMBER), 24, 14, 80, 42);
+		place(panel, label("WHAT HAPPENED ON THIS DAY", Kido.condBold, 26, Kido.INK, 0.12f),
 				104, 22, 640, 34);
 		String date = today.format(DateTimeFormatter.ofPattern("EEEE // dd MMMM yyyy", Locale.ENGLISH))
 				.toUpperCase(Locale.ROOT);
-		place(monthPanel, label(date, Kido.mono, 17, Kido.DIM, 0.05f), 26, 66, 820, 26);
+		place(panel, label(date, Kido.mono, 17, Kido.DIM, 0.05f), 26, 66, 820, 26);
 		View divider = new View(context);
 		divider.setBackgroundColor(Kido.LINE);
-		place(monthPanel, divider, 24, 102, 850, 2);
+		place(panel, divider, 24, 102, 850, 2);
 
 		LinearLayout rows = new LinearLayout(context);
 		rows.setOrientation(LinearLayout.VERTICAL);
@@ -162,7 +162,7 @@ final class CalendarView extends FrameLayout {
 		scroll.setVerticalScrollBarEnabled(false);
 		scroll.setOverScrollMode(View.OVER_SCROLL_NEVER);
 		scroll.addView(rows);
-		place(monthPanel, scroll, 20, 116, 860, 360);
+		place(panel, scroll, 20, 116, 860, 360);
 
 		JSONArray events = readEvents(context, today);
 		if (events == null || events.length() == 0) {
