@@ -894,6 +894,7 @@ public class KidoActivity extends Activity {
         place(hud, footerZone, 1300, 1050, 520, -1);
         showTabs(0);
         showNowPlaying();
+        if (calendarView != null) updateCalendarPlate(calendarView.getDisplayedMonth());
     }
 
     /**
