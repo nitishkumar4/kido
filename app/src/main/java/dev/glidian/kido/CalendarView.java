@@ -25,6 +25,8 @@ import java.util.Locale;
 final class CalendarView extends FrameLayout {
 	private final TraceView frame;
 	private final View accent;
+	private FrameLayout monthPanel;
+	private YearMonth displayedMonth = YearMonth.now();
 
 	CalendarView(Context context) {
 		super(context);
@@ -53,7 +55,7 @@ final class CalendarView extends FrameLayout {
 		title.addView(label("SEC-05", Kido.mono, 22, Kido.DIM));
 		place(title, 120, 360, -1, 58);
 
-		buildMonth(context);
+		renderMonth();
 		buildEvents(context);
 		buildHints();
 		place(new RulerView(context, 440), 36, 446, 64, 580);
@@ -69,27 +71,51 @@ final class CalendarView extends FrameLayout {
 		place(monthControls, 500, 966, 1000, 34);
 	}
 
+	private void renderMonth() {
+		if (monthPanel != null) removeView(monthPanel);
+		buildMonth(getContext());
+	}
+
+	void previousMonth() {
+		displayedMonth = displayedMonth.minusMonths(1);
+		renderMonth();
+	}
+
+	void nextMonth() {
+		displayedMonth = displayedMonth.plusMonths(1);
+		renderMonth();
+	}
+
+	void resetMonth() {
+		YearMonth current = YearMonth.now();
+		if (!displayedMonth.equals(current)) {
+			displayedMonth = current;
+			renderMonth();
+		}
+	}
+
 	private void buildMonth(Context context) {
-		YearMonth month = YearMonth.now();
+		YearMonth month = displayedMonth;
 		LocalDate today = LocalDate.now();
 
-		FrameLayout panel = panel();
-		place(panel, 110, 452, 770, 500);
-		place(panel, label(month.format(DateTimeFormatter.ofPattern("MMMM yyyy", Locale.ENGLISH))
+		monthPanel = panel();
+		place(monthPanel, 110, 452, 770, 500);
+		place(monthPanel, label(month.format(DateTimeFormatter.ofPattern("MMMM yyyy", Locale.ENGLISH))
 				.toUpperCase(Locale.ROOT), Kido.condBold, 30, Kido.INK, 0.12f),
 				28, 22, 460, 42);
 
 		TextView todayTag = label("TODAY", Kido.mono, 18, Kido.LIME, 0.1f);
 		todayTag.setGravity(Gravity.CENTER);
+		todayTag.setVisibility(month.equals(YearMonth.from(today)) ? View.VISIBLE : View.INVISIBLE);
 		todayTag.setBackground(outline(Kido.withAlpha(Kido.LIME, 0.10f), Kido.LIME));
-		place(panel, todayTag, 630, 22, 104, 34);
+		place(monthPanel, todayTag, 630, 22, 104, 34);
 
 		String[] weekdays = {"SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"};
 		int cellWidth = 100;
 		for (int i = 0; i < weekdays.length; i++) {
 			TextView day = label(weekdays[i], Kido.mono, 17, Kido.DIM, 0.06f);
 			day.setGravity(Gravity.CENTER);
-			place(panel, day, 28 + i * cellWidth, 86, cellWidth, 28);
+			place(monthPanel, day, 28 + i * cellWidth, 86, cellWidth, 28);
 		}
 
 		int offset = month.atDay(1).getDayOfWeek().getValue() % 7;
@@ -97,7 +123,7 @@ final class CalendarView extends FrameLayout {
 			int slot = offset + day - 1;
 			int column = slot % 7;
 			int row = slot / 7;
-			boolean isToday = day == today.getDayOfMonth();
+			boolean isToday = month.equals(YearMonth.from(today)) && day == today.getDayOfMonth();
 			TextView cell = label(String.format(Locale.ROOT, "%02d", day),
 					Kido.mono, 24, isToday ? Kido.VOID : Kido.CREAM, 0.02f);
 			cell.setGravity(Gravity.CENTER);
@@ -108,27 +134,27 @@ final class CalendarView extends FrameLayout {
 				cell.setBackground(outline(Kido.withAlpha(Kido.PANEL, 0.35f),
 						Kido.withAlpha(Kido.LINE, 0.65f)));
 			}
-			place(panel, cell, 28 + column * cellWidth, 124 + row * 54, 88, 46);
+			place(monthPanel, cell, 28 + column * cellWidth, 124 + row * 54, 88, 46);
 		}
 
-		TextView note = label("CURRENT MONTH  //  READ ONLY", Kido.mono, 16, Kido.DIM, 0.06f);
-		place(panel, note, 28, 462, -1, 24);
+		TextView note = label("MONTH CYCLE  //  READ ONLY", Kido.mono, 16, Kido.DIM, 0.06f);
+		place(monthPanel, note, 28, 462, -1, 24);
 	}
 
 	private void buildEvents(Context context) {
 		LocalDate today = LocalDate.now();
 		FrameLayout panel = panel();
-		place(panel, 910, 452, 900, 500);
+		place(monthPanel, 910, 452, 900, 500);
 
-		place(panel, label("本日", Kido.mincho, 30, Kido.AMBER), 24, 14, 80, 42);
-		place(panel, label("WHAT HAPPENED ON THIS DAY", Kido.condBold, 26, Kido.INK, 0.12f),
+		place(monthPanel, label("本日", Kido.mincho, 30, Kido.AMBER), 24, 14, 80, 42);
+		place(monthPanel, label("WHAT HAPPENED ON THIS DAY", Kido.condBold, 26, Kido.INK, 0.12f),
 				104, 22, 640, 34);
 		String date = today.format(DateTimeFormatter.ofPattern("EEEE // dd MMMM yyyy", Locale.ENGLISH))
 				.toUpperCase(Locale.ROOT);
-		place(panel, label(date, Kido.mono, 17, Kido.DIM, 0.05f), 26, 66, 820, 26);
+		place(monthPanel, label(date, Kido.mono, 17, Kido.DIM, 0.05f), 26, 66, 820, 26);
 		View divider = new View(context);
 		divider.setBackgroundColor(Kido.LINE);
-		place(panel, divider, 24, 102, 850, 2);
+		place(monthPanel, divider, 24, 102, 850, 2);
 
 		LinearLayout rows = new LinearLayout(context);
 		rows.setOrientation(LinearLayout.VERTICAL);
@@ -136,7 +162,7 @@ final class CalendarView extends FrameLayout {
 		scroll.setVerticalScrollBarEnabled(false);
 		scroll.setOverScrollMode(View.OVER_SCROLL_NEVER);
 		scroll.addView(rows);
-		place(panel, scroll, 20, 116, 860, 360);
+		place(monthPanel, scroll, 20, 116, 860, 360);
 
 		JSONArray events = readEvents(context, today);
 		if (events == null || events.length() == 0) {
