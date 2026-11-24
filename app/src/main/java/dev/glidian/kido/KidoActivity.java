@@ -85,8 +85,8 @@ public class KidoActivity extends Activity {
     private static final int[] ZONE_TABS = {R.string.zone_main_tab, R.string.zone_apps_tab, R.string.zone_system_tab};
     // The section tabs under the clock: left edge, step from one tab to the next, and tab width. The data block and
     // the NOW PLAYING panel above them span exactly the same width.
-    private static final int TAB_X = 730, TAB_STEP = 108, TAB_W = 100;
-    private static final int NP_W = TAB_STEP * 3 + TAB_W;
+    private static final int TAB_X = 730, TAB_STEP = 86, TAB_W = 78;
+    private static final int NP_W = TAB_STEP * 4 + TAB_W;
     private static final long IDLE_MS = 45_000;
 
     private final Handler handler = new Handler(Looper.getMainLooper());
@@ -497,8 +497,7 @@ public class KidoActivity extends Activity {
         c.setOnLongClickListener(v -> {
             openMenu(v, app, true);
             return true;
-        });
-        c.setOnFocusChangeListener((v, has) -> {
+        });        c.setOnFocusChangeListener((v, has) -> {
             bg.setColor(has ? Kido.ORANGE : Kido.PANEL);
             bg.setStroke(Kido.px(has ? 3 : 2), has ? Kido.FOCUS_RIM : Kido.LINE);
             int t = has ? Kido.DARK_TEXT : 0;
@@ -838,11 +837,11 @@ public class KidoActivity extends Activity {
             FrameLayout tab = new FrameLayout(this);
             tabBg[i] = box(Kido.withAlpha(Kido.GREEN, 0.1f), Kido.withAlpha(Kido.GREEN, 0.45f), 2);
             tab.setBackground(tabBg[i]);
-            tabText[i * 2] = text(TAB_KANJI[i], Kido.mincho, 22, Kido.withAlpha(Kido.LIME, 0.75f), 0);
-            String tabLabel = i == 0 ? "AUDIO" : i == 4 ? "CALENDAR" : str(ZONE_TABS[i - 1]);
-            tabText[i * 2 + 1] = text(tabLabel, Kido.condBold, 20, Kido.withAlpha(Kido.LIME, 0.85f), 0.1f);
-            place(tab, tabText[i * 2], 10, 6, -1, -1);
-            place(tab, tabText[i * 2 + 1], 10, 38, -1, -1);
+            tabText[i * 2] = text(TAB_KANJI[i], Kido.mincho, 20, Kido.withAlpha(Kido.LIME, 0.75f), 0);
+            String tabLabel = i == 0 ? "AUDIO" : i == 4 ? "DAY" : str(ZONE_TABS[i - 1]);
+            tabText[i * 2 + 1] = text(tabLabel, Kido.condBold, 16, Kido.withAlpha(Kido.LIME, 0.85f), 0.1f);
+            place(tab, tabText[i * 2], 8, 6, 62, -1);
+            place(tab, tabText[i * 2 + 1], 8, 38, 66, -1);
             place(hud, tab, TAB_X + i * TAB_STEP, 214, TAB_W, 74);
             tabBar[i] = new GlowView(this, Kido.px(12), false);
             tabBar[i].setColor(Kido.RED);
@@ -997,8 +996,7 @@ public class KidoActivity extends Activity {
                     nowPlaying.playPause();
                     beeps.tick();
                 }
-                return true;
-            case KeyEvent.KEYCODE_DPAD_LEFT:
+                return true;            case KeyEvent.KEYCODE_DPAD_LEFT:
             case KeyEvent.KEYCODE_DPAD_RIGHT:
                 if (press && nowPlaying.skip(k == KeyEvent.KEYCODE_DPAD_RIGHT)) beeps.tick();
                 return true;
@@ -1497,8 +1495,7 @@ public class KidoActivity extends Activity {
 
     // ---------------------------------------------------------------- lifecycle and keys
 
-    private final Runnable goIdle = () -> {
-        idle = true;
+    private final Runnable goIdle = () -> {        idle = true;
         setStatus("待機", str(R.string.standby), str(R.string.standby_detail), str(R.string.idle), Kido.AMBER);
         log(str(R.string.standby_detail));
     };
@@ -1997,8 +1994,7 @@ public class KidoActivity extends Activity {
         TextView t = text(str(R.string.hold_ok_options), Kido.mono, 20, Kido.DIM, 0.08f);
         hints.add(t);
         t.setSingleLine(true);
-        t.setGravity(Gravity.CENTER_HORIZONTAL);
-        return t;
+        t.setGravity(Gravity.CENTER_HORIZONTAL);        return t;
     }
 
     /** Hold OK on an app: move it, pin or unpin it, or open its system info page. Back closes. */
@@ -2497,7 +2493,6 @@ public class KidoActivity extends Activity {
         log(str(keep ? R.string.log_moved : R.string.log_unchanged, it.app.look.name.toUpperCase(Locale.ROOT)));
         rebuild(it.app.pkg);
     }
-
     /** The place of the k-th hex in reading order: x, y and row, in alternating rows of five and four. */
     private static float[] hexSlot(int k) {
         int row = 0, start = 0;
