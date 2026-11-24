@@ -1,9 +1,9 @@
 {
   "01-01": [
     {
-      "year": 1822,
-      "tag": "FACT",
-      "title": "The Greek Constitution of 1822 is adopted by the First National Assembly at Epidaurus."
+      "year": 1801,
+      "tag": "SPACE",
+      "title": "Italian astronomer Giuseppe Piazzi discovers Ceres, the first object found in the asteroid belt."
     },
     {
       "year": 1914,
@@ -23,19 +23,19 @@
   ],
   "01-02": [
     {
-      "year": 1788,
-      "tag": "FACT",
-      "title": "Georgia becomes the fourth state to ratify the United States Constitution."
+      "year": 1959,
+      "tag": "SPACE",
+      "title": "The Soviet spacecraft Luna 1 is launched, becoming the first spacecraft to reach the vicinity of the Moon."
     },
     {
-      "year": 1900,
-      "tag": "FACT",
-      "title": "American statesman and diplomat John Hay announces the Open Door Policy to promote trade with China."
+      "year": 1822,
+      "tag": "SCIENCE",
+      "title": "German physicist Rudolf Clausius is born; his work helped establish thermodynamics and the concept of entropy."
     },
     {
-      "year": 1963,
-      "tag": "FACT",
-      "title": "Vietnam War: The Viet Cong wins its first major victory, at the Battle of Ap Bac."
+      "year": 1839,
+      "tag": "TECHNOLOGY",
+      "title": "Louis Daguerre is traditionally credited with making an early photograph of the Moon using the daguerreotype process."
     },
     {
       "year": 2024,
@@ -50,9 +50,9 @@
       "title": "The first issue of Berlingske, Denmark's oldest continually operating newspaper, is published."
     },
     {
-      "year": 1933,
-      "tag": "FACT",
-      "title": "Minnie D. Craig becomes the first woman elected as Speaker of the North Dakota House of Representatives."
+      "year": 2019,
+      "tag": "SPACE",
+      "title": "China's Chang'e 4 makes the first soft landing on the far side of the Moon."
     },
     {
       "year": 1999,
@@ -60,9 +60,9 @@
       "title": "The Mars Polar Lander is launched by NASA."
     },
     {
-      "year": 2016,
-      "tag": "FACT",
-      "title": "In response to the execution of Nimr al-Nimr, Iran ends its diplomatic relations with Saudi Arabia."
+      "year": 1927,
+      "tag": "SCIENCE",
+      "title": "German mathematician Carl Runge dies; his work contributed to the Runge–Kutta methods used to solve differential equations."
     }
   ],
   "01-04": [
@@ -72,9 +72,9 @@
       "title": "The first issue of the Swedish-languaged Saima newspaper founded by J."
     },
     {
-      "year": 1918,
-      "tag": "FACT",
-      "title": "The Finnish Declaration of Independence is recognized by Russia, Sweden, Germany and France."
+      "year": 1643,
+      "tag": "SCIENCE",
+      "title": "Isaac Newton is born; he later formulates the laws of motion and universal gravitation."
     },
     {
       "year": 1972,
@@ -89,9 +89,9 @@
   ],
   "01-05": [
     {
-      "year": 1822,
-      "tag": "FACT",
-      "title": "The government of Central America votes for total annexation to the First Mexican Empire."
+      "year": 1970,
+      "tag": "SCIENCE",
+      "title": "Physicist Max Born dies; his statistical interpretation of the quantum wave function helped shape modern quantum mechanics."
     },
     {
       "year": 1944,
@@ -104,9 +104,9 @@
       "title": "US President Richard Nixon announces the Space Shuttle program."
     },
     {
-      "year": 2023,
-      "tag": "FACT",
-      "title": "The 2023 Sinaloa unrest begins."
+      "year": 1838,
+      "tag": "SCIENCE",
+      "title": "French mathematician Camille Jordan is born; he is known for foundational work in group theory and the Jordan curve theorem."
     }
   ],
   "01-06": [
@@ -116,9 +116,9 @@
       "title": "Sie werden aus Saba alle kommen, BWV 65, a Bach cantata, for Epiphany, is performed the first time."
     },
     {
-      "year": 1929,
-      "tag": "FACT",
-      "title": "King Alexander of the Serbs, Croats and Slovenes suspends his country's constitution."
+      "year": 1918,
+      "tag": "SCIENCE",
+      "title": "Mathematician Georg Cantor dies; his work established set theory and transformed the understanding of infinity."
     },
     {
       "year": 1947,
@@ -126,9 +126,9 @@
       "title": "Pan American Airlines becomes the first commercial airline to offer a round-the-world ticket."
     },
     {
-      "year": 2019,
-      "tag": "FACT",
-      "title": "Muhammad V of Kelantan resigns as the Yang di-Pertuan Agong of Malaysia, becoming the first monarch to do so."
+      "year": 1990,
+      "tag": "SCIENCE",
+      "title": "Physicist Pavel Cherenkov dies; he discovered the radiation named after him, the blue glow produced by charged particles moving through a medium."
     }
   ],
   "01-07": [
@@ -160,9 +160,9 @@
       "title": "The first Lithuanian-language book, the Catechism of Martynas Mažvydas, is published in Königsberg."
     },
     {
-      "year": 1918,
-      "tag": "FACT",
-      "title": "U.S. President Woodrow Wilson announces his \"Fourteen Points\" as conditions for ending World War I."
+      "year": 1642,
+      "tag": "SCIENCE",
+      "title": "Galileo Galilei dies; his experiments and telescope observations helped lay the foundations of modern physics and astronomy."
     },
     {
       "year": 1973,
@@ -170,9 +170,9 @@
       "title": "Soviet space mission Luna 21 is launched."
     },
     {
-      "year": 2002,
-      "tag": "FACT",
-      "title": "President of the United States George W. Bush signs into law the No Child Left Behind Act."
+      "year": 1942,
+      "tag": "SCIENCE",
+      "title": "Theoretical physicist Stephen Hawking is born; his work transformed the study of black holes and cosmology."
     }
   ],
   "01-09": [
@@ -182,9 +182,9 @@
       "title": "Jean-Pierre Blanchard becomes the first person to fly in a balloon in the United States."
     },
     {
-      "year": 1945,
-      "tag": "FACT",
-      "title": "The Sixth United States Army begins the invasion of Lingayen Gulf."
+      "year": 1799,
+      "tag": "SCIENCE",
+      "title": "Italian mathematician Maria Gaetana Agnesi dies; her influential calculus textbook was among the earliest mathematical works written by a woman."
     },
     {
       "year": 1997,
@@ -199,9 +199,9 @@
   ],
   "01-10": [
     {
-      "year": 1861,
-      "tag": "FACT",
-      "title": "American Civil War: Florida becomes the third state to secede from the Union."
+      "year": 1938,
+      "tag": "TECHNOLOGY",
+      "title": "Computer scientist Donald Knuth is born; he later writes The Art of Computer Programming and creates the TeX typesetting system."
     },
     {
       "year": 1901,
@@ -214,16 +214,16 @@
       "title": "The first General Assembly of the United Nations assembles in the Methodist Central Hall, Westminster."
     },
     {
-      "year": 2007,
-      "tag": "FACT",
-      "title": "A general strike begins in Guinea in an attempt to get President Lansana Conté to resign."
+      "year": 1936,
+      "tag": "SCIENCE",
+      "title": "Astronomer Robert Woodrow Wilson is born; with Arno Penzias, he later discovers the cosmic microwave background radiation."
     }
   ],
   "01-11": [
     {
-      "year": 1879,
-      "tag": "FACT",
-      "title": "The Anglo-Zulu War begins."
+      "year": 1787,
+      "tag": "SPACE",
+      "title": "Astronomer William Herschel discovers Titania and Oberon, the two largest moons of Uranus."
     },
     {
       "year": 1935,
@@ -248,9 +248,9 @@
       "title": "The National Trust is founded in the United Kingdom."
     },
     {
-      "year": 1945,
-      "tag": "FACT",
-      "title": "The Red Army begins the Vistula–Oder Offensive."
+      "year": 1665,
+      "tag": "SCIENCE",
+      "title": "French mathematician Pierre de Fermat dies; he is regarded as a founder of modern number theory."
     },
     {
       "year": 1967,
@@ -265,9 +265,9 @@
   ],
   "01-13": [
     {
-      "year": 1847,
-      "tag": "FACT",
-      "title": "The Treaty of Cahuenga ends the Mexican–American War in California."
+      "year": 1888,
+      "tag": "GEOGRAPHY",
+      "title": "The National Geographic Society is founded to promote the exploration and sharing of geographical knowledge."
     },
     {
       "year": 1942,
@@ -275,9 +275,9 @@
       "title": "Henry Ford patents a soybean car, which is 30% lighter than a regular car."
     },
     {
-      "year": 1988,
-      "tag": "FACT",
-      "title": "Lee Teng-hui becomes the first native Taiwanese President of the Republic of China."
+      "year": 1906,
+      "tag": "TECHNOLOGY",
+      "title": "Russian physicist Alexander Popov dies; he was a pioneer in the development of radio communication."
     },
     {
       "year": 2004,
@@ -297,21 +297,21 @@
       "title": "Norway claims Queen Maud Land in Antarctica."
     },
     {
-      "year": 1953,
-      "tag": "FACT",
-      "title": "Josip Broz Tito is elected the first President of Yugoslavia."
+      "year": 2005,
+      "tag": "SPACE",
+      "title": "The European Space Agency's Huygens probe lands on Titan, Saturn's largest moon, and sends back images and scientific data."
     },
     {
-      "year": 2024,
-      "tag": "FACT",
-      "title": "Queen Margrethe II abdicates as Queen of Denmark and is succeeded by her son, Frederik X."
+      "year": 1978,
+      "tag": "SCIENCE",
+      "title": "Logician Kurt Gödel dies; his incompleteness theorems reveal fundamental limits of formal mathematical systems."
     }
   ],
   "01-15": [
     {
-      "year": 1777,
-      "tag": "FACT",
-      "title": "American Revolutionary War: New Connecticut declares its independence."
+      "year": 1850,
+      "tag": "SCIENCE",
+      "title": "Russian mathematician Sofya Kovalevskaya is born; she later makes major contributions to analysis and mechanics."
     },
     {
       "year": 1908,
@@ -319,9 +319,9 @@
       "title": "The Alpha Kappa Alpha sorority becomes the first Greek-letter organization founded and established by African…"
     },
     {
-      "year": 1975,
-      "tag": "FACT",
-      "title": "The Alvor Agreement is signed, ending the Angolan War of Independence and giving Angola independence from…"
+      "year": 2001,
+      "tag": "TECHNOLOGY",
+      "title": "Wikipedia is launched as a free online encyclopedia written collaboratively by volunteers."
     },
     {
       "year": 2023,
@@ -331,9 +331,9 @@
   ],
   "01-16": [
     {
-      "year": 1780,
-      "tag": "FACT",
-      "title": "American Revolutionary War: Battle of Cape St. Vincent."
+      "year": 1969,
+      "tag": "SPACE",
+      "title": "The Soviet spacecraft Soyuz 4 and Soyuz 5 complete the first docking of two crewed spacecraft and transfer crew members between them."
     },
     {
       "year": 1920,
@@ -346,9 +346,9 @@
       "title": "An avalanche hits the Icelandic village Súðavík, destroying 25 homes and burying 26 people, 14 of whom died."
     },
     {
-      "year": 2012,
-      "tag": "FACT",
-      "title": "The Mali War begins when Tuareg militias start fighting the Malian government for independence."
+      "year": 1967,
+      "tag": "SCIENCE",
+      "title": "Physicist Robert J. Van de Graaff dies; he designed the high-voltage electrostatic generator that bears his name."
     }
   ],
   "01-17": [
@@ -363,9 +363,9 @@
       "title": "Alcohol Prohibition begins in the United States as the Volstead Act goes into effect."
     },
     {
-      "year": 1950,
-      "tag": "FACT",
-      "title": "United Nations Security Council Resolution 79 relating to arms control is adopted."
+      "year": 1997,
+      "tag": "SPACE",
+      "title": "Astronomer Clyde Tombaugh dies; he discovered Pluto in 1930 at Lowell Observatory."
     },
     {
       "year": 2017,
@@ -380,9 +380,9 @@
       "title": "An X-ray generating machine is exhibited for the first time by H. L. Smith."
     },
     {
-      "year": 1919,
-      "tag": "FACT",
-      "title": "Ignacy Jan Paderewski becomes Prime Minister of the newly independent Poland."
+      "year": 1921,
+      "tag": "SCIENCE",
+      "title": "Japanese-American physicist Yoichiro Nambu is born; he later shares the Nobel Prize for work on spontaneous symmetry breaking."
     },
     {
       "year": 1983,
@@ -390,9 +390,9 @@
       "title": "The International Olympic Committee restores Jim Thorpe's Olympic medals to his family."
     },
     {
-      "year": 2002,
-      "tag": "FACT",
-      "title": "The Sierra Leone Civil War is declared over."
+      "year": 1977,
+      "tag": "SCIENCE",
+      "title": "Researchers identify the bacterium responsible for Legionnaires' disease, solving the mystery behind the 1976 outbreak."
     }
   ],
   "01-19": [
@@ -402,14 +402,14 @@
       "title": "Johann Wolfgang von Goethe's Faust: The First Part of the Tragedy receives its premiere performance."
     },
     {
-      "year": 1942,
-      "tag": "FACT",
-      "title": "The Japanese conquest of Burma begins."
+      "year": 1736,
+      "tag": "TECHNOLOGY",
+      "title": "Scottish engineer James Watt is born; his improvements to the steam engine helped drive the Industrial Revolution."
     },
     {
-      "year": 1966,
-      "tag": "FACT",
-      "title": "Indira Gandhi becomes India's first female prime minister."
+      "year": 1912,
+      "tag": "SCIENCE",
+      "title": "Mathematician Leonid Kantorovich is born; he later develops foundational methods in linear programming."
     },
     {
       "year": 2012,
@@ -419,9 +419,9 @@
   ],
   "01-20": [
     {
-      "year": 1841,
-      "tag": "GEOGRAPHY",
-      "title": "Hong Kong Island is occupied by the British during the First Opium War."
+      "year": 1775,
+      "tag": "SCIENCE",
+      "title": "French physicist André-Marie Ampère is born; his work helped establish electrodynamics, and the ampere is named after him."
     },
     {
       "year": 1921,
@@ -434,16 +434,16 @@
       "title": "In the United States, the National Negro Network is established with 40 charter member radio stations."
     },
     {
-      "year": 2009,
-      "tag": "FACT",
-      "title": "A protest movement in Iceland culminates as the 2009 Icelandic financial crisis protests start."
+      "year": 1931,
+      "tag": "SCIENCE",
+      "title": "American physicist David Lee is born; he later shares the Nobel Prize for the discovery of superfluidity in helium-3."
     }
   ],
   "01-21": [
     {
-      "year": 1824,
-      "tag": "FACT",
-      "title": "The Ashantis defeat British forces in the Gold Coast during the First Anglo-Ashanti War."
+      "year": 1892,
+      "tag": "SCIENCE",
+      "title": "Astronomer John Couch Adams dies; he predicted the existence and position of Neptune from irregularities in Uranus's orbit."
     },
     {
       "year": 1945,
@@ -456,9 +456,9 @@
       "title": "Commercial service of Concorde begins with the London-Bahrain and Paris-Rio routes."
     },
     {
-      "year": 2014,
-      "tag": "FACT",
-      "title": "Rojava conflict: The Jazira Canton declares its autonomy from the Syrian Arab Republic."
+      "year": 1874,
+      "tag": "SCIENCE",
+      "title": "French mathematician René-Louis Baire is born; he is known for the Baire category theorem and work in real analysis."
     }
   ],
   "01-22": [
@@ -468,9 +468,9 @@
       "title": "The United Mine Workers of America is founded in Columbus, Ohio."
     },
     {
-      "year": 1924,
-      "tag": "FACT",
-      "title": "Ramsay MacDonald becomes the first Labour Prime Minister of the United Kingdom."
+      "year": 1908,
+      "tag": "SCIENCE",
+      "title": "Physicist Lev Landau is born; he makes major contributions to theoretical physics and later receives the Nobel Prize."
     },
     {
       "year": 1968,
@@ -478,16 +478,16 @@
       "title": "Apollo Program: Apollo 5 lifts off carrying the first Lunar module into space."
     },
     {
-      "year": 2006,
-      "tag": "FACT",
-      "title": "Evo Morales is inaugurated as President of Bolivia, becoming the country's first indigenous president."
+      "year": 1592,
+      "tag": "SCIENCE",
+      "title": "French philosopher and astronomer Pierre Gassendi is born; he later becomes the first to observe a transit of Mercury across the Sun."
     }
   ],
   "01-23": [
     {
-      "year": 1879,
-      "tag": "FACT",
-      "title": "Anglo-Zulu War: The Battle of Rorke's Drift ends."
+      "year": 1922,
+      "tag": "SCIENCE",
+      "title": "Insulin is used successfully to treat a patient with diabetes for the first time, marking a turning point in diabetes care."
     },
     {
       "year": 1912,
@@ -495,9 +495,9 @@
       "title": "The First International Opium Convention is signed at The Hague."
     },
     {
-      "year": 1967,
-      "tag": "FACT",
-      "title": "Diplomatic relations between the Soviet Union and Ivory Coast are established."
+      "year": 1907,
+      "tag": "SCIENCE",
+      "title": "Japanese physicist Hideki Yukawa is born; he later predicts the meson as the carrier of the nuclear force."
     },
     {
       "year": 2003,
@@ -512,9 +512,9 @@
       "title": "The University of Calcutta is formally founded as the first fully fledged university in South Asia."
     },
     {
-      "year": 1943,
-      "tag": "FACT",
-      "title": "Franklin D. Roosevelt and Winston Churchill conclude a conference in Casablanca."
+      "year": 1986,
+      "tag": "SPACE",
+      "title": "Voyager 2 makes its closest approach to Uranus, discovering new moons and rings during the only spacecraft visit to the planet."
     },
     {
       "year": 1990,
@@ -522,21 +522,21 @@
       "title": "Japan launches Hiten, the country's first lunar probe, the first robotic lunar probe since the Soviet Union's…"
     },
     {
-      "year": 2003,
-      "tag": "FACT",
-      "title": "The United States Department of Homeland Security officially begins operation."
+      "year": 1931,
+      "tag": "SCIENCE",
+      "title": "Swedish mathematician Lars Hörmander is born; his work transforms the theory of linear partial differential equations."
     }
   ],
   "01-25": [
     {
-      "year": 1479,
-      "tag": "FACT",
-      "title": "The Treaty of Constantinople ends the 16-year-long First Ottoman–Venetian War."
+      "year": 1736,
+      "tag": "SCIENCE",
+      "title": "Mathematician Joseph-Louis Lagrange is born; his work shapes modern analysis, number theory and celestial mechanics."
     },
     {
-      "year": 1918,
-      "tag": "FACT",
-      "title": "The Ukrainian People's Republic declares independence from Soviet Russia."
+      "year": 1742,
+      "tag": "SCIENCE",
+      "title": "Astronomer Edmond Halley dies; he calculated the orbit of the comet later named in his honour and predicted its return."
     },
     {
       "year": 1994,
@@ -551,14 +551,14 @@
   ],
   "01-26": [
     {
-      "year": 1855,
-      "tag": "FACT",
-      "title": "Point No Point Treaty is signed in Washington Territory."
+      "year": 1895,
+      "tag": "SCIENCE",
+      "title": "British mathematician Arthur Cayley dies; he helped establish modern algebra and the theory of matrices."
     },
     {
-      "year": 1942,
-      "tag": "FACT",
-      "title": "The first United States forces arrive in Europe, landing in Northern Ireland."
+      "year": 1949,
+      "tag": "SCIENCE",
+      "title": "The 200-inch Hale Telescope at Palomar Observatory sees first light, opening a new era in large-telescope astronomy."
     },
     {
       "year": 1962,
@@ -583,14 +583,14 @@
       "title": "First flight of the Lockheed P-38 Lightning."
     },
     {
-      "year": 1965,
-      "tag": "FACT",
-      "title": "South Vietnamese Prime Minister Trần Văn Hương is removed by the military junta of Nguyễn Khánh."
+      "year": 1880,
+      "tag": "TECHNOLOGY",
+      "title": "Thomas Edison receives a patent for an electric lamp, a milestone in the development of practical electric lighting."
     },
     {
-      "year": 2011,
-      "tag": "FACT",
-      "title": "Arab Spring: The Yemeni Revolution begins as over 16,000 protestors demonstrate in Sanaa."
+      "year": 2015,
+      "tag": "SCIENCE",
+      "title": "Physicist Charles Townes dies; his work on the maser helped lead to the development of the laser."
     }
   ],
   "01-28": [
@@ -600,9 +600,9 @@
       "title": "Yale Daily News becomes the first independent daily college newspaper in the United States."
     },
     {
-      "year": 1945,
-      "tag": "FACT",
-      "title": "Supplies begin to reach the Republic of China over the newly reopened Burma Road."
+      "year": 1958,
+      "tag": "TECHNOLOGY",
+      "title": "The modern LEGO brick design is patented, introducing the interlocking system that defines the toy."
     },
     {
       "year": 1956,
@@ -627,26 +627,26 @@
       "title": "Charles Curtis of Kansas becomes the first Native American U.S. Senator."
     },
     {
-      "year": 1996,
-      "tag": "FACT",
-      "title": "President Jacques Chirac announces a \"definitive end\" to French nuclear weapons testing."
+      "year": 1926,
+      "tag": "SCIENCE",
+      "title": "Pakistani physicist Abdus Salam is born; he later shares the Nobel Prize for work unifying electromagnetic and weak forces."
     },
     {
-      "year": 2014,
-      "tag": "FACT",
-      "title": "Rojava conflict: The Afrin Canton declares its autonomy from the Syrian Arab Republic."
+      "year": 1810,
+      "tag": "SCIENCE",
+      "title": "German mathematician Ernst Kummer is born; his work on number theory includes a major advance related to Fermat's Last Theorem."
     }
   ],
   "01-30": [
     {
-      "year": 1862,
-      "tag": "FACT",
-      "title": "American Civil War: The first American ironclad warship, the USS Monitor is launched."
+      "year": 1826,
+      "tag": "TECHNOLOGY",
+      "title": "The first modern suspension bridge opens across the Menai Strait in Wales."
     },
     {
-      "year": 1902,
-      "tag": "FACT",
-      "title": "The first Anglo-Japanese Alliance is signed in London."
+      "year": 1991,
+      "tag": "SCIENCE",
+      "title": "Physicist John Bardeen dies; he remains the only person to have won the Nobel Prize in Physics twice."
     },
     {
       "year": 1960,
@@ -661,14 +661,14 @@
   ],
   "01-31": [
     {
-      "year": 1891,
-      "tag": "FACT",
-      "title": "History of Portugal: The first attempt at a Portuguese republican revolution breaks out in the northern city…"
+      "year": 1862,
+      "tag": "SPACE",
+      "title": "Alvan Graham Clark discovers Sirius B, the faint white-dwarf companion of the star Sirius."
     },
     {
-      "year": 1928,
-      "tag": "FACT",
-      "title": "Leon Trotsky is exiled to Alma-Ata."
+      "year": 1929,
+      "tag": "SCIENCE",
+      "title": "Physicist Rudolf Mössbauer is born; he later discovers the recoil-free gamma-ray resonance known as the Mössbauer effect."
     },
     {
       "year": 1951,
