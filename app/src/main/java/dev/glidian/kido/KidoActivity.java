@@ -733,6 +733,7 @@ public class KidoActivity extends Activity {
         calendarView.setOnFocusChangeListener((view, hasFocus) -> {
             if (!hasFocus) return;
             calendarView.resetMonth();
+            updateCalendarPlate(calendarView.getDisplayedMonth());
             boolean byKey = SystemClock.uptimeMillis() - lastKeyAt < 400;
             if (zone != 4) {
                 if (byKey) beeps.section();
