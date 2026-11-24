@@ -23,6 +23,7 @@ import java.util.Locale;
 
 /** Read-only current-month calendar and locally bundled historical events. */
 final class CalendarView extends FrameLayout {
+	private int eventTagColor = Kido.RED;
 	private final TraceView frame;
 	private final View accent;
 	private FrameLayout monthPanel;
@@ -200,7 +201,7 @@ final class CalendarView extends FrameLayout {
 
 			TextView year = label(String.valueOf(event.optInt("year")), Kido.condBold, 34,
 					Kido.AMBER, 0.04f);
-			year.setGravity(Gravity.CENTER_VERTICAL);
+			year.setGravity(Gravity.CENTER);
 			row.addView(year, new LinearLayout.LayoutParams(Kido.px(112), -1));
 
 			TextView tag = label(event.optString("tag", "FACT"), Kido.mono, 15, Kido.VOID, 0.04f);
