@@ -729,6 +729,7 @@ public class KidoActivity extends Activity {
         room.leftMargin = Kido.px(CALENDAR_X);
         room.topMargin = Kido.px(CALENDAR_Y);
         board.addView(calendarView, room);
+        calendarView.setOnMonthChangedListener(this::updateCalendarPlate);
         calendarView.setOnFocusChangeListener((view, hasFocus) -> {
             if (!hasFocus) return;
             calendarView.resetMonth();
@@ -737,7 +738,6 @@ public class KidoActivity extends Activity {
                 if (byKey) beeps.section();
                 moveTo(4);
             }
-            setStatus("暦", "CALENDAR", "WHAT HAPPENED ON THIS DAY", "READ ONLY", Kido.AMBER);
         });
     }
 
@@ -1340,6 +1340,28 @@ public class KidoActivity extends Activity {
         String head = cut > 0 ? s.substring(0, cut) : s;
         while (head.length() > 1 && p.measureText(head.trim() + "…" + tail) > max) head = head.substring(0, head.length() - 1);
         return head.trim() + "…" + tail;
+    }
+
+    private void updateCalendarPlate(java.time.YearMonth month) {
+        String[] kanji = {"一月", "二月", "三月", "四月", "五月", "六月",
+                "七月", "八月", "九月", "十月", "十一月", "十二月"};
+        int[] colors = {
+                0xFF35B8FF, 0xFFFF5CA8, 0xFF22C55E, 0xFFA78BFA,
+                0xFFA3E635, 0xFF22D3EE, 0xFFFB923C, 0xFFF43F5E,
+                0xFF8B5CF6, 0xFFF59E0B, 0xFF60A5FA, 0xFFD946EF
+        };
+        int index = month.getMonthValue() - 1;
+        plateKanji.setText(kanji[index]);
+        plateEn.setText(month.getMonth().name());
+        subLeft.setText("WHAT HAPPENED ON THIS DAY");
+        subRight.setText("READ ONLY");
+
+        int color = colors[index];
+        plateColor = color;
+        plateBg.setColor(color);
+        plateHalo.setColor(Kido.withAlpha(color, 0.85f));
+        subBg.setStroke(Kido.px(2), color);
+        glowBg.setColors(new int[]{Kido.withAlpha(color, 0.34f), 0x00000000});
     }
 
     private void setStatus(String kanji, String en, String left, String right, int color) {
