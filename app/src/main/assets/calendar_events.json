@@ -2,7 +2,7 @@
   "01-01": [
     {
       "year": 1822,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Greek Constitution of 1822 is adopted by the First National Assembly at Epidaurus."
     },
     {
@@ -17,14 +17,14 @@
     },
     {
       "year": 2011,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Estonia officially adopts the Euro currency and becomes the 17th Eurozone country."
     }
   ],
   "01-02": [
     {
       "year": 1788,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Georgia becomes the fourth state to ratify the United States Constitution."
     },
     {
@@ -34,7 +34,7 @@
     },
     {
       "year": 1963,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Vietnam War: The Viet Cong wins its first major victory, at the Battle of Ap Bac."
     },
     {
@@ -51,7 +51,7 @@
     },
     {
       "year": 1933,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Minnie D. Craig becomes the first woman elected as Speaker of the North Dakota House of Representatives."
     },
     {
@@ -73,7 +73,7 @@
     },
     {
       "year": 1918,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Finnish Declaration of Independence is recognized by Russia, Sweden, Germany and France."
     },
     {
@@ -90,12 +90,12 @@
   "01-05": [
     {
       "year": 1822,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The government of Central America votes for total annexation to the First Mexican Empire."
     },
     {
       "year": 1944,
-      "tag": "CULTURE",
+      "tag": "GEOGRAPHY",
       "title": "The Daily Mail becomes the first major London newspaper to be published on both sides of the Atlantic Ocean."
     },
     {
@@ -117,7 +117,7 @@
     },
     {
       "year": 1929,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "King Alexander of the Serbs, Croats and Slovenes suspends his country's constitution."
     },
     {
@@ -127,7 +127,7 @@
     },
     {
       "year": 2019,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Muhammad V of Kelantan resigns as the Yang di-Pertuan Agong of Malaysia, becoming the first monarch to do so."
     }
   ],
@@ -161,17 +161,17 @@
     },
     {
       "year": 1918,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "U.S. President Woodrow Wilson announces his \"Fourteen Points\" as conditions for ending World War I."
     },
     {
       "year": 1973,
-      "tag": "FACT",
+      "tag": "SPACE",
       "title": "Soviet space mission Luna 21 is launched."
     },
     {
       "year": 2002,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "President of the United States George W. Bush signs into law the No Child Left Behind Act."
     }
   ],
@@ -183,24 +183,24 @@
     },
     {
       "year": 1945,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Sixth United States Army begins the invasion of Lingayen Gulf."
     },
     {
       "year": 1997,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "Comair Flight 3272 crashes in Raisinville Township in Monroe County, Michigan, killing 29 people."
     },
     {
       "year": 2007,
-      "tag": "FACT",
+      "tag": "TECHNOLOGY",
       "title": "Apple CEO Steve Jobs introduces the original iPhone at a Macworld keynote in San Francisco."
     }
   ],
   "01-10": [
     {
       "year": 1861,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "American Civil War: Florida becomes the third state to secede from the Union."
     },
     {
@@ -210,19 +210,19 @@
     },
     {
       "year": 1946,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The first General Assembly of the United Nations assembles in the Methodist Central Hall, Westminster."
     },
     {
       "year": 2007,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "A general strike begins in Guinea in an attempt to get President Lansana Conté to resign."
     }
   ],
   "01-11": [
     {
       "year": 1879,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Anglo-Zulu War begins."
     },
     {
@@ -244,12 +244,12 @@
   "01-12": [
     {
       "year": 1895,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The National Trust is founded in the United Kingdom."
     },
     {
       "year": 1945,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Red Army begins the Vistula–Oder Offensive."
     },
     {
@@ -266,22 +266,22 @@
   "01-13": [
     {
       "year": 1847,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Treaty of Cahuenga ends the Mexican–American War in California."
     },
     {
       "year": 1942,
-      "tag": "FACT",
+      "tag": "TECHNOLOGY",
       "title": "Henry Ford patents a soybean car, which is 30% lighter than a regular car."
     },
     {
       "year": 1988,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Lee Teng-hui becomes the first native Taiwanese President of the Republic of China."
     },
     {
       "year": 2004,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "Uzbekistan Airways Flight 1154 crashes while landing at Tashkent International Airport, killing 37."
     }
   ],
@@ -293,24 +293,24 @@
     },
     {
       "year": 1939,
-      "tag": "POLITICS",
+      "tag": "GEOGRAPHY",
       "title": "Norway claims Queen Maud Land in Antarctica."
     },
     {
       "year": 1953,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Josip Broz Tito is elected the first President of Yugoslavia."
     },
     {
       "year": 2024,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Queen Margrethe II abdicates as Queen of Denmark and is succeeded by her son, Frederik X."
     }
   ],
   "01-15": [
     {
       "year": 1777,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "American Revolutionary War: New Connecticut declares its independence."
     },
     {
@@ -320,41 +320,41 @@
     },
     {
       "year": 1975,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Alvor Agreement is signed, ending the Angolan War of Independence and giving Angola independence from…"
     },
     {
       "year": 2023,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "Yeti Airlines Flight 691 crashes near Pokhara International Airport, killing all 72 people on board."
     }
   ],
   "01-16": [
     {
       "year": 1780,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "American Revolutionary War: Battle of Cape St. Vincent."
     },
     {
       "year": 1920,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The League of Nations holds its first council meeting in Paris, France."
     },
     {
       "year": 1995,
-      "tag": "FACT",
+      "tag": "NATURE",
       "title": "An avalanche hits the Icelandic village Súðavík, destroying 25 homes and burying 26 people, 14 of whom died."
     },
     {
       "year": 2012,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Mali War begins when Tuareg militias start fighting the Malian government for independence."
     }
   ],
   "01-17": [
     {
       "year": 1773,
-      "tag": "DISCOVERY",
+      "tag": "GEOGRAPHY",
       "title": "Captain James Cook leads the first expedition to sail south of the Antarctic Circle."
     },
     {
@@ -364,24 +364,24 @@
     },
     {
       "year": 1950,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "United Nations Security Council Resolution 79 relating to arms control is adopted."
     },
     {
       "year": 2017,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "The search for Malaysia Airlines Flight 370 is announced to be suspended."
     }
   ],
   "01-18": [
     {
       "year": 1896,
-      "tag": "FACT",
+      "tag": "SCIENCE",
       "title": "An X-ray generating machine is exhibited for the first time by H. L. Smith."
     },
     {
       "year": 1919,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Ignacy Jan Paderewski becomes Prime Minister of the newly independent Poland."
     },
     {
@@ -391,24 +391,24 @@
     },
     {
       "year": 2002,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Sierra Leone Civil War is declared over."
     }
   ],
   "01-19": [
     {
       "year": 1829,
-      "tag": "CULTURE",
+      "tag": "FACT",
       "title": "Johann Wolfgang von Goethe's Faust: The First Part of the Tragedy receives its premiere performance."
     },
     {
       "year": 1942,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Japanese conquest of Burma begins."
     },
     {
       "year": 1966,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Indira Gandhi becomes India's first female prime minister."
     },
     {
@@ -420,12 +420,12 @@
   "01-20": [
     {
       "year": 1841,
-      "tag": "WAR",
+      "tag": "GEOGRAPHY",
       "title": "Hong Kong Island is occupied by the British during the First Opium War."
     },
     {
       "year": 1921,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The first Constitution of Turkey is adopted, making fundamental changes in the source and exercise of…"
     },
     {
@@ -442,12 +442,12 @@
   "01-21": [
     {
       "year": 1824,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Ashantis defeat British forces in the Gold Coast during the First Anglo-Ashanti War."
     },
     {
       "year": 1945,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Trade Union Council of Transcarpathian Ukraine is founded in Mukachevo."
     },
     {
@@ -457,7 +457,7 @@
     },
     {
       "year": 2014,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Rojava conflict: The Jazira Canton declares its autonomy from the Syrian Arab Republic."
     }
   ],
@@ -469,7 +469,7 @@
     },
     {
       "year": 1924,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Ramsay MacDonald becomes the first Labour Prime Minister of the United Kingdom."
     },
     {
@@ -479,14 +479,14 @@
     },
     {
       "year": 2006,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Evo Morales is inaugurated as President of Bolivia, becoming the country's first indigenous president."
     }
   ],
   "01-23": [
     {
       "year": 1879,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Anglo-Zulu War: The Battle of Rorke's Drift ends."
     },
     {
@@ -496,29 +496,29 @@
     },
     {
       "year": 1967,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Diplomatic relations between the Soviet Union and Ivory Coast are established."
     },
     {
       "year": 2003,
-      "tag": "SPACE",
+      "tag": "FACT",
       "title": "A very weak signal from Pioneer 10 is detected for the last time, but no usable data can be extracted."
     }
   ],
   "01-24": [
     {
       "year": 1857,
-      "tag": "FACT",
+      "tag": "CULTURE",
       "title": "The University of Calcutta is formally founded as the first fully fledged university in South Asia."
     },
     {
       "year": 1943,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Franklin D. Roosevelt and Winston Churchill conclude a conference in Casablanca."
     },
     {
       "year": 1990,
-      "tag": "POLITICS",
+      "tag": "SPACE",
       "title": "Japan launches Hiten, the country's first lunar probe, the first robotic lunar probe since the Soviet Union's…"
     },
     {
@@ -530,12 +530,12 @@
   "01-25": [
     {
       "year": 1479,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Treaty of Constantinople ends the 16-year-long First Ottoman–Venetian War."
     },
     {
       "year": 1918,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Ukrainian People's Republic declares independence from Soviet Russia."
     },
     {
@@ -552,17 +552,17 @@
   "01-26": [
     {
       "year": 1855,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Point No Point Treaty is signed in Washington Territory."
     },
     {
       "year": 1942,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The first United States forces arrive in Europe, landing in Northern Ireland."
     },
     {
       "year": 1962,
-      "tag": "FACT",
+      "tag": "SPACE",
       "title": "Ranger 3 is launched to study the Moon. The space probe later misses the Moon by 22,000 miles."
     },
     {
@@ -574,7 +574,7 @@
   "01-27": [
     {
       "year": 1785,
-      "tag": "FACT",
+      "tag": "CULTURE",
       "title": "The University of Georgia is founded, the first state-chartered public university in the United States."
     },
     {
@@ -584,24 +584,24 @@
     },
     {
       "year": 1965,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "South Vietnamese Prime Minister Trần Văn Hương is removed by the military junta of Nguyễn Khánh."
     },
     {
       "year": 2011,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Arab Spring: The Yemeni Revolution begins as over 16,000 protestors demonstrate in Sanaa."
     }
   ],
   "01-28": [
     {
       "year": 1878,
-      "tag": "FACT",
+      "tag": "CULTURE",
       "title": "Yale Daily News becomes the first independent daily college newspaper in the United States."
     },
     {
       "year": 1945,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Supplies begin to reach the Republic of China over the newly reopened Burma Road."
     },
     {
@@ -611,7 +611,7 @@
     },
     {
       "year": 2002,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "TAME Flight 120, a Boeing 727-100, crashes in the Andes mountains in southern Colombia, killing 94."
     }
   ],
@@ -628,19 +628,19 @@
     },
     {
       "year": 1996,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "President Jacques Chirac announces a \"definitive end\" to French nuclear weapons testing."
     },
     {
       "year": 2014,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Rojava conflict: The Afrin Canton declares its autonomy from the Syrian Arab Republic."
     }
   ],
   "01-30": [
     {
       "year": 1862,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "American Civil War: The first American ironclad warship, the USS Monitor is launched."
     },
     {
@@ -650,7 +650,7 @@
     },
     {
       "year": 1960,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The African National Party is founded in Chad, through the merger of traditionalist parties."
     },
     {
@@ -662,7 +662,7 @@
   "01-31": [
     {
       "year": 1891,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "History of Portugal: The first attempt at a Portuguese republican revolution breaks out in the northern city…"
     },
     {
@@ -672,7 +672,7 @@
     },
     {
       "year": 1951,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "United Nations Security Council Resolution 90 relating to the Korean War is adopted."
     },
     {
@@ -689,7 +689,7 @@
     },
     {
       "year": 1924,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Russia–United Kingdom relations are restored, over six years after the Communist revolution."
     },
     {
@@ -699,24 +699,24 @@
     },
     {
       "year": 2021,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "A coup d'état in Myanmar removes Aung San Suu Kyi from power and restores military rule."
     }
   ],
   "02-02": [
     {
       "year": 1848,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Mexican–American War: The Treaty of Guadalupe Hidalgo is signed."
     },
     {
       "year": 1920,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Tartu Peace Treaty is signed between Estonia and Russia."
     },
     {
       "year": 1987,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "After the 1986 People Power Revolution, the Philippines enacts a new constitution."
     },
     {
@@ -733,7 +733,7 @@
     },
     {
       "year": 1930,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Communist Party of Vietnam is founded at a \"Unification Conference\" held in Kowloon, British Hong Kong."
     },
     {
@@ -743,7 +743,7 @@
     },
     {
       "year": 2007,
-      "tag": "FACT",
+      "tag": "INCIDENT",
       "title": "A Baghdad market bombing kills at least 135 people and injures a further 339."
     }
   ],
@@ -755,24 +755,24 @@
     },
     {
       "year": 1941,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The United Service Organization is created to entertain American troops."
     },
     {
       "year": 1961,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Angolan War of Independence and the greater Portuguese Colonial War begin."
     },
     {
       "year": 2003,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Federal Republic of Yugoslavia adopts a new constitution, becoming a loose confederacy between Montenegro…"
     }
   ],
   "02-05": [
     {
       "year": 1818,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Jean-Baptiste Bernadotte ascends to the thrones of Sweden and Norway."
     },
     {
@@ -794,12 +794,12 @@
   "02-06": [
     {
       "year": 1833,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Otto becomes the first modern King of Greece."
     },
     {
       "year": 1944,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Great Raids Against Helsinki begins."
     },
     {
@@ -809,14 +809,14 @@
     },
     {
       "year": 2018,
-      "tag": "TECHNOLOGY",
+      "tag": "SPACE",
       "title": "SpaceX's Falcon Heavy, a super heavy launch vehicle, makes its maiden flight."
     }
   ],
   "02-07": [
     {
       "year": 1301,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Edward of Caernarvon becomes the first English Prince of Wales."
     },
     {
@@ -831,14 +831,14 @@
     },
     {
       "year": 2021,
-      "tag": "INCIDENT",
+      "tag": "NATURE",
       "title": "The 2021 Uttarakhand flood begins."
     }
   ],
   "02-08": [
     {
       "year": 1837,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Richard Johnson becomes the first and only Vice President of the United States chosen by the Senate."
     },
     {
@@ -853,14 +853,14 @@
     },
     {
       "year": 2014,
-      "tag": "FACT",
+      "tag": "INCIDENT",
       "title": "A hotel fire in Medina, Saudi Arabia, kills 15 Egyptian pilgrims with 130 others injured."
     }
   ],
   "02-09": [
     {
       "year": 1849,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The new Roman Republic is declared."
     },
     {
@@ -882,7 +882,7 @@
   "02-10": [
     {
       "year": 1763,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "French and Indian War: The Treaty of Paris ends the war and France cedes Quebec to Great Britain."
     },
     {
@@ -892,7 +892,7 @@
     },
     {
       "year": 1967,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The 25th Amendment to the United States Constitution is ratified."
     },
     {
@@ -904,7 +904,7 @@
   "02-11": [
     {
       "year": 1889,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Meiji Constitution of Japan is adopted."
     },
     {
@@ -926,7 +926,7 @@
   "02-12": [
     {
       "year": 1818,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Bernardo O'Higgins formally approves the Chilean Declaration of Independence near Concepción, Chile."
     },
     {
@@ -936,7 +936,7 @@
     },
     {
       "year": 1946,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Operation Deadlight ends after scuttling 121 of 154 captured U-boats."
     },
     {
@@ -953,12 +953,12 @@
     },
     {
       "year": 1913,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The 13th Dalai Lama proclaims Tibetan independence following a period of domination by Manchu Qing dynasty…"
     },
     {
       "year": 1996,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Nepalese Civil War is initiated in the Kingdom of Nepal by the Communist Party of Nepal."
     },
     {
@@ -975,12 +975,12 @@
     },
     {
       "year": 1939,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "German battleship Bismarck is launched."
     },
     {
       "year": 1949,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Knesset convenes for the first time."
     },
     {
@@ -992,12 +992,12 @@
   "02-15": [
     {
       "year": 1835,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Serbia's Sretenje Constitution briefly comes into effect."
     },
     {
       "year": 1944,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The assault on Monte Cassino, Italy, begins."
     },
     {
@@ -1014,12 +1014,12 @@
   "02-16": [
     {
       "year": 1899,
-      "tag": "CULTURE",
+      "tag": "FACT",
       "title": "Iceland's first football club, Knattspyrnufélag Reykjavíkur, is founded."
     },
     {
       "year": 1945,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Alaska Equal Rights Act of 1945, the first anti-discrimination law in the United States."
     },
     {
@@ -1029,19 +1029,19 @@
     },
     {
       "year": 2006,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The last Mobile army surgical hospital is decommissioned by the United States Army."
     }
   ],
   "02-17": [
     {
       "year": 1854,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The United Kingdom recognizes the independence of the Orange Free State."
     },
     {
       "year": 1944,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Battle of Eniwetok begins. The battle ends in an American victory on February 22."
     },
     {
@@ -1051,7 +1051,7 @@
     },
     {
       "year": 2008,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Kosovo declares independence from Serbia."
     }
   ],
@@ -1085,7 +1085,7 @@
     },
     {
       "year": 1943,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Battle of Kasserine Pass in Tunisia begins."
     },
     {
@@ -1102,12 +1102,12 @@
   "02-20": [
     {
       "year": 1846,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Polish insurgents lead an uprising in Kraków to incite a fight for national independence."
     },
     {
       "year": 1942,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Lieutenant Edward O'Hare becomes America's first World War II flying ace."
     },
     {
@@ -1117,7 +1117,7 @@
     },
     {
       "year": 2005,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Spain becomes the first country to vote in a referendum on ratification of the proposed Constitution of the…"
     }
   ],
@@ -1129,7 +1129,7 @@
     },
     {
       "year": 1921,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Constituent Assembly of the Democratic Republic of Georgia adopts the country's first constitution."
     },
     {
@@ -1151,24 +1151,24 @@
     },
     {
       "year": 1944,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Soviet Red Army recaptures Krivoi Rog."
     },
     {
       "year": 1979,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Saint Lucia gains independence from the United Kingdom."
     },
     {
       "year": 2015,
-      "tag": "FACT",
+      "tag": "GEOGRAPHY",
       "title": "A ferry carrying 100 passengers capsizes in the Padma River, killing 70 people."
     }
   ],
   "02-23": [
     {
       "year": 1854,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The official independence of the Orange Free State, South Africa is declared."
     },
     {
@@ -1190,17 +1190,17 @@
   "02-24": [
     {
       "year": 1303,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The English are defeated at the Battle of Roslin, in the First War of Scottish Independence."
     },
     {
       "year": 1918,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Estonian Declaration of Independence."
     },
     {
       "year": 1949,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Armistice Agreements are signed, to formally end the hostilities of the 1948 Arab-Israeli War."
     },
     {
@@ -1212,7 +1212,7 @@
   "02-25": [
     {
       "year": 1875,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Guangxu Emperor of Qing dynasty China begins his reign, under Empress Dowager Cixi's regency."
     },
     {
@@ -1222,7 +1222,7 @@
     },
     {
       "year": 1999,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "Alitalia Flight 1553 crashes at Genoa Cristoforo Colombo Airport in Genoa, Italy, killing four."
     },
     {
@@ -1239,7 +1239,7 @@
     },
     {
       "year": 1945,
-      "tag": "WAR",
+      "tag": "GEOGRAPHY",
       "title": "US troops reclaim the Philippine island of Corregidor from the Japanese."
     },
     {
@@ -1261,17 +1261,17 @@
     },
     {
       "year": 1921,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The International Working Union of Socialist Parties is founded in Vienna."
     },
     {
       "year": 1991,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Gulf War: U.S. President George H. W. Bush announces that \"Kuwait is liberated\"."
     },
     {
       "year": 2001,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "Loganair Flight 670A crashes while attempting to make a water landing in the Firth of Forth in Scotland."
     }
   ],
@@ -1283,7 +1283,7 @@
     },
     {
       "year": 1922,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The United Kingdom ends its protectorate over Egypt through a Unilateral Declaration of Independence."
     },
     {
@@ -1293,41 +1293,41 @@
     },
     {
       "year": 2024,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Prime Minister Modi of India inaugurates the 2nd Space Port of India - Kulasekarapattinam Spaceport."
     }
   ],
   "02-29": [
     {
       "year": 1644,
-      "tag": "DISCOVERY",
+      "tag": "FACT",
       "title": "Abel Tasman's second Pacific voyage begins as he leaves Batavia in command of three ships."
     },
     {
       "year": 1936,
-      "tag": "INCIDENT",
+      "tag": "FACT",
       "title": "The February 26 Incident in Tokyo ends."
     },
     {
       "year": 1992,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "A referendum is begun in Bosnia and Herzegovina for the determination of Bosnian independence."
     },
     {
       "year": 2020,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Luxembourg becomes the first country in the world to render public transport free nationwide."
     }
   ],
   "03-01": [
     {
       "year": 1872,
-      "tag": "FACT",
+      "tag": "NATURE",
       "title": "Yellowstone National Park is established as the world's first national park."
     },
     {
       "year": 1941,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Bulgaria signs the Tripartite Pact, allying itself with the Axis powers."
     },
     {
@@ -1344,12 +1344,12 @@
   "03-02": [
     {
       "year": 1836,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Texas Revolution: The Declaration of independence of the Republic of Texas from Mexico is adopted."
     },
     {
       "year": 1941,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "First German military units enter Bulgaria after it joins the Axis Pact."
     },
     {
@@ -1359,7 +1359,7 @@
     },
     {
       "year": 2006,
-      "tag": "INCIDENT",
+      "tag": "FACT",
       "title": "In Monterrey, Mexico, a man identified as Diego Santoy Riveroll commits a double murder against two children."
     }
   ],
@@ -1371,7 +1371,7 @@
     },
     {
       "year": 1942,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Ten Japanese warplanes raid Broome, Western Australia, killing more than 100 people."
     },
     {
@@ -1393,7 +1393,7 @@
     },
     {
       "year": 1944,
-      "tag": "WAR",
+      "tag": "INCIDENT",
       "title": "After the success of Big Week, the USAAF begins a daylight bombing campaign of Berlin."
     },
     {
@@ -1403,14 +1403,14 @@
     },
     {
       "year": 2020,
-      "tag": "INCIDENT",
+      "tag": "NATURE",
       "title": "Nik Wallenda becomes the first person to walk over the Masaya Volcano in Nicaragua."
     }
   ],
   "03-05": [
     {
       "year": 1824,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "First Anglo-Burmese War: The British officially declare war on Burma."
     },
     {
@@ -1420,7 +1420,7 @@
     },
     {
       "year": 1991,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "Aeropostal Alas de Venezuela Flight 109 crashes in Venezuela, killing 45."
     },
     {
@@ -1432,7 +1432,7 @@
   "03-06": [
     {
       "year": 1323,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Treaty of Paris of 1323 is signed."
     },
     {
@@ -1442,7 +1442,7 @@
     },
     {
       "year": 1957,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Ghana becomes the first Sub-Saharan country to gain independence from the British."
     },
     {
@@ -1459,12 +1459,12 @@
     },
     {
       "year": 1931,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Parliament House of Finland is officially inaugurated in Helsinki, Finland."
     },
     {
       "year": 1986,
-      "tag": "INCIDENT",
+      "tag": "GEOGRAPHY",
       "title": "Challenger Disaster: Divers from the USS Preserver locate the crew cabin of Challenger on the ocean floor."
     },
     {
@@ -1476,12 +1476,12 @@
   "03-08": [
     {
       "year": 1844,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "King Oscar I ascends to the thrones of Sweden and Norway."
     },
     {
       "year": 1910,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "French aviatrix Raymonde de Laroche becomes the first woman to receive a pilot's license."
     },
     {
@@ -1498,12 +1498,12 @@
   "03-09": [
     {
       "year": 1847,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Mexican–American War: The first large-scale amphibious assault in U.S."
     },
     {
       "year": 1908,
-      "tag": "CULTURE",
+      "tag": "FACT",
       "title": "Inter Milan is founded on Football Club Internazionale, following a schism from A.C. Milan."
     },
     {
@@ -1535,14 +1535,14 @@
     },
     {
       "year": 2006,
-      "tag": "FACT",
+      "tag": "SPACE",
       "title": "The Mars Reconnaissance Orbiter arrives at Mars."
     }
   ],
   "03-11": [
     {
       "year": 1861,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "American Civil War: The Constitution of the Confederate States of America is adopted."
     },
     {
@@ -1552,7 +1552,7 @@
     },
     {
       "year": 1990,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Lithuania declares independence from the Soviet Union."
     },
     {
@@ -1564,7 +1564,7 @@
   "03-12": [
     {
       "year": 1689,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "James II of England lands at Kinsale, starting the Williamite War in Ireland."
     },
     {
@@ -1574,7 +1574,7 @@
     },
     {
       "year": 1968,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Mauritius gains independence from the United Kingdom."
     },
     {
@@ -1586,7 +1586,7 @@
   "03-13": [
     {
       "year": 1884,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Siege of Khartoum begins. It lasts until January 26, 1885."
     },
     {
@@ -1613,7 +1613,7 @@
     },
     {
       "year": 1939,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Slovakia declares independence under German pressure."
     },
     {
@@ -1630,34 +1630,34 @@
   "03-15": [
     {
       "year": 1892,
-      "tag": "FACT",
+      "tag": "INCIDENT",
       "title": "The Lobau bombing is one of the first attacks of the Ère des attentats."
     },
     {
       "year": 1922,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "After Egypt gains nominal independence from the United Kingdom, Fuad I becomes King of Egypt."
     },
     {
       "year": 1978,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Somalia and Ethiopia sign a truce to end the Ethio-Somali War."
     },
     {
       "year": 2022,
-      "tag": "INCIDENT",
+      "tag": "FACT",
       "title": "The 2022 Sri Lankan protests begins amidst Sri Lanka's economic collapse."
     }
   ],
   "03-16": [
     {
       "year": 1802,
-      "tag": "WAR",
+      "tag": "DISCOVERY",
       "title": "The Army Corps of Engineers is established to found and operate the United States Military Academy at West…"
     },
     {
       "year": 1924,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "In accordance with the Treaty of Rome, Fiume becomes annexed as part of Italy."
     },
     {
@@ -1674,29 +1674,29 @@
   "03-17": [
     {
       "year": 1860,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The First Taranaki War begins in Taranaki, New Zealand, a major phase of the New Zealand Wars."
     },
     {
       "year": 1921,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Second Polish Republic adopts the March Constitution."
     },
     {
       "year": 1969,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Golda Meir becomes the first female Prime Minister of Israel."
     },
     {
       "year": 2003,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Leader of the House of Commons and Lord President of the Council, Robin Cook."
     }
   ],
   "03-18": [
     {
       "year": 1793,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The first modern republic in Germany, the Republic of Mainz, is declared by Andreas Joseph Hofmann."
     },
     {
@@ -1711,14 +1711,14 @@
     },
     {
       "year": 2014,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The parliaments of Russia and Crimea sign an accession treaty."
     }
   ],
   "03-19": [
     {
       "year": 1812,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Cortes of Cádiz promulgates the Spanish Constitution of 1812."
     },
     {
@@ -1728,7 +1728,7 @@
     },
     {
       "year": 1962,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Algerian War of Independence ends."
     },
     {
@@ -1745,7 +1745,7 @@
     },
     {
       "year": 1922,
-      "tag": "WAR",
+      "tag": "TECHNOLOGY",
       "title": "The USS Langley is commissioned as the first United States Navy aircraft carrier."
     },
     {
@@ -1762,12 +1762,12 @@
   "03-21": [
     {
       "year": 1821,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Greek War of Independence: Greek revolutionaries seize Kalavryta."
     },
     {
       "year": 1928,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "Charles Lindbergh is presented with the Medal of Honor for the first solo trans-Atlantic flight."
     },
     {
@@ -1789,7 +1789,7 @@
     },
     {
       "year": 1906,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The first England vs France rugby union match is played at Parc des Princes in Paris."
     },
     {
@@ -1806,12 +1806,12 @@
   "03-23": [
     {
       "year": 1821,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Greek War of Independence: Battle and fall of city of Kalamata."
     },
     {
       "year": 1935,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Signing of the Constitution of the Commonwealth of the Philippines."
     },
     {
@@ -1833,7 +1833,7 @@
     },
     {
       "year": 1921,
-      "tag": "CULTURE",
+      "tag": "FACT",
       "title": "The 1921 Women's Olympiad begins in Monte Carlo, becoming the first international women's sports event."
     },
     {
@@ -1843,19 +1843,19 @@
     },
     {
       "year": 2008,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Bhutan officially becomes a democracy, with its first ever general election."
     }
   ],
   "03-25": [
     {
       "year": 1845,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "New Zealand Legislative Council pass the first Militia Act constituting the New Zealand Army."
     },
     {
       "year": 1924,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "On the anniversary of Greek Independence, Alexandros Papanastasiou proclaims the Second Hellenic Republic."
     },
     {
@@ -1865,7 +1865,7 @@
     },
     {
       "year": 2006,
-      "tag": "INCIDENT",
+      "tag": "FACT",
       "title": "Protesters demanding a new election in Belarus, following the rigged 2006 Belarusian presidential election."
     }
   ],
@@ -1877,29 +1877,29 @@
     },
     {
       "year": 1945,
-      "tag": "WAR",
+      "tag": "GEOGRAPHY",
       "title": "The Battle of Iwo Jima ends as the island is officially secured by American forces."
     },
     {
       "year": 1981,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Social Democratic Party is founded as a party."
     },
     {
       "year": 2005,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Around 200,000 to 300,000 Taiwanese demonstrate in Taipei in opposition to the Anti-Secession Law of China."
     }
   ],
   "03-27": [
     {
       "year": 1782,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Second Rockingham ministry assumes office in Great Britain and begins negotiations to end the American…"
     },
     {
       "year": 1918,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The National Council of Bessarabia proclaims union with the Kingdom of Romania."
     },
     {
@@ -1916,17 +1916,17 @@
   "03-28": [
     {
       "year": 1860,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "First Taranaki War: The Battle of Waireka begins."
     },
     {
       "year": 1920,
-      "tag": "FACT",
+      "tag": "NATURE",
       "title": "Palm Sunday tornado outbreak of 1920 affects the Great Lakes region and Deep South states."
     },
     {
       "year": 1961,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "ČSA Flight 511 crashes in Igensdorf, Germany, killing 52."
     },
     {
@@ -1943,7 +1943,7 @@
     },
     {
       "year": 1941,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The North American Regional Broadcasting Agreement goes into effect at 03:00 local time."
     },
     {
@@ -1960,12 +1960,12 @@
   "03-30": [
     {
       "year": 1856,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Treaty of Paris is signed, ending the Crimean War."
     },
     {
       "year": 1912,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Sultan Abd al-Hafid signs the Treaty of Fez, making Morocco a French protectorate."
     },
     {
@@ -1987,7 +1987,7 @@
     },
     {
       "year": 1905,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Kaiser Wilhelm II of Germany declares his support for Moroccan independence in Tangier."
     },
     {
@@ -1997,7 +1997,7 @@
     },
     {
       "year": 2005,
-      "tag": "SCIENCE",
+      "tag": "FACT",
       "title": "The dwarf planet Makemake is discovered by a team led by astronomer Michael E. Brown at the Palomar Observatory."
     }
   ],
@@ -2009,7 +2009,7 @@
     },
     {
       "year": 1900,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Prince George becomes absolute monarch of the Cretan State."
     },
     {
@@ -2019,7 +2019,7 @@
     },
     {
       "year": 2016,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The 2016 Nagorno-Karabakh conflict begins along the Nagorno-Karabakh Line of Contact."
     }
   ],
@@ -2036,12 +2036,12 @@
     },
     {
       "year": 1982,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Falklands War: Argentina invades the Falkland Islands."
     },
     {
       "year": 2015,
-      "tag": "INCIDENT",
+      "tag": "CULTURE",
       "title": "Gunmen attack Garissa University College in Kenya, killing at least 148 people and wounding 79 others."
     }
   ],
@@ -2053,7 +2053,7 @@
     },
     {
       "year": 1922,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Joseph Stalin becomes the first General Secretary of the Communist Party of the Soviet Union."
     },
     {
@@ -2070,7 +2070,7 @@
   "04-04": [
     {
       "year": 1887,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Argonia, Kansas elects Susanna M. Salter as the first female mayor in the United States."
     },
     {
@@ -2085,19 +2085,19 @@
     },
     {
       "year": 2009,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "France announces its return to full participation of its military forces within NATO."
     }
   ],
   "04-05": [
     {
       "year": 1862,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "American Civil War: The Battle of Yorktown begins."
     },
     {
       "year": 1936,
-      "tag": "FACT",
+      "tag": "NATURE",
       "title": "Tupelo–Gainesville tornado outbreak: An F5 tornado kills 233 in Tupelo, Mississippi."
     },
     {
@@ -2114,7 +2114,7 @@
   "04-06": [
     {
       "year": 1320,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Scots reaffirm their independence by signing the Declaration of Arbroath."
     },
     {
@@ -2124,7 +2124,7 @@
     },
     {
       "year": 1992,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Bosnian War begins."
     },
     {
@@ -2141,7 +2141,7 @@
     },
     {
       "year": 1943,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Ioannis Rallis becomes collaborationist Prime Minister of Greece during the Axis Occupation."
     },
     {
@@ -2163,7 +2163,7 @@
     },
     {
       "year": 1904,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The French Third Republic and the United Kingdom of Great Britain and Ireland sign the Entente cordiale."
     },
     {
@@ -2173,19 +2173,19 @@
     },
     {
       "year": 2020,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Bernie Sanders ends his presidential campaign, leaving Joe Biden as the Democratic Party's nominee."
     }
   ],
   "04-09": [
     {
       "year": 1454,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Treaty of Lodi is signed, establishing a balance of power among northern Italian city-states for almost…"
     },
     {
       "year": 1942,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Battle of Bataan ends and the Bataan Death March begins."
     },
     {
@@ -2202,7 +2202,7 @@
   "04-10": [
     {
       "year": 1821,
-      "tag": "WAR",
+      "tag": "GEOGRAPHY",
       "title": "Greek War of Independence: the island of Psara joins the Greek struggle for independence."
     },
     {
@@ -2212,12 +2212,12 @@
     },
     {
       "year": 1998,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Good Friday Agreement is signed in Northern Ireland."
     },
     {
       "year": 2009,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "President of Fiji Ratu Josefa Iloilo announces the abrogation of the constitution and assumes all governance…"
     }
   ],
@@ -2229,7 +2229,7 @@
     },
     {
       "year": 1921,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Emir Abdullah establishes the first centralised government in the newly created British protectorate of…"
     },
     {
@@ -2246,7 +2246,7 @@
   "04-12": [
     {
       "year": 1807,
-      "tag": "FACT",
+      "tag": "CULTURE",
       "title": "The Froberg mutiny on Malta ends when the remaining mutineers blow up the magazine of Fort Ricasoli."
     },
     {
@@ -2283,14 +2283,14 @@
     },
     {
       "year": 2013,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "Lion Air Flight 904 crashes on approach to Ngurah Rai International Airport in Denpasar, Indonesia."
     }
   ],
   "04-14": [
     {
       "year": 1890,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Pan-American Union is founded by the First International Conference of American States in Washington, D.C."
     },
     {
@@ -2305,7 +2305,7 @@
     },
     {
       "year": 2023,
-      "tag": "FACT",
+      "tag": "SPACE",
       "title": "The Jupiter Icy Moons Explorer is launched by the European Space Agency."
     }
   ],
@@ -2322,12 +2322,12 @@
     },
     {
       "year": 1994,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Marrakesh Agreement relating to foundation of World Trade Organization is adopted."
     },
     {
       "year": 2002,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "Air China Flight 129 crashes on approach to Gimhae International Airport in Busan, South Korea."
     }
   ],
@@ -2349,7 +2349,7 @@
     },
     {
       "year": 2003,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Treaty of Accession is signed in Athens admitting ten new member states to the European Union."
     }
   ],
@@ -2361,7 +2361,7 @@
     },
     {
       "year": 1945,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Montese, Italy, is liberated from Nazi forces."
     },
     {
@@ -2371,19 +2371,19 @@
     },
     {
       "year": 2003,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Anneli Jäätteenmäki takes office as the first female prime minister of Finland."
     }
   ],
   "04-18": [
     {
       "year": 1897,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Greco-Turkish War is declared between Greece and the Ottoman Empire."
     },
     {
       "year": 1942,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Pierre Laval becomes Prime Minister of Vichy France."
     },
     {
@@ -2393,14 +2393,14 @@
     },
     {
       "year": 2018,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "King Mswati III of Swaziland announces that his country's name will change to Eswatini."
     }
   ],
   "04-19": [
     {
       "year": 1539,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Treaty of Frankfurt between Protestants and the Holy Roman Emperor is signed."
     },
     {
@@ -2422,12 +2422,12 @@
   "04-20": [
     {
       "year": 1876,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The April Uprising begins."
     },
     {
       "year": 1922,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Soviet government creates the South Ossetian Autonomous Oblast within the Georgian SSR."
     },
     {
@@ -2444,12 +2444,12 @@
   "04-21": [
     {
       "year": 1792,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Tiradentes, a revolutionary leading a movement for Brazil's independence, is hanged, drawn and quartered."
     },
     {
       "year": 1945,
-      "tag": "WAR",
+      "tag": "INCIDENT",
       "title": "Soviet forces south of Berlin at Zossen attack the German High Command headquarters."
     },
     {
@@ -2471,7 +2471,7 @@
     },
     {
       "year": 1945,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Sachsenhausen concentration camp is liberated by soldiers of the Red Army and Polish First Army."
     },
     {
@@ -2481,19 +2481,19 @@
     },
     {
       "year": 2016,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Paris Agreement is signed, an agreement to help fight global warming."
     }
   ],
   "04-23": [
     {
       "year": 1660,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Treaty of Oliva is established between Sweden and Poland."
     },
     {
       "year": 1935,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Polish Constitution of 1935 is adopted."
     },
     {
@@ -2542,24 +2542,24 @@
     },
     {
       "year": 1990,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Violeta Chamorro takes office as the President of Nicaragua, the first woman to hold the position."
     },
     {
       "year": 2005,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Bulgaria and Romania sign the Treaty of Accession 2005 to join the European Union."
     }
   ],
   "04-26": [
     {
       "year": 1794,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Battle of Beaumont during the Flanders Campaign of the War of the First Coalition."
     },
     {
       "year": 1944,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Georgios Papandreou becomes head of the Greek government-in-exile based in Egypt."
     },
     {
@@ -2569,7 +2569,7 @@
     },
     {
       "year": 2002,
-      "tag": "FACT",
+      "tag": "INCIDENT",
       "title": "Robert Steinhäuser kills 16 at Gutenberg-Gymnasium in Erfurt, Germany, before committing suicide."
     }
   ],
@@ -2581,12 +2581,12 @@
     },
     {
       "year": 1941,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "German troops enter Athens."
     },
     {
       "year": 1992,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Betty Boothroyd becomes the first woman to be elected Speaker of the British House of Commons in its 700-year…"
     },
     {
@@ -2598,12 +2598,12 @@
   "04-28": [
     {
       "year": 1788,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Maryland becomes the seventh state to ratify the United States Constitution."
     },
     {
       "year": 1923,
-      "tag": "CULTURE",
+      "tag": "FACT",
       "title": "Wembley Stadium is opened, named initially as the Empire Stadium."
     },
     {
@@ -2613,7 +2613,7 @@
     },
     {
       "year": 2004,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "CBS News releases evidence of the Abu Ghraib torture and prisoner abuse."
     }
   ],
@@ -2625,7 +2625,7 @@
     },
     {
       "year": 1945,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Surrender of Caserta is signed by the commander of German forces in Italy."
     },
     {
@@ -2642,7 +2642,7 @@
   "04-30": [
     {
       "year": 1838,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Nicaragua declares independence from the Central American Federation."
     },
     {
@@ -2652,19 +2652,19 @@
     },
     {
       "year": 1980,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Iranian Embassy siege begins in London."
     },
     {
       "year": 2013,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Willem-Alexander is inaugurated as King of the Netherlands following the abdication of Beatrix."
     }
   ],
   "05-01": [
     {
       "year": 1894,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Coxey's Army, the first significant American protest march, arrives in Washington, D.C."
     },
     {
@@ -2674,19 +2674,19 @@
     },
     {
       "year": 1997,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Labour Party wins the 1997 General Election and Tony Blair is elected as Prime Minister."
     },
     {
       "year": 2019,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Naruhito ascends to the throne of Japan succeeding his father Akihito, beginning the Reiwa period."
     }
   ],
   "05-02": [
     {
       "year": 1812,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Siege of Cuautla during the Mexican War of Independence ends with both sides claiming victory."
     },
     {
@@ -2696,12 +2696,12 @@
     },
     {
       "year": 1999,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Panamanian general election: Mireya Moscoso becomes the first woman to be elected President of Panama."
     },
     {
       "year": 2008,
-      "tag": "INCIDENT",
+      "tag": "NATURE",
       "title": "Chaitén Volcano begins erupting in Chile, forcing the evacuation of more than 4,500 people."
     }
   ],
@@ -2713,12 +2713,12 @@
     },
     {
       "year": 1920,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "A Bolshevik coup fails in the Democratic Republic of Georgia."
     },
     {
       "year": 1947,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "New post-war Japanese constitution goes into effect."
     },
     {
@@ -2730,12 +2730,12 @@
   "05-04": [
     {
       "year": 1776,
-      "tag": "POLITICS",
+      "tag": "GEOGRAPHY",
       "title": "Rhode Island becomes the first American colony to renounce allegiance to King George III."
     },
     {
       "year": 1912,
-      "tag": "WAR",
+      "tag": "GEOGRAPHY",
       "title": "Italy begins the invasion and occupation of the Ottoman island of Rhodes."
     },
     {
@@ -2745,7 +2745,7 @@
     },
     {
       "year": 2000,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Ken Livingstone becomes the first Mayor of London."
     }
   ],
@@ -2762,12 +2762,12 @@
     },
     {
       "year": 1961,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "Project Mercury: Alan Shepard becomes the first American to travel into outer space, on a sub-orbital flight."
     },
     {
       "year": 2006,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The government of Sudan signs an accord with the Sudan Liberation Army."
     }
   ],
@@ -2779,7 +2779,7 @@
     },
     {
       "year": 1906,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Russian Constitution of 1906 is adopted."
     },
     {
@@ -2796,12 +2796,12 @@
   "05-07": [
     {
       "year": 1832,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Greece's independence is recognized by the Treaty of London."
     },
     {
       "year": 1920,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Treaty of Moscow: Soviet Russia recognizes the independence of the Democratic Republic of Georgia only to…"
     },
     {
@@ -2818,12 +2818,12 @@
   "05-08": [
     {
       "year": 1821,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Greek War of Independence: The Greeks defeat the Turks at the Battle of Gravia Inn."
     },
     {
       "year": 1945,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "End of the Prague uprising, celebrated now as a national holiday in the Czech Republic."
     },
     {
@@ -2845,12 +2845,12 @@
     },
     {
       "year": 1901,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Australia opens its first national parliament in Melbourne."
     },
     {
       "year": 1992,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Armenian forces capture Shusha, marking a major turning point in the First Nagorno-Karabakh War."
     },
     {
@@ -2862,7 +2862,7 @@
   "05-10": [
     {
       "year": 1872,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Victoria Woodhull becomes the first woman nominated for President of the United States."
     },
     {
@@ -2889,12 +2889,12 @@
     },
     {
       "year": 1919,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Uruguay becomes a signatory to the Buenos Aires copyright treaty."
     },
     {
       "year": 1987,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Klaus Barbie goes on trial in Lyon for war crimes committed during World War II."
     },
     {
@@ -2906,12 +2906,12 @@
   "05-12": [
     {
       "year": 1821,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The first major battle of the Greek War of Independence against the Turks is fought in Valtetsi."
     },
     {
       "year": 1926,
-      "tag": "FACT",
+      "tag": "GEOGRAPHY",
       "title": "The Italian-built airship Norge becomes the first vessel to fly over the North Pole."
     },
     {
@@ -2921,14 +2921,14 @@
     },
     {
       "year": 2002,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Former US President Jimmy Carter arrives in Cuba for a five-day visit with Fidel Castro."
     }
   ],
   "05-13": [
     {
       "year": 1830,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Ecuador gains its independence from Gran Colombia."
     },
     {
@@ -2938,7 +2938,7 @@
     },
     {
       "year": 1999,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Kosovo War: NATO bombs the village of Koriša, killing at least 87 people."
     },
     {
@@ -2950,7 +2950,7 @@
   "05-14": [
     {
       "year": 1097,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Siege of Nicaea begins during the First Crusade."
     },
     {
@@ -2965,14 +2965,14 @@
     },
     {
       "year": 2012,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "Agni Air Flight CHT crashes in Nepal after a failed go-around, killing 15 people."
     }
   ],
   "05-15": [
     {
       "year": 1849,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Sicilian revolution of 1848 is finally extinguished."
     },
     {
@@ -2994,7 +2994,7 @@
   "05-16": [
     {
       "year": 1822,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Greek War of Independence: The Turks capture the Greek town of Souli."
     },
     {
@@ -3004,7 +3004,7 @@
     },
     {
       "year": 1975,
-      "tag": "FACT",
+      "tag": "GEOGRAPHY",
       "title": "Junko Tabei from Japan becomes the first woman to reach the summit of Mount Everest."
     },
     {
@@ -3016,12 +3016,12 @@
   "05-17": [
     {
       "year": 1639,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The treaty of Zuhab ends the fifteen-year-long war between the Ottomans and the Safavids."
     },
     {
       "year": 1915,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The last British Liberal Party government falls."
     },
     {
@@ -3031,7 +3031,7 @@
     },
     {
       "year": 2010,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "Pamir Airways Flight 112 crashes in Afghanistan's Shakardara District, killing 44."
     }
   ],
@@ -3048,12 +3048,12 @@
     },
     {
       "year": 1991,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Northern Somalia declares independence from the rest of Somalia as the Republic of Somaliland."
     },
     {
       "year": 2019,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "United States presidential election: Joe Biden launches his presidential campaign."
     }
   ],
@@ -3065,7 +3065,7 @@
     },
     {
       "year": 1922,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Young Pioneer Organization of the Soviet Union is established."
     },
     {
@@ -3075,19 +3075,19 @@
     },
     {
       "year": 2016,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "EgyptAir Flight 804 crashes into the Mediterranean Sea while traveling from Paris to Cairo."
     }
   ],
   "05-20": [
     {
       "year": 1775,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Mecklenburg Declaration of Independence is allegedly signed in Charlotte, North Carolina."
     },
     {
       "year": 1902,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Cuba gains independence from the United States. Tomás Estrada Palma becomes the country's first President."
     },
     {
@@ -3097,7 +3097,7 @@
     },
     {
       "year": 2011,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Mamata Banerjee is sworn in as the Chief Minister of West Bengal, the first woman to hold this post."
     }
   ],
@@ -3109,12 +3109,12 @@
     },
     {
       "year": 1904,
-      "tag": "CULTURE",
+      "tag": "FACT",
       "title": "The Fédération Internationale de Football Association is founded in Paris."
     },
     {
       "year": 1966,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Ulster Volunteer Force declares war on the Irish Republican Army in Northern Ireland."
     },
     {
@@ -3126,7 +3126,7 @@
   "05-22": [
     {
       "year": 1864,
-      "tag": "WAR",
+      "tag": "GEOGRAPHY",
       "title": "American Civil War: After ten weeks, the Union Army's Red River Campaign ends in failure."
     },
     {
@@ -3136,7 +3136,7 @@
     },
     {
       "year": 1992,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Bosnia and Herzegovina, Croatia and Slovenia join the United Nations."
     },
     {
@@ -3148,34 +3148,34 @@
   "05-23": [
     {
       "year": 1788,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "South Carolina became the eighth state to ratify the United States Constitution."
     },
     {
       "year": 1915,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Italy joins the Allies, fulfilling its part of the Treaty of London."
     },
     {
       "year": 1995,
-      "tag": "FACT",
+      "tag": "CULTURE",
       "title": "The first version of the Java programming language is released."
     },
     {
       "year": 2013,
-      "tag": "TECHNOLOGY",
+      "tag": "GEOGRAPHY",
       "title": "A freeway bridge carrying Interstate 5 over the Skagit River collapses in Mount Vernon, Washington."
     }
   ],
   "05-24": [
     {
       "year": 1832,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The First Kingdom of Greece is declared in the London Conference."
     },
     {
       "year": 1940,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "Igor Sikorsky performs the first successful single-rotor helicopter flight."
     },
     {
@@ -3185,19 +3185,19 @@
     },
     {
       "year": 2000,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Israeli troops withdraw from southern Lebanon after 22 years of occupation."
     }
   ],
   "05-25": [
     {
       "year": 1833,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Chilean Constitution of 1833 is promulgated."
     },
     {
       "year": 1938,
-      "tag": "WAR",
+      "tag": "INCIDENT",
       "title": "Spanish Civil War: The bombing of Alicante kills 313 people."
     },
     {
@@ -3219,17 +3219,17 @@
     },
     {
       "year": 1942,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Battle of Gazala begins, in present-day Libya."
     },
     {
       "year": 1966,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "British Guiana gains independence, becoming Guyana."
     },
     {
       "year": 2003,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "Ukrainian-Mediterranean Airlines Flight 4230 crashes in the Turkish town of Maçka, killing 75."
     }
   ],
@@ -3251,19 +3251,19 @@
     },
     {
       "year": 2014,
-      "tag": "CULTURE",
+      "tag": "FACT",
       "title": "The football club Kerala Blasters FC and its first supporters' group Manjappada are formed."
     }
   ],
   "05-28": [
     {
       "year": 934,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "English king Æthelstan begins his invasion of Scotland."
     },
     {
       "year": 1918,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Azerbaijan Democratic Republic and the First Republic of Armenia declare their independence."
     },
     {
@@ -3280,7 +3280,7 @@
   "05-29": [
     {
       "year": 1864,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Emperor Maximilian I of Mexico arrives in Mexico for the first time."
     },
     {
@@ -3295,19 +3295,19 @@
     },
     {
       "year": 2004,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The National World War II Memorial is dedicated in Washington, D.C."
     }
   ],
   "05-30": [
     {
       "year": 1854,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Kansas–Nebraska Act becomes law, establishing the U.S. territories of Kansas and Nebraska."
     },
     {
       "year": 1942,
-      "tag": "WAR",
+      "tag": "INCIDENT",
       "title": "One thousand British bombers launch a 90-minute attack on Cologne, Germany."
     },
     {
@@ -3324,12 +3324,12 @@
   "05-31": [
     {
       "year": 1775,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "American Revolution: The Mecklenburg Resolves are adopted in the Province of North Carolina."
     },
     {
       "year": 1902,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Second Boer War: The Treaty of Vereeniging ends the war and ensures British control of South Africa."
     },
     {
@@ -3339,19 +3339,19 @@
     },
     {
       "year": 2013,
-      "tag": "FACT",
+      "tag": "SPACE",
       "title": "The asteroid 1998 QE2 and its moon make their closest approach to Earth for the next two centuries."
     }
   ],
   "06-01": [
     {
       "year": 1857,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Revolution of the Ganhadores begins in Salvador, Bahia, Brazil."
     },
     {
       "year": 1913,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Greek–Serbian Treaty of Alliance is signed, paving the way for the Second Balkan War."
     },
     {
@@ -3373,7 +3373,7 @@
     },
     {
       "year": 1909,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Alfred Deakin becomes Prime Minister of Australia for the third time."
     },
     {
@@ -3383,7 +3383,7 @@
     },
     {
       "year": 2003,
-      "tag": "DISCOVERY",
+      "tag": "SPACE",
       "title": "Europe launches its first voyage to another planet, Mars."
     }
   ],
@@ -3395,7 +3395,7 @@
     },
     {
       "year": 1942,
-      "tag": "WAR",
+      "tag": "GEOGRAPHY",
       "title": "Japan begins the Aleutian Islands Campaign by bombing Unalaska Island."
     },
     {
@@ -3405,14 +3405,14 @@
     },
     {
       "year": 2006,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The union of Serbia and Montenegro comes to an end with Montenegro's formal declaration of independence."
     }
   ],
   "06-04": [
     {
       "year": 1859,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Italian Independence wars: In the Battle of Magenta, the French army, under Louis-Napoleon."
     },
     {
@@ -3422,7 +3422,7 @@
     },
     {
       "year": 1970,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Tonga gains independence from the British Empire."
     },
     {
@@ -3434,12 +3434,12 @@
   "06-05": [
     {
       "year": 1849,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Denmark becomes a constitutional monarchy by the signing of a new constitution."
     },
     {
       "year": 1917,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Conscription begins in the United States as \"Army registration day\"."
     },
     {
@@ -3449,7 +3449,7 @@
     },
     {
       "year": 2024,
-      "tag": "SPACE",
+      "tag": "FACT",
       "title": "The Boeing Starliner is launched on its first crewed flight, carrying astronauts Barry Wilmore and Sunita…"
     }
   ],
@@ -3466,12 +3466,12 @@
     },
     {
       "year": 1993,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Punsalmaagiin Ochirbat wins the first presidential election in Mongolia."
     },
     {
       "year": 2024,
-      "tag": "TECHNOLOGY",
+      "tag": "SPACE",
       "title": "The launch of SpaceX Starship integrated flight test 4"
     }
   ],
@@ -3483,7 +3483,7 @@
     },
     {
       "year": 1942,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Battle of Midway ends in American victory."
     },
     {
@@ -3493,19 +3493,19 @@
     },
     {
       "year": 2000,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The United Nations defines the Blue Line as the border between Israel and Lebanon."
     }
   ],
   "06-08": [
     {
       "year": 1789,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "James Madison introduces twelve proposed amendments to the United States Constitution in Congress."
     },
     {
       "year": 1943,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The two-day Battle of Porta between the Royal Italian Army and the Greek People's Liberation Army begins."
     },
     {
@@ -3515,24 +3515,24 @@
     },
     {
       "year": 2004,
-      "tag": "FACT",
+      "tag": "SPACE",
       "title": "The first Venus Transit in well over a century takes place, the previous one being in 1882."
     }
   ],
   "06-09": [
     {
       "year": 1534,
-      "tag": "FACT",
+      "tag": "GEOGRAPHY",
       "title": "Jacques Cartier is the first European to describe and map the Saint Lawrence River."
     },
     {
       "year": 1928,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "Charles Kingsford Smith completes the first trans-Pacific flight in a Fokker Trimotor monoplane."
     },
     {
       "year": 1999,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Kosovo War: The Federal Republic of Yugoslavia and NATO sign a peace treaty."
     },
     {
@@ -3549,7 +3549,7 @@
     },
     {
       "year": 1940,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Military resistance to the German occupation of Norway ends."
     },
     {
@@ -3571,12 +3571,12 @@
     },
     {
       "year": 1940,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Siege of Malta begins with a series of Italian air raids."
     },
     {
       "year": 1987,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Diane Abbott, Paul Boateng and Bernie Grant are elected as the first black MPs in Great Britain."
     },
     {
@@ -3588,7 +3588,7 @@
   "06-12": [
     {
       "year": 1653,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "First Anglo-Dutch War: The Battle of the Gabbard begins, lasting until the following day."
     },
     {
@@ -3598,63 +3598,63 @@
     },
     {
       "year": 1991,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "In modern Russia's first democratic election, Boris Yeltsin is elected as the President of Russia."
     },
     {
       "year": 2019,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Kassym-Jomart Tokayev is inaugurated as the second president of Kazakhstan."
     }
   ],
   "06-13": [
     {
       "year": 1774,
-      "tag": "FACT",
+      "tag": "GEOGRAPHY",
       "title": "Rhode Island becomes the first of Britain's North American colonies to ban the importation of slaves."
     },
     {
       "year": 1927,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "Aviator Charles Lindbergh receives a ticker tape parade up 5th Avenue in New York City."
     },
     {
       "year": 1982,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Fahd becomes King of Saudi Arabia upon the death of his brother, Khalid."
     },
     {
       "year": 2002,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The United States withdraws from the Anti-Ballistic Missile Treaty."
     }
   ],
   "06-14": [
     {
       "year": 1158,
-      "tag": "FACT",
+      "tag": "GEOGRAPHY",
       "title": "The city of Munich is founded by Henry the Lion on the banks of the river Isar."
     },
     {
       "year": 1940,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Soviet Union presents an ultimatum to Lithuania, resulting in Lithuanian loss of independence."
     },
     {
       "year": 1962,
-      "tag": "SCIENCE",
+      "tag": "FACT",
       "title": "The European Space Research Organisation is established in Paris – later becoming the European Space Agency."
     },
     {
       "year": 2014,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "A Ukraine military Ilyushin Il-76 airlifter is shot down, killing all 49 people on board."
     }
   ],
   "06-15": [
     {
       "year": 1864,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "American Civil War: The Second Battle of Petersburg begins."
     },
     {
@@ -3669,19 +3669,19 @@
     },
     {
       "year": 2013,
-      "tag": "INCIDENT",
+      "tag": "FACT",
       "title": "A bomb explodes on a bus in the Pakistani city of Quetta, killing at least 25 people and wounding 22 others."
     }
   ],
   "06-16": [
     {
       "year": 1779,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "American Revolutionary War: Spain declares war on the Kingdom of Great Britain."
     },
     {
       "year": 1925,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Artek, the most famous Young Pioneer camp of the Soviet Union, is established."
     },
     {
@@ -3698,12 +3698,12 @@
   "06-17": [
     {
       "year": 1898,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The United States Navy Hospital Corps is established."
     },
     {
       "year": 1944,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Iceland declares independence from Denmark and becomes a republic."
     },
     {
@@ -3713,14 +3713,14 @@
     },
     {
       "year": 2021,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Juneteenth National Independence Day is signed into law by President Joe Biden."
     }
   ],
   "06-18": [
     {
       "year": 1887,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Reinsurance Treaty between Germany and Russia is signed."
     },
     {
@@ -3742,7 +3742,7 @@
   "06-19": [
     {
       "year": 325,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The original Nicene Creed is adopted at the First Council of Nicaea."
     },
     {
@@ -3774,7 +3774,7 @@
     },
     {
       "year": 1960,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Mali Federation gains independence from France."
     },
     {
@@ -3786,17 +3786,17 @@
   "06-21": [
     {
       "year": 1824,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Greek War of Independence: Egyptian forces capture Psara in the Aegean Sea."
     },
     {
       "year": 1929,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "An agreement brokered by U.S. Ambassador Dwight Whitney Morrow ends the Cristero War in Mexico."
     },
     {
       "year": 1957,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Ellen Fairclough is sworn in as Canada's first female Cabinet Minister."
     },
     {
@@ -3808,12 +3808,12 @@
   "06-22": [
     {
       "year": 1870,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The United States Department of Justice is created by the U.S. Congress."
     },
     {
       "year": 1945,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Battle of Okinawa comes to an end with an American flag-raising ceremony."
     },
     {
@@ -3823,14 +3823,14 @@
     },
     {
       "year": 2007,
-      "tag": "FACT",
+      "tag": "NATURE",
       "title": "The small town of Elie, Manitoba is hit by Canada's most intense tornado on record."
     }
   ],
   "06-23": [
     {
       "year": 1314,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "First War of Scottish Independence: The Battle of Bannockburn begins."
     },
     {
@@ -3840,19 +3840,19 @@
     },
     {
       "year": 1951,
-      "tag": "FACT",
+      "tag": "GEOGRAPHY",
       "title": "The ocean liner SS United States is christened and launched."
     },
     {
       "year": 2016,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Brexit: The United Kingdom votes in a referendum to leave the European Union, by 52% to 48%."
     }
   ],
   "06-24": [
     {
       "year": 1793,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The first Republican constitution in France is adopted."
     },
     {
@@ -3879,7 +3879,7 @@
     },
     {
       "year": 1938,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Dr. Douglas Hyde is inaugurated as the first President of Ireland."
     },
     {
@@ -3889,7 +3889,7 @@
     },
     {
       "year": 2007,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "PMTair Flight 241 crashes in the Dâmrei Mountains in Kampot Province, Cambodia, killing all 22 people on board."
     }
   ],
@@ -3901,29 +3901,29 @@
     },
     {
       "year": 1945,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The United Nations Charter is signed by 50 Allied nations in San Francisco, California."
     },
     {
       "year": 1991,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Yugoslav Wars: The Yugoslav People's Army begins the Ten-Day War in Slovenia."
     },
     {
       "year": 2006,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Mari Alkatiri, the first Prime Minister of East Timor, resigns after weeks of political unrest."
     }
   ],
   "06-27": [
     {
       "year": 1806,
-      "tag": "FACT",
+      "tag": "GEOGRAPHY",
       "title": "British forces take Buenos Aires during the first of the British invasions of the River Plate."
     },
     {
       "year": 1941,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "German troops capture the city of Białystok during Operation Barbarossa."
     },
     {
@@ -3945,12 +3945,12 @@
     },
     {
       "year": 1922,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Irish Civil War begins with the shelling of the Four Courts in Dublin by Free State forces."
     },
     {
       "year": 1982,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "Aeroflot Flight 8641 crashes in Mazyr, Belarus, killing 132 people."
     },
     {
@@ -3962,12 +3962,12 @@
   "06-29": [
     {
       "year": 1534,
-      "tag": "FACT",
+      "tag": "GEOGRAPHY",
       "title": "Jacques Cartier is the first European to reach Prince Edward Island."
     },
     {
       "year": 1913,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Bulgarian army launches attacks against Serbian positions, triggering the Second Balkan War."
     },
     {
@@ -3977,14 +3977,14 @@
     },
     {
       "year": 2014,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Islamic State of Iraq and the Levant self-declares its caliphate in Syria and northern Iraq."
     }
   ],
   "06-30": [
     {
       "year": 1876,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Serbia declares war on the Ottoman Empire, leading to the Serbian Wars for Independence."
     },
     {
@@ -3994,24 +3994,24 @@
     },
     {
       "year": 1960,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Belgian Congo gains independence as Republic of the Congo."
     },
     {
       "year": 2013,
-      "tag": "FACT",
+      "tag": "NATURE",
       "title": "Nineteen firefighters die controlling a wildfire near Yarnell, Arizona."
     }
   ],
   "07-01": [
     {
       "year": 1885,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The United States terminates reciprocity and fishery agreement with Canada."
     },
     {
       "year": 1942,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "start of the First Battle of El Alamein."
     },
     {
@@ -4043,7 +4043,7 @@
     },
     {
       "year": 2005,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "The Live 8 benefit concerts takes place in the G8 states and in South Africa."
     }
   ],
@@ -4055,7 +4055,7 @@
     },
     {
       "year": 1944,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Minsk Offensive clears German troops from the city."
     },
     {
@@ -4065,7 +4065,7 @@
     },
     {
       "year": 2006,
-      "tag": "FACT",
+      "tag": "INCIDENT",
       "title": "The Valencia Metro derailment kills 41 people."
     }
   ],
@@ -4077,29 +4077,29 @@
     },
     {
       "year": 1942,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The 250-day Siege of Sevastopol in the Crimea ends when the city falls to Axis forces."
     },
     {
       "year": 1998,
-      "tag": "FACT",
+      "tag": "SPACE",
       "title": "Japan launches the Nozomi probe to Mars, joining the United States and Russia as a space exploring nation."
     },
     {
       "year": 2009,
-      "tag": "FACT",
+      "tag": "GEOGRAPHY",
       "title": "The first of four days of bombings begins on the southern Philippine island group of Mindanao."
     }
   ],
   "07-05": [
     {
       "year": 1811,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Venezuelan Declaration of Independence is adopted by a congress of the provinces."
     },
     {
       "year": 1943,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "An Allied invasion fleet sails for Sicily."
     },
     {
@@ -4116,7 +4116,7 @@
   "07-06": [
     {
       "year": 1560,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Treaty of Edinburgh is signed by Scotland and England."
     },
     {
@@ -4131,14 +4131,14 @@
     },
     {
       "year": 2006,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Nathu La pass between India and China, sealed during the Sino-Indian War, re-opens for trade after 44 years."
     }
   ],
   "07-07": [
     {
       "year": 1863,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The United States begins its first military draft; exemptions cost $300."
     },
     {
@@ -4148,12 +4148,12 @@
     },
     {
       "year": 1978,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Solomon Islands becomes independent from the United Kingdom."
     },
     {
       "year": 2007,
-      "tag": "CULTURE",
+      "tag": "FACT",
       "title": "The first Live Earth benefit concert was held in 11 locations around the world."
     }
   ],
@@ -4165,7 +4165,7 @@
     },
     {
       "year": 1937,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Turkey, Iran, Iraq, and Afghanistan sign the Treaty of Saadabad."
     },
     {
@@ -4182,7 +4182,7 @@
   "07-09": [
     {
       "year": 1816,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Argentina declares independence from Spain."
     },
     {
@@ -4197,14 +4197,14 @@
     },
     {
       "year": 2011,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "South Sudan gains independence and secedes from Sudan."
     }
   ],
   "07-10": [
     {
       "year": 1778,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "American Revolution: Louis XVI of France declares war on the Kingdom of Great Britain."
     },
     {
@@ -4214,7 +4214,7 @@
     },
     {
       "year": 1973,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Bahamas gains full independence within the Commonwealth of Nations."
     },
     {
@@ -4231,7 +4231,7 @@
     },
     {
       "year": 1921,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "A truce in the Irish War of Independence comes into effect."
     },
     {
@@ -4253,12 +4253,12 @@
     },
     {
       "year": 1920,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Soviet–Lithuanian Peace Treaty is signed, by which Soviet Russia recognizes the independence of Lithuania."
     },
     {
       "year": 1975,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "São Tomé and Príncipe declare independence from Portugal."
     },
     {
@@ -4275,7 +4275,7 @@
     },
     {
       "year": 1913,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The 1913 Romanian Army cholera outbreak during the Second Balkan War starts."
     },
     {
@@ -4285,14 +4285,14 @@
     },
     {
       "year": 2011,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "United Nations Security Council Resolution 1999 is adopted, which admits South Sudan to member status of…"
     }
   ],
   "07-14": [
     {
       "year": 1223,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Louis VIII becomes King of France upon the death of his father, Philip II."
     },
     {
@@ -4302,7 +4302,7 @@
     },
     {
       "year": 1950,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Korean War: beginning of the Battle of Taejon."
     },
     {
@@ -4319,17 +4319,17 @@
     },
     {
       "year": 1922,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Japanese Communist Party is established in Japan."
     },
     {
       "year": 1971,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The United Red Army is founded in Japan."
     },
     {
       "year": 2009,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "Caspian Airlines Flight 7908 crashes near Jannatabad, Qazvin, Iran, killing 168."
     }
   ],
@@ -4341,7 +4341,7 @@
     },
     {
       "year": 1931,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Emperor Haile Selassie signs the first constitution of Ethiopia."
     },
     {
@@ -4380,7 +4380,7 @@
   "07-18": [
     {
       "year": 1870,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The First Vatican Council decrees the dogma of papal infallibility."
     },
     {
@@ -4402,7 +4402,7 @@
   "07-19": [
     {
       "year": 1544,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Italian War of 1542–46: The first Siege of Boulogne begins."
     },
     {
@@ -4417,14 +4417,14 @@
     },
     {
       "year": 2011,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Guinean President Alpha Condé survives an attempted assassination and coup d'état at his residence in Conakry."
     }
   ],
   "07-20": [
     {
       "year": 1810,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Citizens of Bogotá, New Granada declare independence from Spain."
     },
     {
@@ -4434,7 +4434,7 @@
     },
     {
       "year": 1960,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "The Polaris missile is successfully launched from a submarine, the USS George Washington, for the first time."
     },
     {
@@ -4446,7 +4446,7 @@
   "07-21": [
     {
       "year": 1718,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Treaty of Passarowitz between the Ottoman Empire, Austria and the Republic of Venice is signed."
     },
     {
@@ -4461,7 +4461,7 @@
     },
     {
       "year": 2008,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Ram Baran Yadav is declared the first President of Nepal."
     }
   ],
@@ -4473,7 +4473,7 @@
     },
     {
       "year": 1943,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Allied forces capture Palermo during the Allied invasion of Sicily."
     },
     {
@@ -4483,14 +4483,14 @@
     },
     {
       "year": 2019,
-      "tag": "SCIENCE",
+      "tag": "SPACE",
       "title": "Chandrayaan-2, the second lunar exploration mission developed by Indian Space Research Organisation after…"
     }
   ],
   "07-23": [
     {
       "year": 1881,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Boundary Treaty of 1881 between Chile and Argentina is signed in Buenos Aires."
     },
     {
@@ -4512,12 +4512,12 @@
   "07-24": [
     {
       "year": 1866,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Reconstruction: Tennessee becomes the first U.S."
     },
     {
       "year": 1924,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Themistoklis Sofoulis becomes Prime Minister of Greece."
     },
     {
@@ -4527,7 +4527,7 @@
     },
     {
       "year": 2009,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "Aria Air Flight 1525 crashes at Mashhad International Airport, killing 16."
     }
   ],
@@ -4539,7 +4539,7 @@
     },
     {
       "year": 1915,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "RFC Captain Lanoe Hawker becomes the first British pursuit aviator to earn the Victoria Cross."
     },
     {
@@ -4549,19 +4549,19 @@
     },
     {
       "year": 2007,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Pratibha Patil is sworn in as India's first female president."
     }
   ],
   "07-26": [
     {
       "year": 1848,
-      "tag": "POLITICS",
+      "tag": "CULTURE",
       "title": "The University of Wisconsin–Madison is established by Nelson Dewey, first Governor of Wisconsin."
     },
     {
       "year": 1945,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Potsdam Declaration is signed in Potsdam, Germany."
     },
     {
@@ -4578,7 +4578,7 @@
   "07-27": [
     {
       "year": 1778,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "American Revolution: First Battle of Ushant: British and French fleets fight to a standoff."
     },
     {
@@ -4588,7 +4588,7 @@
     },
     {
       "year": 1955,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Austrian State Treaty restores Austrian sovereignty."
     },
     {
@@ -4600,7 +4600,7 @@
   "07-28": [
     {
       "year": 1821,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "José de San Martín declares the independence of Peru from Spain."
     },
     {
@@ -4644,7 +4644,7 @@
   "07-30": [
     {
       "year": 1859,
-      "tag": "FACT",
+      "tag": "GEOGRAPHY",
       "title": "First ascent of Grand Combin, one of the highest summits in the Alps."
     },
     {
@@ -4654,7 +4654,7 @@
     },
     {
       "year": 1980,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Vanuatu gains independence."
     },
     {
@@ -4671,7 +4671,7 @@
     },
     {
       "year": 1917,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Battle of Passchendaele begins near Ypres in West Flanders, Belgium."
     },
     {
@@ -4693,12 +4693,12 @@
     },
     {
       "year": 1944,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Warsaw Uprising against the Nazi German occupation breaks out in Warsaw, Poland."
     },
     {
       "year": 1960,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Dahomey declares independence from France."
     },
     {
@@ -4715,7 +4715,7 @@
     },
     {
       "year": 1945,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Potsdam Conference ends."
     },
     {
@@ -4732,7 +4732,7 @@
   "08-03": [
     {
       "year": 1795,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Treaty of Greenville is signed, ending the Northwest Indian War in the Ohio Country."
     },
     {
@@ -4742,7 +4742,7 @@
     },
     {
       "year": 1960,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Niger gains independence from France."
     },
     {
@@ -4759,12 +4759,12 @@
     },
     {
       "year": 1924,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Diplomatic relations between Mexico and the Soviet Union are established."
     },
     {
       "year": 1995,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Operation Storm, the last major battle of the Croatian War of Independence begins."
     },
     {
@@ -4776,7 +4776,7 @@
   "08-05": [
     {
       "year": 1874,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Japan launches its postal savings system, modeled after a similar system in the United Kingdom."
     },
     {
@@ -4786,19 +4786,19 @@
     },
     {
       "year": 1965,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Indo-Pakistani war of 1965 begins as Pakistani soldiers cross the Line of Control dressed as locals."
     },
     {
       "year": 2008,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The New England Revolution win the 2008 North American SuperLiga final against the Houston Dynamo."
     }
   ],
   "08-06": [
     {
       "year": 1825,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Bolivian Declaration of Independence is proclaimed."
     },
     {
@@ -4830,12 +4830,12 @@
     },
     {
       "year": 1990,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "First American soldiers arrive in Saudi Arabia as part of the Gulf War."
     },
     {
       "year": 2008,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The start of the Russo-Georgian War over the territory of South Ossetia."
     }
   ],
@@ -4847,7 +4847,7 @@
     },
     {
       "year": 1942,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Quit India Movement is launched in India against the British rule in response to Mohandas Gandhi's call for…"
     },
     {
@@ -4857,24 +4857,24 @@
     },
     {
       "year": 2019,
-      "tag": "WAR",
+      "tag": "INCIDENT",
       "title": "An explosion at the State Central Navy Testing Range in Nyonoksa, Russia, kills five people."
     }
   ],
   "08-09": [
     {
       "year": 1610,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The First Anglo-Powhatan War begins in colonial Virginia."
     },
     {
       "year": 1925,
-      "tag": "POLITICS",
+      "tag": "TECHNOLOGY",
       "title": "A train robbery takes place in Kakori, near Lucknow, India, by the Indian independence revolutionaries."
     },
     {
       "year": 1973,
-      "tag": "FACT",
+      "tag": "SPACE",
       "title": "Mars 7 is launched from the USSR."
     },
     {
@@ -4886,17 +4886,17 @@
   "08-10": [
     {
       "year": 1641,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Treaty of London between England and Scotland, ending the Bishops' Wars, is signed."
     },
     {
       "year": 1944,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Battle of Narva on the Eastern Front ends with a defensive German victory."
     },
     {
       "year": 1990,
-      "tag": "FACT",
+      "tag": "SPACE",
       "title": "The Magellan space probe reaches Venus."
     },
     {
@@ -4908,22 +4908,22 @@
   "08-11": [
     {
       "year": 1813,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "In Colombia, Juan del Corral declares the independence of Antioquia."
     },
     {
       "year": 1920,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Latvian–Soviet Peace Treaty, which relinquished Russia's authority and pretenses to Latvia, is signed."
     },
     {
       "year": 1991,
-      "tag": "CULTURE",
+      "tag": "FACT",
       "title": "Nickelodeon's first line of \"Nicktoons\" premiere on the channel."
     },
     {
       "year": 2023,
-      "tag": "FACT",
+      "tag": "SPACE",
       "title": "Luna 25 launches from the Vostochny Cosmodrome."
     }
   ],
@@ -4935,7 +4935,7 @@
     },
     {
       "year": 1914,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "France, the United Kingdom and the British Empire declare war on Austria-Hungary."
     },
     {
@@ -4952,17 +4952,17 @@
   "08-13": [
     {
       "year": 1898,
-      "tag": "FACT",
+      "tag": "SPACE",
       "title": "Carl Gustav Witt discovers 433 Eros, the first near-Earth asteroid to be found."
     },
     {
       "year": 1937,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Second Sino-Japanese War: The Battle of Shanghai begins."
     },
     {
       "year": 1960,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Central African Republic declares independence from France."
     },
     {
@@ -4979,12 +4979,12 @@
     },
     {
       "year": 1901,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "The first claimed powered flight, by Gustave Whitehead in his Number 21."
     },
     {
       "year": 1971,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Bahrain declares independence from Britain."
     },
     {
@@ -4996,17 +4996,17 @@
   "08-15": [
     {
       "year": 1899,
-      "tag": "CULTURE",
+      "tag": "FACT",
       "title": "Fratton Park football ground in Portsmouth, England is officially first opened."
     },
     {
       "year": 1914,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The First Russian Army, led by Paul von Rennenkampf, enters East Prussia."
     },
     {
       "year": 1971,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Bahrain gains independence from the United Kingdom."
     },
     {
@@ -5018,7 +5018,7 @@
   "08-16": [
     {
       "year": 1793,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "French Revolution: A levée en masse is decreed by the National Convention."
     },
     {
@@ -5040,17 +5040,17 @@
   "08-17": [
     {
       "year": 1883,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The first public performance of the Dominican Republic's national anthem, Himno Nacional."
     },
     {
       "year": 1945,
-      "tag": "CULTURE",
+      "tag": "NATURE",
       "title": "The novella Animal Farm by George Orwell is first published."
     },
     {
       "year": 1977,
-      "tag": "FACT",
+      "tag": "GEOGRAPHY",
       "title": "The Soviet icebreaker Arktika becomes the first surface ship to reach the North Pole."
     },
     {
@@ -5067,7 +5067,7 @@
     },
     {
       "year": 1945,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Sukarno takes office as the first president of Indonesia, following the country's declaration of independence…"
     },
     {
@@ -5084,22 +5084,22 @@
   "08-19": [
     {
       "year": 1861,
-      "tag": "FACT",
+      "tag": "GEOGRAPHY",
       "title": "First ascent of Weisshorn, fifth highest summit in the Alps."
     },
     {
       "year": 1936,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Great Purge of the Soviet Union begins when the first of the Moscow Trials is convened."
     },
     {
       "year": 1991,
-      "tag": "INCIDENT",
+      "tag": "FACT",
       "title": "Crown Heights riot in New York City begins."
     },
     {
       "year": 2005,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The first-ever joint military exercise between Russia and China, called Peace Mission 2005 begins."
     }
   ],
@@ -5133,7 +5133,7 @@
     },
     {
       "year": 1944,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Dumbarton Oaks Conference, prelude to the United Nations, begins."
     },
     {
@@ -5143,14 +5143,14 @@
     },
     {
       "year": 2000,
-      "tag": "CULTURE",
+      "tag": "FACT",
       "title": "American golfer Tiger Woods wins the 82nd PGA Championship and becomes the first golfer since Ben Hogan in…"
     }
   ],
   "08-22": [
     {
       "year": 1791,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Haitian slave revolution begins in Saint-Domingue, Haiti."
     },
     {
@@ -5160,7 +5160,7 @@
     },
     {
       "year": 1991,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Iceland is the first nation in the world to recognize the independence of the Baltic states."
     },
     {
@@ -5172,7 +5172,7 @@
   "08-23": [
     {
       "year": 1866,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Austro-Prussian War ends with the Treaty of Prague."
     },
     {
@@ -5182,7 +5182,7 @@
     },
     {
       "year": 1990,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Armenia declares its independence from the Soviet Union."
     },
     {
@@ -5194,7 +5194,7 @@
   "08-24": [
     {
       "year": 1821,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Treaty of Córdoba is signed in Córdoba, now in Veracruz, Mexico."
     },
     {
@@ -5204,7 +5204,7 @@
     },
     {
       "year": 1950,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Edith Sampson becomes the first black U.S. delegate to the United Nations."
     },
     {
@@ -5216,7 +5216,7 @@
   "08-25": [
     {
       "year": 1830,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Belgian Revolution begins."
     },
     {
@@ -5226,7 +5226,7 @@
     },
     {
       "year": 1991,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Belarus gains its independence from the Soviet Union."
     },
     {
@@ -5238,17 +5238,17 @@
   "08-26": [
     {
       "year": 1883,
-      "tag": "FACT",
+      "tag": "INCIDENT",
       "title": "The 1883 eruption of Krakatoa begins its final, paroxysmal, stage."
     },
     {
       "year": 1920,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The 19th amendment to United States Constitution, giving women the right to vote, is certified."
     },
     {
       "year": 1998,
-      "tag": "SPACE",
+      "tag": "TECHNOLOGY",
       "title": "The first flight of the Boeing Delta III ends in disaster 75 seconds after liftoff."
     },
     {
@@ -5260,7 +5260,7 @@
   "08-27": [
     {
       "year": 1689,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Treaty of Nerchinsk is signed by Russia and the Qing Empire."
     },
     {
@@ -5275,7 +5275,7 @@
     },
     {
       "year": 2011,
-      "tag": "INCIDENT",
+      "tag": "NATURE",
       "title": "Hurricane Irene strikes the United States east coast, killing 47 and causing an estimated $15.6 billion in…"
     }
   ],
@@ -5292,7 +5292,7 @@
     },
     {
       "year": 1964,
-      "tag": "INCIDENT",
+      "tag": "FACT",
       "title": "The Philadelphia race riot begins."
     },
     {
@@ -5304,7 +5304,7 @@
   "08-29": [
     {
       "year": 1842,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Treaty of Nanking signing ends the First Opium War."
     },
     {
@@ -5319,19 +5319,19 @@
     },
     {
       "year": 2012,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The XIV Paralympic Games open in London, England, United Kingdom."
     }
   ],
   "08-30": [
     {
       "year": 1721,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Great Northern War between Sweden and Russia ends in the Treaty of Nystad."
     },
     {
       "year": 1941,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Tighina Agreement, a treaty regarding administration issues of the Transnistria Governorate."
     },
     {
@@ -5341,24 +5341,24 @@
     },
     {
       "year": 2008,
-      "tag": "INCIDENT",
+      "tag": "NATURE",
       "title": "A Conviasa Boeing 737 crashes into Illiniza Volcano in Ecuador, killing all three people on board."
     }
   ],
   "08-31": [
     {
       "year": 1776,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "William Livingston, the first Governor of New Jersey, begins serving his first term."
     },
     {
       "year": 1943,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "USS Harmon, the first U.S. Navy ship to be named after a black person, is commissioned."
     },
     {
       "year": 1999,
-      "tag": "FACT",
+      "tag": "INCIDENT",
       "title": "The first of a series of bombings in Moscow kills one person and wounds 40 others."
     },
     {
@@ -5375,7 +5375,7 @@
     },
     {
       "year": 1944,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Launch of Operation Ratweek, complicating German retreat."
     },
     {
@@ -5385,7 +5385,7 @@
     },
     {
       "year": 2008,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Iraq War: The United States Armed Forces transfers control of Anbar Province to the Iraqi Armed Forces."
     }
   ],
@@ -5402,12 +5402,12 @@
     },
     {
       "year": 1968,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Operation OAU begins during the Nigerian Civil War."
     },
     {
       "year": 2023,
-      "tag": "SCIENCE",
+      "tag": "FACT",
       "title": "India's first solar observation mission: The Indian Space Research Organisation successfully launches…"
     }
   ],
@@ -5424,24 +5424,24 @@
     },
     {
       "year": 1989,
-      "tag": "TECHNOLOGY",
+      "tag": "NATURE",
       "title": "Varig Flight 254 crashes in the Amazon rainforest near São José do Xingu in Brazil, killing 12."
     },
     {
       "year": 2004,
-      "tag": "WAR",
+      "tag": "CULTURE",
       "title": "Beslan school siege results in over 330 fatalities, including 186 children."
     }
   ],
   "09-04": [
     {
       "year": 1882,
-      "tag": "FACT",
+      "tag": "TECHNOLOGY",
       "title": "The Pearl Street Station in New York City becomes the first power plant to supply electricity to paying…"
     },
     {
       "year": 1939,
-      "tag": "WAR",
+      "tag": "INCIDENT",
       "title": "William J. Murphy commands the first Royal Air Force attack on Germany."
     },
     {
@@ -5463,7 +5463,7 @@
     },
     {
       "year": 1937,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Spanish Civil War: Llanes falls to the Nationalists following a one-day siege."
     },
     {
@@ -5473,7 +5473,7 @@
     },
     {
       "year": 2022,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Liz Truss is declared the winner of the UK Conservative Party leadership election, beating Rishi Sunak."
     }
   ],
@@ -5485,12 +5485,12 @@
     },
     {
       "year": 1936,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Spanish Civil War: The Interprovincial Council of Asturias and León is established."
     },
     {
       "year": 1991,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Soviet Union recognizes the independence of the Baltic states Estonia, Latvia, and Lithuania."
     },
     {
@@ -5502,12 +5502,12 @@
   "09-07": [
     {
       "year": 1625,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Treaty of Southampton makes an alliance between England and the Dutch Republic against Spain."
     },
     {
       "year": 1932,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Battle of Boquerón, the first major battle of the Chaco War, commences."
     },
     {
@@ -5524,7 +5524,7 @@
   "09-08": [
     {
       "year": 1808,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Treaty of Paris is signed ending the French military occupation of Prussia."
     },
     {
@@ -5534,7 +5534,7 @@
     },
     {
       "year": 1954,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Southeast Asia Treaty Organization is established."
     },
     {
@@ -5546,7 +5546,7 @@
   "09-09": [
     {
       "year": 1892,
-      "tag": "FACT",
+      "tag": "SPACE",
       "title": "Amalthea becomes the last moon to be discovered without the use of photography."
     },
     {
@@ -5561,24 +5561,24 @@
     },
     {
       "year": 2015,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Elizabeth II becomes the longest reigning monarch of the United Kingdom."
     }
   ],
   "09-10": [
     {
       "year": 1776,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "American Revolutionary War: Nathan Hale volunteers to spy for the Continental Army."
     },
     {
       "year": 1936,
-      "tag": "CULTURE",
+      "tag": "FACT",
       "title": "The first world individual Speedway World Championship was held at London's Wembley Stadium."
     },
     {
       "year": 1974,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Guinea-Bissau gains independence from Portugal."
     },
     {
@@ -5590,7 +5590,7 @@
   "09-11": [
     {
       "year": 1852,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Outbreak of Revolution of September 11 resulting in the State of Buenos Aires declaring independence as a…"
     },
     {
@@ -5605,7 +5605,7 @@
     },
     {
       "year": 2024,
-      "tag": "INCIDENT",
+      "tag": "NATURE",
       "title": "Hurricane Francine impacts the Gulf of Mexico, as a Category 2 hurricane."
     }
   ],
@@ -5627,14 +5627,14 @@
     },
     {
       "year": 2007,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Former Philippine President Joseph Estrada is convicted of plunder."
     }
   ],
   "09-13": [
     {
       "year": 1791,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "King Louis XVI accepts the new French constitution."
     },
     {
@@ -5649,41 +5649,41 @@
     },
     {
       "year": 2007,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Declaration on the Rights of Indigenous Peoples is adopted by the United Nations General Assembly."
     }
   ],
   "09-14": [
     {
       "year": 1829,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Ottoman Empire signs the Treaty of Adrianople with Russia, thus ending the Russo-Turkish War."
     },
     {
       "year": 1944,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Maastricht becomes the first Dutch city to be liberated by allied forces."
     },
     {
       "year": 1984,
-      "tag": "FACT",
+      "tag": "GEOGRAPHY",
       "title": "Joe Kittinger becomes the first person to fly a gas balloon alone across the Atlantic Ocean."
     },
     {
       "year": 2003,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "In a referendum, Estonia approves joining the European Union."
     }
   ],
   "09-15": [
     {
       "year": 1821,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Captaincy General of Guatemala declares independence from Spain."
     },
     {
       "year": 1916,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Tanks are used for the first time in battle, at the Battle of the Somme."
     },
     {
@@ -5693,19 +5693,19 @@
     },
     {
       "year": 2017,
-      "tag": "FACT",
+      "tag": "INCIDENT",
       "title": "The Parsons Green bombing takes place in London."
     }
   ],
   "09-16": [
     {
       "year": 1810,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "With the Grito de Dolores, Father Miguel Hidalgo begins Mexico's fight for independence from Spain."
     },
     {
       "year": 1914,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Siege of Przemyśl begins."
     },
     {
@@ -5722,12 +5722,12 @@
   "09-17": [
     {
       "year": 1778,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Treaty of Fort Pitt is signed."
     },
     {
       "year": 1944,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Soviet troops launch the Tallinn Offensive against Germany and pro-independence Estonian units."
     },
     {
@@ -5744,22 +5744,22 @@
   "09-18": [
     {
       "year": 1851,
-      "tag": "FACT",
+      "tag": "CULTURE",
       "title": "First publication of The New-York Daily Times, which later becomes The New York Times."
     },
     {
       "year": 1944,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Battle of Arracourt begins."
     },
     {
       "year": 1990,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Liechtenstein becomes a member of the United Nations."
     },
     {
       "year": 2014,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Scotland votes against independence from the United Kingdom, by 55% to 45%."
     }
   ],
@@ -5771,17 +5771,17 @@
     },
     {
       "year": 1944,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Battle of Hürtgen Forest begins."
     },
     {
       "year": 1983,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Saint Kitts and Nevis gains its independence."
     },
     {
       "year": 2006,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Thai army stages a coup. The Constitution is revoked and martial law is declared."
     }
   ],
@@ -5798,12 +5798,12 @@
     },
     {
       "year": 1990,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "South Ossetia declares its independence from Georgia."
     },
     {
       "year": 2011,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The United States military ends its \"don't ask, don't tell\" policy."
     }
   ],
@@ -5815,12 +5815,12 @@
     },
     {
       "year": 1942,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "The Boeing B-29 Superfortress makes its maiden flight."
     },
     {
       "year": 1991,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Armenia gains independence from the Soviet Union."
     },
     {
@@ -5842,29 +5842,29 @@
     },
     {
       "year": 1948,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Israeli-Palestine conflict: The All-Palestine Government is established by the Arab League."
     },
     {
       "year": 2024,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Anura Kumara Dissanayake is elected as the 9th President Of Sri Lanka."
     }
   ],
   "09-23": [
     {
       "year": 1821,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Tripolitsa, Greece, is captured by Greek rebels during the Greek War of Independence."
     },
     {
       "year": 1905,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Norway and Sweden sign the Karlstad Treaty, peacefully dissolving the Union between the two countries."
     },
     {
       "year": 1999,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "Qantas Flight 1 overruns a runway in Bangkok during a storm, causing minor injuries to some passengers."
     },
     {
@@ -5876,7 +5876,7 @@
   "09-24": [
     {
       "year": 1830,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "A revolutionary committee of notables forms the Provisional Government of Belgium."
     },
     {
@@ -5898,12 +5898,12 @@
   "09-25": [
     {
       "year": 1555,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Peace of Augsburg is signed by Emperor Charles V and the princes of the Schmalkaldic League."
     },
     {
       "year": 1915,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Second Battle of Champagne begins."
     },
     {
@@ -5925,12 +5925,12 @@
     },
     {
       "year": 1919,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Ukrainian War of Independence: The Revolutionary Insurgent Army of Ukraine defeats the White Russian…"
     },
     {
       "year": 1953,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Rationing of sugar in the United Kingdom ends."
     },
     {
@@ -5942,7 +5942,7 @@
   "09-27": [
     {
       "year": 1529,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Siege of Vienna begins when Suleiman I attacks the city."
     },
     {
@@ -5964,12 +5964,12 @@
   "09-28": [
     {
       "year": 1821,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Declaration of Independence of the Mexican Empire is drafted. It will be made public on 13 October."
     },
     {
       "year": 1941,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Drama uprising against the Bulgarian occupation in northern Greece begins."
     },
     {
@@ -5979,7 +5979,7 @@
     },
     {
       "year": 2008,
-      "tag": "SPACE",
+      "tag": "FACT",
       "title": "Falcon 1 becomes the first privately developed liquid-fuel ground-launched vehicle to put a payload into…"
     }
   ],
@@ -5991,7 +5991,7 @@
     },
     {
       "year": 1920,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Ukrainian War of Independence: The Ukrainian Soviet Socialist Republic agree to a truce with the Makhnovshchina."
     },
     {
@@ -6001,7 +6001,7 @@
     },
     {
       "year": 2019,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Violence and low turnout mar the 2019 Afghan presidential election."
     }
   ],
@@ -6013,29 +6013,29 @@
     },
     {
       "year": 1939,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "General Władysław Sikorski becomes prime minister of the Polish government-in-exile."
     },
     {
       "year": 1966,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Bechuanaland declares its independence, and becomes the Republic of Botswana."
     },
     {
       "year": 2016,
-      "tag": "INCIDENT",
+      "tag": "NATURE",
       "title": "Hurricane Matthew becomes a Category 5 hurricane, making it the strongest hurricane to form in the Caribbean…"
     }
   ],
   "10-01": [
     {
       "year": 1890,
-      "tag": "POLITICS",
+      "tag": "NATURE",
       "title": "Yosemite National Park is established by the U.S. Congress."
     },
     {
       "year": 1938,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Pursuant to the Munich Agreement signed the day before, Nazi Germany begins the military occupation and…"
     },
     {
@@ -6045,14 +6045,14 @@
     },
     {
       "year": 2017,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "An independence referendum, later declared illegal by the Constitutional Court of Spain."
     }
   ],
   "10-02": [
     {
       "year": 1870,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "By plebiscite, the citizens of the Papal States accept annexation by the Kingdom of Italy."
     },
     {
@@ -6062,7 +6062,7 @@
     },
     {
       "year": 1980,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Michael Myers becomes the first member of either chamber of Congress to be expelled since the Civil War."
     },
     {
@@ -6074,17 +6074,17 @@
   "10-03": [
     {
       "year": 1739,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Treaty of Niš is signed by the Ottoman Empire and Russia ending the Russian–Turkish War."
     },
     {
       "year": 1932,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Kingdom of Iraq gains independence from the United Kingdom."
     },
     {
       "year": 1991,
-      "tag": "SCIENCE",
+      "tag": "CULTURE",
       "title": "Nadine Gordimer is announced as the winner of the Nobel Prize in Literature."
     },
     {
@@ -6096,7 +6096,7 @@
   "10-04": [
     {
       "year": 1824,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Mexico adopts a new constitution and becomes a federal republic."
     },
     {
@@ -6118,7 +6118,7 @@
   "10-05": [
     {
       "year": 1789,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "French Revolution: The Women's March on Versailles effectively terminates royal authority."
     },
     {
@@ -6140,7 +6140,7 @@
   "10-06": [
     {
       "year": 1849,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The execution of the 13 Martyrs of Arad after the Hungarian war of independence."
     },
     {
@@ -6155,7 +6155,7 @@
     },
     {
       "year": 2022,
-      "tag": "SCIENCE",
+      "tag": "CULTURE",
       "title": "Annie Ernaux is awarded the Nobel Prize in Literature."
     }
   ],
@@ -6172,7 +6172,7 @@
     },
     {
       "year": 1991,
-      "tag": "WAR",
+      "tag": "INCIDENT",
       "title": "Croatian War of Independence: Bombing of the Banski Dvori in Zagreb, Croatia."
     },
     {
@@ -6184,12 +6184,12 @@
   "10-08": [
     {
       "year": 1821,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Peruvian Navy is established during the War of Independence."
     },
     {
       "year": 1921,
-      "tag": "CULTURE",
+      "tag": "TECHNOLOGY",
       "title": "KDKA in Pittsburgh's Forbes Field conducts the first live broadcast of a football game."
     },
     {
@@ -6206,12 +6206,12 @@
   "10-09": [
     {
       "year": 1874,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Universal Postal Union is created by the Treaty of Bern."
     },
     {
       "year": 1936,
-      "tag": "FACT",
+      "tag": "TECHNOLOGY",
       "title": "Boulder Dam begins to generate electricity and transmit it to Los Angeles."
     },
     {
@@ -6228,12 +6228,12 @@
   "10-10": [
     {
       "year": 1868,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Ten Years' War begins against Spanish rule in Cuba."
     },
     {
       "year": 1945,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Double Tenth Agreement is signed by the Communist Party and the Kuomintang about the future of China."
     },
     {
@@ -6250,7 +6250,7 @@
   "10-11": [
     {
       "year": 1890,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "In Washington, D.C., the Daughters of the American Revolution is founded."
     },
     {
@@ -6277,12 +6277,12 @@
     },
     {
       "year": 1945,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Lao Issara took control of Laos' government and reaffirmed the country's independence."
     },
     {
       "year": 1999,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The former Autonomous Soviet Republic of Abkhazia declares its independence from Georgia."
     },
     {
@@ -6299,12 +6299,12 @@
     },
     {
       "year": 1943,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Marshal Pietro Badoglio announces that Italy has officially declared war on Germany."
     },
     {
       "year": 1946,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "France adopts the constitution of the Fourth Republic."
     },
     {
@@ -6321,7 +6321,7 @@
     },
     {
       "year": 1920,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Finland and Soviet Russia sign the Treaty of Tartu, exchanging some territories."
     },
     {
@@ -6331,14 +6331,14 @@
     },
     {
       "year": 2003,
-      "tag": "INCIDENT",
+      "tag": "FACT",
       "title": "The Steve Bartman Incident takes place at Wrigley Field in Chicago, Illinois."
     }
   ],
   "10-15": [
     {
       "year": 1815,
-      "tag": "FACT",
+      "tag": "GEOGRAPHY",
       "title": "Napoleon begins his exile on Saint Helena in the South Atlantic Ocean."
     },
     {
@@ -6365,24 +6365,24 @@
     },
     {
       "year": 1939,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "No. 603 Squadron RAF intercepts the first Luftwaffe raid on Britain."
     },
     {
       "year": 1968,
-      "tag": "SCIENCE",
+      "tag": "CULTURE",
       "title": "Yasunari Kawabata becomes the first Japanese person to be awarded the Nobel Prize in Literature."
     },
     {
       "year": 2013,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "Lao Airlines Flight 301 crashes on approach to Pakse International Airport in Laos, killing 49 people."
     }
   ],
   "10-17": [
     {
       "year": 1797,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Treaty of Campo Formio is signed between France and Austria, ending the War of the First Coalition."
     },
     {
@@ -6392,24 +6392,24 @@
     },
     {
       "year": 1956,
-      "tag": "POLITICS",
+      "tag": "TECHNOLOGY",
       "title": "The first commercial nuclear power station is officially opened by Queen Elizabeth II in Sellafield, England."
     },
     {
       "year": 2019,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The 17 October Revolution starts in Lebanon."
     }
   ],
   "10-18": [
     {
       "year": 1851,
-      "tag": "CULTURE",
+      "tag": "NATURE",
       "title": "Herman Melville's Moby-Dick is first published as The Whale by Richard Bentley of London."
     },
     {
       "year": 1944,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Soviet Union begins the liberation of Czechoslovakia from Nazi Germany."
     },
     {
@@ -6426,12 +6426,12 @@
   "10-19": [
     {
       "year": 1466,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Thirteen Years' War between Poland and the Teutonic Order ends with the Second Treaty of Thorn."
     },
     {
       "year": 1944,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "A coup is launched against Juan Federico Ponce Vaides, beginning the ten-year Guatemalan Revolution."
     },
     {
@@ -6441,19 +6441,19 @@
     },
     {
       "year": 2005,
-      "tag": "INCIDENT",
+      "tag": "NATURE",
       "title": "Hurricane Wilma becomes the most intense Atlantic hurricane on record with a minimum pressure of 882 mb."
     }
   ],
   "10-20": [
     {
       "year": 1774,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "American Revolution: The Continental Association, a nonconsumption and nonimportation agreement against the…"
     },
     {
       "year": 1910,
-      "tag": "CULTURE",
+      "tag": "GEOGRAPHY",
       "title": "British ocean liner RMS Olympic is launched."
     },
     {
@@ -6463,14 +6463,14 @@
     },
     {
       "year": 2017,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Syrian civil war: The Syrian Democratic Forces declare victory in the Raqqa campaign."
     }
   ],
   "10-21": [
     {
       "year": 1797,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "In Boston Harbor, the 44-gun United States Navy frigate USS Constitution is launched."
     },
     {
@@ -6492,7 +6492,7 @@
   "10-22": [
     {
       "year": 1739,
-      "tag": "WAR",
+      "tag": "INCIDENT",
       "title": "The War of Jenkins' Ear begins with the first attack on La Guaira."
     },
     {
@@ -6507,7 +6507,7 @@
     },
     {
       "year": 2008,
-      "tag": "FACT",
+      "tag": "SPACE",
       "title": "India launches its first uncrewed lunar probe mission Chandrayaan-1."
     }
   ],
@@ -6519,12 +6519,12 @@
     },
     {
       "year": 1912,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "First Balkan War: The Battle of Kumanovo between the Serbian and Ottoman armies begins."
     },
     {
       "year": 1956,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Secret police shoot several anti-communist protesters, igniting the Hungarian Revolution."
     },
     {
@@ -6536,12 +6536,12 @@
   "10-24": [
     {
       "year": 1360,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Treaty of Brétigny is ratified, marking the end of the first phase of the Hundred Years' War."
     },
     {
       "year": 1930,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "A bloodless coup d'état in Brazil ends the First Republic, replacing it with the Vargas Era."
     },
     {
@@ -6558,7 +6558,7 @@
   "10-25": [
     {
       "year": 1822,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Greek War of Independence: The First Siege of Missolonghi begins."
     },
     {
@@ -6568,7 +6568,7 @@
     },
     {
       "year": 1973,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Egypt and Israel accept United Nations Security Council Resolution 339."
     },
     {
@@ -6580,12 +6580,12 @@
   "10-26": [
     {
       "year": 1774,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "American Revolution: The First Continental Congress adjourns in Philadelphia."
     },
     {
       "year": 1944,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Battle of Leyte Gulf ends with an overwhelming American victory."
     },
     {
@@ -6607,7 +6607,7 @@
     },
     {
       "year": 1924,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Uzbek SSR is founded in the Soviet Union."
     },
     {
@@ -6617,14 +6617,14 @@
     },
     {
       "year": 2017,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Catalonia declares independence from Spain."
     }
   ],
   "10-28": [
     {
       "year": 1835,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The United Tribes of New Zealand are established with the signature of the Declaration of Independence."
     },
     {
@@ -6639,7 +6639,7 @@
     },
     {
       "year": 2007,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Cristina Fernández de Kirchner becomes the first directly elected female President of Argentina."
     }
   ],
@@ -6651,7 +6651,7 @@
     },
     {
       "year": 1923,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Turkey becomes a republic following the dissolution of the Ottoman Empire."
     },
     {
@@ -6673,7 +6673,7 @@
     },
     {
       "year": 1920,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Communist Party of Australia is founded in Sydney."
     },
     {
@@ -6683,7 +6683,7 @@
     },
     {
       "year": 2023,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "First rescue of a prisoner during the Israeli invasion of Gaza."
     }
   ],
@@ -6695,12 +6695,12 @@
     },
     {
       "year": 1940,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Battle of Britain ends, causing Germany to abandon Operation Sea Lion."
     },
     {
       "year": 1998,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Iraq disarmament crisis begins: Iraq announces it would no longer cooperate with United Nations weapons…"
     },
     {
@@ -6722,24 +6722,24 @@
     },
     {
       "year": 1954,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Front de Libération Nationale fires the first shots of the Algerian War of Independence."
     },
     {
       "year": 2000,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Serbia and Montenegro joins the United Nations."
     }
   ],
   "11-02": [
     {
       "year": 1795,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The French Directory, a five-man revolutionary government, is created."
     },
     {
       "year": 1940,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "First day of Battle of Elaia–Kalamas between the Greeks and the Italians."
     },
     {
@@ -6761,7 +6761,7 @@
     },
     {
       "year": 1942,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Koli Point action begins during the Guadalcanal campaign and ends on November 12."
     },
     {
@@ -6771,29 +6771,29 @@
     },
     {
       "year": 2020,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The 2020 United States presidential election takes place between Democratic Joe Biden and Republican…"
     }
   ],
   "11-04": [
     {
       "year": 1798,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Russo-Ottoman siege of Corfu begins."
     },
     {
       "year": 1924,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Nellie Tayloe Ross of Wyoming becomes the first female elected as governor in the United States."
     },
     {
       "year": 1993,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "China Airlines Flight 605, a brand-new 747-400, overruns the runway at Hong Kong Kai Tak Airport."
     },
     {
       "year": 2020,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Tigray War begins with Tigrayan rebels launching attacks on Ethiopian command centers."
     }
   ],
@@ -6810,7 +6810,7 @@
     },
     {
       "year": 1996,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Bill Clinton is reelected President of the United States."
     },
     {
@@ -6822,12 +6822,12 @@
   "11-06": [
     {
       "year": 1792,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Battle of Jemappes in the French Revolutionary Wars."
     },
     {
       "year": 1943,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The 1st Ukrainian Front liberates Kyiv from German occupation."
     },
     {
@@ -6837,7 +6837,7 @@
     },
     {
       "year": 2012,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Tammy Baldwin becomes the first openly gay politician to be elected to the United States Senate."
     }
   ],
@@ -6849,7 +6849,7 @@
     },
     {
       "year": 1931,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Chinese Soviet Republic is proclaimed on the anniversary of the October Revolution."
     },
     {
@@ -6859,7 +6859,7 @@
     },
     {
       "year": 2007,
-      "tag": "INCIDENT",
+      "tag": "CULTURE",
       "title": "The Jokela school shooting in Jokela, Tuusula, Finland, takes place, resulting in the death of nine people."
     }
   ],
@@ -6871,7 +6871,7 @@
     },
     {
       "year": 1939,
-      "tag": "INCIDENT",
+      "tag": "FACT",
       "title": "Venlo Incident: Two British agents of SIS are captured by the Germans."
     },
     {
@@ -6881,7 +6881,7 @@
     },
     {
       "year": 2016,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Indian Prime Minister Narendra Modi publicly announces the withdrawal of ₹500 and ₹1000 denomination banknotes."
     }
   ],
@@ -6898,12 +6898,12 @@
     },
     {
       "year": 1953,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Cambodia gains independence from France."
     },
     {
       "year": 2020,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Second Nagorno-Karabakh War: An armistice agreement is signed by Armenia, Azerbaijan and Russia."
     }
   ],
@@ -6915,12 +6915,12 @@
     },
     {
       "year": 1939,
-      "tag": "SCIENCE",
+      "tag": "CULTURE",
       "title": "Finnish author F. E. Sillanpää is awarded the Nobel Prize in Literature."
     },
     {
       "year": 1970,
-      "tag": "POLITICS",
+      "tag": "SPACE",
       "title": "Luna 17: uncrewed space mission launched by the Soviet Union."
     },
     {
@@ -6932,12 +6932,12 @@
   "11-11": [
     {
       "year": 1865,
-      "tag": "POLITICS",
+      "tag": "GEOGRAPHY",
       "title": "Treaty of Sinchula is signed whereby Bhutan cedes the areas east of the Teesta River to the British East…"
     },
     {
       "year": 1919,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Latvian forces defeat the West Russian Volunteer Army at Riga in the Latvian War of Independence."
     },
     {
@@ -6954,17 +6954,17 @@
   "11-12": [
     {
       "year": 1439,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Plymouth becomes the first town incorporated by the English Parliament."
     },
     {
       "year": 1944,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Royal Air Force sink the German battleship Tirpitz, moored off Tromsø, Norway."
     },
     {
       "year": 1995,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Erdut Agreement regarding the peaceful resolution to the Croatian War of Independence is reached."
     },
     {
@@ -6981,17 +6981,17 @@
     },
     {
       "year": 1918,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Allied troops occupy Constantinople, the capital of the Ottoman Empire."
     },
     {
       "year": 1994,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "In a referendum, voters in Sweden decide to join the European Union."
     },
     {
       "year": 2012,
-      "tag": "FACT",
+      "tag": "SPACE",
       "title": "A total solar eclipse occurs in parts of Australia and the South Pacific."
     }
   ],
@@ -7003,7 +7003,7 @@
     },
     {
       "year": 1921,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Communist Party of Spain is founded, and issues the first edition of Mundo obrero."
     },
     {
@@ -7020,12 +7020,12 @@
   "11-15": [
     {
       "year": 1889,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Brazil is declared a republic by Marshal Deodoro da Fonseca as Emperor Pedro II is deposed in a military coup."
     },
     {
       "year": 1933,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Thailand holds its first election."
     },
     {
@@ -7074,19 +7074,19 @@
     },
     {
       "year": 1950,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "United Nations Security Council Resolution 89 relating to the Palestine Question is adopted."
     },
     {
       "year": 2003,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Actor Arnold Schwarzenegger's tenure as the governor of California begins."
     }
   ],
   "11-18": [
     {
       "year": 1889,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Elisha P. Ferry is inaugurated as first governor of Washington."
     },
     {
@@ -7113,7 +7113,7 @@
     },
     {
       "year": 1944,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The founding congress of the Communist Party of Transcarpathian Ukraine is held in Mukachevo."
     },
     {
@@ -7123,7 +7123,7 @@
     },
     {
       "year": 2013,
-      "tag": "FACT",
+      "tag": "INCIDENT",
       "title": "A double suicide bombing at the Iranian embassy in Beirut kills 23 people and injures 160 others."
     }
   ],
@@ -7135,12 +7135,12 @@
     },
     {
       "year": 1945,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Nuremberg trials: Trials against 24 Nazi war criminals start at the Palace of Justice at Nuremberg."
     },
     {
       "year": 1959,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Declaration of the Rights of the Child is adopted by the United Nations."
     },
     {
@@ -7157,7 +7157,7 @@
     },
     {
       "year": 1918,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Flag of Estonia, previously used by pro-independence activists."
     },
     {
@@ -7179,7 +7179,7 @@
     },
     {
       "year": 1943,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Lebanon gains independence from France, nearly two years after it was first announced by the Free French…"
     },
     {
@@ -7189,14 +7189,14 @@
     },
     {
       "year": 2004,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Orange Revolution begins in Ukraine, resulting from the presidential elections."
     }
   ],
   "11-23": [
     {
       "year": 1808,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "French and Poles defeat the Spanish at Battle of Tudela."
     },
     {
@@ -7211,36 +7211,36 @@
     },
     {
       "year": 2005,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Ellen Johnson Sirleaf is elected president of Liberia and becomes the first woman to lead an African country."
     }
   ],
   "11-24": [
     {
       "year": 1859,
-      "tag": "FACT",
+      "tag": "NATURE",
       "title": "Charles Darwin's On the Origin of Species is published."
     },
     {
       "year": 1963,
-      "tag": "INCIDENT",
+      "tag": "FACT",
       "title": "Lee Harvey Oswald is shot while in police custody in Dallas."
     },
     {
       "year": 1971,
-      "tag": "INCIDENT",
+      "tag": "FACT",
       "title": "The D.B. Cooper hijacking begins aboard Northwest Orient Flight 305."
     },
     {
       "year": 1974,
-      "tag": "DISCOVERY",
+      "tag": "FACT",
       "title": "The fossilized remains of Lucy are discovered in Ethiopia."
     }
   ],
   "11-25": [
     {
       "year": 1491,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The siege of Granada, the last Moorish stronghold in Spain, ends with the Treaty of Granada."
     },
     {
@@ -7250,7 +7250,7 @@
     },
     {
       "year": 1975,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Suriname gains independence from the Netherlands."
     },
     {
@@ -7267,7 +7267,7 @@
     },
     {
       "year": 1920,
-      "tag": "WAR",
+      "tag": "INCIDENT",
       "title": "Ukrainian War of Independence: The Red Army launches a surprise attack against the Makhnovshchina."
     },
     {
@@ -7277,7 +7277,7 @@
     },
     {
       "year": 2011,
-      "tag": "SCIENCE",
+      "tag": "SPACE",
       "title": "The Mars Science Laboratory launches to Mars with the Curiosity Rover."
     }
   ],
@@ -7289,7 +7289,7 @@
     },
     {
       "year": 1917,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "P. E. Svinhufvud becomes the chairman of his first senate, technically the first Prime Minister of Finland."
     },
     {
@@ -7299,14 +7299,14 @@
     },
     {
       "year": 2024,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Syrian rebel groups led by Hay'at Tahrir al-Sham launch a ground offensive into Syria."
     }
   ],
   "11-28": [
     {
       "year": 1821,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Panama Independence Day: Panama separates from Spain and joins Gran Colombia."
     },
     {
@@ -7321,19 +7321,19 @@
     },
     {
       "year": 2020,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Over seven hundred civilians are massacred by the Ethiopian National Defense Force and Eritrean Army in Aksum."
     }
   ],
   "11-29": [
     {
       "year": 1890,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Meiji Constitution goes into effect in Japan, and the first Diet convenes."
     },
     {
       "year": 1929,
-      "tag": "DISCOVERY",
+      "tag": "GEOGRAPHY",
       "title": "U.S. Admiral Richard E. Byrd leads the first expedition to fly over the South Pole."
     },
     {
@@ -7343,24 +7343,24 @@
     },
     {
       "year": 2009,
-      "tag": "FACT",
+      "tag": "INCIDENT",
       "title": "Maurice Clemmons shoots and kills four police officers inside a coffee shop in Lakewood, Washington."
     }
   ],
   "11-30": [
     {
       "year": 1872,
-      "tag": "CULTURE",
+      "tag": "FACT",
       "title": "The first-ever international football match takes place at Hamilton Crescent, Glasgow."
     },
     {
       "year": 1916,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Costa Rica signs the Buenos Aires Convention, a copyright treaty."
     },
     {
       "year": 1967,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Pakistan Peoples Party is founded by Zulfikar Ali Bhutto, who becomes its first chairman."
     },
     {
@@ -7377,12 +7377,12 @@
     },
     {
       "year": 1918,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Iceland becomes a sovereign state, yet remains a part of the Danish kingdom."
     },
     {
       "year": 1991,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Cold War: Ukrainian voters overwhelmingly approve a referendum for independence from the Soviet Union."
     },
     {
@@ -7394,7 +7394,7 @@
   "12-02": [
     {
       "year": 1852,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Louis-Napoléon Bonaparte becomes Emperor of the French as Napoleon III."
     },
     {
@@ -7421,12 +7421,12 @@
     },
     {
       "year": 1910,
-      "tag": "FACT",
+      "tag": "TECHNOLOGY",
       "title": "Modern neon lighting is first demonstrated by Georges Claude at the Paris Motor Show."
     },
     {
       "year": 1979,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Iranian Revolution: Ayatollah Ruhollah Khomeini becomes the first Supreme Leader of Iran."
     },
     {
@@ -7443,7 +7443,7 @@
     },
     {
       "year": 1942,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Carlson's patrol during the Guadalcanal campaign ends."
     },
     {
@@ -7465,7 +7465,7 @@
     },
     {
       "year": 1933,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Twenty-first Amendment to the United States Constitution is ratified."
     },
     {
@@ -7487,12 +7487,12 @@
     },
     {
       "year": 1921,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Anglo-Irish Treaty is signed in London by British and Irish representatives."
     },
     {
       "year": 1977,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "South Africa grants independence to Bophuthatswana, although it is not recognized by any other country."
     },
     {
@@ -7504,7 +7504,7 @@
   "12-07": [
     {
       "year": 1787,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Delaware becomes the first state to ratify the United States Constitution."
     },
     {
@@ -7519,14 +7519,14 @@
     },
     {
       "year": 2017,
-      "tag": "INCIDENT",
+      "tag": "CULTURE",
       "title": "Aztec High School shooting: William Atchison kills two students at his former high school."
     }
   ],
   "12-08": [
     {
       "year": 395,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Later Yan is defeated by its former vassal Northern Wei at the Battle of Canhe Slope."
     },
     {
@@ -7536,7 +7536,7 @@
     },
     {
       "year": 1955,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Flag of Europe is adopted by Council of Europe."
     },
     {
@@ -7553,17 +7553,17 @@
     },
     {
       "year": 1931,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Constituent Cortes approves a constitution which establishes the Second Spanish Republic."
     },
     {
       "year": 1987,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Israeli–Palestinian conflict: The First Intifada begins in the Gaza Strip and West Bank."
     },
     {
       "year": 2019,
-      "tag": "INCIDENT",
+      "tag": "NATURE",
       "title": "A volcano on Whakaari / White Island, New Zealand, kills 22 people after it erupts."
     }
   ],
@@ -7575,12 +7575,12 @@
     },
     {
       "year": 1909,
-      "tag": "SCIENCE",
+      "tag": "CULTURE",
       "title": "Selma Lagerlöf becomes the first female writer to receive the Nobel Prize in Literature."
     },
     {
       "year": 1991,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Nagorno-Karabakh independence referendum is held, with 99.98% voting in favor of independence."
     },
     {
@@ -7597,7 +7597,7 @@
     },
     {
       "year": 1941,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Poland declares war on the Empire of Japan."
     },
     {
@@ -7607,24 +7607,24 @@
     },
     {
       "year": 2019,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The results of the 2019 Bougainvillean independence referendum are announced."
     }
   ],
   "12-12": [
     {
       "year": 1787,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Pennsylvania becomes the second state to ratify the US Constitution."
     },
     {
       "year": 1939,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Winter War: The Battle of Tolvajärvi, also known as the first major Finnish victory in the Winter War, begins."
     },
     {
       "year": 1963,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Kenya declares independence from Great Britain."
     },
     {
@@ -7641,7 +7641,7 @@
     },
     {
       "year": 1943,
-      "tag": "WAR",
+      "tag": "INCIDENT",
       "title": "The Massacre of Kalavryta by German occupying forces in Greece."
     },
     {
@@ -7651,7 +7651,7 @@
     },
     {
       "year": 2002,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "European Union enlargement: The EU announces that Cyprus, the Czech Republic, Estonia, Hungary, Latvia."
     }
   ],
@@ -7673,19 +7673,19 @@
     },
     {
       "year": 2003,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Pakistani President Pervez Musharraf narrowly escapes an assassination attempt."
     }
   ],
   "12-15": [
     {
       "year": 1791,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The United States Bill of Rights becomes law when ratified by the Virginia General Assembly."
     },
     {
       "year": 1943,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Battle of Arawe begins during the New Britain campaign."
     },
     {
@@ -7707,17 +7707,17 @@
     },
     {
       "year": 1912,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "First Balkan War: The Royal Hellenic Navy defeats the Ottoman Navy at the Battle of Elli."
     },
     {
       "year": 1972,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Constitution of the People's Republic of Bangladesh is enacted."
     },
     {
       "year": 2024,
-      "tag": "INCIDENT",
+      "tag": "CULTURE",
       "title": "The Abundant Life Christian School shooting in Madison, Wisconsin, United States, takes place."
     }
   ],
@@ -7729,7 +7729,7 @@
     },
     {
       "year": 1907,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Ugyen Wangchuck is crowned first King of Bhutan."
     },
     {
@@ -7739,19 +7739,19 @@
     },
     {
       "year": 2003,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "SpaceShipOne, piloted by Brian Binnie, makes its first powered and first supersonic flight."
     }
   ],
   "12-18": [
     {
       "year": 1787,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "New Jersey becomes the third state to ratify the U.S. Constitution."
     },
     {
       "year": 1939,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The Battle of the Heligoland Bight, the first major air battle of the war, takes place."
     },
     {
@@ -7768,7 +7768,7 @@
   "12-19": [
     {
       "year": 1783,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "William Pitt the Younger becomes the youngest Prime Minister of the United Kingdom at 24."
     },
     {
@@ -7790,7 +7790,7 @@
   "12-20": [
     {
       "year": 1808,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Peninsular War: The Siege of Zaragoza begins."
     },
     {
@@ -7812,12 +7812,12 @@
   "12-21": [
     {
       "year": 1826,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "American settlers in Nacogdoches, Mexican Texas, declare their independence, starting the Fredonian Rebellion."
     },
     {
       "year": 1941,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "A Thai-Japanese Pact of Alliance is signed."
     },
     {
@@ -7834,17 +7834,17 @@
   "12-22": [
     {
       "year": 1891,
-      "tag": "FACT",
+      "tag": "SPACE",
       "title": "Asteroid 323 Brucia becomes the first asteroid discovered using photography."
     },
     {
       "year": 1920,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The GOELRO economic development plan is adopted by the 8th Congress of Soviets of the Russian SFSR."
     },
     {
       "year": 1996,
-      "tag": "TECHNOLOGY",
+      "tag": "FACT",
       "title": "Airborne Express Flight 827 crashes in Narrows, Virginia, killing all six people on board."
     },
     {
@@ -7861,12 +7861,12 @@
     },
     {
       "year": 1936,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Colombia becomes a signatory to the Buenos Aires copyright treaty."
     },
     {
       "year": 1954,
-      "tag": "FACT",
+      "tag": "SCIENCE",
       "title": "First successful kidney transplant is performed by J. Hartwell Harrison and Joseph Murray."
     },
     {
@@ -7878,12 +7878,12 @@
   "12-24": [
     {
       "year": 1868,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Greek Presidential Guard is established as the royal escort by King George I."
     },
     {
       "year": 1914,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "The \"Christmas truce\" begins."
     },
     {
@@ -7905,17 +7905,17 @@
     },
     {
       "year": 1941,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Battle of Hong Kong ends, beginning the Japanese occupation of Hong Kong."
     },
     {
       "year": 1977,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Israeli Prime Minister Menachem Begin meets in Egypt with its president Anwar Sadat."
     },
     {
       "year": 2021,
-      "tag": "FACT",
+      "tag": "SPACE",
       "title": "The James Webb Space Telescope is launched."
     }
   ],
@@ -7927,7 +7927,7 @@
     },
     {
       "year": 1941,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "British Prime Minister Winston Churchill addresses a joint meeting of the U.S. Congress."
     },
     {
@@ -7937,7 +7937,7 @@
     },
     {
       "year": 2004,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Orange Revolution: The final run-off election in Ukraine is held under heavy international scrutiny."
     }
   ],
@@ -7949,7 +7949,7 @@
     },
     {
       "year": 1945,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The International Monetary Fund is created with the signing of an agreement by 29 nations."
     },
     {
@@ -7966,7 +7966,7 @@
   "12-28": [
     {
       "year": 1836,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "Spain recognizes the independence of Mexico with the signing of the Santa María–Calatrava Treaty."
     },
     {
@@ -7976,19 +7976,19 @@
     },
     {
       "year": 1973,
-      "tag": "POLITICS",
+      "tag": "NATURE",
       "title": "The United States Endangered Species Act is signed into law by President Richard Nixon."
     },
     {
       "year": 2014,
-      "tag": "TECHNOLOGY",
+      "tag": "GEOGRAPHY",
       "title": "Indonesia AirAsia Flight 8501 crashes into the Karimata Strait en route from Surabaya to Singapore."
     }
   ],
   "12-29": [
     {
       "year": 1845,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The United States annexes the Republic of Texas and admits it as the 28th state."
     },
     {
@@ -8003,24 +8003,24 @@
     },
     {
       "year": 2003,
-      "tag": "INCIDENT",
+      "tag": "CULTURE",
       "title": "The last known speaker of Akkala Sami dies, rendering the language extinct."
     }
   ],
   "12-30": [
     {
       "year": 1825,
-      "tag": "POLITICS",
+      "tag": "FACT",
       "title": "The Treaty of St. Louis between the United States and the Shawnee Nation is proclaimed."
     },
     {
       "year": 1927,
-      "tag": "FACT",
+      "tag": "TECHNOLOGY",
       "title": "The Ginza Line, the first subway line in Asia, opens in Tokyo, Japan."
     },
     {
       "year": 1972,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Vietnam War: Operation Linebacker II ends."
     },
     {
@@ -8037,7 +8037,7 @@
     },
     {
       "year": 1944,
-      "tag": "WAR",
+      "tag": "FACT",
       "title": "Operation Nordwind, the last major Wehrmacht offensive on the Western Front, begins."
     },
     {
