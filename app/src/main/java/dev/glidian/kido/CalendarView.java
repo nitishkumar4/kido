@@ -27,6 +27,11 @@ final class CalendarView extends FrameLayout {
 	private final View accent;
 	private FrameLayout monthPanel;
 	private YearMonth displayedMonth = YearMonth.now();
+	private OnMonthChangedListener monthChangedListener;
+
+	interface OnMonthChangedListener {
+		void onMonthChanged(YearMonth month);
+	}
 
 	CalendarView(Context context) {
 		super(context);
@@ -74,6 +79,12 @@ final class CalendarView extends FrameLayout {
 	private void renderMonth() {
 		if (monthPanel != null) removeView(monthPanel);
 		buildMonth(getContext());
+		if (monthChangedListener != null) monthChangedListener.onMonthChanged(displayedMonth);
+	}
+
+	void setOnMonthChangedListener(OnMonthChangedListener listener) {
+		monthChangedListener = listener;
+		if (listener != null) listener.onMonthChanged(displayedMonth);
 	}
 
 	void previousMonth() {
