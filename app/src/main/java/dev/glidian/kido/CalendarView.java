@@ -55,7 +55,7 @@ final class CalendarView extends FrameLayout {
 
 		buildMonth(context);
 		buildEvents(context);
-		place(new RulerView(context, 1620), 36, 446, 64, 580);
+		place(new RulerView(context, 440), 36, 446, 64, 580);
 	}
 
 	private void buildMonth(Context context) {
