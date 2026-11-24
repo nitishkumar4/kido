@@ -1352,17 +1352,8 @@ public class KidoActivity extends Activity {
                 0xFF8B5CF6, 0xFFF59E0B, 0xFF60A5FA, 0xFFD946EF
         };
         int index = month.getMonthValue() - 1;
-        plateKanji.setText(kanji[index]);
-        plateEn.setText(month.getMonth().name());
-        subLeft.setText("WHAT HAPPENED ON THIS DAY");
-        subRight.setText("READ ONLY");
-
-        int color = colors[index];
-        plateColor = color;
-        plateBg.setColor(color);
-        plateHalo.setColor(Kido.withAlpha(color, 0.85f));
-        subBg.setStroke(Kido.px(2), color);
-        glowBg.setColors(new int[]{Kido.withAlpha(color, 0.34f), 0x00000000});
+        setStatus(kanji[index], month.getMonth().name(),
+                "WHAT HAPPENED ON THIS DAY", "READ ONLY", colors[index]);
     }
 
     private void setStatus(String kanji, String en, String left, String right, int color) {
