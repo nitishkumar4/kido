@@ -731,6 +731,7 @@ public class KidoActivity extends Activity {
         board.addView(calendarView, room);
         calendarView.setOnFocusChangeListener((view, hasFocus) -> {
             if (!hasFocus) return;
+            calendarView.resetMonth();
             boolean byKey = SystemClock.uptimeMillis() - lastKeyAt < 400;
             if (zone != 4) {
                 if (byKey) beeps.section();
@@ -1550,6 +1551,13 @@ public class KidoActivity extends Activity {
             int key = event.getKeyCode();
             if (key == KeyEvent.KEYCODE_DPAD_LEFT || key == KeyEvent.KEYCODE_BACK) {
                 if (up && !sysViews.isEmpty()) sysViews.get(sysViews.size() - 1).requestFocus();
+                return true;
+            }
+            if (key == KeyEvent.KEYCODE_DPAD_UP || key == KeyEvent.KEYCODE_DPAD_DOWN) {
+                if (down && event.getRepeatCount() == 0) {
+                    if (key == KeyEvent.KEYCODE_DPAD_UP) calendarView.previousMonth();
+                    else calendarView.nextMonth();
+                }
                 return true;
             }
             if (isArrow(key) || key == KeyEvent.KEYCODE_DPAD_CENTER || key == KeyEvent.KEYCODE_ENTER) return true;
