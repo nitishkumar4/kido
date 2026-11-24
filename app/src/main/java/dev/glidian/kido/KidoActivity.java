@@ -871,7 +871,7 @@ public class KidoActivity extends Activity {
         sub.setBackground(subBg);
         subLeft = text("", Kido.condBold, 30, Kido.CREAM, 0.1f);
         subLeft.setSingleLine(true);
-        place(sub, subLeft, 22, 12, 470, -1);
+        place(sub, subLeft, 22, 12, 596, -1);
         subRight = text(str(R.string.ready), Kido.mono, 22, Kido.DIM, 0);
         subRight.setGravity(Gravity.END);
         place(sub, subRight, 460, 18, 158, -1);
@@ -1333,7 +1333,7 @@ public class KidoActivity extends Activity {
 
     /** Long names are shortened with "…" before the " // CH.xx" part, so the status line stays on one line. */
     private String fitStatus(String s) {
-        int max = Kido.px(428);
+        int max = Kido.px(s.startsWith("CYCLE //") ? 590 : 428);
         android.text.TextPaint p = subLeft.getPaint();
         if (p.measureText(s) <= max) return s;
         int cut = s.lastIndexOf(" // ");
@@ -1352,8 +1352,9 @@ public class KidoActivity extends Activity {
                 0xFF8B5CF6, 0xFFF59E0B, 0xFF60A5FA, 0xFFD946EF
         };
         int index = month.getMonthValue() - 1;
-        setStatus(kanji[index], month.getMonth().name(),
-                "WHAT HAPPENED ON THIS DAY", "READ ONLY", colors[index]);
+        String metadata = String.format(Locale.ROOT, "CYCLE // %02d  EPOCH // %02d  PERIOD // %02d",
+                month.getMonthValue(), month.getYear() % 100, month.lengthOfMonth());
+        setStatus(kanji[index], month.getMonth().name(), metadata, "", colors[index]);
     }
 
     private void setStatus(String kanji, String en, String left, String right, int color) {
