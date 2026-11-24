@@ -55,7 +55,15 @@ final class CalendarView extends FrameLayout {
 
 		buildMonth(context);
 		buildEvents(context);
+		buildHints();
 		place(new RulerView(context, 440), 36, 446, 64, 580);
+	}
+
+	private void buildHints() {
+		TextView controls = label("◀  SYSTEM       ▲  PREVIOUS MONTH       ▼  NEXT MONTH",
+				Kido.condBold, 26, Kido.DIM, 0.14f);
+		controls.setGravity(Gravity.CENTER);
+		place(controls, 122, 966, 1676, 34);
 	}
 
 	private void buildMonth(Context context) {
