@@ -71,10 +71,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * KIDŌ home screen. The screen is a big board with three sections (main panels, a honeycomb of the
- * other apps, inputs and settings). Moving between sections pans the board and the new section draws
- * itself in. A fixed HUD on top holds the clock, section tabs and a status block that takes the
- * color of whatever is focused.
+ * KIDŌ home screen. The main board holds the main panels, app honeycomb, system controls and Calendar;
+ * the Audio Archive sits below System as its own room. Moving between sections pans the board and the
+ * new section draws itself in. A fixed HUD holds the clock, section tabs and focus status.
  */
 public class KidoActivity extends Activity {
     private static final int[][] ZONES = {{0, 0}, {1900, 220}, {720, 1180}, {720, 2260}};
@@ -719,7 +718,7 @@ public class KidoActivity extends Activity {
         strip.addView(toast);
         place(z, strip, 122, 830, 1676, 74);
         place(z, text("▲ 主要 " + str(R.string.zone_main_tab), Kido.condBold, 26, Kido.DIM, 0.14f), 122, 966, -1, -1);
-        TextView audioHint = text("▼ 音楽  AUDIO", Kido.condBold, 26, Kido.DIM, 0.14f);
+        TextView audioHint = text("▼ 音楽  AUDIO       ▶ 暦  CALENDAR", Kido.condBold, 26, Kido.DIM, 0.14f);
         audioHint.setGravity(Gravity.END);
         place(z, audioHint, 122, 966, 1676, 34);
     }
