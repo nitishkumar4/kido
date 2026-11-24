@@ -155,6 +155,10 @@ final class CalendarView extends FrameLayout {
 		place(monthPanel, note, 28, 462, -1, 24);
 	}
 
+	void setEventTagColor(int color) {
+		eventTagColor = color;
+	}
+
 	private void buildEvents(Context context) {
 		LocalDate today = LocalDate.now();
 		FrameLayout panel = panel();
@@ -197,13 +201,13 @@ final class CalendarView extends FrameLayout {
 			TextView year = label(String.valueOf(event.optInt("year")), Kido.condBold, 34,
 					Kido.AMBER, 0.04f);
 			year.setGravity(Gravity.CENTER_VERTICAL);
-			row.addView(year, new LinearLayout.LayoutParams(Kido.px(142), -1));
+			row.addView(year, new LinearLayout.LayoutParams(Kido.px(112), -1));
 
 			TextView tag = label(event.optString("tag", "FACT"), Kido.mono, 15, Kido.VOID, 0.04f);
 			tag.setGravity(Gravity.CENTER);
-			tag.setBackground(outline(Kido.LIME, Kido.LIME));
-			LinearLayout.LayoutParams tagParams = new LinearLayout.LayoutParams(Kido.px(132), Kido.px(32));
-			tagParams.rightMargin = Kido.px(18);
+			tag.setBackground(outline(eventTagColor, eventTagColor));
+			LinearLayout.LayoutParams tagParams = new LinearLayout.LayoutParams(Kido.px(120), Kido.px(32));
+			tagParams.rightMargin = Kido.px(14);
 			row.addView(tag, tagParams);
 
 			TextView description = label(event.optString("title", "Historical event"),
