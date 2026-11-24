@@ -79,7 +79,7 @@ public class KidoActivity extends Activity {
     private static final int[][] ZONES = {{0, 0}, {1900, 220}, {720, 1180}, {720, 2260}};
     // Each section has a big kanji beside its title and a short one on its tab; the words are in strings.xml.
     private static final String[] ZONE_KANJI = {"主要", "アプリ", "制御系統"};
-    private static final String[] TAB_KANJI = {"音楽", "主要", "アプリ", "制御", "暦"};
+    private static final String[] TAB_KANJI = {"音楽", "主要", "アプリ", "制御", "事象"};
     private static final int CALENDAR_X = 2640, CALENDAR_Y = 1180;
     private static final int[] ZONE_TITLES = {R.string.zone_main, R.string.zone_apps, R.string.zone_system};
     private static final int[] ZONE_TABS = {R.string.zone_main_tab, R.string.zone_apps_tab, R.string.zone_system_tab};
@@ -718,7 +718,7 @@ public class KidoActivity extends Activity {
         strip.addView(toast);
         place(z, strip, 122, 830, 1676, 74);
         place(z, text("▲ 主要 " + str(R.string.zone_main_tab), Kido.condBold, 26, Kido.DIM, 0.14f), 122, 966, -1, -1);
-        TextView audioHint = text("▼ 音楽  AUDIO       ▶ 暦  CALENDAR", Kido.condBold, 26, Kido.DIM, 0.14f);
+        TextView audioHint = text("▼ 音楽  AUDIO       ▶ 事象  EVENT ARCHIVE", Kido.condBold, 26, Kido.DIM, 0.14f);
         audioHint.setGravity(Gravity.END);
         place(z, audioHint, 122, 966, 1676, 34);
     }
@@ -1254,8 +1254,8 @@ public class KidoActivity extends Activity {
             board.animate().translationX(-Kido.px(CALENDAR_X)).translationY(-Kido.px(CALENDAR_Y))
                     .setDuration(620).setInterpolator(fluid).withEndAction(onPanEnd).start();
             showTabs(4);
-            footerZone.setText("SEC-05 // CALENDAR");
-            log(str(R.string.log_sector, 5, "CALENDAR"));
+            footerZone.setText("SEC-05 // EVENT ARCHIVE");
+            log(str(R.string.log_sector, 5, "EVENT ARCHIVE"));
             handler.postDelayed(arrive, 420);
             return;
         }
