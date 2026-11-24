@@ -84,7 +84,10 @@ final class CalendarView extends FrameLayout {
 
 	void setOnMonthChangedListener(OnMonthChangedListener listener) {
 		monthChangedListener = listener;
-		if (listener != null) listener.onMonthChanged(displayedMonth);
+	}
+
+	YearMonth getDisplayedMonth() {
+		return displayedMonth;
 	}
 
 	void previousMonth() {
