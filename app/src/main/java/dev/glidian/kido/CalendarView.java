@@ -204,10 +204,10 @@ final class CalendarView extends FrameLayout {
 			year.setGravity(Gravity.CENTER);
 			row.addView(year, new LinearLayout.LayoutParams(Kido.px(112), -1));
 
-			TextView tag = label(event.optString("tag", "FACT"), Kido.mono, 15, Kido.VOID, 0.04f);
+			TextView tag = label(event.optString("tag", "FACT"), Kido.mono, 15, eventTagColor, 0.04f);
 			tag.setGravity(Gravity.CENTER);
-			tag.setBackground(outline(eventTagColor, eventTagColor));
-			LinearLayout.LayoutParams tagParams = new LinearLayout.LayoutParams(Kido.px(120), Kido.px(32));
+			tag.setBackground(outline(Kido.withAlpha(Kido.PANEL, 0.35f), eventTagColor));
+			LinearLayout.LayoutParams tagParams = new LinearLayout.LayoutParams(Kido.px(92), Kido.px(32));
 			tagParams.rightMargin = Kido.px(14);
 			row.addView(tag, tagParams);
 
