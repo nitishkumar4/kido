@@ -1552,7 +1552,7 @@ public class KidoActivity extends Activity {
                 if (up && !sysViews.isEmpty()) sysViews.get(sysViews.size() - 1).requestFocus();
                 return true;
             }
-            if (isArrow(key)) return true;
+            if (isArrow(key) || key == KeyEvent.KEYCODE_DPAD_CENTER || key == KeyEvent.KEYCODE_ENTER) return true;
         }
         if (menu != null && event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
             if (up) closeMenu();
