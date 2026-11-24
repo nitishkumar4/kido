@@ -85,7 +85,7 @@ public class KidoActivity extends Activity {
     private static final int[] ZONE_TABS = {R.string.zone_main_tab, R.string.zone_apps_tab, R.string.zone_system_tab};
     // The section tabs under the clock: left edge, step from one tab to the next, and tab width. The data block and
     // the NOW PLAYING panel above them span exactly the same width.
-    private static final int TAB_X = 730, TAB_STEP = 86, TAB_W = 78;
+    private static final int TAB_X = 700, TAB_STEP = 92, TAB_W = 86;
     private static final int NP_W = TAB_STEP * 4 + TAB_W;
     private static final long IDLE_MS = 45_000;
 
@@ -838,11 +838,11 @@ public class KidoActivity extends Activity {
             FrameLayout tab = new FrameLayout(this);
             tabBg[i] = box(Kido.withAlpha(Kido.GREEN, 0.1f), Kido.withAlpha(Kido.GREEN, 0.45f), 2);
             tab.setBackground(tabBg[i]);
-            tabText[i * 2] = text(TAB_KANJI[i], Kido.mincho, 20, Kido.withAlpha(Kido.LIME, 0.75f), 0);
+            tabText[i * 2] = text(TAB_KANJI[i], Kido.mincho, 22, Kido.withAlpha(Kido.LIME, 0.75f), 0);
             String tabLabel = i == 0 ? "AUDIO" : i == 4 ? "DAY" : str(ZONE_TABS[i - 1]);
-            tabText[i * 2 + 1] = text(tabLabel, Kido.condBold, 16, Kido.withAlpha(Kido.LIME, 0.85f), 0.1f);
-            place(tab, tabText[i * 2], 8, 6, 62, -1);
-            place(tab, tabText[i * 2 + 1], 8, 38, 66, -1);
+            tabText[i * 2 + 1] = text(tabLabel, Kido.condBold, 20, Kido.withAlpha(Kido.LIME, 0.85f), 0.1f);
+            place(tab, tabText[i * 2], 10, 6, -1, -1);
+            place(tab, tabText[i * 2 + 1], 10, 38, -1, -1);
             place(hud, tab, TAB_X + i * TAB_STEP, 214, TAB_W, 74);
             tabBar[i] = new GlowView(this, Kido.px(12), false);
             tabBar[i].setColor(Kido.RED);
