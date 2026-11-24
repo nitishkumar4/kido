@@ -53,9 +53,9 @@ final class CalendarView extends FrameLayout {
 		LinearLayout title = new LinearLayout(context);
 		title.setOrientation(LinearLayout.HORIZONTAL);
 		title.setGravity(Gravity.BOTTOM);
-		title.addView(label("暦", Kido.mincho, 46, Kido.AMBER));
+		title.addView(label("事象", Kido.mincho, 46, Kido.AMBER));
 		title.addView(gap(18));
-		title.addView(label("CALENDAR", Kido.condBold, 30, Kido.INK, 0.14f));
+		title.addView(label("EVENT ARCHIVE", Kido.condBold, 30, Kido.INK, 0.14f));
 		title.addView(gap(14));
 		title.addView(label("SEC-05", Kido.mono, 22, Kido.DIM));
 		place(title, 120, 360, -1, 58);
