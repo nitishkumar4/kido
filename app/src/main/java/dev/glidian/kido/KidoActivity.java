@@ -1356,6 +1356,7 @@ public class KidoActivity extends Activity {
         String metadata = String.format(Locale.ROOT, "CYCLE // %02d  EPOCH // %02d  PERIOD // %02d",
                 month.getMonthValue(), month.getYear() % 100, month.lengthOfMonth());
         setStatus(kanji[index], month.getMonth().name(), metadata, "", colors[index]);
+        if (calendarView != null) calendarView.setEventTagColor(colors[index]);
     }
 
     private void setStatus(String kanji, String en, String left, String right, int color) {
