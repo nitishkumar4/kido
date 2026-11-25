@@ -1615,6 +1615,13 @@ public class KidoActivity extends Activity {
                 }
                 return true;
             }
+            if (key == KeyEvent.KEYCODE_DPAD_CENTER || key == KeyEvent.KEYCODE_ENTER) {
+                if (down && event.getRepeatCount() == 0) {
+                    timelineView.resetToToday();
+                    beeps.tick();
+                }
+                return true;
+            }
             if (key == KeyEvent.KEYCODE_HOME) {
                 if (down && event.getRepeatCount() == 0) timelineView.resetToToday();
                 return true;
@@ -1622,10 +1629,7 @@ public class KidoActivity extends Activity {
             if (key == KeyEvent.KEYCODE_BACK) {
                 if (up && calendarView != null) calendarView.requestFocus();
                 return true;
-            }
-            if (isArrow(key)) return true;
-        }
-        if (zone == 4 && calendarView != null && current == calendarView) {
+                    if (zone == 4 && calendarView != null && current == calendarView) {
             int key = event.getKeyCode();
             if (key == KeyEvent.KEYCODE_DPAD_RIGHT) {
                 if (up && timelineView != null) timelineView.requestFocus();
