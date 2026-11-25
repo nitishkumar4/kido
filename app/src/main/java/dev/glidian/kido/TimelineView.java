@@ -89,11 +89,11 @@ final class TimelineView extends FrameLayout {
 		int daysRemaining = daysInYear - today.getDayOfYear();
 		float yearProgress = today.getDayOfYear() / (float) daysInYear;
 		place(this, label("ANNUAL CYCLE // " + today.getYear(), Kido.mono, 13, Kido.DIM, 0.1f),
-				112, 958, 520, 18);
+				112, 943, 520, 18);
 		TextView progressValue = label(String.format(Locale.ROOT, "%.1f%% ELAPSED  //  %02d DAYS REMAINING",
 				yearProgress * 100f, daysRemaining), Kido.mono, 13, Kido.AMBER, 0.08f);
 		progressValue.setGravity(Gravity.END);
-		place(this, progressValue, 1160, 958, 648, 18);
+		place(this, progressValue, 1160, 943, 648, 18);
 		String[] months = {"JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
 				"JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"};
 		for (int i = 0; i < months.length; i++) {
@@ -103,26 +103,26 @@ final class TimelineView extends FrameLayout {
 					: i == today.getMonthValue() - 1 ? Kido.AMBER : Kido.withAlpha(Kido.DIM, 0.72f);
 			View marker = new View(context);
 			marker.setBackgroundColor(color);
-			place(this, marker, left + 5, 980, right - left - 10, 3);
+			place(this, marker, left + 5, 965, right - left - 10, 3);
 			TextView month = label(months[i], Kido.mono, 12, color,
 					i == today.getMonthValue() - 1 ? 0.08f : 0.025f);
 			month.setGravity(Gravity.CENTER);
 			if (i == today.getMonthValue() - 1) month.setTypeface(Kido.condBold);
-			place(this, month, left, 988, right - left, 20);
+			place(this, month, left, 973, right - left, 20);
 		}
 
 		// Chronology rail: five instrument panels, with the selected node treated as the active signal.
 		place(this, label("MAGI // CHRONOLOGY ARRAY", Kido.mono, 16, Kido.DIM, 0.12f),
-				116, 474, 520, 24);
+				116, 439, 520, 24);
 		place(this, label("EVENT STREAM  /  LOCAL DATABASE  /  IN-MH", Kido.mono, 16, Kido.DIM, 0.08f),
-				1120, 474, 680, 24);
+				1120, 439, 680, 24);
 
 		for (int i = 0; i < 5; i++) {
 			FrameLayout card = new FrameLayout(context);
 			card.setBackground(new SimCardDrawable(Kido.withAlpha(Kido.PANEL, 0.94f),
 					Kido.withAlpha(Kido.LINE, 0.9f), Kido.px(22)));
 			int x = 112 + i * 340;
-			place(this, card, x, 498, 320, 178);
+			place(this, card, x, 463, 320, 178);
 			eventCards[i] = card;
 
 			View stripe = new View(context);
@@ -148,7 +148,7 @@ final class TimelineView extends FrameLayout {
 		// Selected-event dossier. Three distinct data zones, like a tactical console readout.
 		FrameLayout dossier = new FrameLayout(context);
 		dossier.setBackground(outline(Kido.withAlpha(Kido.PANEL, 0.98f), Kido.LINE));
-		place(this, dossier, 112, 710, 1696, 246);
+		place(this, dossier, 112, 675, 1696, 246);
 
 		View warning = new View(context);
 		warning.setBackgroundColor(Kido.RED);
