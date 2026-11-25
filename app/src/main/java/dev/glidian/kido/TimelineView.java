@@ -54,8 +54,6 @@ final class TimelineView extends FrameLayout {
 	private final TextView detailMeta;
 	private final TextView detailDescription;
 	private final TextView detailType;
-	private final TextView todayDateLabel;
-	private final TextView todayEventLabel;
 	private final TextView[] states = new TextView[5];
 	private int selectedIndex;
 
@@ -84,12 +82,6 @@ final class TimelineView extends FrameLayout {
 		TextView heading = label("時線", Kido.mincho, 46, Kido.AMBER, 1.0f);
 		place(this, heading, 120, 360, 110, 58);
 		place(this, label("TIMELINE", Kido.condBold, 30, Kido.INK, 0.14f), 250, 384, 260, 34);
-		todayDateLabel = label("", Kido.mono, 17, Kido.AMBER, 0.08f);
-		place(this, todayDateLabel, 560, 390, 540, 28);
-		todayEventLabel = label("", Kido.mono, 17, Kido.CREAM, 0.04f);
-		todayEventLabel.setSingleLine(true);
-		todayEventLabel.setEllipsize(android.text.TextUtils.TruncateAt.END);
-		place(this, todayEventLabel, 1110, 390, 500, 28);
 		place(this, label("SEC-06", Kido.mono, 22, Kido.DIM, 0.05f), 1640, 390, 140, 28);
 
 		LocalDate today = LocalDate.now();
@@ -102,27 +94,35 @@ final class TimelineView extends FrameLayout {
 				yearProgress * 100f, daysRemaining), Kido.mono, 13, Kido.AMBER, 0.08f);
 		progressValue.setGravity(Gravity.END);
 		place(this, progressValue, 1160, 418, 648, 18);
-		View progressTrack = new View(context);
-		progressTrack.setBackgroundColor(Kido.withAlpha(Kido.LINE, 0.75f));
-		place(this, progressTrack, 112, 440, 1696, 4);
-		View progressFill = new View(context);
-		progressFill.setBackgroundColor(Kido.AMBER);
-		progressFill.setPivotX(0f);
-		progressFill.setScaleX(yearProgress);
-		place(this, progressFill, 112, 440, 1696, 4);
+		String[] months = {"JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+				"JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"};
+		for (int i = 0; i < months.length; i++) {
+			int left = 112 + i * 1696 / 12;
+			int right = 112 + (i + 1) * 1696 / 12;
+			int color = i < today.getMonthValue() - 1 ? Kido.withAlpha(Kido.AMBER, 0.62f)
+					: i == today.getMonthValue() - 1 ? Kido.AMBER : Kido.withAlpha(Kido.DIM, 0.72f);
+			View marker = new View(context);
+			marker.setBackgroundColor(color);
+			place(this, marker, left + 5, 440, right - left - 10, 3);
+			TextView month = label(months[i], Kido.mono, 12, color,
+					i == today.getMonthValue() - 1 ? 0.08f : 0.025f);
+			month.setGravity(Gravity.CENTER);
+			if (i == today.getMonthValue() - 1) month.setTypeface(Kido.condBold);
+			place(this, month, left, 448, right - left, 20);
+		}
 
 		// Chronology rail: five instrument panels, with the selected node treated as the active signal.
 		place(this, label("MAGI // CHRONOLOGY ARRAY", Kido.mono, 16, Kido.DIM, 0.12f),
-				116, 448, 520, 24);
+				116, 474, 520, 24);
 		place(this, label("EVENT STREAM  /  LOCAL DATABASE  /  IN-MH", Kido.mono, 16, Kido.DIM, 0.08f),
-				1120, 448, 680, 24);
+				1120, 474, 680, 24);
 
 		for (int i = 0; i < 5; i++) {
 			FrameLayout card = new FrameLayout(context);
 			card.setBackground(new SimCardDrawable(Kido.withAlpha(Kido.PANEL, 0.94f),
 					Kido.withAlpha(Kido.LINE, 0.9f), Kido.px(22)));
 			int x = 112 + i * 340;
-			place(this, card, x, 472, 320, 178);
+			place(this, card, x, 498, 320, 178);
 			eventCards[i] = card;
 
 			View stripe = new View(context);
@@ -148,7 +148,7 @@ final class TimelineView extends FrameLayout {
 		// Selected-event dossier. Three distinct data zones, like a tactical console readout.
 		FrameLayout dossier = new FrameLayout(context);
 		dossier.setBackground(outline(Kido.withAlpha(Kido.PANEL, 0.98f), Kido.LINE));
-		place(this, dossier, 112, 686, 1696, 246);
+		place(this, dossier, 112, 710, 1696, 246);
 
 		View warning = new View(context);
 		warning.setBackgroundColor(Kido.RED);
@@ -274,11 +274,6 @@ final class TimelineView extends FrameLayout {
 	private void render() {
 		Event selected = getSelectedEvent();
 		LocalDate today = LocalDate.now();
-		Event todayEvent = events.get(todayIndex());
-		todayDateLabel.setText("TODAY // " + today.format(
-				DateTimeFormatter.ofPattern("EEE dd MMM yyyy", Locale.ENGLISH)).toUpperCase(Locale.ROOT));
-		todayEventLabel.setText(todayEvent.title.equals("TODAY")
-				? "NO EVENT SCHEDULED" : todayEvent.title.toUpperCase(Locale.ROOT));
 		for (int slot = 0; slot < 5; slot++) {
 			int index = selectedIndex + slot - 2;
 			boolean center = slot == 2;
