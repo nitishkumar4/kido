@@ -31,20 +31,14 @@ final class TimelineView extends FrameLayout {
 		final String type;
 		final String description;
 		final String region;
-		final boolean today;
 
-		Event(LocalDate date, String title, String type, String description, String region, boolean today) {
+		Event(LocalDate date, String title, String type, String description, String region) {
 			this.date = date;
 			this.title = title;
 			this.type = type;
 			this.description = description;
 			this.region = region;
-			this.today = today;
 		}
-	}
-
-	interface OnSelectionChangedListener {
-		void onSelectionChanged(Event event);
 	}
 
 	private final List<Event> events = new ArrayList<>();
@@ -56,7 +50,6 @@ final class TimelineView extends FrameLayout {
 	private final TextView detailMeta;
 	private final TextView detailDescription;
 	private int selectedIndex;
-	private OnSelectionChangedListener listener;
 
 	TimelineView(Context context) {
 		super(context);
@@ -118,10 +111,6 @@ final class TimelineView extends FrameLayout {
 		render();
 	}
 
-	void setOnSelectionChangedListener(OnSelectionChangedListener listener) {
-		this.listener = listener;
-	}
-
 	Event getSelectedEvent() {
 		return events.get(selectedIndex);
 	}
@@ -157,7 +146,7 @@ final class TimelineView extends FrameLayout {
 				if (item == null) continue;
 				LocalDate date = LocalDate.parse(item.optString("date"));
 				events.add(new Event(date, item.optString("title"), item.optString("type"),
-						item.optString("description"), item.optString("region", "IN-MH"), false));
+						item.optString("description"), item.optString("region", "IN-MH")));
 			}
 		} catch (Exception ignored) {
 			events.clear();
@@ -169,12 +158,12 @@ final class TimelineView extends FrameLayout {
 		for (int i = 0; i < events.size(); i++) {
 			Event event = events.get(i);
 			if (event.date.equals(today)) {
-				events.set(i, new Event(event.date, event.title, event.type, event.description, event.region, true));
+				return;
 				return;
 			}
 		}
 		events.add(new Event(today, "TODAY", "TODAY", "No public holiday or festival is listed for today.",
-				"LOCAL DATE", true));
+				"LOCAL DATE"));
 	}
 
 	private void sortEvents() {
@@ -204,7 +193,7 @@ final class TimelineView extends FrameLayout {
 			dates[slot].setText(event.date.format(DateTimeFormatter.ofPattern("dd MMM", Locale.ENGLISH))
 					.toUpperCase(Locale.ROOT));
 			titles[slot].setText(event.title.toUpperCase(Locale.ROOT));
-			int color = center ? Kido.LIME : event.today ? Kido.AMBER : Kido.DIM;
+			int color = center ? Kido.LIME : Kido.DIM;
 			dates[slot].setTextColor(color);
 			titles[slot].setTextColor(center ? Kido.CREAM : Kido.DIM);
 			GradientDrawable marker = new GradientDrawable();
@@ -227,7 +216,6 @@ final class TimelineView extends FrameLayout {
 				week, selected.date.getDayOfYear(), selected.region));
 		detailTitle.setText(selected.title.toUpperCase(Locale.ROOT));
 		detailDescription.setText(selected.type.toUpperCase(Locale.ROOT) + "  //  " + selected.description);
-		if (listener != null) listener.onSelectionChanged(selected);
 	}
 
 	private TextView label(String value, android.graphics.Typeface face, int size, int color, float spacing) {
