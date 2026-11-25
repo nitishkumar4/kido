@@ -95,20 +95,20 @@ final class TimelineView extends FrameLayout {
 				1120, 448, 680, 24);
 
 		timelineTrack = new FrameLayout(context);
-		timelineTrack.setClipChildren(true);
-		timelineTrack.setClipToPadding(true);
+		timelineTrack.setClipChildren(false);
+		timelineTrack.setClipToPadding(false);
 		place(this, timelineTrack, 112, 0, 1696, 1080);
 
 		// Keep the original clean chronology rail; the whole track scrolls with its event nodes.
 		View rail = new View(context);
 		rail.setBackgroundColor(Kido.withAlpha(Kido.AMBER, 0.35f));
-		place(timelineTrack, rail, 20, 668, 1650, 2);
+		place(timelineTrack, rail, 110, 668, 1460, 2);
 
 		for (int i = 0; i < 7; i++) {
 			FrameLayout card = new FrameLayout(context);
 			card.setBackground(outline(Kido.withAlpha(Kido.PANEL, 0.94f), Kido.withAlpha(Kido.LINE, 0.9f)));
-			int x = (i - 1) * 340;
-			place(timelineTrack, card, x, 472, 320, 178);
+			int x = i * 242;
+			place(timelineTrack, card, x, 472, 224, 178);
 			eventCards[i] = card;
 
 			View stripe = new View(context);
@@ -116,19 +116,19 @@ final class TimelineView extends FrameLayout {
 			place(card, stripe, 0, 0, 5, 178);
 
 			nodeCodes[i] = label("NODE 00", Kido.mono, 15, Kido.DIM, 0.12f);
-			place(card, nodeCodes[i], 20, 16, 180, 22);
+			place(card, nodeCodes[i], 14, 16, 120, 22);
 			TextView state = label(i < 3 ? "ARCHIVE" : i == 3 ? "ACTIVE" : "INCOMING",
 					Kido.mono, 13, Kido.DIM, 0.08f);
 			state.setGravity(Gravity.END);
-			place(card, state, 180, 18, 122, 20);
+			place(card, state, 132, 18, 78, 20);
 
 			dates[i] = label("", Kido.condBold, 30, Kido.CREAM, 0.04f);
-			place(card, dates[i], 20, 54, 276, 38);
+			place(card, dates[i], 14, 54, 196, 38);
 
 			titles[i] = label("", Kido.mono, 17, Kido.DIM, 0.015f);
 			titles[i].setMaxLines(2);
 			titles[i].setEllipsize(android.text.TextUtils.TruncateAt.END);
-			place(card, titles[i], 20, 105, 278, 48);
+			place(card, titles[i], 14, 105, 196, 48);
 
 			markers[i] = new View(context);
 			GradientDrawable marker = new GradientDrawable();
@@ -136,7 +136,7 @@ final class TimelineView extends FrameLayout {
 			marker.setColor(Kido.DIM);
 			markers[i].setBackground(marker);
 			markers[i].setRotation(45f);
-			place(timelineTrack, markers[i], x + 151, 660, 18, 18);
+			place(timelineTrack, markers[i], x + 103, 660, 18, 18);
 		}
 
 		// Selected-event dossier. Three distinct data zones, like a tactical console readout.
@@ -210,7 +210,7 @@ final class TimelineView extends FrameLayout {
 
 		// Match the honeycomb: every preloaded item moves and fades toward its next visibility state.
 		for (int i = 0; i < 7; i++) {
-			float alpha = direction > 0 ? (i >= 2 ? 1f : 0f) : (i <= 4 ? 1f : 0f);
+			float alpha = 1f;
 			eventCards[i].animate().alpha(alpha).setDuration(340)
 					.setInterpolator(fluid).withLayer().start();
 			float markerAlpha = alpha == 0f ? 0f : (i == 3 ? 1f : 0.65f);
@@ -238,12 +238,12 @@ final class TimelineView extends FrameLayout {
 		rotate(nodeCodes, direction);
 		rotate(markers, direction);
 		for (int i = 0; i < 7; i++) {
-			int x = (i - 1) * 340;
+			int x = i * 242;
 			FrameLayout.LayoutParams cardParams = (FrameLayout.LayoutParams) eventCards[i].getLayoutParams();
 			cardParams.leftMargin = Kido.px(x);
 			eventCards[i].setLayoutParams(cardParams);
 			FrameLayout.LayoutParams markerParams = (FrameLayout.LayoutParams) markers[i].getLayoutParams();
-			markerParams.leftMargin = Kido.px(x + 151);
+			markerParams.leftMargin = Kido.px(x + 103);
 			markers[i].setLayoutParams(markerParams);
 		}
 	}
@@ -332,7 +332,7 @@ final class TimelineView extends FrameLayout {
 			}
 			card.setVisibility(View.VISIBLE);
 			markers[slot].setVisibility(View.VISIBLE);
-			card.setAlpha(slot == 0 || slot == 6 ? 0f : 1f);
+			card.setAlpha(1f);
 			Event event = events.get(index);
 			nodeCodes[slot].setText(String.format(Locale.ROOT, "NODE %02d", index + 1));
 			dates[slot].setText(event.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy", Locale.ENGLISH))
@@ -349,7 +349,7 @@ final class TimelineView extends FrameLayout {
 			dates[slot].setTextColor(center ? Kido.AMBER : Kido.CREAM);
 			titles[slot].setTextColor(center ? Kido.CREAM : Kido.DIM);
 			markers[slot].setBackgroundColor(center ? Kido.RED : Kido.DIM);
-			markers[slot].setAlpha(slot == 0 || slot == 6 ? 0f : center ? 1f : 0.65f);
+			markers[slot].setAlpha(center ? 1f : 0.65f);
 		}
 
 		detailDay.setText(selected.date.format(DateTimeFormatter.ofPattern("dd", Locale.ENGLISH)));
