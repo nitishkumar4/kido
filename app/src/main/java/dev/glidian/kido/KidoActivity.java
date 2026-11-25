@@ -81,7 +81,7 @@ public class KidoActivity extends Activity {
     private static final String[] ZONE_KANJI = {"主要", "アプリ", "制御系統"};
     private static final String[] TAB_KANJI = {"音楽", "主要", "アプリ", "制御", "事象", "時線"};
     private static final int CALENDAR_X = 2640, CALENDAR_Y = 1180;
-    private static final int TIMELINE_X = 2640, TIMELINE_Y = 2260;
+    private static final int TIMELINE_X = 4560, TIMELINE_Y = 1180;
     private static final int[] ZONE_TITLES = {R.string.zone_main, R.string.zone_apps, R.string.zone_system};
     private static final int[] ZONE_TABS = {R.string.zone_main_tab, R.string.zone_apps_tab, R.string.zone_system_tab};
     // The section tabs under the clock: left edge, step from one tab to the next, and tab width. The data block and
@@ -287,7 +287,7 @@ public class KidoActivity extends Activity {
 
         board = new FrameLayout(this);
         board.setBackground(Backdrop.hexGrid(getResources(), Kido.withAlpha(Kido.AMBER, 0.07f)));
-        root.addView(board, new FrameLayout.LayoutParams(Kido.px(4620), Kido.px(3340)));
+        root.addView(board, new FrameLayout.LayoutParams(Kido.px(6540), Kido.px(3340)));
         List<App> apps = loadApps();
         channelCount = apps.size();
         appsByPkg.clear();
