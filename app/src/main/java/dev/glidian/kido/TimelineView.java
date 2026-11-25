@@ -97,18 +97,18 @@ final class TimelineView extends FrameLayout {
 		timelineTrack = new FrameLayout(context);
 		timelineTrack.setClipChildren(false);
 		timelineTrack.setClipToPadding(false);
-		place(this, timelineTrack, 112, 0, 1696, 1080);
+		place(this, timelineTrack, 70, 0, 1780, 1080);
 
 		// Keep the original clean chronology rail; the whole track scrolls with its event nodes.
 		View rail = new View(context);
 		rail.setBackgroundColor(Kido.withAlpha(Kido.AMBER, 0.35f));
-		place(timelineTrack, rail, 110, 668, 1460, 2);
+		place(timelineTrack, rail, 0, 668, 1780, 2);
 
 		for (int i = 0; i < 7; i++) {
 			FrameLayout card = new FrameLayout(context);
 			card.setBackground(outline(Kido.withAlpha(Kido.PANEL, 0.94f), Kido.withAlpha(Kido.LINE, 0.9f)));
-			int x = i * 242;
-			place(timelineTrack, card, x, 472, 224, 178);
+			int x = -140 + i * 300;
+			place(timelineTrack, card, x, 472, 280, 178);
 			eventCards[i] = card;
 
 			View stripe = new View(context);
@@ -116,19 +116,19 @@ final class TimelineView extends FrameLayout {
 			place(card, stripe, 0, 0, 5, 178);
 
 			nodeCodes[i] = label("NODE 00", Kido.mono, 15, Kido.DIM, 0.12f);
-			place(card, nodeCodes[i], 14, 16, 120, 22);
+			place(card, nodeCodes[i], 14, 16, 160, 22);
 			TextView state = label(i < 3 ? "ARCHIVE" : i == 3 ? "ACTIVE" : "INCOMING",
 					Kido.mono, 13, Kido.DIM, 0.08f);
 			state.setGravity(Gravity.END);
-			place(card, state, 132, 18, 78, 20);
+			place(card, state, 182, 18, 84, 20);
 
 			dates[i] = label("", Kido.condBold, 30, Kido.CREAM, 0.04f);
-			place(card, dates[i], 14, 54, 196, 38);
+			place(card, dates[i], 14, 54, 252, 38);
 
 			titles[i] = label("", Kido.mono, 17, Kido.DIM, 0.015f);
 			titles[i].setMaxLines(2);
 			titles[i].setEllipsize(android.text.TextUtils.TruncateAt.END);
-			place(card, titles[i], 14, 105, 196, 48);
+			place(card, titles[i], 14, 105, 252, 48);
 
 			markers[i] = new View(context);
 			GradientDrawable marker = new GradientDrawable();
@@ -136,7 +136,7 @@ final class TimelineView extends FrameLayout {
 			marker.setColor(Kido.DIM);
 			markers[i].setBackground(marker);
 			markers[i].setRotation(45f);
-			place(timelineTrack, markers[i], x + 103, 660, 18, 18);
+			place(timelineTrack, markers[i], x + 131, 660, 18, 18);
 		}
 
 		// Selected-event dossier. Three distinct data zones, like a tactical console readout.
@@ -218,7 +218,7 @@ final class TimelineView extends FrameLayout {
 					.setInterpolator(fluid).withLayer().start();
 		}
 
-		timelineTrack.animate().translationX(Kido.px(-direction * 340))
+		timelineTrack.animate().translationX(Kido.px(-direction * 300))
 				.setDuration(340)
 				.setInterpolator(fluid)
 				.withEndAction(() -> {
@@ -238,12 +238,12 @@ final class TimelineView extends FrameLayout {
 		rotate(nodeCodes, direction);
 		rotate(markers, direction);
 		for (int i = 0; i < 7; i++) {
-			int x = i * 242;
+			int x = -140 + i * 300;
 			FrameLayout.LayoutParams cardParams = (FrameLayout.LayoutParams) eventCards[i].getLayoutParams();
 			cardParams.leftMargin = Kido.px(x);
 			eventCards[i].setLayoutParams(cardParams);
 			FrameLayout.LayoutParams markerParams = (FrameLayout.LayoutParams) markers[i].getLayoutParams();
-			markerParams.leftMargin = Kido.px(x + 103);
+			markerParams.leftMargin = Kido.px(x + 131);
 			markers[i].setLayoutParams(markerParams);
 		}
 	}
