@@ -205,31 +205,59 @@ final class TimelineView extends FrameLayout {
 	private void slideTo(int direction) {
 		if (sliding || selectedIndex + direction < 0 || selectedIndex + direction >= events.size()) return;
 		sliding = true;
-		int outgoingSlot = direction > 0 ? 1 : 5;
-		int incomingSlot = direction > 0 ? 6 : 0;
 		android.view.animation.PathInterpolator fluid =
 				new android.view.animation.PathInterpolator(0.2f, 0f, 0f, 1f);
-		eventCards[outgoingSlot].animate().alpha(0f).setDuration(340)
-				.setInterpolator(fluid).withLayer().start();
-		markers[outgoingSlot].animate().alpha(0f).setDuration(340)
-				.setInterpolator(fluid).withLayer().start();
-		eventCards[incomingSlot].setAlpha(0f);
-		markers[incomingSlot].setAlpha(0f);
-		eventCards[incomingSlot].animate().alpha(1f).setDuration(340)
-				.setInterpolator(fluid).withLayer().start();
-		markers[incomingSlot].animate().alpha(0.65f).setDuration(340)
-				.setInterpolator(fluid).withLayer().start();
+
+		// Match the honeycomb: every preloaded item moves and fades toward its next visibility state.
+		for (int i = 0; i < 7; i++) {
+			float alpha = direction > 0 ? (i >= 2 ? 1f : 0f) : (i <= 4 ? 1f : 0f);
+			eventCards[i].animate().alpha(alpha).setDuration(340)
+					.setInterpolator(fluid).withLayer().start();
+			float markerAlpha = alpha == 0f ? 0f : (i == 3 ? 1f : 0.65f);
+			markers[i].animate().alpha(markerAlpha).setDuration(340)
+					.setInterpolator(fluid).withLayer().start();
+		}
 
 		timelineTrack.animate().translationX(Kido.px(-direction * 340))
 				.setDuration(340)
 				.setInterpolator(fluid)
 				.withEndAction(() -> {
 					selectedIndex += direction;
-					render();
-					for (FrameLayout card : eventCards) card.setAlpha(1f);
+					rotateSlots(direction);
 					timelineTrack.setTranslationX(0f);
+					render();
 					sliding = false;
 				}).start();
+	}
+
+	/** Recycles the off-screen card after the track has moved, keeping all seven views alive. */
+	private void rotateSlots(int direction) {
+		rotate(eventCards, direction);
+		rotate(dates, direction);
+		rotate(titles, direction);
+		rotate(nodeCodes, direction);
+		rotate(markers, direction);
+		for (int i = 0; i < 7; i++) {
+			int x = (i - 1) * 340;
+			FrameLayout.LayoutParams cardParams = (FrameLayout.LayoutParams) eventCards[i].getLayoutParams();
+			cardParams.leftMargin = Kido.px(x);
+			eventCards[i].setLayoutParams(cardParams);
+			FrameLayout.LayoutParams markerParams = (FrameLayout.LayoutParams) markers[i].getLayoutParams();
+			markerParams.leftMargin = Kido.px(x + 151);
+			markers[i].setLayoutParams(markerParams);
+		}
+	}
+
+	private <T> void rotate(T[] items, int direction) {
+		if (direction > 0) {
+			T first = items[0];
+			System.arraycopy(items, 1, items, 0, items.length - 1);
+			items[items.length - 1] = first;
+		} else {
+			T last = items[items.length - 1];
+			System.arraycopy(items, 0, items, 1, items.length - 1);
+			items[0] = last;
+		}
 	}
 
 	void resetToToday() {
@@ -304,6 +332,7 @@ final class TimelineView extends FrameLayout {
 			}
 			card.setVisibility(View.VISIBLE);
 			markers[slot].setVisibility(View.VISIBLE);
+			card.setAlpha(slot == 0 || slot == 6 ? 0f : 1f);
 			Event event = events.get(index);
 			nodeCodes[slot].setText(String.format(Locale.ROOT, "NODE %02d", index + 1));
 			dates[slot].setText(event.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy", Locale.ENGLISH))
@@ -320,7 +349,7 @@ final class TimelineView extends FrameLayout {
 			dates[slot].setTextColor(center ? Kido.AMBER : Kido.CREAM);
 			titles[slot].setTextColor(center ? Kido.CREAM : Kido.DIM);
 			markers[slot].setBackgroundColor(center ? Kido.RED : Kido.DIM);
-			markers[slot].setAlpha(center ? 1f : 0.65f);
+			markers[slot].setAlpha(slot == 0 || slot == 6 ? 0f : center ? 1f : 0.65f);
 		}
 
 		detailDay.setText(selected.date.format(DateTimeFormatter.ofPattern("dd", Locale.ENGLISH)));
