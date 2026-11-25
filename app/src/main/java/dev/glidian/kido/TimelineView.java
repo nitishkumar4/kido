@@ -56,6 +56,12 @@ final class TimelineView extends FrameLayout {
 	private final TextView detailDescription;
 	private final TextView detailType;
 	private final TextView[] states = new TextView[5];
+	private final View[] monthMarkers = new View[12];
+	private final TextView[] monthLabels = new TextView[12];
+	private final int[] monthColors = {
+			0xFFFF5B55, 0xFFFFA24A, 0xFFFFD34E,
+			0xFF70D68A, 0xFF55BCEB, 0xFFB18AE8
+	};
 	private int selectedIndex;
 
 	TimelineView(Context context) {
@@ -102,25 +108,14 @@ final class TimelineView extends FrameLayout {
 		place(this, progressValue, 1160, 943, 648, 18);
 		String[] months = {"JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
 				"JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"};
-		int[] monthColors = {
-				0xFFFF5B55, 0xFFFFA24A, 0xFFFFD34E,
-				0xFF70D68A, 0xFF55BCEB, 0xFFB18AE8
-		};
 		for (int i = 0; i < months.length; i++) {
 			int left = 112 + i * 1696 / 12;
 			int right = 112 + (i + 1) * 1696 / 12;
-			int baseColor = monthColors[i / 2];
-			boolean active = i == today.getMonthValue() - 1;
-			int color = active ? baseColor : Kido.withAlpha(baseColor,
-					i < today.getMonthValue() - 1 ? 0.62f : 0.38f);
-			View marker = new View(context);
-			marker.setBackgroundColor(color);
-			place(this, marker, left + 5, 965, right - left - 10, active ? 4 : 3);
-			TextView month = label(months[i], Kido.mono, 12, color,
-					active ? 0.08f : 0.025f);
-			month.setGravity(Gravity.CENTER);
-			if (active) month.setTypeface(Kido.condBold);
-			place(this, month, left, 973, right - left, 20);
+			monthMarkers[i] = new View(context);
+			place(this, monthMarkers[i], left + 5, 965, right - left - 10, 3);
+			monthLabels[i] = label(months[i], Kido.mono, 12, Kido.DIM, 0.025f);
+			monthLabels[i].setGravity(Gravity.CENTER);
+			place(this, monthLabels[i], left, 973, right - left, 20);
 		}
 
 		// Chronology rail: five instrument panels, with the selected node treated as the active signal.
@@ -275,6 +270,22 @@ final class TimelineView extends FrameLayout {
 		Collections.sort(events, Comparator.comparing(event -> event.date));
 	}
 
+	private void updateAnnualCycle(LocalDate today, LocalDate selectedDate) {
+		int selectedMonth = selectedDate.getMonthValue() - 1;
+		for (int i = 0; i < monthMarkers.length; i++) {
+			boolean active = i == selectedMonth;
+			int baseColor = monthColors[i / 2];
+			int color = active ? baseColor : Kido.withAlpha(baseColor,
+					i < today.getMonthValue() - 1 ? 0.62f : 0.38f);
+			monthMarkers[i].setBackgroundColor(color);
+			FrameLayout.LayoutParams markerParams = (FrameLayout.LayoutParams) monthMarkers[i].getLayoutParams();
+			markerParams.height = Kido.px(active ? 4 : 3);
+			monthMarkers[i].setLayoutParams(markerParams);
+			monthLabels[i].setTextColor(color);
+			monthLabels[i].setTypeface(active ? Kido.condBold : Kido.mono);
+		}
+	}
+
 	private int todayIndex() {
 		LocalDate today = LocalDate.now();
 		for (int i = 0; i < events.size(); i++) {
@@ -286,6 +297,7 @@ final class TimelineView extends FrameLayout {
 	private void render() {
 		Event selected = getSelectedEvent();
 		LocalDate today = LocalDate.now();
+		updateAnnualCycle(today, selected.date);
 		for (int slot = 0; slot < 5; slot++) {
 			int index = selectedIndex + slot - 2;
 			boolean center = slot == 2;
