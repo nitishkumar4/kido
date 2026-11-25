@@ -159,7 +159,6 @@ final class TimelineView extends FrameLayout {
 			Event event = events.get(i);
 			if (event.date.equals(today)) {
 				return;
-				return;
 			}
 		}
 		events.add(new Event(today, "TODAY", "TODAY", "No public holiday or festival is listed for today.",
