@@ -264,9 +264,9 @@ final class TimelineView extends FrameLayout {
 			titles[slot].setText(event.title.toUpperCase(Locale.ROOT));
 
 			int signal = center ? Kido.AMBER : Kido.DIM;
-			card.setBackground(outline(center ? Kido.withAlpha(Kido.ORANGE, 0.13f)
+			card.setBackground(new SimCardDrawable(center ? Kido.withAlpha(Kido.ORANGE, 0.13f)
 					: Kido.withAlpha(Kido.PANEL, 0.94f),
-					center ? Kido.AMBER : Kido.withAlpha(Kido.LINE, 0.9f)));
+					center ? Kido.AMBER : Kido.withAlpha(Kido.LINE, 0.9f), Kido.px(22)));
 			View stripe = card.findViewWithTag("stripe");
 			if (stripe != null) stripe.setBackgroundColor(center ? Kido.RED : Kido.withAlpha(Kido.AMBER, 0.35f));
 			nodeCodes[slot].setTextColor(signal);
