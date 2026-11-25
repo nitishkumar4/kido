@@ -200,12 +200,12 @@ final class TimelineView extends FrameLayout {
 				1290, 190, 370, 18);
 
 		TextView back = label("◀  事象  ARCHIVE", Kido.condBold, 26, Kido.DIM, 0.14f);
-		place(this, back, 122, 980, 400, 34);
+		place(this, back, 122, 990, 400, 34);
 
 		TextView controls = label("LEFT // PREVIOUS       RIGHT // NEXT       BACK // CALENDAR",
 				Kido.mono, 20, Kido.DIM, 0.08f);
 		controls.setGravity(Gravity.CENTER);
-		place(this, controls, 500, 980, 1000, 34);
+		place(this, controls, 500, 990, 1000, 34);
 		place(this, new RulerView(context, 440), 36, 446, 64, 580);
 		render();
 	}
