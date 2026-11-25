@@ -1,0 +1,170 @@
+[
+  {
+    "date": "2026-01-26",
+    "title": "Republic Day",
+    "type": "PUBLIC HOLIDAY",
+    "description": "National holiday",
+    "region": "IN-MH"
+  },
+  {
+    "date": "2026-02-15",
+    "title": "Mahashivratri",
+    "type": "FESTIVAL",
+    "description": "Maha Shivratri; falls on a Sunday.",
+    "region": "IN-MH"
+  },
+  {
+    "date": "2026-02-19",
+    "title": "Chhatrapati Shivaji Maharaj Jayanti",
+    "type": "OBSERVANCE",
+    "description": "Birth anniversary of Chhatrapati Shivaji Maharaj.",
+    "region": "IN-MH"
+  },
+  {
+    "date": "2026-03-03",
+    "title": "Holi",
+    "type": "PUBLIC HOLIDAY",
+    "description": "Holi (second day / Dhulivandan).",
+    "region": "IN-MH"
+  },
+  {
+    "date": "2026-03-19",
+    "title": "Gudi Padwa",
+    "type": "PUBLIC HOLIDAY",
+    "description": "Maharashtrian New Year.",
+    "region": "IN-MH"
+  },
+  {
+    "date": "2026-03-21",
+    "title": "Ramzan Id",
+    "type": "PUBLIC HOLIDAY",
+    "description": "Id-ul-Fitr; date may vary with moon sighting.",
+    "region": "IN-MH"
+  },
+  {
+    "date": "2026-03-26",
+    "title": "Ram Navami",
+    "type": "PUBLIC HOLIDAY",
+    "description": "Birth of Lord Rama.",
+    "region": "IN-MH"
+  },
+  {
+    "date": "2026-03-31",
+    "title": "Mahavir Jayanti",
+    "type": "PUBLIC HOLIDAY",
+    "description": "Mahavir Janmakalyanak.",
+    "region": "IN-MH"
+  },
+  {
+    "date": "2026-04-03",
+    "title": "Good Friday",
+    "type": "PUBLIC HOLIDAY",
+    "description": "Christian observance commemorating the crucifixion of Jesus Christ.",
+    "region": "IN-MH"
+  },
+  {
+    "date": "2026-04-14",
+    "title": "Dr. Babasaheb Ambedkar Jayanti",
+    "type": "PUBLIC HOLIDAY",
+    "description": "Birth anniversary of Dr. B. R. Ambedkar.",
+    "region": "IN-MH"
+  },
+  {
+    "date": "2026-05-01",
+    "title": "Maharashtra Day / Buddha Purnima",
+    "type": "PUBLIC HOLIDAY",
+    "description": "Maharashtra Foundation Day and Buddha Purnima.",
+    "region": "IN-MH"
+  },
+  {
+    "date": "2026-05-28",
+    "title": "Bakri Id",
+    "type": "PUBLIC HOLIDAY",
+    "description": "Id-ul-Zuha; date may vary with moon sighting.",
+    "region": "IN-MH"
+  },
+  {
+    "date": "2026-06-26",
+    "title": "Muharram",
+    "type": "PUBLIC HOLIDAY",
+    "description": "Islamic New Year observance; date may vary with moon sighting.",
+    "region": "IN-MH"
+  },
+  {
+    "date": "2026-08-15",
+    "title": "Independence Day / Parsi New Year",
+    "type": "PUBLIC HOLIDAY",
+    "description": "India's Independence Day and Parsi New Year.",
+    "region": "IN-MH"
+  },
+  {
+    "date": "2026-08-26",
+    "title": "Id-E-Milad",
+    "type": "PUBLIC HOLIDAY",
+    "description": "Prophet Muhammad's birthday; date may vary with moon sighting.",
+    "region": "IN-MH"
+  },
+  {
+    "date": "2026-09-14",
+    "title": "Ganesh Chaturthi",
+    "type": "PUBLIC HOLIDAY",
+    "description": "Festival celebrating the birth of Lord Ganesha.",
+    "region": "IN-MH"
+  },
+  {
+    "date": "2026-10-02",
+    "title": "Mahatma Gandhi Jayanti",
+    "type": "PUBLIC HOLIDAY",
+    "description": "Birth anniversary of Mahatma Gandhi.",
+    "region": "IN-MH"
+  },
+  {
+    "date": "2026-10-20",
+    "title": "Dasara",
+    "type": "PUBLIC HOLIDAY",
+    "description": "Vijayadashami / Dussehra.",
+    "region": "IN-MH"
+  },
+  {
+    "date": "2026-11-08",
+    "title": "Diwali Amavasya (Laxmi Pujan)",
+    "type": "FESTIVAL",
+    "description": "Diwali Lakshmi Pujan; falls on a Sunday.",
+    "region": "IN-MH"
+  },
+  {
+    "date": "2026-11-10",
+    "title": "Diwali (Bali Pratipada)",
+    "type": "PUBLIC HOLIDAY",
+    "description": "The day after Diwali Amavasya.",
+    "region": "IN-MH"
+  },
+  {
+    "date": "2026-11-11",
+    "title": "Bhaubeej",
+    "type": "STATE HOLIDAY",
+    "description": "Additional holiday for Maharashtra state and local government offices.",
+    "region": "IN-MH"
+  },
+  {
+    "date": "2026-11-24",
+    "title": "Guru Nanak Jayanti",
+    "type": "PUBLIC HOLIDAY",
+    "description": "Birth anniversary of Guru Nanak Dev Ji.",
+    "region": "IN-MH"
+  },
+  {
+    "date": "2026-12-25",
+    "title": "Christmas",
+    "type": "PUBLIC HOLIDAY",
+    "description": "Christmas Day.",
+    "region": "IN-MH"
+  },
+  {
+    "date": "2027-01-01",
+    "title": "New Year's Day",
+    "type": "OBSERVANCE",
+    "description": "First day of the new calendar year.",
+    "region": "IN"
+  }
+]
