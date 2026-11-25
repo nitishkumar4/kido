@@ -213,9 +213,10 @@ final class TimelineView extends FrameLayout {
 				.setInterpolator(new android.view.animation.LinearInterpolator()).start();
 		eventCards[incomingSlot].setAlpha(0f);
 		markers[incomingSlot].setAlpha(0f);
-		eventCards[incomingSlot].animate().alpha(1f).setDuration(280)
+		// Let the incoming card move into the viewport before its fade becomes noticeable.
+		eventCards[incomingSlot].animate().alpha(1f).setStartDelay(70).setDuration(210)
 				.setInterpolator(new android.view.animation.LinearInterpolator()).start();
-		markers[incomingSlot].animate().alpha(0.65f).setDuration(280)
+		markers[incomingSlot].animate().alpha(0.65f).setStartDelay(70).setDuration(210)
 				.setInterpolator(new android.view.animation.LinearInterpolator()).start();
 
 		timelineTrack.animate().translationX(Kido.px(-direction * 340))
