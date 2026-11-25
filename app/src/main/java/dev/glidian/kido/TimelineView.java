@@ -62,7 +62,7 @@ final class TimelineView extends FrameLayout {
 		sortEvents();
 		selectedIndex = todayIndex();
 
-		TextView heading = label("時線", Kido.mincho, 46, Kido.AMBER);
+		TextView heading = label("時線", Kido.mincho, 46, Kido.AMBER, 1.0f);
 		place(this, heading, 120, 360, 110, 58);
 		place(this, label("TIMELINE", Kido.condBold, 30, Kido.INK, 0.14f), 250, 384, 260, 34);
 		place(this, label("PUBLIC HOLIDAYS // FESTIVALS // IMPORTANT DAYS", Kido.mono, 19, Kido.DIM, 0.08f),
