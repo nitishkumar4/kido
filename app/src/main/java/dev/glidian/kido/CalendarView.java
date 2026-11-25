@@ -68,13 +68,13 @@ final class CalendarView extends FrameLayout {
 	}
 
 	private void buildHints() {
-		TextView system = label("◀  系統  SYSTEM", Kido.condBold, 26, Kido.DIM, 0.14f);
+		TextView system = label("BACK // 系統  SYSTEM", Kido.condBold, 26, Kido.DIM, 0.14f);
 		place(system, 122, 966, 400, 34);
 
-		TextView monthControls = label("UP // PREVIOUS       DOWN // NEXT       OK // CURRENT",
-				Kido.mono, 20, Kido.DIM, 0.08f);
+		TextView monthControls = label("LEFT // PREVIOUS MONTH       RIGHT // NEXT MONTH       DOWN // EVENT SEQUENCE",
+				Kido.mono, 18, Kido.DIM, 0.08f);
 		monthControls.setGravity(Gravity.CENTER);
-		place(monthControls, 500, 966, 1000, 34);
+		place(monthControls, 500, 966, 1300, 34);
 	}
 
 	private void renderMonth() {
