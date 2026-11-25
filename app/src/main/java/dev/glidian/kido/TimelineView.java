@@ -54,6 +54,9 @@ final class TimelineView extends FrameLayout {
 	private final TextView detailMeta;
 	private final TextView detailDescription;
 	private final TextView detailType;
+	private final TextView todayDateLabel;
+	private final TextView todayEventLabel;
+	private final TextView[] states = new TextView[5];
 	private int selectedIndex;
 
 	TimelineView(Context context) {
@@ -81,9 +84,32 @@ final class TimelineView extends FrameLayout {
 		TextView heading = label("時線", Kido.mincho, 46, Kido.AMBER, 1.0f);
 		place(this, heading, 120, 360, 110, 58);
 		place(this, label("TIMELINE", Kido.condBold, 30, Kido.INK, 0.14f), 250, 384, 260, 34);
-		place(this, label("PUBLIC HOLIDAYS // FESTIVALS // IMPORTANT DAYS", Kido.mono, 19, Kido.DIM, 0.08f),
-				560, 390, 1050, 28);
+		todayDateLabel = label("", Kido.mono, 17, Kido.AMBER, 0.08f);
+		place(this, todayDateLabel, 560, 390, 540, 28);
+		todayEventLabel = label("", Kido.mono, 17, Kido.CREAM, 0.04f);
+		todayEventLabel.setSingleLine(true);
+		todayEventLabel.setEllipsize(android.text.TextUtils.TruncateAt.END);
+		place(this, todayEventLabel, 1110, 390, 500, 28);
 		place(this, label("SEC-06", Kido.mono, 22, Kido.DIM, 0.05f), 1640, 390, 140, 28);
+
+		LocalDate today = LocalDate.now();
+		int daysInYear = today.lengthOfYear();
+		int daysRemaining = daysInYear - today.getDayOfYear();
+		float yearProgress = today.getDayOfYear() / (float) daysInYear;
+		place(this, label("ANNUAL CYCLE // " + today.getYear(), Kido.mono, 13, Kido.DIM, 0.1f),
+				112, 418, 520, 18);
+		TextView progressValue = label(String.format(Locale.ROOT, "%.1f%% ELAPSED  //  %02d DAYS REMAINING",
+				yearProgress * 100f, daysRemaining), Kido.mono, 13, Kido.AMBER, 0.08f);
+		progressValue.setGravity(Gravity.END);
+		place(this, progressValue, 1160, 418, 648, 18);
+		View progressTrack = new View(context);
+		progressTrack.setBackgroundColor(Kido.withAlpha(Kido.LINE, 0.75f));
+		place(this, progressTrack, 112, 440, 1696, 4);
+		View progressFill = new View(context);
+		progressFill.setBackgroundColor(Kido.AMBER);
+		progressFill.setPivotX(0f);
+		progressFill.setScaleX(yearProgress);
+		place(this, progressFill, 112, 440, 1696, 4);
 
 		// Chronology rail: five instrument panels, with the selected node treated as the active signal.
 		place(this, label("MAGI // CHRONOLOGY ARRAY", Kido.mono, 16, Kido.DIM, 0.12f),
@@ -105,10 +131,10 @@ final class TimelineView extends FrameLayout {
 
 			nodeCodes[i] = label("NODE 00", Kido.mono, 15, Kido.DIM, 0.12f);
 			place(card, nodeCodes[i], 14, 16, 180, 22);
-			TextView state = label(i < 2 ? "ARCHIVE" : i == 2 ? "ACTIVE" : "INCOMING",
+			states[i] = label(i < 2 ? "ARCHIVE" : i == 2 ? "ACTIVE" : "INCOMING",
 					Kido.mono, 13, Kido.DIM, 0.08f);
-			state.setGravity(Gravity.END);
-			place(card, state, 202, 18, 104, 20);
+			states[i].setGravity(Gravity.END);
+			place(card, states[i], 202, 18, 104, 20);
 
 			dates[i] = label("", Kido.condBold, 30, Kido.CREAM, 0.04f);
 			place(card, dates[i], 14, 54, 292, 38);
@@ -247,6 +273,12 @@ final class TimelineView extends FrameLayout {
 
 	private void render() {
 		Event selected = getSelectedEvent();
+		LocalDate today = LocalDate.now();
+		Event todayEvent = events.get(todayIndex());
+		todayDateLabel.setText("TODAY // " + today.format(
+				DateTimeFormatter.ofPattern("EEE dd MMM yyyy", Locale.ENGLISH)).toUpperCase(Locale.ROOT));
+		todayEventLabel.setText(todayEvent.title.equals("TODAY")
+				? "NO EVENT SCHEDULED" : todayEvent.title.toUpperCase(Locale.ROOT));
 		for (int slot = 0; slot < 5; slot++) {
 			int index = selectedIndex + slot - 2;
 			boolean center = slot == 2;
@@ -262,6 +294,9 @@ final class TimelineView extends FrameLayout {
 			dates[slot].setText(event.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy", Locale.ENGLISH))
 					.toUpperCase(Locale.ROOT));
 			titles[slot].setText(event.title.toUpperCase(Locale.ROOT));
+			states[slot].setText(event.date.equals(today) ? "TODAY"
+					: center ? "ACTIVE" : index < selectedIndex ? "ARCHIVE" : "INCOMING");
+			states[slot].setTextColor(event.date.equals(today) ? Kido.AMBER : Kido.DIM);
 
 			int signal = center ? Kido.AMBER : Kido.DIM;
 			card.setBackground(new SimCardDrawable(center ? Kido.withAlpha(Kido.ORANGE, 0.13f)
