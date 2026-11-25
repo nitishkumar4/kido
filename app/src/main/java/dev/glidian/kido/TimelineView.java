@@ -270,12 +270,20 @@ final class TimelineView extends FrameLayout {
 		Collections.sort(events, Comparator.comparing(event -> event.date));
 	}
 
+	private int brighten(int color) {
+		int red = android.graphics.Color.red(color);
+		int green = android.graphics.Color.green(color);
+		int blue = android.graphics.Color.blue(color);
+		return android.graphics.Color.rgb(red + (255 - red) / 3,
+				green + (255 - green) / 3, blue + (255 - blue) / 3);
+	}
+
 	private void updateAnnualCycle(LocalDate today, LocalDate selectedDate) {
 		int selectedMonth = selectedDate.getMonthValue() - 1;
 		for (int i = 0; i < monthMarkers.length; i++) {
 			boolean active = i == selectedMonth;
 			int baseColor = monthColors[i / 2];
-			int color = active ? baseColor : Kido.withAlpha(baseColor,
+			int color = active ? brighten(baseColor) : Kido.withAlpha(baseColor,
 					i < today.getMonthValue() - 1 ? 0.62f : 0.38f);
 			monthMarkers[i].setBackgroundColor(color);
 			FrameLayout.LayoutParams markerParams = (FrameLayout.LayoutParams) monthMarkers[i].getLayoutParams();
