@@ -1275,7 +1275,10 @@ public class KidoActivity extends Activity {
         if (z == 5) {
             handler.removeCallbacks(arrive);
             board.animate().translationX(-Kido.px(TIMELINE_X)).translationY(-Kido.px(TIMELINE_Y))
-                    .setDuration(620).setInterpolator(fluid).withEndAction(onPanEnd).start();
+                    .setDuration(620).setInterpolator(fluid).withEndAction(() -> {
+                        intro(5);
+                        if (onPanEnd != null) onPanEnd.run();
+                    }).start();
             showTabs(5);
             footerZone.setText("SEC-06 // TIMELINE");
             setStatus("時線", "TIMELINE", "PUBLIC HOLIDAYS // FESTIVALS", "LEFT / RIGHT // EVENTS", Kido.LIME);
