@@ -89,11 +89,11 @@ final class TimelineView extends FrameLayout {
 		int daysRemaining = daysInYear - today.getDayOfYear();
 		float yearProgress = today.getDayOfYear() / (float) daysInYear;
 		place(this, label("ANNUAL CYCLE // " + today.getYear(), Kido.mono, 13, Kido.DIM, 0.1f),
-				112, 418, 520, 18);
+				112, 958, 520, 18);
 		TextView progressValue = label(String.format(Locale.ROOT, "%.1f%% ELAPSED  //  %02d DAYS REMAINING",
 				yearProgress * 100f, daysRemaining), Kido.mono, 13, Kido.AMBER, 0.08f);
 		progressValue.setGravity(Gravity.END);
-		place(this, progressValue, 1160, 418, 648, 18);
+		place(this, progressValue, 1160, 958, 648, 18);
 		String[] months = {"JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
 				"JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"};
 		for (int i = 0; i < months.length; i++) {
@@ -103,12 +103,12 @@ final class TimelineView extends FrameLayout {
 					: i == today.getMonthValue() - 1 ? Kido.AMBER : Kido.withAlpha(Kido.DIM, 0.72f);
 			View marker = new View(context);
 			marker.setBackgroundColor(color);
-			place(this, marker, left + 5, 440, right - left - 10, 3);
+			place(this, marker, left + 5, 980, right - left - 10, 3);
 			TextView month = label(months[i], Kido.mono, 12, color,
 					i == today.getMonthValue() - 1 ? 0.08f : 0.025f);
 			month.setGravity(Gravity.CENTER);
 			if (i == today.getMonthValue() - 1) month.setTypeface(Kido.condBold);
-			place(this, month, left, 448, right - left, 20);
+			place(this, month, left, 988, right - left, 20);
 		}
 
 		// Chronology rail: five instrument panels, with the selected node treated as the active signal.
@@ -191,7 +191,7 @@ final class TimelineView extends FrameLayout {
 		TextView hints = label("◀ PREVIOUS EVENT                         NEXT EVENT ▶          HOME // TODAY",
 				Kido.mono, 18, Kido.DIM, 0.07f);
 		hints.setGravity(Gravity.CENTER);
-		place(this, hints, 400, 966, 1120, 34);
+		place(this, hints, 400, 1012, 1120, 24);
 		place(this, new RulerView(context, 440), 36, 446, 64, 580);
 		render();
 	}
