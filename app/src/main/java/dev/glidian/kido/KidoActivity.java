@@ -919,7 +919,6 @@ public class KidoActivity extends Activity {
         showTabs(0);
         showNowPlaying();
         if (calendarView != null) updateCalendarPlate(calendarView.getDisplayedMonth());
-        if (timelineView != null) setStatus("時線", "TIMELINE", "PUBLIC HOLIDAYS // FESTIVALS", "LEFT / RIGHT // EVENTS", Kido.LIME);
     }
 
     /**
