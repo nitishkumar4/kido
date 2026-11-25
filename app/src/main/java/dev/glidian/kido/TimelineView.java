@@ -94,7 +94,7 @@ final class TimelineView extends FrameLayout {
 
 		View rail = new View(context);
 		rail.setBackgroundColor(Kido.withAlpha(Kido.AMBER, 0.35f));
-		place(this, rail, 132, 535, 1650, 2);
+		place(this, rail, 132, 668, 1650, 2);
 
 		for (int i = 0; i < 5; i++) {
 			FrameLayout card = new FrameLayout(context);
@@ -128,7 +128,7 @@ final class TimelineView extends FrameLayout {
 			marker.setColor(Kido.DIM);
 			markers[i].setBackground(marker);
 			markers[i].setRotation(45f);
-			place(this, markers[i], x + 151, 526, 18, 18);
+			place(this, markers[i], x + 151, 660, 18, 18);
 		}
 
 		// Selected-event dossier. Three distinct data zones, like a tactical console readout.
