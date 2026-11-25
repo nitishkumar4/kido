@@ -79,10 +79,15 @@ final class TimelineView extends FrameLayout {
 		sortEvents();
 		selectedIndex = todayIndex();
 
-		TextView heading = label("時線", Kido.mincho, 46, Kido.AMBER, 1.0f);
-		place(this, heading, 120, 360, 110, 58);
-		place(this, label("CHRONO SEQUENCE", Kido.condBold, 30, Kido.INK, 0.14f), 250, 384, 390, 34);
-		place(this, label("SEC-06", Kido.mono, 22, Kido.DIM, 0.05f), 660, 390, 140, 28);
+		LinearLayout title = new LinearLayout(context);
+		title.setOrientation(LinearLayout.HORIZONTAL);
+		title.setGravity(Gravity.BOTTOM);
+		title.addView(label("時線", Kido.mincho, 46, Kido.AMBER, 0f));
+		title.addView(gap(18));
+		title.addView(label("EVENT SEQUENCE", Kido.condBold, 30, Kido.INK, 0.14f));
+		title.addView(gap(14));
+		title.addView(label("SEC-06", Kido.mono, 22, Kido.DIM, 0f));
+		place(this, title, 120, 360, -1, 58);
 
 		LocalDate today = LocalDate.now();
 		int daysInYear = today.lengthOfYear();
@@ -358,6 +363,12 @@ final class TimelineView extends FrameLayout {
 		@Override public void setAlpha(int alpha) { paint.setAlpha(alpha); }
 		@Override public void setColorFilter(android.graphics.ColorFilter filter) { paint.setColorFilter(filter); }
 		@Override public int getOpacity() { return android.graphics.PixelFormat.TRANSLUCENT; }
+	}
+
+	private View gap(int width) {
+		View view = new View(getContext());
+		view.setLayoutParams(new LinearLayout.LayoutParams(Kido.px(width), 1));
+		return view;
 	}
 
 	private TextView label(String value, android.graphics.Typeface face, int size, int color, float spacing) {
