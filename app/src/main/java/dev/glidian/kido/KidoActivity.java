@@ -723,7 +723,7 @@ public class KidoActivity extends Activity {
         strip.addView(toast);
         place(z, strip, 122, 830, 1676, 74);
         place(z, text("▲ 主要 " + str(R.string.zone_main_tab), Kido.condBold, 26, Kido.DIM, 0.14f), 122, 966, -1, -1);
-        TextView audioHint = text("▼ 音楽  AUDIO       ▶ 事象  EVENT", Kido.condBold, 26, Kido.DIM, 0.14f);
+        TextView audioHint = text("▼ 音楽  AUDIO       ▶ 事象  EVENTS", Kido.condBold, 26, Kido.DIM, 0.14f);
         audioHint.setGravity(Gravity.END);
         place(z, audioHint, 122, 966, 1676, 34);
     }
