@@ -46,11 +46,11 @@ final class TimelineView extends FrameLayout {
 	private final FrameLayout timelineTrack;
 	private boolean sliding;
 	private final List<Event> events = new ArrayList<>();
-	private final FrameLayout[] eventCards = new FrameLayout[5];
-	private final TextView[] dates = new TextView[5];
-	private final TextView[] titles = new TextView[5];
-	private final TextView[] nodeCodes = new TextView[5];
-	private final View[] markers = new View[5];
+	private final FrameLayout[] eventCards = new FrameLayout[7];
+	private final TextView[] dates = new TextView[7];
+	private final TextView[] titles = new TextView[7];
+	private final TextView[] nodeCodes = new TextView[7];
+	private final View[] markers = new View[7];
 	private final TextView detailDay;
 	private final TextView detailMonth;
 	private final TextView detailTitle;
@@ -102,10 +102,10 @@ final class TimelineView extends FrameLayout {
 		rail.setBackgroundColor(Kido.withAlpha(Kido.AMBER, 0.35f));
 		place(timelineTrack, rail, 132, 668, 1650, 2);
 
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 7; i++) {
 			FrameLayout card = new FrameLayout(context);
 			card.setBackground(outline(Kido.withAlpha(Kido.PANEL, 0.94f), Kido.withAlpha(Kido.LINE, 0.9f)));
-			int x = 112 + i * 340;
+			int x = 112 + (i - 1) * 340;
 			place(timelineTrack, card, x, 472, 320, 178);
 			eventCards[i] = card;
 
@@ -115,7 +115,7 @@ final class TimelineView extends FrameLayout {
 
 			nodeCodes[i] = label("NODE 00", Kido.mono, 15, Kido.DIM, 0.12f);
 			place(card, nodeCodes[i], 20, 16, 180, 22);
-			TextView state = label(i < 2 ? "ARCHIVE" : i == 2 ? "ACTIVE" : "INCOMING",
+			TextView state = label(i < 3 ? "ARCHIVE" : i == 3 ? "ACTIVE" : "INCOMING",
 					Kido.mono, 13, Kido.DIM, 0.08f);
 			state.setGravity(Gravity.END);
 			place(card, state, 180, 18, 122, 20);
@@ -203,13 +203,13 @@ final class TimelineView extends FrameLayout {
 	private void slideTo(int direction) {
 		if (sliding || selectedIndex + direction < 0 || selectedIndex + direction >= events.size()) return;
 		sliding = true;
-		int outgoingSlot = direction > 0 ? 0 : 4;
-		int incomingSlot = direction > 0 ? 4 : 0;
+		int outgoingSlot = direction > 0 ? 1 : 5;
+		int incomingSlot = direction > 0 ? 6 : 0;
 		eventCards[outgoingSlot].animate().alpha(0f).setDuration(280)
-				.setInterpolator(new android.view.animation.DecelerateInterpolator()).start();
+				.setInterpolator(new android.view.animation.LinearInterpolator()).start();
 		eventCards[incomingSlot].setAlpha(0f);
 		eventCards[incomingSlot].animate().alpha(1f).setDuration(280)
-				.setInterpolator(new android.view.animation.DecelerateInterpolator()).start();
+				.setInterpolator(new android.view.animation.LinearInterpolator()).start();
 
 		timelineTrack.animate().translationX(Kido.px(-direction * 340))
 				.setDuration(280)
@@ -284,9 +284,9 @@ final class TimelineView extends FrameLayout {
 
 	private void render() {
 		Event selected = getSelectedEvent();
-		for (int slot = 0; slot < 5; slot++) {
-			int index = selectedIndex + slot - 2;
-			boolean center = slot == 2;
+		for (int slot = 0; slot < 7; slot++) {
+			int index = selectedIndex + slot - 3;
+			boolean center = slot == 3;
 			FrameLayout card = eventCards[slot];
 			if (index < 0 || index >= events.size()) {
 				card.setVisibility(View.INVISIBLE);
