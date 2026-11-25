@@ -121,13 +121,14 @@ final class TimelineView extends FrameLayout {
 
 		// Selected-event dossier. Three distinct data zones, like a tactical console readout.
 		FrameLayout dossier = new FrameLayout(context);
-		dossier.setBackground(new TicketDrawable(Kido.withAlpha(Kido.PANEL, 0.98f), Kido.withAlpha(Kido.LINE, 0.95f), Kido.withAlpha(Kido.AMBER, 0.55f)));
+		dossier.setBackground(outline(Kido.withAlpha(Kido.PANEL, 0.98f), Kido.LINE));
 		place(this, dossier, 112, 686, 1696, 246);
 
-		place(dossier, label("BOARDING PASS // EVENT RECORD", Kido.mono, 15, Kido.DIM, 0.1f),
-				28, 18, 270, 22);
-		place(dossier, label("DATE", Kido.mono, 13, Kido.DIM, 0.12f),
-				28, 48, 180, 18);
+		View warning = new View(context);
+		warning.setBackgroundColor(Kido.RED);
+		place(dossier, warning, 0, 0, 7, 246);
+		place(dossier, label("SELECTED NODE // 03", Kido.mono, 15, Kido.DIM, 0.1f),
+				28, 20, 270, 22);
 		detailDay = label("", Kido.condBold, 76, Kido.AMBER, 0.02f);
 		place(dossier, detailDay, 28, 54, 230, 82);
 		detailMonth = label("", Kido.mono, 19, Kido.CREAM, 0.08f);
@@ -135,22 +136,30 @@ final class TimelineView extends FrameLayout {
 		detailType = label("", Kido.mono, 15, Kido.RED, 0.1f);
 		place(dossier, detailType, 30, 192, 260, 22);
 
+		View dividerA = new View(context);
+		dividerA.setBackgroundColor(Kido.withAlpha(Kido.AMBER, 0.45f));
+		place(dossier, dividerA, 310, 24, 2, 198);
+
 		detailTitle = label("", Kido.condBold, 36, Kido.CREAM, 0.04f);
 		detailTitle.setSingleLine(true);
 		detailTitle.setEllipsize(android.text.TextUtils.TruncateAt.END);
 		place(dossier, detailTitle, 348, 38, 890, 50);
-		place(dossier, label("DESTINATION // EVENT", Kido.mono, 14, Kido.AMBER, 0.1f),
-				350, 20, 780, 20);
+		place(dossier, label("EVENT RECORD // VERIFIED LOCAL ENTRY", Kido.mono, 14, Kido.DIM, 0.09f),
+				350, 98, 780, 20);
 		detailDescription = label("", Kido.mono, 19, Kido.INK, 0.015f);
 		detailDescription.setMaxLines(3);
 		detailDescription.setEllipsize(android.text.TextUtils.TruncateAt.END);
 		place(dossier, detailDescription, 350, 132, 890, 82);
 
-		place(dossier, label("FLIGHT DETAILS", Kido.mono, 15, Kido.DIM, 0.12f),
-				1290, 20, 340, 22);
+		View dividerB = new View(context);
+		dividerB.setBackgroundColor(Kido.withAlpha(Kido.AMBER, 0.45f));
+		place(dossier, dividerB, 1260, 24, 2, 198);
+
+		place(dossier, label("TEMPORAL DATA", Kido.mono, 15, Kido.DIM, 0.12f),
+				1290, 26, 340, 22);
 		detailMeta = label("", Kido.mono, 18, Kido.LIME, 0.04f);
 		place(dossier, detailMeta, 1290, 68, 360, 86);
-		place(dossier, label("KIDO AIR  /  IN-MH", Kido.mono, 12, Kido.DIM, 0.08f),
+		place(dossier, label("NERV // PUBLIC INFORMATION TERMINAL", Kido.mono, 12, Kido.DIM, 0.08f),
 				1290, 190, 370, 18);
 
 		TextView hints = label("◀ PREVIOUS EVENT                         NEXT EVENT ▶          HOME // TODAY",
@@ -274,59 +283,6 @@ final class TimelineView extends FrameLayout {
 		int week = selected.date.get(WeekFields.ISO.weekOfWeekBasedYear());
 		detailMeta.setText(String.format(Locale.ROOT, "WEEK   %02d\nDAY    %03d\nAREA   %s",
 				week, selected.date.getDayOfYear(), selected.region));
-	}
-
-	private static final class TicketDrawable extends android.graphics.drawable.Drawable {
-		private final android.graphics.Paint paint = new android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG);
-		private final android.graphics.Path path = new android.graphics.Path();
-		private final int fillColor;
-		private final int strokeColor;
-		private final int perforationColor;
-
-		TicketDrawable(int fillColor, int strokeColor, int perforationColor) {
-			this.fillColor = fillColor;
-			this.strokeColor = strokeColor;
-			this.perforationColor = perforationColor;
-		}
-
-		@Override
-		public void draw(android.graphics.Canvas canvas) {
-			float w = getBounds().width();
-			float h = getBounds().height();
-			float a = Kido.px(310);
-			float b = Kido.px(1260);
-			float r = Kido.px(18);
-			path.reset();
-			path.moveTo(0, 0);
-			path.lineTo(a, 0);
-			path.lineTo(a, h / 2f - r);
-			path.quadTo(a - r, h / 2f, a, h / 2f + r);
-			path.lineTo(a, h);
-			path.lineTo(b, h);
-			path.lineTo(b, h / 2f + r);
-			path.quadTo(b + r, h / 2f, b, h / 2f - r);
-			path.lineTo(b, 0);
-			path.lineTo(w, 0);
-			path.lineTo(w, h);
-			path.lineTo(0, h);
-			path.close();
-			paint.setStyle(android.graphics.Paint.Style.FILL);
-			paint.setColor(fillColor);
-			canvas.drawPath(path, paint);
-			paint.setStyle(android.graphics.Paint.Style.STROKE);
-			paint.setStrokeWidth(Kido.px(2));
-			paint.setColor(strokeColor);
-			canvas.drawPath(path, paint);
-			paint.setPathEffect(new android.graphics.DashPathEffect(new float[]{Kido.px(5), Kido.px(6)}, 0));
-			paint.setColor(perforationColor);
-			canvas.drawLine(a, Kido.px(16), a, h - Kido.px(16), paint);
-			canvas.drawLine(b, Kido.px(16), b, h - Kido.px(16), paint);
-			paint.setPathEffect(null);
-		}
-
-		@Override public void setAlpha(int alpha) { paint.setAlpha(alpha); }
-		@Override public void setColorFilter(android.graphics.ColorFilter filter) { paint.setColorFilter(filter); }
-		@Override public int getOpacity() { return android.graphics.PixelFormat.TRANSLUCENT; }
 	}
 
 	private static final class SimCardDrawable extends android.graphics.drawable.Drawable {
