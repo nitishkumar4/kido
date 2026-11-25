@@ -43,6 +43,8 @@ final class TimelineView extends FrameLayout {
 
 	private final TraceView frame;
 	private final View accent;
+	private final FrameLayout timelineTrack;
+	private boolean sliding;
 	private final List<Event> events = new ArrayList<>();
 	private final FrameLayout[] eventCards = new FrameLayout[5];
 	private final TextView[] dates = new TextView[5];
@@ -92,33 +94,19 @@ final class TimelineView extends FrameLayout {
 		place(this, label("EVENT STREAM  /  LOCAL DATABASE  /  IN-MH", Kido.mono, 16, Kido.DIM, 0.08f),
 				1120, 448, 680, 24);
 
-		// Calibrated tuning scale: fine ticks, regular graduations and a continuous signal track.
+		timelineTrack = new FrameLayout(context);
+		place(this, timelineTrack, 0, 0, 1920, 1080);
+
+		// Keep the original clean chronology rail; the whole track scrolls with its event nodes.
 		View rail = new View(context);
-		rail.setBackgroundColor(Kido.withAlpha(Kido.AMBER, 0.55f));
-		place(this, rail, 132, 668, 1650, 2);
-
-		for (int tick = 0; tick <= 82; tick++) {
-			int x = 132 + tick * 20;
-			boolean major = tick % 5 == 0;
-			boolean medium = tick % 5 == 2;
-			int height = major ? 13 : medium ? 9 : 5;
-			int color = major ? Kido.withAlpha(Kido.AMBER, 0.8f)
-					: Kido.withAlpha(Kido.DIM, 0.65f);
-
-			View upperTick = new View(context);
-			upperTick.setBackgroundColor(color);
-			place(this, upperTick, x, 668 - height, 2, height);
-
-			View lowerTick = new View(context);
-			lowerTick.setBackgroundColor(color);
-			place(this, lowerTick, x, 670, 2, major ? 8 : 4);
-		}
+		rail.setBackgroundColor(Kido.withAlpha(Kido.AMBER, 0.35f));
+		place(timelineTrack, rail, 132, 668, 1650, 2);
 
 		for (int i = 0; i < 5; i++) {
 			FrameLayout card = new FrameLayout(context);
 			card.setBackground(outline(Kido.withAlpha(Kido.PANEL, 0.94f), Kido.withAlpha(Kido.LINE, 0.9f)));
 			int x = 112 + i * 340;
-			place(this, card, x, 472, 320, 178);
+			place(timelineTrack, card, x, 472, 320, 178);
 			eventCards[i] = card;
 
 			View stripe = new View(context);
@@ -146,7 +134,7 @@ final class TimelineView extends FrameLayout {
 			marker.setColor(Kido.DIM);
 			markers[i].setBackground(marker);
 			markers[i].setRotation(45f);
-			place(this, markers[i], x + 151, 660, 18, 18);
+			place(timelineTrack, markers[i], x + 151, 660, 18, 18);
 		}
 
 		// Selected-event dossier. Three distinct data zones, like a tactical console readout.
@@ -205,20 +193,35 @@ final class TimelineView extends FrameLayout {
 	}
 
 	void previousEvent() {
-		if (selectedIndex > 0) {
-			selectedIndex--;
-			render();
-		}
+		slideTo(-1);
 	}
 
 	void nextEvent() {
-		if (selectedIndex < events.size() - 1) {
-			selectedIndex++;
-			render();
-		}
+		slideTo(1);
+	}
+
+	private void slideTo(int direction) {
+		if (sliding || selectedIndex + direction < 0 || selectedIndex + direction >= events.size()) return;
+		sliding = true;
+		timelineTrack.animate().translationX(Kido.px(-direction * 340))
+				.setDuration(220)
+				.setInterpolator(new android.view.animation.DecelerateInterpolator())
+				.withEndAction(() -> {
+					selectedIndex += direction;
+					render();
+					timelineTrack.setTranslationX(Kido.px(direction * 340));
+					timelineTrack.animate().translationX(0f)
+							.setDuration(220)
+							.setInterpolator(new android.view.animation.DecelerateInterpolator())
+							.withEndAction(() -> sliding = false)
+							.start();
+				}).start();
 	}
 
 	void resetToToday() {
+		timelineTrack.animate().cancel();
+		sliding = false;
+		timelineTrack.setTranslationX(0f);
 		selectedIndex = todayIndex();
 		render();
 	}
