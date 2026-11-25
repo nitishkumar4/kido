@@ -23,7 +23,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
-/** Lightweight event timeline. Its data and navigation are independent of CalendarView. */
+/** Lightweight local-event timeline. Reads only holidays.json. */
 final class TimelineView extends FrameLayout {
 	static final class Event {
 		final LocalDate date;
