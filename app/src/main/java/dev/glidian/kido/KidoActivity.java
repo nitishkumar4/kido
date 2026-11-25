@@ -86,7 +86,7 @@ public class KidoActivity extends Activity {
     private static final int[] ZONE_TABS = {R.string.zone_main_tab, R.string.zone_apps_tab, R.string.zone_system_tab};
     // The section tabs under the clock: left edge, step from one tab to the next, and tab width. The data block and
     // the NOW PLAYING panel above them span exactly the same width.
-    private static final int TAB_X = 700, TAB_STEP = 78, TAB_W = 68;
+    private static final int TAB_X = 700, TAB_STEP = 78, TAB_W = 78;
     private static final int NP_W = TAB_STEP * 5 + TAB_W;
     private static final long IDLE_MS = 45_000;
 
@@ -1622,6 +1622,10 @@ public class KidoActivity extends Activity {
         }
         if (zone == 4 && calendarView != null && current == calendarView) {
             int key = event.getKeyCode();
+            if (key == KeyEvent.KEYCODE_DPAD_RIGHT) {
+                if (up && timelineView != null) timelineView.requestFocus();
+                return true;
+            }
             if (key == KeyEvent.KEYCODE_DPAD_LEFT || key == KeyEvent.KEYCODE_BACK) {
                 if (up && !sysViews.isEmpty()) sysViews.get(sysViews.size() - 1).requestFocus();
                 return true;
