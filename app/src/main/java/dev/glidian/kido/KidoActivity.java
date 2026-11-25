@@ -190,6 +190,7 @@ public class KidoActivity extends Activity {
     private Beeps beeps;
     private SharedPreferences prefs;
     private long lastKeyAt, lastLogAt;
+    private View rightPressOrigin;
     private int inputCount, channelCount, sysCheck = 41;
     private boolean resumed;
     private ValueAnimator alertPulse;
@@ -1567,7 +1568,12 @@ public class KidoActivity extends Activity {
         handler.removeCallbacks(goIdle);
         handler.postDelayed(goIdle, IDLE_MS);
         boolean down = event.getAction() == KeyEvent.ACTION_DOWN, up = event.getAction() == KeyEvent.ACTION_UP;
-        if (down) lastKeyAt = SystemClock.uptimeMillis();
+        if (down) {
+            lastKeyAt = SystemClock.uptimeMillis();
+            if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_RIGHT && event.getRepeatCount() == 0) {
+                rightPressOrigin = getCurrentFocus();
+            }
+        }
         if (boot != null) {
             if (up) endBoot();
             return true;
@@ -1625,7 +1631,10 @@ public class KidoActivity extends Activity {
         if (zone == 4 && calendarView != null && current == calendarView) {
             int key = event.getKeyCode();
             if (key == KeyEvent.KEYCODE_DPAD_RIGHT) {
-                if (up && timelineView != null) timelineView.requestFocus();
+                if (up) {
+                    if (rightPressOrigin == calendarView && timelineView != null) timelineView.requestFocus();
+                    rightPressOrigin = null;
+                }
                 return true;
             }
             if (key == KeyEvent.KEYCODE_DPAD_LEFT || key == KeyEvent.KEYCODE_BACK) {
