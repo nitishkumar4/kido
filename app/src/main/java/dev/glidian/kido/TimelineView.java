@@ -41,6 +41,8 @@ final class TimelineView extends FrameLayout {
 		}
 	}
 
+	private final TraceView frame;
+	private final View accent;
 	private final List<Event> events = new ArrayList<>();
 	private final TextView[] dates = new TextView[5];
 	private final TextView[] titles = new TextView[5];
@@ -57,6 +59,17 @@ final class TimelineView extends FrameLayout {
 		setFocusableInTouchMode(true);
 		setDescendantFocusability(FOCUS_BLOCK_DESCENDANTS);
 
+		frame = new TraceView(context);
+		place(this, frame, 30, 432, 1840, 608);
+
+		accent = new View(context);
+		accent.setBackground(new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+				new int[]{Kido.withAlpha(Kido.LIME, 0.55f), Kido.withAlpha(Kido.AMBER, 0.5f),
+						Kido.withAlpha(Kido.RED, 0.55f)}));
+		accent.setPivotX(0);
+		accent.setScaleX(0f);
+		place(this, accent, 30, 344, 1500, 8);
+
 		loadEvents(context);
 		addToday();
 		sortEvents();
@@ -67,6 +80,7 @@ final class TimelineView extends FrameLayout {
 		place(this, label("TIMELINE", Kido.condBold, 30, Kido.INK, 0.14f), 250, 384, 260, 34);
 		place(this, label("PUBLIC HOLIDAYS // FESTIVALS // IMPORTANT DAYS", Kido.mono, 19, Kido.DIM, 0.08f),
 				560, 390, 1050, 28);
+		place(this, label("SEC-06", Kido.mono, 22, Kido.DIM, 0.05f), 1640, 390, 140, 28);
 
 		View track = new View(context);
 		track.setBackgroundColor(Kido.LINE);
@@ -108,6 +122,7 @@ final class TimelineView extends FrameLayout {
 				Kido.mono, 20, Kido.DIM, 0.07f);
 		hints.setGravity(Gravity.CENTER);
 		place(this, hints, 400, 966, 1120, 34);
+		place(new RulerView(context, 440), 36, 446, 64, 580);
 		render();
 	}
 
@@ -132,6 +147,14 @@ final class TimelineView extends FrameLayout {
 	void resetToToday() {
 		selectedIndex = todayIndex();
 		render();
+	}
+
+	void intro() {
+		frame.trace(620);
+		accent.setScaleX(0f);
+		accent.animate().scaleX(1f).setDuration(560)
+				.setInterpolator(new android.view.animation.PathInterpolator(0.77f, 0f, 0.18f, 1f))
+				.start();
 	}
 
 	private void loadEvents(Context context) {
