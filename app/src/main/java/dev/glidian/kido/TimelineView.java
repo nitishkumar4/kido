@@ -207,21 +207,22 @@ final class TimelineView extends FrameLayout {
 		sliding = true;
 		int outgoingSlot = direction > 0 ? 1 : 5;
 		int incomingSlot = direction > 0 ? 6 : 0;
-		eventCards[outgoingSlot].animate().alpha(0f).setDuration(280)
-				.setInterpolator(new android.view.animation.LinearInterpolator()).start();
-		markers[outgoingSlot].animate().alpha(0f).setDuration(280)
-				.setInterpolator(new android.view.animation.LinearInterpolator()).start();
+		android.view.animation.PathInterpolator fluid =
+				new android.view.animation.PathInterpolator(0.2f, 0f, 0f, 1f);
+		eventCards[outgoingSlot].animate().alpha(0f).setDuration(340)
+				.setInterpolator(fluid).withLayer().start();
+		markers[outgoingSlot].animate().alpha(0f).setDuration(340)
+				.setInterpolator(fluid).withLayer().start();
 		eventCards[incomingSlot].setAlpha(0f);
 		markers[incomingSlot].setAlpha(0f);
-		// Let the incoming card move into the viewport before its fade becomes noticeable.
-		eventCards[incomingSlot].animate().alpha(1f).setStartDelay(70).setDuration(210)
-				.setInterpolator(new android.view.animation.LinearInterpolator()).start();
-		markers[incomingSlot].animate().alpha(0.65f).setStartDelay(70).setDuration(210)
-				.setInterpolator(new android.view.animation.LinearInterpolator()).start();
+		eventCards[incomingSlot].animate().alpha(1f).setDuration(340)
+				.setInterpolator(fluid).withLayer().start();
+		markers[incomingSlot].animate().alpha(0.65f).setDuration(340)
+				.setInterpolator(fluid).withLayer().start();
 
 		timelineTrack.animate().translationX(Kido.px(-direction * 340))
-				.setDuration(280)
-				.setInterpolator(new android.view.animation.DecelerateInterpolator())
+				.setDuration(340)
+				.setInterpolator(fluid)
 				.withEndAction(() -> {
 					selectedIndex += direction;
 					render();
