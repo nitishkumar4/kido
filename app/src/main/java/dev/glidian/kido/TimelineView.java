@@ -125,7 +125,7 @@ final class TimelineView extends FrameLayout {
 		// Chronology rail: five instrument panels, with the selected node treated as the active signal.
 		place(this, label("MAGI // CHRONOLOGY ARRAY", Kido.mono, 16, Kido.DIM, 0.12f),
 				116, 439, 520, 24);
-		place(this, label("EVENT STREAM  /  LOCAL DATABASE  /  IN-MH", Kido.mono, 16, Kido.DIM, 0.08f),
+		place(this, label("EVENT STREAM  /  LOCAL DATABASE", Kido.mono, 16, Kido.DIM, 0.08f),
 				1120, 439, 680, 24);
 
 		for (int i = 0; i < 5; i++) {
@@ -199,8 +199,8 @@ final class TimelineView extends FrameLayout {
 		place(dossier, label("NERV // PUBLIC INFORMATION TERMINAL", Kido.mono, 12, Kido.DIM, 0.08f),
 				1290, 190, 370, 18);
 
-		TextView back = label("◀  事象  EVENT ARCHIVE", Kido.condBold, 26, Kido.DIM, 0.14f);
-		place(this, back, 122, 1012, 400, 34);
+		TextView back = label("◀  事象  ARCHIVE", Kido.condBold, 26, Kido.DIM, 0.14f);
+		place(this, back, 122, 966, 400, 34);
 
 		TextView controls = label("LEFT // PREVIOUS       RIGHT // NEXT       BACK // CALENDAR",
 				Kido.mono, 20, Kido.DIM, 0.08f);
