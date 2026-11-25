@@ -126,7 +126,7 @@ final class TimelineView extends FrameLayout {
 		place(this, label("MAGI // CHRONOLOGY ARRAY", Kido.mono, 16, Kido.DIM, 0.12f),
 				116, 439, 520, 24);
 		place(this, label("EVENT STREAM  /  LOCAL DATABASE", Kido.mono, 16, Kido.DIM, 0.08f),
-				1120, 439, 680, 24);
+				792, 439, 680, 24);
 
 		for (int i = 0; i < 5; i++) {
 			FrameLayout card = new FrameLayout(context);
