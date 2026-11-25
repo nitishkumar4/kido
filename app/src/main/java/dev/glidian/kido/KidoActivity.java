@@ -1318,7 +1318,10 @@ public class KidoActivity extends Activity {
 
     /** Draws a section in: the frame traces itself, the accent bar extends and the header count runs up. */
     private void intro(int z) {
-        if (z == 5) return;
+        if (z == 5) {
+            if (timelineView != null) timelineView.intro();
+            return;
+        }
         if (z == 4) {
             if (calendarView != null) calendarView.intro();
             return;
