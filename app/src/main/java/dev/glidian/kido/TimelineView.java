@@ -203,12 +203,21 @@ final class TimelineView extends FrameLayout {
 	private void slideTo(int direction) {
 		if (sliding || selectedIndex + direction < 0 || selectedIndex + direction >= events.size()) return;
 		sliding = true;
+		int outgoingSlot = direction > 0 ? 0 : 4;
+		int incomingSlot = direction > 0 ? 4 : 0;
+		eventCards[outgoingSlot].animate().alpha(0f).setDuration(280)
+				.setInterpolator(new android.view.animation.DecelerateInterpolator()).start();
+		eventCards[incomingSlot].setAlpha(0f);
+		eventCards[incomingSlot].animate().alpha(1f).setDuration(280)
+				.setInterpolator(new android.view.animation.DecelerateInterpolator()).start();
+
 		timelineTrack.animate().translationX(Kido.px(-direction * 340))
 				.setDuration(280)
 				.setInterpolator(new android.view.animation.DecelerateInterpolator())
 				.withEndAction(() -> {
 					selectedIndex += direction;
 					render();
+					for (FrameLayout card : eventCards) card.setAlpha(1f);
 					timelineTrack.setTranslationX(0f);
 					sliding = false;
 				}).start();
