@@ -1629,7 +1629,10 @@ public class KidoActivity extends Activity {
             if (key == KeyEvent.KEYCODE_BACK) {
                 if (up && calendarView != null) calendarView.requestFocus();
                 return true;
-                    if (zone == 4 && calendarView != null && current == calendarView) {
+            }
+            if (isArrow(key)) return true;
+        }
+        if (zone == 4 && calendarView != null && current == calendarView) {
             int key = event.getKeyCode();
             if (key == KeyEvent.KEYCODE_DPAD_RIGHT) {
                 if (up && timelineView != null) timelineView.requestFocus();
