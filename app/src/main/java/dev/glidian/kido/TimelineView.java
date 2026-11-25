@@ -199,10 +199,13 @@ final class TimelineView extends FrameLayout {
 		place(dossier, label("NERV // PUBLIC INFORMATION TERMINAL", Kido.mono, 12, Kido.DIM, 0.08f),
 				1290, 190, 370, 18);
 
-		TextView hints = label("◀ PREVIOUS EVENT                         NEXT EVENT ▶          HOME // TODAY",
-				Kido.mono, 18, Kido.DIM, 0.07f);
-		hints.setGravity(Gravity.CENTER);
-		place(this, hints, 400, 1012, 1120, 24);
+		TextView system = label("◀  系統  SYSTEM", Kido.condBold, 26, Kido.DIM, 0.14f);
+		place(this, system, 122, 1012, 400, 34);
+
+		TextView controls = label("LEFT // PREVIOUS       RIGHT // NEXT       OK / HOME // TODAY",
+				Kido.mono, 20, Kido.DIM, 0.08f);
+		controls.setGravity(Gravity.CENTER);
+		place(this, controls, 500, 1012, 1000, 34);
 		place(this, new RulerView(context, 440), 36, 446, 64, 580);
 		render();
 	}
