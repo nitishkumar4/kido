@@ -81,8 +81,8 @@ final class TimelineView extends FrameLayout {
 
 		TextView heading = label("時線", Kido.mincho, 46, Kido.AMBER, 1.0f);
 		place(this, heading, 120, 360, 110, 58);
-		place(this, label("TIMELINE", Kido.condBold, 30, Kido.INK, 0.14f), 250, 384, 260, 34);
-		place(this, label("SEC-06", Kido.mono, 22, Kido.DIM, 0.05f), 1640, 390, 140, 28);
+		place(this, label("CHRONO SEQUENCE", Kido.condBold, 30, Kido.INK, 0.14f), 250, 384, 390, 34);
+		place(this, label("SEC-06", Kido.mono, 22, Kido.DIM, 0.05f), 660, 390, 140, 28);
 
 		LocalDate today = LocalDate.now();
 		int daysInYear = today.lengthOfYear();
