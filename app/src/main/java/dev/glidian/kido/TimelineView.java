@@ -96,18 +96,24 @@ final class TimelineView extends FrameLayout {
 		place(this, progressValue, 1160, 943, 648, 18);
 		String[] months = {"JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
 				"JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"};
+		int[] monthColors = {
+				0xFFFF5B55, 0xFFFFA24A, 0xFFFFD34E,
+				0xFF70D68A, 0xFF55BCEB, 0xFFB18AE8
+		};
 		for (int i = 0; i < months.length; i++) {
 			int left = 112 + i * 1696 / 12;
 			int right = 112 + (i + 1) * 1696 / 12;
-			int color = i < today.getMonthValue() - 1 ? Kido.withAlpha(Kido.AMBER, 0.62f)
-					: i == today.getMonthValue() - 1 ? Kido.AMBER : Kido.withAlpha(Kido.DIM, 0.72f);
+			int baseColor = monthColors[i / 2];
+			boolean active = i == today.getMonthValue() - 1;
+			int color = active ? baseColor : Kido.withAlpha(baseColor,
+					i < today.getMonthValue() - 1 ? 0.62f : 0.38f);
 			View marker = new View(context);
 			marker.setBackgroundColor(color);
-			place(this, marker, left + 5, 965, right - left - 10, 3);
+			place(this, marker, left + 5, 965, right - left - 10, active ? 4 : 3);
 			TextView month = label(months[i], Kido.mono, 12, color,
-					i == today.getMonthValue() - 1 ? 0.08f : 0.025f);
+					active ? 0.08f : 0.025f);
 			month.setGravity(Gravity.CENTER);
-			if (i == today.getMonthValue() - 1) month.setTypeface(Kido.condBold);
+			if (active) month.setTypeface(Kido.condBold);
 			place(this, month, left, 973, right - left, 20);
 		}
 
