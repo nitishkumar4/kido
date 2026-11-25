@@ -43,8 +43,6 @@ final class TimelineView extends FrameLayout {
 
 	private final TraceView frame;
 	private final View accent;
-	private final FrameLayout timelineTrack;
-	private boolean sliding;
 	private final List<Event> events = new ArrayList<>();
 	private final FrameLayout[] eventCards = new FrameLayout[7];
 	private final TextView[] dates = new TextView[7];
@@ -94,21 +92,11 @@ final class TimelineView extends FrameLayout {
 		place(this, label("EVENT STREAM  /  LOCAL DATABASE  /  IN-MH", Kido.mono, 16, Kido.DIM, 0.08f),
 				1120, 448, 680, 24);
 
-		timelineTrack = new FrameLayout(context);
-		timelineTrack.setClipChildren(false);
-		timelineTrack.setClipToPadding(false);
-		place(this, timelineTrack, 70, 0, 1780, 1080);
-
-		// Keep the original clean chronology rail; the whole track scrolls with its event nodes.
-		View rail = new View(context);
-		rail.setBackgroundColor(Kido.withAlpha(Kido.AMBER, 0.35f));
-		place(timelineTrack, rail, 0, 668, 1780, 2);
-
 		for (int i = 0; i < 7; i++) {
 			FrameLayout card = new FrameLayout(context);
 			card.setBackground(outline(Kido.withAlpha(Kido.PANEL, 0.94f), Kido.withAlpha(Kido.LINE, 0.9f)));
-			int x = -140 + i * 300;
-			place(timelineTrack, card, x, 472, 280, 178);
+			int x = -80 + i * 300;
+			place(this, card, x, 472, 280, 178);
 			eventCards[i] = card;
 
 			View stripe = new View(context);
@@ -136,7 +124,7 @@ final class TimelineView extends FrameLayout {
 			marker.setColor(Kido.DIM);
 			markers[i].setBackground(marker);
 			markers[i].setRotation(45f);
-			place(timelineTrack, markers[i], x + 131, 660, 18, 18);
+			place(this, markers[i], x + 131, 660, 18, 18);
 		}
 
 		// Selected-event dossier. Three distinct data zones, like a tactical console readout.
@@ -203,67 +191,13 @@ final class TimelineView extends FrameLayout {
 	}
 
 	private void slideTo(int direction) {
-		if (sliding || selectedIndex + direction < 0 || selectedIndex + direction >= events.size()) return;
-		sliding = true;
-		android.view.animation.PathInterpolator fluid =
-				new android.view.animation.PathInterpolator(0.2f, 0f, 0f, 1f);
-
-		// Match the honeycomb: every preloaded item moves and fades toward its next visibility state.
-		for (int i = 0; i < 7; i++) {
-			float alpha = 1f;
-			eventCards[i].animate().alpha(alpha).setDuration(340)
-					.setInterpolator(fluid).withLayer().start();
-			float markerAlpha = alpha == 0f ? 0f : (i == 3 ? 1f : 0.65f);
-			markers[i].animate().alpha(markerAlpha).setDuration(340)
-					.setInterpolator(fluid).withLayer().start();
-		}
-
-		timelineTrack.animate().translationX(Kido.px(-direction * 300))
-				.setDuration(340)
-				.setInterpolator(fluid)
-				.withEndAction(() -> {
-					selectedIndex += direction;
-					rotateSlots(direction);
-					timelineTrack.setTranslationX(0f);
-					render();
-					sliding = false;
-				}).start();
-	}
-
-	/** Recycles the off-screen card after the track has moved, keeping all seven views alive. */
-	private void rotateSlots(int direction) {
-		rotate(eventCards, direction);
-		rotate(dates, direction);
-		rotate(titles, direction);
-		rotate(nodeCodes, direction);
-		rotate(markers, direction);
-		for (int i = 0; i < 7; i++) {
-			int x = -140 + i * 300;
-			FrameLayout.LayoutParams cardParams = (FrameLayout.LayoutParams) eventCards[i].getLayoutParams();
-			cardParams.leftMargin = Kido.px(x);
-			eventCards[i].setLayoutParams(cardParams);
-			FrameLayout.LayoutParams markerParams = (FrameLayout.LayoutParams) markers[i].getLayoutParams();
-			markerParams.leftMargin = Kido.px(x + 131);
-			markers[i].setLayoutParams(markerParams);
-		}
-	}
-
-	private <T> void rotate(T[] items, int direction) {
-		if (direction > 0) {
-			T first = items[0];
-			System.arraycopy(items, 1, items, 0, items.length - 1);
-			items[items.length - 1] = first;
-		} else {
-			T last = items[items.length - 1];
-			System.arraycopy(items, 0, items, 1, items.length - 1);
-			items[0] = last;
-		}
+		int nextIndex = selectedIndex + direction;
+		if (nextIndex < 0 || nextIndex >= events.size()) return;
+		selectedIndex = nextIndex;
+		render();
 	}
 
 	void resetToToday() {
-		timelineTrack.animate().cancel();
-		sliding = false;
-		timelineTrack.setTranslationX(0f);
 		selectedIndex = todayIndex();
 		render();
 	}
