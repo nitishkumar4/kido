@@ -1273,6 +1273,7 @@ public class KidoActivity extends Activity {
     private void moveTo(int z, Runnable onPanEnd) {
         zone = z;
         if (z == 5) {
+            if (timelineView != null) timelineView.resetToToday();
             handler.removeCallbacks(arrive);
             board.animate().translationX(-Kido.px(TIMELINE_X)).translationY(-Kido.px(TIMELINE_Y))
                     .setDuration(620).setInterpolator(fluid).withEndAction(() -> {
