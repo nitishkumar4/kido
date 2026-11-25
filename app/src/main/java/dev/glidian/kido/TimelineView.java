@@ -44,13 +44,17 @@ final class TimelineView extends FrameLayout {
 	private final TraceView frame;
 	private final View accent;
 	private final List<Event> events = new ArrayList<>();
+	private final FrameLayout[] eventCards = new FrameLayout[5];
 	private final TextView[] dates = new TextView[5];
 	private final TextView[] titles = new TextView[5];
+	private final TextView[] nodeCodes = new TextView[5];
 	private final View[] markers = new View[5];
-	private final TextView detailDate;
+	private final TextView detailDay;
+	private final TextView detailMonth;
 	private final TextView detailTitle;
 	private final TextView detailMeta;
 	private final TextView detailDescription;
+	private final TextView detailType;
 	private int selectedIndex;
 
 	TimelineView(Context context) {
@@ -82,44 +86,96 @@ final class TimelineView extends FrameLayout {
 				560, 390, 1050, 28);
 		place(this, label("SEC-06", Kido.mono, 22, Kido.DIM, 0.05f), 1640, 390, 140, 28);
 
-		View track = new View(context);
-		track.setBackgroundColor(Kido.LINE);
-		place(this, track, 160, 508, 1600, 3);
+		// Chronology rail: five instrument panels, with the selected node treated as the active signal.
+		place(this, label("MAGI // CHRONOLOGY ARRAY", Kido.mono, 16, Kido.DIM, 0.12f),
+				116, 448, 520, 24);
+		place(this, label("EVENT STREAM  /  LOCAL DATABASE  /  IN-MH", Kido.mono, 16, Kido.DIM, 0.08f),
+				1120, 448, 680, 24);
+
+		View rail = new View(context);
+		rail.setBackgroundColor(Kido.withAlpha(Kido.AMBER, 0.35f));
+		place(this, rail, 132, 535, 1650, 2);
 
 		for (int i = 0; i < 5; i++) {
-			FrameLayout point = new FrameLayout(context);
-			int x = 36 + i * 370;
-			place(this, point, x, 440, 360, 190);
+			FrameLayout card = new FrameLayout(context);
+			card.setBackground(outline(Kido.withAlpha(Kido.PANEL, 0.94f), Kido.withAlpha(Kido.LINE, 0.9f)));
+			int x = 112 + i * 340;
+			place(this, card, x, 472, 320, 178);
+			eventCards[i] = card;
+
+			View stripe = new View(context);
+			stripe.setTag("stripe");
+			place(card, stripe, 0, 0, 5, 178);
+
+			nodeCodes[i] = label("NODE 00", Kido.mono, 15, Kido.DIM, 0.12f);
+			place(card, nodeCodes[i], 20, 16, 180, 22);
+			TextView state = label(i < 2 ? "ARCHIVE" : i == 2 ? "ACTIVE" : "INCOMING",
+					Kido.mono, 13, Kido.DIM, 0.08f);
+			state.setGravity(Gravity.END);
+			place(card, state, 180, 18, 122, 20);
+
+			dates[i] = label("", Kido.condBold, 30, Kido.CREAM, 0.04f);
+			place(card, dates[i], 20, 54, 276, 38);
+
+			titles[i] = label("", Kido.mono, 17, Kido.DIM, 0.015f);
+			titles[i].setMaxLines(2);
+			titles[i].setEllipsize(android.text.TextUtils.TruncateAt.END);
+			place(card, titles[i], 20, 105, 278, 48);
 
 			markers[i] = new View(context);
-			place(point, markers[i], 164, 64, 28, 28);
-			dates[i] = label("", Kido.mono, 20, Kido.DIM, 0.05f);
-			dates[i].setGravity(Gravity.CENTER);
-			place(point, dates[i], 10, 108, 340, 28);
-			titles[i] = label("", Kido.condBold, 22, Kido.CREAM, 0.04f);
-			titles[i].setGravity(Gravity.CENTER);
-			titles[i].setSingleLine(true);
-			titles[i].setEllipsize(android.text.TextUtils.TruncateAt.END);
-			place(point, titles[i], 8, 142, 344, 30);
+			GradientDrawable marker = new GradientDrawable();
+			marker.setShape(GradientDrawable.RECTANGLE);
+			marker.setColor(Kido.DIM);
+			markers[i].setBackground(marker);
+			markers[i].setRotation(45f);
+			place(this, markers[i], x + 151, 526, 18, 18);
 		}
 
-		FrameLayout detail = new FrameLayout(context);
-		detail.setBackground(outline(Kido.PANEL, Kido.LINE));
-		place(this, detail, 120, 666, 1680, 250);
-		detailDate = label("", Kido.condBold, 42, Kido.AMBER, 0.06f);
-		place(detail, detailDate, 34, 30, 500, 54);
-		detailMeta = label("", Kido.mono, 20, Kido.DIM, 0.06f);
-		place(detail, detailMeta, 36, 100, 470, 34);
-		detailTitle = label("", Kido.condBold, 34, Kido.CREAM, 0.04f);
+		// Selected-event dossier. Three distinct data zones, like a tactical console readout.
+		FrameLayout dossier = new FrameLayout(context);
+		dossier.setBackground(outline(Kido.withAlpha(Kido.PANEL, 0.98f), Kido.LINE));
+		place(this, dossier, 112, 686, 1696, 246);
+
+		View warning = new View(context);
+		warning.setBackgroundColor(Kido.RED);
+		place(dossier, warning, 0, 0, 7, 246);
+		place(dossier, label("SELECTED NODE // 03", Kido.mono, 15, Kido.DIM, 0.1f),
+				28, 20, 270, 22);
+		detailDay = label("", Kido.condBold, 76, Kido.AMBER, 0.02f);
+		place(dossier, detailDay, 28, 54, 230, 82);
+		detailMonth = label("", Kido.mono, 19, Kido.CREAM, 0.08f);
+		place(dossier, detailMonth, 30, 148, 250, 28);
+		detailType = label("", Kido.mono, 15, Kido.RED, 0.1f);
+		place(dossier, detailType, 30, 192, 260, 22);
+
+		View dividerA = new View(context);
+		dividerA.setBackgroundColor(Kido.withAlpha(Kido.AMBER, 0.45f));
+		place(dossier, dividerA, 310, 24, 2, 198);
+
+		detailTitle = label("", Kido.condBold, 36, Kido.CREAM, 0.04f);
 		detailTitle.setSingleLine(true);
 		detailTitle.setEllipsize(android.text.TextUtils.TruncateAt.END);
-		place(detail, detailTitle, 570, 34, 1050, 48);
-		detailDescription = label("", Kido.mono, 21, Kido.INK, 0.02f);
+		place(dossier, detailTitle, 348, 38, 890, 50);
+		place(dossier, label("EVENT RECORD // VERIFIED LOCAL ENTRY", Kido.mono, 14, Kido.DIM, 0.09f),
+				350, 98, 780, 20);
+		detailDescription = label("", Kido.mono, 19, Kido.INK, 0.015f);
 		detailDescription.setMaxLines(3);
-		place(detail, detailDescription, 572, 100, 1040, 110);
+		detailDescription.setEllipsize(android.text.TextUtils.TruncateAt.END);
+		place(dossier, detailDescription, 350, 132, 890, 82);
+
+		View dividerB = new View(context);
+		dividerB.setBackgroundColor(Kido.withAlpha(Kido.AMBER, 0.45f));
+		place(dossier, dividerB, 1260, 24, 2, 198);
+
+		place(dossier, label("TEMPORAL DATA", Kido.mono, 15, Kido.DIM, 0.12f),
+				1290, 26, 340, 22);
+		detailMeta = label("", Kido.mono, 18, Kido.LIME, 0.04f);
+		place(dossier, detailMeta, 1290, 68, 360, 86);
+		place(dossier, label("NERV // PUBLIC INFORMATION TERMINAL", Kido.mono, 12, Kido.DIM, 0.08f),
+				1290, 190, 370, 18);
 
 		TextView hints = label("◀ PREVIOUS EVENT                         NEXT EVENT ▶          HOME // TODAY",
-				Kido.mono, 20, Kido.DIM, 0.07f);
+				Kido.mono, 18, Kido.DIM, 0.07f);
 		hints.setGravity(Gravity.CENTER);
 		place(this, hints, 400, 966, 1120, 34);
 		place(this, new RulerView(context, 440), 36, 446, 64, 580);
@@ -205,39 +261,42 @@ final class TimelineView extends FrameLayout {
 		for (int slot = 0; slot < 5; slot++) {
 			int index = selectedIndex + slot - 2;
 			boolean center = slot == 2;
+			FrameLayout card = eventCards[slot];
 			if (index < 0 || index >= events.size()) {
-				dates[slot].setText("");
-				titles[slot].setText("");
-				markers[slot].setBackgroundColor(0x00000000);
+				card.setVisibility(View.INVISIBLE);
+				markers[slot].setVisibility(View.INVISIBLE);
 				continue;
 			}
+			card.setVisibility(View.VISIBLE);
+			markers[slot].setVisibility(View.VISIBLE);
 			Event event = events.get(index);
-			dates[slot].setText(event.date.format(DateTimeFormatter.ofPattern("dd MMM", Locale.ENGLISH))
+			nodeCodes[slot].setText(String.format(Locale.ROOT, "NODE %02d", index + 1));
+			dates[slot].setText(event.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy", Locale.ENGLISH))
 					.toUpperCase(Locale.ROOT));
 			titles[slot].setText(event.title.toUpperCase(Locale.ROOT));
-			int color = center ? Kido.LIME : Kido.DIM;
-			dates[slot].setTextColor(color);
+
+			int signal = center ? Kido.AMBER : Kido.DIM;
+			card.setBackground(outline(center ? Kido.withAlpha(Kido.ORANGE, 0.13f)
+					: Kido.withAlpha(Kido.PANEL, 0.94f),
+					center ? Kido.AMBER : Kido.withAlpha(Kido.LINE, 0.9f)));
+			View stripe = card.findViewWithTag("stripe");
+			if (stripe != null) stripe.setBackgroundColor(center ? Kido.RED : Kido.withAlpha(Kido.AMBER, 0.35f));
+			nodeCodes[slot].setTextColor(signal);
+			dates[slot].setTextColor(center ? Kido.AMBER : Kido.CREAM);
 			titles[slot].setTextColor(center ? Kido.CREAM : Kido.DIM);
-			GradientDrawable marker = new GradientDrawable();
-			marker.setShape(GradientDrawable.OVAL);
-			marker.setColor(center ? Kido.LIME : Kido.withAlpha(Kido.INK, 0.55f));
-			if (center) marker.setStroke(Kido.px(3), Kido.LIME);
-			markers[slot].setBackground(marker);
-			FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) markers[slot].getLayoutParams();
-			params.width = Kido.px(center ? 34 : 22);
-			params.height = Kido.px(center ? 34 : 22);
-			params.leftMargin = Kido.px(center ? 161 : 167);
-			params.topMargin = Kido.px(center ? 61 : 67);
-			markers[slot].setLayoutParams(params);
+			markers[slot].setBackgroundColor(center ? Kido.RED : Kido.DIM);
+			markers[slot].setAlpha(center ? 1f : 0.65f);
 		}
 
-		detailDate.setText(selected.date.format(DateTimeFormatter.ofPattern("EEEE // dd MMMM yyyy", Locale.ENGLISH))
+		detailDay.setText(selected.date.format(DateTimeFormatter.ofPattern("dd", Locale.ENGLISH)));
+		detailMonth.setText(selected.date.format(DateTimeFormatter.ofPattern("MMMM yyyy", Locale.ENGLISH))
 				.toUpperCase(Locale.ROOT));
-		int week = selected.date.get(WeekFields.ISO.weekOfWeekBasedYear());
-		detailMeta.setText(String.format(Locale.ROOT, "WEEK %02d  //  DAY %03d  //  %s",
-				week, selected.date.getDayOfYear(), selected.region));
+		detailType.setText("◆  " + selected.type.toUpperCase(Locale.ROOT));
 		detailTitle.setText(selected.title.toUpperCase(Locale.ROOT));
-		detailDescription.setText(selected.type.toUpperCase(Locale.ROOT) + "  //  " + selected.description);
+		detailDescription.setText(selected.description);
+		int week = selected.date.get(WeekFields.ISO.weekOfWeekBasedYear());
+		detailMeta.setText(String.format(Locale.ROOT, "WEEK   %02d\nDAY    %03d\nAREA   %s",
+				week, selected.date.getDayOfYear(), selected.region));
 	}
 
 	private TextView label(String value, android.graphics.Typeface face, int size, int color, float spacing) {
