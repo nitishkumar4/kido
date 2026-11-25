@@ -57,6 +57,7 @@ final class TimelineView extends FrameLayout {
 	private final TextView detailType;
 	private final TextView[] states = new TextView[5];
 	private final View[] monthMarkers = new View[12];
+	private final GlowView[] monthGlows = new GlowView[12];
 	private final TextView[] monthLabels = new TextView[12];
 	private final int[] monthColors = {
 			0xFFFF5B55, 0xFFFFA24A, 0xFFFFD34E,
@@ -111,6 +112,9 @@ final class TimelineView extends FrameLayout {
 		for (int i = 0; i < months.length; i++) {
 			int left = 112 + i * 1696 / 12;
 			int right = 112 + (i + 1) * 1696 / 12;
+			monthGlows[i] = new GlowView(context, Kido.px(7), false);
+			monthGlows[i].setVisibility(View.INVISIBLE);
+			place(this, monthGlows[i], left + 5, 956, right - left - 10, 22);
 			monthMarkers[i] = new View(context);
 			place(this, monthMarkers[i], left + 5, 965, right - left - 10, 3);
 			monthLabels[i] = label(months[i], Kido.mono, 12, Kido.DIM, 0.025f);
@@ -286,11 +290,16 @@ final class TimelineView extends FrameLayout {
 			int color = active ? brighten(baseColor) : Kido.withAlpha(baseColor,
 					i < today.getMonthValue() - 1 ? 0.62f : 0.38f);
 			monthMarkers[i].setBackgroundColor(color);
+			monthGlows[i].setColor(Kido.withAlpha(color, 0.72f));
+			monthGlows[i].setGlowing(active);
+			monthGlows[i].setVisibility(active ? View.VISIBLE : View.INVISIBLE);
 			FrameLayout.LayoutParams markerParams = (FrameLayout.LayoutParams) monthMarkers[i].getLayoutParams();
 			markerParams.height = Kido.px(active ? 4 : 3);
 			monthMarkers[i].setLayoutParams(markerParams);
 			monthLabels[i].setTextColor(color);
 			monthLabels[i].setTypeface(active ? Kido.condBold : Kido.mono);
+			if (active) monthLabels[i].setShadowLayer(Kido.px(8), 0, 0, Kido.withAlpha(color, 0.55f));
+			else monthLabels[i].setShadowLayer(0, 0, 0, 0);
 		}
 	}
 
