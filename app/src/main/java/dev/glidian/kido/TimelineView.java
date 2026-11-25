@@ -95,17 +95,19 @@ final class TimelineView extends FrameLayout {
 				1120, 448, 680, 24);
 
 		timelineTrack = new FrameLayout(context);
-		place(this, timelineTrack, 0, 0, 1920, 1080);
+		timelineTrack.setClipChildren(true);
+		timelineTrack.setClipToPadding(true);
+		place(this, timelineTrack, 112, 0, 1696, 1080);
 
 		// Keep the original clean chronology rail; the whole track scrolls with its event nodes.
 		View rail = new View(context);
 		rail.setBackgroundColor(Kido.withAlpha(Kido.AMBER, 0.35f));
-		place(timelineTrack, rail, 132, 668, 1650, 2);
+		place(timelineTrack, rail, 20, 668, 1650, 2);
 
 		for (int i = 0; i < 7; i++) {
 			FrameLayout card = new FrameLayout(context);
 			card.setBackground(outline(Kido.withAlpha(Kido.PANEL, 0.94f), Kido.withAlpha(Kido.LINE, 0.9f)));
-			int x = 112 + (i - 1) * 340;
+			int x = (i - 1) * 340;
 			place(timelineTrack, card, x, 472, 320, 178);
 			eventCards[i] = card;
 
