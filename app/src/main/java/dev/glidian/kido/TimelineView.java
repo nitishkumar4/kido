@@ -44,11 +44,10 @@ final class TimelineView extends FrameLayout {
 	private final TraceView frame;
 	private final View accent;
 	private final List<Event> events = new ArrayList<>();
-	private final FrameLayout[] eventCards = new FrameLayout[7];
-	private final TextView[] dates = new TextView[7];
-	private final TextView[] titles = new TextView[7];
-	private final TextView[] nodeCodes = new TextView[7];
-	private final View[] markers = new View[7];
+	private final FrameLayout[] eventCards = new FrameLayout[5];
+	private final TextView[] dates = new TextView[5];
+	private final TextView[] titles = new TextView[5];
+	private final TextView[] nodeCodes = new TextView[5];
 	private final TextView detailDay;
 	private final TextView detailMonth;
 	private final TextView detailTitle;
@@ -92,11 +91,12 @@ final class TimelineView extends FrameLayout {
 		place(this, label("EVENT STREAM  /  LOCAL DATABASE  /  IN-MH", Kido.mono, 16, Kido.DIM, 0.08f),
 				1120, 448, 680, 24);
 
-		for (int i = 0; i < 7; i++) {
+		for (int i = 0; i < 5; i++) {
 			FrameLayout card = new FrameLayout(context);
-			card.setBackground(outline(Kido.withAlpha(Kido.PANEL, 0.94f), Kido.withAlpha(Kido.LINE, 0.9f)));
-			int x = -80 + i * 300;
-			place(this, card, x, 472, 280, 178);
+			card.setBackground(new SimCardDrawable(Kido.withAlpha(Kido.PANEL, 0.94f),
+					Kido.withAlpha(Kido.LINE, 0.9f), Kido.px(22)));
+			int x = 112 + i * 340;
+			place(this, card, x, 472, 320, 178);
 			eventCards[i] = card;
 
 			View stripe = new View(context);
@@ -104,27 +104,19 @@ final class TimelineView extends FrameLayout {
 			place(card, stripe, 0, 0, 5, 178);
 
 			nodeCodes[i] = label("NODE 00", Kido.mono, 15, Kido.DIM, 0.12f);
-			place(card, nodeCodes[i], 14, 16, 160, 22);
-			TextView state = label(i < 3 ? "ARCHIVE" : i == 3 ? "ACTIVE" : "INCOMING",
+			place(card, nodeCodes[i], 14, 16, 180, 22);
+			TextView state = label(i < 2 ? "ARCHIVE" : i == 2 ? "ACTIVE" : "INCOMING",
 					Kido.mono, 13, Kido.DIM, 0.08f);
 			state.setGravity(Gravity.END);
-			place(card, state, 182, 18, 84, 20);
+			place(card, state, 202, 18, 104, 20);
 
 			dates[i] = label("", Kido.condBold, 30, Kido.CREAM, 0.04f);
-			place(card, dates[i], 14, 54, 252, 38);
+			place(card, dates[i], 14, 54, 292, 38);
 
 			titles[i] = label("", Kido.mono, 17, Kido.DIM, 0.015f);
 			titles[i].setMaxLines(2);
 			titles[i].setEllipsize(android.text.TextUtils.TruncateAt.END);
-			place(card, titles[i], 14, 105, 252, 48);
-
-			markers[i] = new View(context);
-			GradientDrawable marker = new GradientDrawable();
-			marker.setShape(GradientDrawable.RECTANGLE);
-			marker.setColor(Kido.DIM);
-			markers[i].setBackground(marker);
-			markers[i].setRotation(45f);
-			place(this, markers[i], x + 131, 660, 18, 18);
+			place(card, titles[i], 14, 105, 274, 48);
 		}
 
 		// Selected-event dossier. Three distinct data zones, like a tactical console readout.
@@ -255,17 +247,15 @@ final class TimelineView extends FrameLayout {
 
 	private void render() {
 		Event selected = getSelectedEvent();
-		for (int slot = 0; slot < 7; slot++) {
-			int index = selectedIndex + slot - 3;
-			boolean center = slot == 3;
+		for (int slot = 0; slot < 5; slot++) {
+			int index = selectedIndex + slot - 2;
+			boolean center = slot == 2;
 			FrameLayout card = eventCards[slot];
 			if (index < 0 || index >= events.size()) {
 				card.setVisibility(View.INVISIBLE);
-				markers[slot].setVisibility(View.INVISIBLE);
 				continue;
 			}
 			card.setVisibility(View.VISIBLE);
-			markers[slot].setVisibility(View.VISIBLE);
 			card.setAlpha(1f);
 			Event event = events.get(index);
 			nodeCodes[slot].setText(String.format(Locale.ROOT, "NODE %02d", index + 1));
@@ -282,8 +272,6 @@ final class TimelineView extends FrameLayout {
 			nodeCodes[slot].setTextColor(signal);
 			dates[slot].setTextColor(center ? Kido.AMBER : Kido.CREAM);
 			titles[slot].setTextColor(center ? Kido.CREAM : Kido.DIM);
-			markers[slot].setBackgroundColor(center ? Kido.RED : Kido.DIM);
-			markers[slot].setAlpha(center ? 1f : 0.65f);
 		}
 
 		detailDay.setText(selected.date.format(DateTimeFormatter.ofPattern("dd", Locale.ENGLISH)));
@@ -295,6 +283,45 @@ final class TimelineView extends FrameLayout {
 		int week = selected.date.get(WeekFields.ISO.weekOfWeekBasedYear());
 		detailMeta.setText(String.format(Locale.ROOT, "WEEK   %02d\nDAY    %03d\nAREA   %s",
 				week, selected.date.getDayOfYear(), selected.region));
+	}
+
+	private static final class SimCardDrawable extends android.graphics.drawable.Drawable {
+		private final android.graphics.Paint paint = new android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG);
+		private final android.graphics.Path path = new android.graphics.Path();
+		private final int fillColor;
+		private final int strokeColor;
+		private final float cut;
+
+		SimCardDrawable(int fillColor, int strokeColor, float cut) {
+			this.fillColor = fillColor;
+			this.strokeColor = strokeColor;
+			this.cut = cut;
+		}
+
+		@Override
+		public void draw(android.graphics.Canvas canvas) {
+			android.graphics.Rect bounds = getBounds();
+			float right = bounds.width();
+			float bottom = bounds.height();
+			path.reset();
+			path.moveTo(0, 0);
+			path.lineTo(right, 0);
+			path.lineTo(right, bottom - cut);
+			path.lineTo(right - cut, bottom);
+			path.lineTo(0, bottom);
+			path.close();
+			paint.setStyle(android.graphics.Paint.Style.FILL);
+			paint.setColor(fillColor);
+			canvas.drawPath(path, paint);
+			paint.setStyle(android.graphics.Paint.Style.STROKE);
+			paint.setStrokeWidth(Kido.px(2));
+			paint.setColor(strokeColor);
+			canvas.drawPath(path, paint);
+		}
+
+		@Override public void setAlpha(int alpha) { paint.setAlpha(alpha); }
+		@Override public void setColorFilter(android.graphics.ColorFilter filter) { paint.setColorFilter(filter); }
+		@Override public int getOpacity() { return android.graphics.PixelFormat.TRANSLUCENT; }
 	}
 
 	private TextView label(String value, android.graphics.Typeface face, int size, int color, float spacing) {
