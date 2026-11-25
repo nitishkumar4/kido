@@ -204,17 +204,13 @@ final class TimelineView extends FrameLayout {
 		if (sliding || selectedIndex + direction < 0 || selectedIndex + direction >= events.size()) return;
 		sliding = true;
 		timelineTrack.animate().translationX(Kido.px(-direction * 340))
-				.setDuration(220)
+				.setDuration(280)
 				.setInterpolator(new android.view.animation.DecelerateInterpolator())
 				.withEndAction(() -> {
 					selectedIndex += direction;
 					render();
-					timelineTrack.setTranslationX(Kido.px(direction * 340));
-					timelineTrack.animate().translationX(0f)
-							.setDuration(220)
-							.setInterpolator(new android.view.animation.DecelerateInterpolator())
-							.withEndAction(() -> sliding = false)
-							.start();
+					timelineTrack.setTranslationX(0f);
+					sliding = false;
 				}).start();
 	}
 
