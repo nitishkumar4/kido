@@ -122,7 +122,7 @@ final class TimelineView extends FrameLayout {
 				Kido.mono, 20, Kido.DIM, 0.07f);
 		hints.setGravity(Gravity.CENTER);
 		place(this, hints, 400, 966, 1120, 34);
-		place(new RulerView(context, 440), 36, 446, 64, 580);
+		place(this, new RulerView(context, 440), 36, 446, 64, 580);
 		render();
 	}
 
