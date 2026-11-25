@@ -114,7 +114,7 @@ final class TimelineView extends FrameLayout {
 			int right = 112 + (i + 1) * 1696 / 12;
 			monthGlows[i] = new GlowView(context, Kido.px(7), false);
 			monthGlows[i].setVisibility(View.INVISIBLE);
-			place(this, monthGlows[i], left + 5, 956, right - left - 10, 22);
+			place(this, monthGlows[i], left - 2, 958, right - left + 4, 18);
 			monthMarkers[i] = new View(context);
 			place(this, monthMarkers[i], left + 5, 965, right - left - 10, 3);
 			monthLabels[i] = label(months[i], Kido.mono, 12, Kido.DIM, 0.025f);
@@ -290,7 +290,7 @@ final class TimelineView extends FrameLayout {
 			int color = active ? brighten(baseColor) : Kido.withAlpha(baseColor,
 					i < today.getMonthValue() - 1 ? 0.62f : 0.38f);
 			monthMarkers[i].setBackgroundColor(color);
-			monthGlows[i].setColor(Kido.withAlpha(color, 0.72f));
+			monthGlows[i].setColor(color);
 			monthGlows[i].setGlowing(active);
 			monthGlows[i].setVisibility(active ? View.VISIBLE : View.INVISIBLE);
 			FrameLayout.LayoutParams markerParams = (FrameLayout.LayoutParams) monthMarkers[i].getLayoutParams();
