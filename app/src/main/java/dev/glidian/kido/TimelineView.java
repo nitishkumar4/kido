@@ -142,8 +142,8 @@ final class TimelineView extends FrameLayout {
 
 			nodeCodes[i] = label("NODE 00", Kido.mono, 15, Kido.DIM, 0.12f);
 			place(card, nodeCodes[i], 14, 16, 180, 22);
-			states[i] = label(i < 2 ? "ARCHIVE" : i == 2 ? "ACTIVE" : "INCOMING",
-					Kido.mono, 13, Kido.DIM, 0.08f);
+			states[i] = label(i < 2 ? "ARCHIVE" : i == 2 ? "ACTIVE" : "UPCOMING",
+					Kido.mono, 13, Kido.LIME, 0.08f);
 			states[i].setGravity(Gravity.END);
 			place(card, states[i], 202, 18, 104, 20);
 
@@ -333,9 +333,8 @@ final class TimelineView extends FrameLayout {
 			dates[slot].setText(event.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy", Locale.ENGLISH))
 					.toUpperCase(Locale.ROOT));
 			titles[slot].setText(event.title.toUpperCase(Locale.ROOT));
-			states[slot].setText(event.date.equals(today) ? "TODAY"
-					: center ? "ACTIVE" : index < selectedIndex ? "ARCHIVE" : "INCOMING");
-			states[slot].setTextColor(event.date.equals(today) ? Kido.AMBER : Kido.DIM);
+			states[slot].setText(center ? "ACTIVE" : index < selectedIndex ? "ARCHIVE" : "UPCOMING");
+			states[slot].setTextColor(Kido.LIME);
 
 			int signal = center ? Kido.AMBER : Kido.DIM;
 			card.setBackground(new SimCardDrawable(center ? Kido.withAlpha(Kido.ORANGE, 0.13f)
