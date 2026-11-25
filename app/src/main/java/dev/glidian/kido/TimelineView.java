@@ -92,9 +92,27 @@ final class TimelineView extends FrameLayout {
 		place(this, label("EVENT STREAM  /  LOCAL DATABASE  /  IN-MH", Kido.mono, 16, Kido.DIM, 0.08f),
 				1120, 448, 680, 24);
 
+		// Calibrated tuning scale: fine ticks, regular graduations and a continuous signal track.
 		View rail = new View(context);
-		rail.setBackgroundColor(Kido.withAlpha(Kido.AMBER, 0.35f));
+		rail.setBackgroundColor(Kido.withAlpha(Kido.AMBER, 0.55f));
 		place(this, rail, 132, 668, 1650, 2);
+
+		for (int tick = 0; tick <= 82; tick++) {
+			int x = 132 + tick * 20;
+			boolean major = tick % 5 == 0;
+			boolean medium = tick % 5 == 2;
+			int height = major ? 13 : medium ? 9 : 5;
+			int color = major ? Kido.withAlpha(Kido.AMBER, 0.8f)
+					: Kido.withAlpha(Kido.DIM, 0.65f);
+
+			View upperTick = new View(context);
+			upperTick.setBackgroundColor(color);
+			place(this, upperTick, x, 668 - height, 2, height);
+
+			View lowerTick = new View(context);
+			lowerTick.setBackgroundColor(color);
+			place(this, lowerTick, x, 670, 2, major ? 8 : 4);
+		}
 
 		for (int i = 0; i < 5; i++) {
 			FrameLayout card = new FrameLayout(context);
