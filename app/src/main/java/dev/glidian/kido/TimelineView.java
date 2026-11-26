@@ -286,28 +286,26 @@ final class TimelineView extends FrameLayout {
 		if (category == null) return Kido.DIM;
 
 		switch (category.toUpperCase(Locale.ROOT)) {
-			case "CULTURAL COMMEMORATION":
 			case "CULTURAL FESTIVAL":
-			case "CULTURAL OBSERVANCE":
 			case "RELIGIOUS FESTIVAL":
-			case "RELIGIOUS OBSERVANCE":
-			case "SEASONAL OBSERVANCE":
-				return 0xFFB18AE8;
-
-			case "HISTORICAL COMMEMORATION":
-				return 0xFF55BCEB;
-
-			case "INTERNATIONAL OBSERVANCE":
-				return 0xFF6B9DFF;
+				return 0xFFFF9F43;
 
 			case "NATIONAL HOLIDAY":
 			case "PUBLIC HOLIDAY":
-				return Kido.AMBER;
+			case "STATE PUBLIC HOLIDAY":
+				return 0xFFFFD34E;
 
 			case "STATE OBSERVANCE":
-			case "STATE PUBLIC HOLIDAY":
 			case "UT OBSERVANCE":
 			case "NATIONAL OBSERVANCE":
+			case "INTERNATIONAL OBSERVANCE":
+			case "RELIGIOUS OBSERVANCE":
+			case "SEASONAL OBSERVANCE":
+			case "CULTURAL OBSERVANCE":
+				return 0xFF6B9DFF;
+				
+			case "CULTURAL COMMEMORATION":
+			case "HISTORICAL COMMEMORATION":
 				return 0xFF70D68A;
 
 			default:
@@ -388,7 +386,7 @@ final class TimelineView extends FrameLayout {
 		detailDay.setText(selected.date.format(DateTimeFormatter.ofPattern("dd", Locale.ENGLISH)));
 		detailMonth.setText(selected.date.format(DateTimeFormatter.ofPattern("MMMM yyyy", Locale.ENGLISH))
 				.toUpperCase(Locale.ROOT));
-		detailType.setText(selected.category.toUpperCase(Locale.ROOT));
+		detailType.setText("◆  " + selected.category.toUpperCase(Locale.ROOT));
 		detailType.setTextColor(categoryColor(selected.category));
 		detailTitle.setText(selected.title.toUpperCase(Locale.ROOT));
 		detailDescription.setText(selected.description);
