@@ -87,7 +87,7 @@ public class KidoActivity extends Activity {
     // The section tabs under the clock: left edge, step from one tab to the next, and tab width. The data block and
     // the NOW PLAYING panel above them span exactly the same width.
     private static final int TAB_X = 700, TAB_STEP = 92, TAB_W = 86;
-    private static final int NP_W = TAB_STEP * 5 + TAB_W;
+    private static final int NP_W = TAB_STEP * 4 + TAB_W;
     private static final long IDLE_MS = 45_000;
 
     private final Handler handler = new Handler(Looper.getMainLooper());
