@@ -295,19 +295,37 @@ final class TimelineView extends FrameLayout {
 	}
 
 	static int categoryColor(String category) {
-		String value = category == null ? "" : category.toUpperCase(Locale.ROOT);
-		if (value.contains("WAR") || value.contains("POLITIC")) return Kido.RED;
-		if (value.contains("RELIGIOUS") || value.contains("FESTIVAL")
-				|| value.contains("CULTURAL FESTIVAL") || value.contains("CULTURAL OBSERVANCE")) {
-			return 0xFFB18AE8;
+		if (category == null) return Kido.DIM;
+
+		switch (category.toUpperCase(Locale.ROOT)) {
+			case "CULTURAL COMMEMORATION":
+			case "CULTURAL FESTIVAL":
+			case "CULTURAL OBSERVANCE":
+			case "RELIGIOUS / CULTURAL OBSERVANCE":
+			case "RELIGIOUS FESTIVAL":
+			case "RELIGIOUS OBSERVANCE":
+			case "SEASONAL OBSERVANCE":
+				return 0xFFB18AE8;
+
+			case "HISTORICAL COMMEMORATION":
+				return 0xFF55BCEB;
+
+			case "INTERNATIONAL OBSERVANCE":
+				return 0xFF6B9DFF;
+
+			case "NATIONAL HOLIDAY":
+			case "NATIONAL OBSERVANCE":
+			case "PUBLIC HOLIDAY":
+				return Kido.AMBER;
+
+			case "STATE OBSERVANCE":
+			case "STATE PUBLIC HOLIDAY":
+			case "UT OBSERVANCE":
+				return 0xFF70D68A;
+
+			default:
+				return Kido.DIM;
 		}
-		if (value.contains("HISTORICAL") || value.contains("COMMEMORATION")) return 0xFF55BCEB;
-		if (value.contains("STATE") || value.contains("UT OBSERVANCE")
-				|| value.contains("TERRITORY")) return 0xFF70D68A;
-		if (value.contains("INTERNATIONAL") || value.contains("AWARENESS")) return 0xFF6B9DFF;
-		if (value.contains("NATIONAL") || value.contains("PUBLIC HOLIDAY")) return Kido.AMBER;
-		if (value.contains("DATE MARKER")) return Kido.DIM;
-		return Kido.DIM;
 	}
 
 	private int brighten(int color) {
