@@ -869,10 +869,10 @@ public class KidoActivity extends Activity {
             tabText[i * 2 + 1] = text(tabLabel, Kido.condBold, 20, Kido.withAlpha(Kido.LIME, 0.85f), 0.1f);
             place(tab, tabText[i * 2], 10, 6, -1, -1);
             place(tab, tabText[i * 2 + 1], 10, 38, -1, -1);
-            place(hud, tab, TAB_X + i * TAB_STEP, 214, TAB_W, 74);
+            place(hud, tab, TAB_X + (i - 1) * TAB_STEP, 214, TAB_W, 74);
             tabBar[i] = new GlowView(this, Kido.px(12), false);
             tabBar[i].setColor(Kido.RED);
-            place(hud, tabBar[i], TAB_X - 6 + i * TAB_STEP, 284, TAB_W + 12, 32);
+            place(hud, tabBar[i], TAB_X - 6 + (i - 1) * TAB_STEP, 284, TAB_W + 12, 32);
         }
 
         plate = new FrameLayout(this);
