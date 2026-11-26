@@ -1406,8 +1406,16 @@ public class KidoActivity extends Activity {
         TimelineView.Event event = timelineView.getSelectedEvent();
         int color = TimelineView.categoryColor(event.category);
         setStatus("事象", "EVENT STREAM", event.category.toUpperCase(Locale.ROOT),
-                "SELECTED EVENT", color);
-        subLeft.setTextColor(color);
+                "SELECTED", color);
+    }
+
+    private void animateStatusText(TextView view, String value) {
+        if (value.equals(view.getText().toString())) return;
+        view.animate().cancel();
+        view.setText(value);
+        view.setAlpha(0f);
+        view.setTranslationX(-Kido.px(14));
+        view.animate().alpha(1f).translationX(0).setDuration(300).setInterpolator(fluid).start();
     }
 
     private void setStatus(String kanji, String en, String left, String right, int color) {
@@ -1416,11 +1424,11 @@ public class KidoActivity extends Activity {
             plateEn.setText(en);
             plateKanji.setAlpha(0f);
             plateKanji.setTranslationX(-Kido.px(14));
-            plateKanji.animate().alpha(1f).translationX(0).setDuration(300).start();
+            plateKanji.animate().alpha(1f).translationX(0).setDuration(300).setInterpolator(fluid).start();
         }
-        subLeft.setText(fitStatus(left));
+        animateStatusText(subLeft, fitStatus(left));
+        animateStatusText(subRight, right);
         subLeft.setTextColor(Kido.CREAM);
-        subRight.setText(right);
         subRight.setTextColor(Kido.DIM);
         if (color == plateColor) return;
         ValueAnimator anim = ValueAnimator.ofObject(new ArgbEvaluator(), plateColor, color);
