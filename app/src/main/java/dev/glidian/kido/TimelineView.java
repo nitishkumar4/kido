@@ -172,8 +172,20 @@ final class TimelineView extends FrameLayout {
 		place(dossier, detailDay, 28, 54, 230, 82);
 		detailMonth = label("", Kido.mono, 19, Kido.CREAM, 0.08f);
 		place(dossier, detailMonth, 30, 148, 250, 28);
-		detailType = label("", Kido.mono, 15, Kido.RED, 0.1f);
-		place(dossier, detailType, 30, 192, 260, 22);
+		FrameLayout categoryBadge = new FrameLayout(context);
+		GradientDrawable categoryBackground = new GradientDrawable();
+		categoryBackground.setColor(Kido.withAlpha(Kido.RED, 0.08f));
+		categoryBackground.setStroke(Kido.px(1), Kido.withAlpha(Kido.RED, 0.8f));
+		categoryBadge.setBackground(categoryBackground);
+		GlowView categoryGlow = new GlowView(context, Kido.px(5), false);
+		categoryGlow.setColor(Kido.withAlpha(Kido.RED, 0.3f));
+		categoryGlow.setGlowing(true);
+		place(categoryBadge, categoryGlow, 0, 0, 260, 30);
+		detailType = label("", Kido.condBold, 16, Kido.RED, 0.08f);
+		detailType.setGravity(Gravity.CENTER_VERTICAL);
+		detailType.setPadding(Kido.px(8), 0, Kido.px(8), 0);
+		place(categoryBadge, detailType, 0, 0, 260, 30);
+		place(dossier, categoryBadge, 30, 186, 260, 30);
 
 		View dividerA = new View(context);
 		dividerA.setBackgroundColor(Kido.withAlpha(Kido.AMBER, 0.45f));
