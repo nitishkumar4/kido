@@ -112,6 +112,30 @@
     "description": "The third day of the Sankranti harvest celebrations in Andhra Pradesh and Telangana, traditionally dedicated to cattle and the animals that support agriculture. Families decorate and honour their livestock."
   },
   {
+    "date": "2026-01-21",
+    "day": "Wednesday",
+    "event": "Manipur Statehood Day",
+    "category": "STATE OBSERVANCE",
+    "region": "IN-MN",
+    "description": "Marks Manipur attaining full statehood on 21 January 1972. The day recognises the state's distinctive history, language, traditions and cultural contributions."
+  },
+  {
+    "date": "2026-01-21",
+    "day": "Wednesday",
+    "event": "Meghalaya Statehood Day",
+    "category": "STATE OBSERVANCE",
+    "region": "IN-ML",
+    "description": "Commemorates Meghalaya becoming a full state of India on 21 January 1972, alongside Manipur and Tripura. The day celebrates the state's Khasi, Garo and Jaintia communities and their cultural heritage."
+  },
+  {
+    "date": "2026-01-21",
+    "day": "Wednesday",
+    "event": "Tripura Statehood Day",
+    "category": "STATE OBSERVANCE",
+    "region": "IN-TR",
+    "description": "Commemorates Tripura becoming a full state of India on 21 January 1972. The day celebrates its diverse communities, history and cultural traditions."
+  },
+  {
     "date": "2026-01-23",
     "day": "Friday",
     "event": "Netaji Subhas Chandra Bose Jayanti – Parakram Diwas",
@@ -986,6 +1010,22 @@
   {
     "date": "2026-10-31",
     "day": "Saturday",
+    "event": "Jammu and Kashmir Reorganisation Day",
+    "category": "UT OBSERVANCE",
+    "region": "IN-JK",
+    "description": "Marks the implementation of the Jammu and Kashmir Reorganisation Act on 31 October 2019, when the former state was reorganised into the Union Territories of Jammu and Kashmir and Ladakh."
+  },
+  {
+    "date": "2026-10-31",
+    "day": "Saturday",
+    "event": "Ladakh Union Territory Foundation Day",
+    "category": "UT OBSERVANCE",
+    "region": "IN-LA",
+    "description": "Commemorates the creation of Ladakh as a separate Union Territory on 31 October 2019. The day recognises the region's distinct geography, languages and cultural traditions."
+  },
+  {
+    "date": "2026-10-31",
+    "day": "Saturday",
     "event": "National Unity Day – Rashtriya Ekta Diwas",
     "category": "NATIONAL OBSERVANCE",
     "region": "IN",
@@ -994,10 +1034,26 @@
   {
     "date": "2026-11-01",
     "day": "Sunday",
+    "event": "Andaman and Nicobar Islands Foundation Day",
+    "category": "UT OBSERVANCE",
+    "region": "IN-AN",
+    "description": "Marks the formation of the Andaman and Nicobar Islands as a Union Territory on 1 November 1956. The day recognises the islands' maritime history and diverse communities."
+  },
+  {
+    "date": "2026-11-01",
+    "day": "Sunday",
     "event": "Andhra Pradesh Formation Day",
     "category": "STATE OBSERVANCE",
     "region": "IN-AP",
     "description": "Commemorates the formation of Andhra State on 1 November 1956 and the later evolution of Andhra Pradesh. The day recognises Telugu language and regional history."
+  },
+  {
+    "date": "2026-11-01",
+    "day": "Sunday",
+    "event": "Chandigarh Foundation Day",
+    "category": "UT OBSERVANCE",
+    "region": "IN-CH",
+    "description": "Marks Chandigarh becoming a Union Territory on 1 November 1966, when Haryana was created and Chandigarh became the shared capital of Punjab and Haryana."
   },
   {
     "date": "2026-11-01",
@@ -1034,10 +1090,26 @@
   {
     "date": "2026-11-01",
     "day": "Sunday",
+    "event": "Lakshadweep Foundation Day",
+    "category": "UT OBSERVANCE",
+    "region": "IN-LD",
+    "description": "Marks the formation of the Laccadive, Minicoy and Amindivi Islands as a Union Territory on 1 November 1956; the territory was later renamed Lakshadweep."
+  },
+  {
+    "date": "2026-11-01",
+    "day": "Sunday",
     "event": "Madhya Pradesh Foundation Day",
     "category": "STATE OBSERVANCE",
     "region": "IN-MP",
     "description": "Marks the formation of Madhya Pradesh on 1 November 1956 following the reorganisation of states. The day celebrates the state's cultural and historical heritage."
+  },
+  {
+    "date": "2026-11-01",
+    "day": "Sunday",
+    "event": "Puducherry Liberation Day",
+    "category": "UT OBSERVANCE",
+    "region": "IN-PY",
+    "description": "Commemorates the de facto transfer of the former French settlements to India on 1 November 1954, ending French administration in the territory."
   },
   {
     "date": "2026-11-01",
@@ -1070,6 +1142,14 @@
     "category": "RELIGIOUS FESTIVAL",
     "region": "IN",
     "description": "Observed after Diwali in many Hindu traditions, commemorating Krishna lifting Govardhan Hill to protect villagers from torrential rain. Devotees prepare offerings of food known as Annakut."
+  },
+  {
+    "date": "2026-11-09",
+    "day": "Monday",
+    "event": "Uttarakhand Foundation Day",
+    "category": "STATE OBSERVANCE",
+    "region": "IN-UT",
+    "description": "Marks the creation of Uttarakhand as a separate state on 9 November 2000, carved out of Uttar Pradesh. The day celebrates the Himalayan state's identity, communities and heritage."
   },
   {
     "date": "2026-11-10",
@@ -1150,6 +1230,14 @@
     "category": "HISTORICAL COMMEMORATION",
     "region": "IN-PB,IN-HR,IN-DL",
     "description": "Honours the ninth Sikh Guru, Guru Tegh Bahadur, who was executed in 1675 after defending freedom of conscience and the right of communities to practise their faith."
+  },
+  {
+    "date": "2026-11-26",
+    "day": "Thursday",
+    "event": "Constitution Day",
+    "category": "NATIONAL OBSERVANCE",
+    "region": "IN-DN",
+    "description": "The Constitution of India was adopted on 26 November 1949. This nationwide observance promotes constitutional values, democratic rights and civic duties; it is also recorded as a national observance for the Dadra and Nagar Haveli and Daman and Diu region."
   },
   {
     "date": "2026-11-26",
