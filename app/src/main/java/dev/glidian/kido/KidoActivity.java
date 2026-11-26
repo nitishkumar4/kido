@@ -1646,6 +1646,14 @@ public class KidoActivity extends Activity {
                 if (up && calendarView != null) calendarView.requestFocus();
                 return true;
             }
+            if (key == KeyEvent.KEYCODE_DPAD_CENTER || key == KeyEvent.KEYCODE_ENTER) {
+                if (down && event.getRepeatCount() == 0) {
+                    timelineView.resetToToday();
+                    updateTimelineStatus();
+                    beeps.tick();
+                }
+                return true;
+            }
             if (isArrow(key)) return true;
         }
         if (zone == 4 && calendarView != null && current == calendarView) {
