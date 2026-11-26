@@ -858,11 +858,12 @@ public class KidoActivity extends Activity {
         place(hud, dataValues, TAB_X + 148, 76, 220, -1);
         buildNowPlaying(hud);
 
+        // Three-row map: MAIN / APPS, CTRL / EVENT / SEQN, AUDIO.
+        int[] tabRows = {1, 2, 0, 0, 1, 1};
+        int[] tabColumns = {2, 1, 1, 2, 0, 1};
         for (int i = 0; i < 6; i++) {
-            int column = i % 5;
-            int row = i / 5;
-            int x = TAB_X + column * TAB_STEP;
-            int y = 214 + row * 44;
+            int x = TAB_X + tabColumns[i] * TAB_STEP;
+            int y = 214 + tabRows[i] * 44;
             FrameLayout tab = new FrameLayout(this);
             tabBg[i] = box(Kido.withAlpha(Kido.GREEN, 0.1f), Kido.withAlpha(Kido.GREEN, 0.45f), 2);
             tab.setBackground(tabBg[i]);
