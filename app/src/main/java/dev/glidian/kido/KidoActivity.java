@@ -858,12 +858,12 @@ public class KidoActivity extends Activity {
         place(hud, dataValues, TAB_X + 148, 76, 220, -1);
         buildNowPlaying(hud);
 
-        // Three-row map: MAIN / APPS, CTRL / EVENT / SEQN, AUDIO.
+        // Five-column, three-row map: MAIN / APPS, CTRL / EVENT / SEQN, AUDIO.
         int[] tabRows = {1, 2, 0, 0, 1, 1};
-        int[] tabColumns = {2, 0, 0, 1, 0, 1};
+        int[] tabColumns = {4, 2, 2, 3, 2, 3};
         for (int i = 0; i < 6; i++) {
             int x = TAB_X + tabColumns[i] * TAB_STEP;
-            int y = 214 + tabRows[i] * 44;
+            int y = 204 + tabRows[i] * 44;
             FrameLayout tab = new FrameLayout(this);
             tabBg[i] = box(Kido.withAlpha(Kido.GREEN, 0.1f), Kido.withAlpha(Kido.GREEN, 0.45f), 2);
             tab.setBackground(tabBg[i]);
@@ -968,7 +968,7 @@ public class KidoActivity extends Activity {
             if (has && SystemClock.uptimeMillis() - lastKeyAt < 400) beeps.tick();
         });
         npPanel.setVisibility(View.GONE);
-        place(hud, npPanel, TAB_X, 56, NP_W, 150);
+        place(hud, npPanel, TAB_X, 46, NP_W, 150);
     }
 
     /**
