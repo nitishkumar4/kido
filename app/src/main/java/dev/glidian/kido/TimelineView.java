@@ -2,6 +2,10 @@ package dev.glidian.kido;
 
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -211,9 +215,9 @@ final class TimelineView extends FrameLayout {
 
 		place(dossier, label("TEMPORAL DATA", Kido.mono, 15, Kido.DIM, 0.12f),
 				1290, 26, 340, 22);
-		detailMeta = label("", Kido.mono, 16, Kido.LIME, 0.035f);
-		detailMeta.setLineSpacing(Kido.px(2), 1f);
-		place(dossier, detailMeta, 1290, 58, 360, 124);
+		detailMeta = label("", Kido.mono, 15, Kido.CREAM, 0.035f);
+		detailMeta.setLineSpacing(Kido.px(1), 1f);
+		place(dossier, detailMeta, 1290, 56, 360, 130);
 		place(dossier, label("NERV // PUBLIC INFORMATION TERMINAL", Kido.mono, 12, Kido.DIM, 0.08f),
 				1290, 190, 370, 18);
 
@@ -414,14 +418,36 @@ final class TimelineView extends FrameLayout {
 		int week = selected.date.get(WeekFields.ISO.weekOfWeekBasedYear());
 		int dayOfYear = selected.date.getDayOfYear();
 		int daysInYear = selected.date.lengthOfYear();
+		int quarter = (selected.date.getMonthValue() - 1) / 3 + 1;
 		long dayOffset = ChronoUnit.DAYS.between(today, selected.date);
 		String relative = dayOffset == 0 ? "TODAY"
 				: dayOffset > 0 ? String.format(Locale.ROOT, "IN %d DAYS", dayOffset)
 				: String.format(Locale.ROOT, "%d DAYS AGO", -dayOffset);
-		String weekday = selected.date.getDayOfWeek().name();
-		detailMeta.setText(String.format(Locale.ROOT,
-				"WEEK       %02d\nDAY %03d / %03d\nWEEKDAY    %s\nRELATIVE   %s\nREGION     %s",
-				week, dayOfYear, daysInYear, weekday, relative, selected.region));
+
+		SpannableStringBuilder meta = new SpannableStringBuilder();
+		appendMetaLine(meta, "WEEK", String.format(Locale.ROOT, "%02d", week), 0xFF55BCEB);
+		appendMetaLine(meta, "DAY OF YEAR", String.format(Locale.ROOT, "%03d / %03d",
+				dayOfYear, daysInYear), Kido.AMBER);
+		appendMetaLine(meta, "WEEKDAY", selected.date.getDayOfWeek().name(), Kido.CREAM);
+		appendMetaLine(meta, "QUARTER", "Q" + quarter, 0xFFB18AE8);
+		appendMetaLine(meta, "RELATIVE", relative,
+				dayOffset == 0 ? Kido.LIME : dayOffset > 0 ? Kido.AMBER : Kido.DIM);
+		appendMetaLine(meta, "REGION", selected.region, 0xFF6B9DFF);
+		detailMeta.setText(meta);
+	}
+
+	private void appendMetaLine(SpannableStringBuilder text, String label, String value, int valueColor) {
+		if (text.length() > 0) text.append("\n");
+		int labelStart = text.length();
+		text.append(String.format(Locale.ROOT, "%-12s", label));
+		text.setSpan(new ForegroundColorSpan(Kido.DIM), labelStart, text.length(),
+				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		int valueStart = text.length();
+		text.append(value);
+		text.setSpan(new ForegroundColorSpan(valueColor), valueStart, text.length(),
+				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		text.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), valueStart, text.length(),
+				Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 	}
 
 	private static final class SimCardDrawable extends android.graphics.drawable.Drawable {
