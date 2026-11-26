@@ -49,6 +49,8 @@ final class TimelineView extends FrameLayout {
 	private final View accent;
 	private final List<Event> events = new ArrayList<>();
 	private final FrameLayout[] eventCards = new FrameLayout[5];
+	private final TextView previousArrow;
+	private final TextView nextArrow;
 	private final TextView[] dates = new TextView[5];
 	private final TextView[] titles = new TextView[5];
 	private final TextView[] nodeCodes = new TextView[5];
@@ -135,8 +137,8 @@ final class TimelineView extends FrameLayout {
 			FrameLayout card = new FrameLayout(context);
 			card.setBackground(new SimCardDrawable(Kido.withAlpha(Kido.PANEL, 0.94f),
 					Kido.withAlpha(Kido.LINE, 0.9f), Kido.px(22)));
-			int x = 112 + i * 340;
-			place(this, card, x, 463, 320, 178);
+			int x = 122 + i * 344;
+			place(this, card, x, 463, 300, 178);
 			eventCards[i] = card;
 
 			View stripe = new View(context);
@@ -148,16 +150,25 @@ final class TimelineView extends FrameLayout {
 			states[i] = label(i < 2 ? "ARCHIVE" : i == 2 ? "ACTIVE" : "UPCOMING",
 					Kido.mono, 13, Kido.LIME, 0.08f);
 			states[i].setGravity(Gravity.END);
-			place(card, states[i], 202, 18, 104, 20);
+			place(card, states[i], 182, 18, 104, 20);
 
 			dates[i] = label("", Kido.condBold, 30, Kido.CREAM, 0.04f);
-			place(card, dates[i], 14, 54, 292, 38);
+			place(card, dates[i], 14, 54, 272, 38);
 
 			titles[i] = label("", Kido.mono, 17, Kido.DIM, 0.015f);
 			titles[i].setMaxLines(2);
 			titles[i].setEllipsize(android.text.TextUtils.TruncateAt.END);
-			place(card, titles[i], 14, 105, 274, 48);
+			place(card, titles[i], 14, 105, 272, 48);
 		}
+
+		previousArrow = label("‹", Kido.condBold, 46, Kido.AMBER, 0f);
+		previousArrow.setGravity(Gravity.CENTER);
+		previousArrow.setShadowLayer(Kido.px(10), 0, 0, Kido.withAlpha(Kido.AMBER, 0.55f));
+		place(this, previousArrow, 774, 523, 28, 54);
+		nextArrow = label("›", Kido.condBold, 46, Kido.AMBER, 0f);
+		nextArrow.setGravity(Gravity.CENTER);
+		nextArrow.setShadowLayer(Kido.px(10), 0, 0, Kido.withAlpha(Kido.AMBER, 0.55f));
+		place(this, nextArrow, 1118, 523, 28, 54);
 
 		// Selected-event dossier. Three distinct data zones, like a tactical console readout.
 		FrameLayout dossier = new FrameLayout(context);
@@ -206,7 +217,7 @@ final class TimelineView extends FrameLayout {
 		TextView back = label("◀  事象  ARCHIVE", Kido.condBold, 26, Kido.DIM, 0.14f);
 		place(this, back, 122, 995, 400, 34);
 
-		TextView controls = label("UP // PREVIOUS       DOWN // NEXT       OK // CURRENT",
+		TextView controls = label("LEFT // PREVIOUS       RIGHT // NEXT       OK // TODAY",
 				Kido.mono, 20, Kido.DIM, 0.08f);
 		controls.setGravity(Gravity.CENTER);
 		place(this, controls, 500, 1000, 1000, 34);
@@ -352,6 +363,8 @@ final class TimelineView extends FrameLayout {
 
 	private void render() {
 		Event selected = getSelectedEvent();
+		previousArrow.setVisibility(selectedIndex > 0 ? View.VISIBLE : View.INVISIBLE);
+		nextArrow.setVisibility(selectedIndex < events.size() - 1 ? View.VISIBLE : View.INVISIBLE);
 		LocalDate today = LocalDate.now();
 		updateAnnualCycle(today, selected.date);
 		for (int slot = 0; slot < 5; slot++) {
