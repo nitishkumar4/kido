@@ -79,7 +79,6 @@ public class KidoActivity extends Activity {
     private static final int[][] ZONES = {{0, 0}, {1900, 220}, {720, 1180}, {720, 2260}};
     // Each section has a big kanji beside its title and a short one on its tab; the words are in strings.xml.
     private static final String[] ZONE_KANJI = {"主要", "アプリ", "制御系統"};
-    private static final String[] TAB_KANJI = {"時線", "音楽", "主要", "アプリ", "制御", "事象"};
     private static final int CALENDAR_X = 2640, CALENDAR_Y = 1180;
     private static final int TIMELINE_X = 4560, TIMELINE_Y = 1180;
     private static final int[] ZONE_TITLES = {R.string.zone_main, R.string.zone_apps, R.string.zone_system};
@@ -117,7 +116,7 @@ public class KidoActivity extends Activity {
     private int[] musicHudVisibility;
     private String previousFooterZone;
     private GradientDrawable plateBg, subBg, glowBg;
-    private final TextView[] tabText = new TextView[12];
+    private final TextView[] tabText = new TextView[6];
     private final GlowView[] tabBar = new GlowView[6];
     private final GlowView[] zoneGlow = new GlowView[3];
     private GlowView plateHalo;
@@ -861,18 +860,22 @@ public class KidoActivity extends Activity {
         buildNowPlaying(hud);
 
         for (int i = 0; i < 6; i++) {
+            int column = i % 5;
+            int row = i / 5;
+            int x = TAB_X - TAB_STEP + column * TAB_STEP;
+            int y = 214 + row * 44;
             FrameLayout tab = new FrameLayout(this);
             tabBg[i] = box(Kido.withAlpha(Kido.GREEN, 0.1f), Kido.withAlpha(Kido.GREEN, 0.45f), 2);
             tab.setBackground(tabBg[i]);
-            tabText[i * 2] = text(TAB_KANJI[i], Kido.mincho, 22, Kido.withAlpha(Kido.LIME, 0.75f), 0);
             String tabLabel = i == 0 ? "SEQN" : i == 1 ? "AUDIO" : i == 5 ? "EVENT" : str(ZONE_TABS[i - 2]);
-            tabText[i * 2 + 1] = text(tabLabel, Kido.condBold, 20, Kido.withAlpha(Kido.LIME, 0.85f), 0.1f);
-            place(tab, tabText[i * 2], 10, 6, -1, -1);
-            place(tab, tabText[i * 2 + 1], 10, 38, -1, -1);
-            place(hud, tab, TAB_X + (i - 1) * TAB_STEP, 214, TAB_W, 74);
+            tabText[i] = text(tabLabel, Kido.condBold, 18, Kido.withAlpha(Kido.LIME, 0.85f), 0.1f);
+            tabText[i].setGravity(Gravity.CENTER);
+            tabText[i].setSingleLine(true);
+            place(tab, tabText[i], 0, 0, TAB_W, 36);
+            place(hud, tab, x, y, TAB_W, 36);
             tabBar[i] = new GlowView(this, Kido.px(12), false);
             tabBar[i].setColor(Kido.RED);
-            place(hud, tabBar[i], TAB_X - 6 + (i - 1) * TAB_STEP, 284, TAB_W + 12, 32);
+            place(hud, tabBar[i], x - 6, y + 34, TAB_W + 12, 12);
         }
 
         plate = new FrameLayout(this);
@@ -1363,8 +1366,7 @@ public class KidoActivity extends Activity {
             boolean on = audioTabActive ? i == 1 : i == (z == 4 ? 5 : z == 5 ? 0 : z + 2);
             tabBg[i].setColor(on ? Kido.withAlpha(Kido.RED, 0.18f) : Kido.withAlpha(Kido.GREEN, 0.1f));
             tabBg[i].setStroke(Kido.px(2), on ? Kido.RED : Kido.withAlpha(Kido.GREEN, 0.45f));
-            tabText[i * 2].setTextColor(on ? Kido.RED : Kido.withAlpha(Kido.LIME, 0.75f));
-            tabText[i * 2 + 1].setTextColor(on ? Kido.RED : Kido.withAlpha(Kido.LIME, 0.85f));
+            tabText[i].setTextColor(on ? Kido.RED : Kido.withAlpha(Kido.LIME, 0.85f));
             tabBar[i].setVisibility(on ? View.VISIBLE : View.INVISIBLE);
         }
     }
