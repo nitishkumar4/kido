@@ -865,7 +865,7 @@ public class KidoActivity extends Activity {
             tabBg[i] = box(Kido.withAlpha(Kido.GREEN, 0.1f), Kido.withAlpha(Kido.GREEN, 0.45f), 2);
             tab.setBackground(tabBg[i]);
             tabText[i * 2] = text(TAB_KANJI[i], Kido.mincho, 22, Kido.withAlpha(Kido.LIME, 0.75f), 0);
-            String tabLabel = i == 0 ? "TIME" : i == 1 ? "AUDIO" : i == 5 ? "EVENT" : str(ZONE_TABS[i - 2]);
+            String tabLabel = i == 0 ? "SEQ" : i == 1 ? "AUDIO" : i == 5 ? "EVENT" : str(ZONE_TABS[i - 2]);
             tabText[i * 2 + 1] = text(tabLabel, Kido.condBold, 20, Kido.withAlpha(Kido.LIME, 0.85f), 0.1f);
             place(tab, tabText[i * 2], 10, 6, -1, -1);
             place(tab, tabText[i * 2 + 1], 10, 38, -1, -1);
