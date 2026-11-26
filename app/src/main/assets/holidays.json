@@ -987,7 +987,7 @@
     "date": "2026-10-26",
     "day": "Monday",
     "event": "Maharishi Valmiki Jayanti",
-    "category": "RELIGIOUS / CULTURAL OBSERVANCE",
+    "category": "CULTURAL OBSERVANCE",
     "region": "IN-UP,IN-PB,IN-HR,IN-DL",
     "description": "Commemorates the sage Valmiki, traditionally revered as the author of the Ramayana. The day is marked by prayers, processions and community events."
   },
@@ -1236,16 +1236,8 @@
     "day": "Thursday",
     "event": "Constitution Day",
     "category": "NATIONAL OBSERVANCE",
-    "region": "IN-DN",
-    "description": "The Constitution of India was adopted on 26 November 1949. This nationwide observance promotes constitutional values, democratic rights and civic duties; it is also recorded as a national observance for the Dadra and Nagar Haveli and Daman and Diu region."
-  },
-  {
-    "date": "2026-11-26",
-    "day": "Thursday",
-    "event": "Constitution Day – Samvidhan Divas",
-    "category": "NATIONAL OBSERVANCE",
     "region": "IN",
-    "description": "Marks the adoption of the Constitution of India by the Constituent Assembly on 26 November 1949. The day promotes constitutional values, rights, duties and democratic principles."
+    "description": "The Constitution of India was adopted on 26 November 1949. This nationwide observance promotes constitutional values, democratic rights and civic duties; it is also recorded as a national observance for the Dadra and Nagar Haveli and Daman and Diu region."
   },
   {
     "date": "2026-12-01",
