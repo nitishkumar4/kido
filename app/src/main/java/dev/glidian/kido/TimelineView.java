@@ -58,8 +58,6 @@ final class TimelineView extends FrameLayout {
 	private final TextView detailMeta;
 	private final TextView detailDescription;
 	private final TextView detailType;
-	private final GradientDrawable categoryBackground;
-	private final GlowView categoryGlow;
 	private final TextView[] states = new TextView[5];
 	private final View[] monthMarkers = new View[12];
 	private final GlowView[] monthGlows = new GlowView[12];
@@ -175,20 +173,8 @@ final class TimelineView extends FrameLayout {
 		place(dossier, detailDay, 28, 54, 230, 82);
 		detailMonth = label("", Kido.mono, 19, Kido.CREAM, 0.08f);
 		place(dossier, detailMonth, 30, 148, 250, 28);
-		FrameLayout categoryBadge = new FrameLayout(context);
-		categoryBackground = new GradientDrawable();
-		categoryBackground.setColor(Kido.withAlpha(Kido.RED, 0.08f));
-		categoryBackground.setStroke(Kido.px(1), Kido.withAlpha(Kido.RED, 0.8f));
-		categoryBadge.setBackground(categoryBackground);
-		categoryGlow = new GlowView(context, Kido.px(5), false);
-		categoryGlow.setColor(Kido.withAlpha(Kido.RED, 0.3f));
-		categoryGlow.setGlowing(true);
-		place(categoryBadge, categoryGlow, 0, 0, 260, 30);
 		detailType = label("", Kido.condBold, 16, Kido.RED, 0.08f);
-		detailType.setGravity(Gravity.CENTER_VERTICAL);
-		detailType.setPadding(Kido.px(8), 0, Kido.px(8), 0);
-		place(categoryBadge, detailType, 0, 0, 260, 30);
-		place(dossier, categoryBadge, 30, 186, 260, 30);
+		place(dossier, detailType, 30, 186, 260, 30);
 
 		View dividerA = new View(context);
 		dividerA.setBackgroundColor(Kido.withAlpha(Kido.AMBER, 0.45f));
@@ -402,12 +388,8 @@ final class TimelineView extends FrameLayout {
 		detailDay.setText(selected.date.format(DateTimeFormatter.ofPattern("dd", Locale.ENGLISH)));
 		detailMonth.setText(selected.date.format(DateTimeFormatter.ofPattern("MMMM yyyy", Locale.ENGLISH))
 				.toUpperCase(Locale.ROOT));
-		detailType.setText("◆  " + selected.category.toUpperCase(Locale.ROOT));
-		int categoryColor = categoryColor(selected.category);
-		detailType.setTextColor(categoryColor);
-		categoryBackground.setColor(Kido.withAlpha(categoryColor, 0.08f));
-		categoryBackground.setStroke(Kido.px(1), Kido.withAlpha(categoryColor, 0.8f));
-		categoryGlow.setColor(Kido.withAlpha(categoryColor, 0.3f));
+		detailType.setText(selected.category.toUpperCase(Locale.ROOT));
+		detailType.setTextColor(categoryColor(selected.category));
 		detailTitle.setText(selected.title.toUpperCase(Locale.ROOT));
 		detailDescription.setText(selected.description);
 		int week = selected.date.get(WeekFields.ISO.weekOfWeekBasedYear());
