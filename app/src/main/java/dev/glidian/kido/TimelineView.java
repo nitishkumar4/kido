@@ -17,6 +17,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -210,8 +211,9 @@ final class TimelineView extends FrameLayout {
 
 		place(dossier, label("TEMPORAL DATA", Kido.mono, 15, Kido.DIM, 0.12f),
 				1290, 26, 340, 22);
-		detailMeta = label("", Kido.mono, 18, Kido.LIME, 0.04f);
-		place(dossier, detailMeta, 1290, 68, 360, 86);
+		detailMeta = label("", Kido.mono, 16, Kido.LIME, 0.035f);
+		detailMeta.setLineSpacing(Kido.px(2), 1f);
+		place(dossier, detailMeta, 1290, 58, 360, 124);
 		place(dossier, label("NERV // PUBLIC INFORMATION TERMINAL", Kido.mono, 12, Kido.DIM, 0.08f),
 				1290, 190, 370, 18);
 
@@ -410,8 +412,16 @@ final class TimelineView extends FrameLayout {
 		detailTitle.setText(selected.title.toUpperCase(Locale.ROOT));
 		detailDescription.setText(selected.description);
 		int week = selected.date.get(WeekFields.ISO.weekOfWeekBasedYear());
-		detailMeta.setText(String.format(Locale.ROOT, "WEEK   %02d\nDAY    %03d\nAREA   %s",
-				week, selected.date.getDayOfYear(), selected.region));
+		int dayOfYear = selected.date.getDayOfYear();
+		int daysInYear = selected.date.lengthOfYear();
+		long dayOffset = ChronoUnit.DAYS.between(today, selected.date);
+		String relative = dayOffset == 0 ? "TODAY"
+				: dayOffset > 0 ? String.format(Locale.ROOT, "IN %d DAYS", dayOffset)
+				: String.format(Locale.ROOT, "%d DAYS AGO", -dayOffset);
+		String weekday = selected.date.getDayOfWeek().name();
+		detailMeta.setText(String.format(Locale.ROOT,
+				"WEEK       %02d\nDAY OF YEAR %03d / %03d\nWEEKDAY    %s\nRELATIVE   %s\nREGION     %s",
+				week, dayOfYear, daysInYear, weekday, relative, selected.region));
 	}
 
 	private static final class SimCardDrawable extends android.graphics.drawable.Drawable {
