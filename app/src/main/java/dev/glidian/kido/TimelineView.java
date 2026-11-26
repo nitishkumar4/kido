@@ -303,7 +303,6 @@ final class TimelineView extends FrameLayout {
 			case "CULTURAL COMMEMORATION":
 			case "CULTURAL FESTIVAL":
 			case "CULTURAL OBSERVANCE":
-			case "RELIGIOUS / CULTURAL OBSERVANCE":
 			case "RELIGIOUS FESTIVAL":
 			case "RELIGIOUS OBSERVANCE":
 			case "SEASONAL OBSERVANCE":
@@ -316,13 +315,13 @@ final class TimelineView extends FrameLayout {
 				return 0xFF6B9DFF;
 
 			case "NATIONAL HOLIDAY":
-			case "NATIONAL OBSERVANCE":
 			case "PUBLIC HOLIDAY":
 				return Kido.AMBER;
 
 			case "STATE OBSERVANCE":
 			case "STATE PUBLIC HOLIDAY":
 			case "UT OBSERVANCE":
+			case "NATIONAL OBSERVANCE":
 				return 0xFF70D68A;
 
 			default:
@@ -421,7 +420,7 @@ final class TimelineView extends FrameLayout {
 				: String.format(Locale.ROOT, "%d DAYS AGO", -dayOffset);
 		String weekday = selected.date.getDayOfWeek().name();
 		detailMeta.setText(String.format(Locale.ROOT,
-				"WEEK       %02d\nDAY OF YEAR %03d / %03d\nWEEKDAY    %s\nQUARTER    Q%d\nRELATIVE   %s\nREGION     %s",
+				"WEEK       %02d\nDAY        %03d / %03d\nWEEKDAY    %s\nQUARTER    Q%d\nRELATIVE   %s\nREGION     %s",
 				week, dayOfYear, daysInYear, weekday, quarter, relative, selected.region));
 	}
 
