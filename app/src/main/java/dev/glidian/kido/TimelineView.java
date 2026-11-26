@@ -29,14 +29,16 @@ final class TimelineView extends FrameLayout {
 	static final class Event {
 		final LocalDate date;
 		final String title;
-		final String type;
+		final String category;
+		final String day;
 		final String description;
 		final String region;
 
-		Event(LocalDate date, String title, String type, String description, String region) {
+		Event(LocalDate date, String day, String title, String category, String description, String region) {
 			this.date = date;
+			this.day = day;
 			this.title = title;
-			this.type = type;
+			this.category = category;
 			this.description = description;
 			this.region = region;
 		}
@@ -253,8 +255,9 @@ final class TimelineView extends FrameLayout {
 				JSONObject item = array.optJSONObject(i);
 				if (item == null) continue;
 				LocalDate date = LocalDate.parse(item.optString("date"));
-				events.add(new Event(date, item.optString("title"), item.optString("type"),
-						item.optString("description"), item.optString("region", "IN-MH")));
+				events.add(new Event(date, item.optString("day", date.getDayOfWeek().name()),
+						item.optString("event"), item.optString("category"),
+						item.optString("description"), item.optString("region", "IN")));
 			}
 		} catch (Exception ignored) {
 			events.clear();
@@ -269,8 +272,8 @@ final class TimelineView extends FrameLayout {
 				return;
 			}
 		}
-		events.add(new Event(today, "TODAY", "TODAY", "No public holiday or festival is listed for today.",
-				"LOCAL DATE"));
+		events.add(new Event(today, today.getDayOfWeek().name(), "TODAY", "DATE MARKER",
+				"No public holiday or festival is listed for today.", "IN"));
 	}
 
 	private void sortEvents() {
@@ -350,7 +353,7 @@ final class TimelineView extends FrameLayout {
 		detailDay.setText(selected.date.format(DateTimeFormatter.ofPattern("dd", Locale.ENGLISH)));
 		detailMonth.setText(selected.date.format(DateTimeFormatter.ofPattern("MMMM yyyy", Locale.ENGLISH))
 				.toUpperCase(Locale.ROOT));
-		detailType.setText("◆  " + selected.type.toUpperCase(Locale.ROOT));
+		detailType.setText("◆  " + selected.category.toUpperCase(Locale.ROOT));
 		detailTitle.setText(selected.title.toUpperCase(Locale.ROOT));
 		detailDescription.setText(selected.description);
 		int week = selected.date.get(WeekFields.ISO.weekOfWeekBasedYear());
