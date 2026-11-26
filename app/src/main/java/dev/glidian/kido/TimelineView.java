@@ -420,7 +420,7 @@ final class TimelineView extends FrameLayout {
 				: String.format(Locale.ROOT, "%d DAYS AGO", -dayOffset);
 		String weekday = selected.date.getDayOfWeek().name();
 		detailMeta.setText(String.format(Locale.ROOT,
-				"WEEK       %02d\nDAY OF YEAR %03d / %03d\nWEEKDAY    %s\nRELATIVE   %s\nREGION     %s",
+				"WEEK       %02d\nDAY %03d / %03d\nWEEKDAY    %s\nRELATIVE   %s\nREGION     %s",
 				week, dayOfYear, daysInYear, weekday, relative, selected.region));
 	}
 
