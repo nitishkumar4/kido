@@ -1283,7 +1283,7 @@ public class KidoActivity extends Activity {
                     }).start();
             showTabs(5);
             footerZone.setText("SEC-06 // TIMELINE");
-            setStatus("時線", "TIMELINE", "PUBLIC HOLIDAYS // FESTIVALS", "LEFT / RIGHT // EVENTS", Kido.LIME);
+            updateTimelineStatus();
             log(str(R.string.log_sector, 6, "TIMELINE"));
             return;
         }
@@ -1401,6 +1401,15 @@ public class KidoActivity extends Activity {
         if (calendarView != null) calendarView.setEventTagColor(colors[index]);
     }
 
+    private void updateTimelineStatus() {
+        if (timelineView == null) return;
+        TimelineView.Event event = timelineView.getSelectedEvent();
+        int color = TimelineView.categoryColor(event.category);
+        setStatus("事象", "EVENT STREAM", event.category.toUpperCase(Locale.ROOT),
+                "SELECTED EVENT", color);
+        subLeft.setTextColor(color);
+    }
+
     private void setStatus(String kanji, String en, String left, String right, int color) {
         if (!kanji.equals(plateKanji.getText().toString()) || !en.equals(plateEn.getText().toString())) {
             plateKanji.setText(kanji);
@@ -1410,7 +1419,9 @@ public class KidoActivity extends Activity {
             plateKanji.animate().alpha(1f).translationX(0).setDuration(300).start();
         }
         subLeft.setText(fitStatus(left));
+        subLeft.setTextColor(Kido.CREAM);
         subRight.setText(right);
+        subRight.setTextColor(Kido.DIM);
         if (color == plateColor) return;
         ValueAnimator anim = ValueAnimator.ofObject(new ArgbEvaluator(), plateColor, color);
         anim.setDuration(450);
@@ -1619,6 +1630,7 @@ public class KidoActivity extends Activity {
                     lastMoveAt = now;
                     if (key == KeyEvent.KEYCODE_DPAD_UP) timelineView.previousEvent();
                     else timelineView.nextEvent();
+                    updateTimelineStatus();
                 }
                 return true;
             }
