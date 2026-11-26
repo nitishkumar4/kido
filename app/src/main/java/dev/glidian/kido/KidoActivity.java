@@ -79,7 +79,7 @@ public class KidoActivity extends Activity {
     private static final int[][] ZONES = {{0, 0}, {1900, 220}, {720, 1180}, {720, 2260}};
     // Each section has a big kanji beside its title and a short one on its tab; the words are in strings.xml.
     private static final String[] ZONE_KANJI = {"主要", "アプリ", "制御系統"};
-    private static final String[] TAB_KANJI = {"音楽", "主要", "アプリ", "制御", "事象", "時線"};
+    private static final String[] TAB_KANJI = {"時線", "音楽", "主要", "アプリ", "制御", "事象"};
     private static final int CALENDAR_X = 2640, CALENDAR_Y = 1180;
     private static final int TIMELINE_X = 4560, TIMELINE_Y = 1180;
     private static final int[] ZONE_TITLES = {R.string.zone_main, R.string.zone_apps, R.string.zone_system};
@@ -865,7 +865,7 @@ public class KidoActivity extends Activity {
             tabBg[i] = box(Kido.withAlpha(Kido.GREEN, 0.1f), Kido.withAlpha(Kido.GREEN, 0.45f), 2);
             tab.setBackground(tabBg[i]);
             tabText[i * 2] = text(TAB_KANJI[i], Kido.mincho, 22, Kido.withAlpha(Kido.LIME, 0.75f), 0);
-            String tabLabel = i == 0 ? "AUDIO" : i == 4 ? "EVENT" : i == 5 ? "TIME" : str(ZONE_TABS[i - 1]);
+            String tabLabel = i == 0 ? "TIME" : i == 1 ? "AUDIO" : i == 5 ? "EVENT" : str(ZONE_TABS[i - 2]);
             tabText[i * 2 + 1] = text(tabLabel, Kido.condBold, 20, Kido.withAlpha(Kido.LIME, 0.85f), 0.1f);
             place(tab, tabText[i * 2], 10, 6, -1, -1);
             place(tab, tabText[i * 2 + 1], 10, 38, -1, -1);
@@ -1360,7 +1360,7 @@ public class KidoActivity extends Activity {
 
     private void showTabs(int z) {
         for (int i = 0; i < 6; i++) {
-            boolean on = audioTabActive ? i == 0 : i == (z == 4 ? 4 : z == 5 ? 5 : z + 1);
+            boolean on = audioTabActive ? i == 1 : i == (z == 4 ? 5 : z == 5 ? 0 : z + 2);
             tabBg[i].setColor(on ? Kido.withAlpha(Kido.RED, 0.18f) : Kido.withAlpha(Kido.GREEN, 0.1f));
             tabBg[i].setStroke(Kido.px(2), on ? Kido.RED : Kido.withAlpha(Kido.GREEN, 0.45f));
             tabText[i * 2].setTextColor(on ? Kido.RED : Kido.withAlpha(Kido.LIME, 0.75f));
