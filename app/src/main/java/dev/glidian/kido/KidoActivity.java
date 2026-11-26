@@ -117,7 +117,6 @@ public class KidoActivity extends Activity {
     private String previousFooterZone;
     private GradientDrawable plateBg, subBg, glowBg;
     private final TextView[] tabText = new TextView[6];
-    private final GlowView[] tabBar = new GlowView[6];
     private final GlowView[] zoneGlow = new GlowView[3];
     private GlowView plateHalo;
     private final GradientDrawable[] tabBg = new GradientDrawable[6];
@@ -862,7 +861,7 @@ public class KidoActivity extends Activity {
         for (int i = 0; i < 6; i++) {
             int column = i % 5;
             int row = i / 5;
-            int x = TAB_X - TAB_STEP + column * TAB_STEP;
+            int x = TAB_X + column * TAB_STEP;
             int y = 214 + row * 44;
             FrameLayout tab = new FrameLayout(this);
             tabBg[i] = box(Kido.withAlpha(Kido.GREEN, 0.1f), Kido.withAlpha(Kido.GREEN, 0.45f), 2);
@@ -873,9 +872,6 @@ public class KidoActivity extends Activity {
             tabText[i].setSingleLine(true);
             place(tab, tabText[i], 0, 0, TAB_W, 36);
             place(hud, tab, x, y, TAB_W, 36);
-            tabBar[i] = new GlowView(this, Kido.px(12), false);
-            tabBar[i].setColor(Kido.RED);
-            place(hud, tabBar[i], x - 6, y + 34, TAB_W + 12, 12);
         }
 
         plate = new FrameLayout(this);
@@ -1367,7 +1363,6 @@ public class KidoActivity extends Activity {
             tabBg[i].setColor(on ? Kido.withAlpha(Kido.RED, 0.18f) : Kido.withAlpha(Kido.GREEN, 0.1f));
             tabBg[i].setStroke(Kido.px(2), on ? Kido.RED : Kido.withAlpha(Kido.GREEN, 0.45f));
             tabText[i].setTextColor(on ? Kido.RED : Kido.withAlpha(Kido.LIME, 0.85f));
-            tabBar[i].setVisibility(on ? View.VISIBLE : View.INVISIBLE);
         }
     }
 
