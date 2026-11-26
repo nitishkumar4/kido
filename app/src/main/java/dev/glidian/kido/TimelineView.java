@@ -186,9 +186,9 @@ final class TimelineView extends FrameLayout {
 		place(dossier, label("EVENT RECORD // VERIFIED LOCAL ENTRY", Kido.mono, 14, Kido.DIM, 0.09f),
 				350, 98, 780, 20);
 		detailDescription = label("", Kido.mono, 19, Kido.INK, 0.015f);
-		detailDescription.setMaxLines(3);
+		detailDescription.setMaxLines(4);
 		detailDescription.setEllipsize(android.text.TextUtils.TruncateAt.END);
-		place(dossier, detailDescription, 350, 132, 890, 82);
+		place(dossier, detailDescription, 350, 132, 890, 96);
 
 		View dividerB = new View(context);
 		dividerB.setBackgroundColor(Kido.withAlpha(Kido.AMBER, 0.45f));
