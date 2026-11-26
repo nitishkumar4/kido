@@ -414,14 +414,15 @@ final class TimelineView extends FrameLayout {
 		int week = selected.date.get(WeekFields.ISO.weekOfWeekBasedYear());
 		int dayOfYear = selected.date.getDayOfYear();
 		int daysInYear = selected.date.lengthOfYear();
+		int quarter = (selected.date.getMonthValue() - 1) / 3 + 1;
 		long dayOffset = ChronoUnit.DAYS.between(today, selected.date);
 		String relative = dayOffset == 0 ? "TODAY"
 				: dayOffset > 0 ? String.format(Locale.ROOT, "IN %d DAYS", dayOffset)
 				: String.format(Locale.ROOT, "%d DAYS AGO", -dayOffset);
 		String weekday = selected.date.getDayOfWeek().name();
 		detailMeta.setText(String.format(Locale.ROOT,
-				"WEEK       %02d\nDAY OF YEAR %03d / %03d\nWEEKDAY    %s\nRELATIVE   %s\nREGION     %s",
-				week, dayOfYear, daysInYear, weekday, relative, selected.region));
+				"WEEK       %02d\nDAY OF YEAR %03d / %03d\nWEEKDAY    %s\nQUARTER    Q%d\nRELATIVE   %s\nREGION     %s",
+				week, dayOfYear, daysInYear, weekday, quarter, relative, selected.region));
 	}
 
 	private static final class SimCardDrawable extends android.graphics.drawable.Drawable {
