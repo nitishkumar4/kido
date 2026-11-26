@@ -53,7 +53,7 @@
     <!-- Clock and data block -->
     <string name="local_time">LOCAL TIME:</string>
     <string name="data_labels">SYS-CHK\nFREE MEM\nUPTIME\nINPUTS</string>
-    <string name="system_nominal">SYSTEM NOMINAL</string>
+    <string name="system_nominal">SYSTEM</string>
     <string name="sys_check_log">SYS-CHK %1$04d // PARITY %2$04X // OK</string>
 
     <!-- Wi-Fi readouts -->

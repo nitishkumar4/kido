@@ -46,7 +46,7 @@
 
     <string name="local_time">HORA LOCAL:</string>
     <string name="data_labels">VERIF.\nMEM LIBRE\nACTIVO\nENTRADAS</string>
-    <string name="system_nominal">SISTEMA NORMAL</string>
+    <string name="system_nominal">SISTEMA</string>
     <string name="sys_check_log">VERIF. %1$04d // PARIDAD %2$04X // OK</string>
 
     <string name="wifi_strong">FUERTE</string>
