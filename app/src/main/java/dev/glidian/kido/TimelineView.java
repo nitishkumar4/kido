@@ -57,6 +57,8 @@ final class TimelineView extends FrameLayout {
 	private final TextView detailMeta;
 	private final TextView detailDescription;
 	private final TextView detailType;
+	private final GradientDrawable categoryBackground;
+	private final GlowView categoryGlow;
 	private final TextView[] states = new TextView[5];
 	private final View[] monthMarkers = new View[12];
 	private final GlowView[] monthGlows = new GlowView[12];
@@ -173,11 +175,11 @@ final class TimelineView extends FrameLayout {
 		detailMonth = label("", Kido.mono, 19, Kido.CREAM, 0.08f);
 		place(dossier, detailMonth, 30, 148, 250, 28);
 		FrameLayout categoryBadge = new FrameLayout(context);
-		GradientDrawable categoryBackground = new GradientDrawable();
+		categoryBackground = new GradientDrawable();
 		categoryBackground.setColor(Kido.withAlpha(Kido.RED, 0.08f));
 		categoryBackground.setStroke(Kido.px(1), Kido.withAlpha(Kido.RED, 0.8f));
 		categoryBadge.setBackground(categoryBackground);
-		GlowView categoryGlow = new GlowView(context, Kido.px(5), false);
+		categoryGlow = new GlowView(context, Kido.px(5), false);
 		categoryGlow.setColor(Kido.withAlpha(Kido.RED, 0.3f));
 		categoryGlow.setGlowing(true);
 		place(categoryBadge, categoryGlow, 0, 0, 260, 30);
@@ -292,6 +294,22 @@ final class TimelineView extends FrameLayout {
 		Collections.sort(events, Comparator.comparing(event -> event.date));
 	}
 
+	static int categoryColor(String category) {
+		String value = category == null ? "" : category.toUpperCase(Locale.ROOT);
+		if (value.contains("WAR") || value.contains("POLITIC")) return Kido.RED;
+		if (value.contains("RELIGIOUS") || value.contains("FESTIVAL")
+				|| value.contains("CULTURAL FESTIVAL") || value.contains("CULTURAL OBSERVANCE")) {
+			return 0xFFB18AE8;
+		}
+		if (value.contains("HISTORICAL") || value.contains("COMMEMORATION")) return 0xFF55BCEB;
+		if (value.contains("STATE") || value.contains("UT OBSERVANCE")
+				|| value.contains("TERRITORY")) return 0xFF70D68A;
+		if (value.contains("INTERNATIONAL") || value.contains("AWARENESS")) return 0xFF6B9DFF;
+		if (value.contains("NATIONAL") || value.contains("PUBLIC HOLIDAY")) return Kido.AMBER;
+		if (value.contains("DATE MARKER")) return Kido.DIM;
+		return Kido.DIM;
+	}
+
 	private int brighten(int color) {
 		int red = android.graphics.Color.red(color);
 		int green = android.graphics.Color.green(color);
@@ -366,6 +384,11 @@ final class TimelineView extends FrameLayout {
 		detailMonth.setText(selected.date.format(DateTimeFormatter.ofPattern("MMMM yyyy", Locale.ENGLISH))
 				.toUpperCase(Locale.ROOT));
 		detailType.setText("◆  " + selected.category.toUpperCase(Locale.ROOT));
+		int categoryColor = categoryColor(selected.category);
+		detailType.setTextColor(categoryColor);
+		categoryBackground.setColor(Kido.withAlpha(categoryColor, 0.08f));
+		categoryBackground.setStroke(Kido.px(1), Kido.withAlpha(categoryColor, 0.8f));
+		categoryGlow.setColor(Kido.withAlpha(categoryColor, 0.3f));
 		detailTitle.setText(selected.title.toUpperCase(Locale.ROOT));
 		detailDescription.setText(selected.description);
 		int week = selected.date.get(WeekFields.ISO.weekOfWeekBasedYear());
