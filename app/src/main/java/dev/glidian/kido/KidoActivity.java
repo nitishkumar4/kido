@@ -79,8 +79,8 @@ public class KidoActivity extends Activity {
     private static final int[][] ZONES = {{0, 0}, {1900, 220}, {720, 1180}, {720, 2260}};
     // Each section has a big kanji beside its title and a short one on its tab; the words are in strings.xml.
     private static final String[] ZONE_KANJI = {"主要", "アプリ", "制御系統"};
-    private static final String[] TAB_KANJI = {"音楽", "主要", "アプリ", "制御", "事象"};
     private static final int CALENDAR_X = 2640, CALENDAR_Y = 1180;
+    private static final int TIMELINE_X = 4560, TIMELINE_Y = 1180;
     private static final int[] ZONE_TITLES = {R.string.zone_main, R.string.zone_apps, R.string.zone_system};
     private static final int[] ZONE_TABS = {R.string.zone_main_tab, R.string.zone_apps_tab, R.string.zone_system_tab};
     // The section tabs under the clock: left edge, step from one tab to the next, and tab width. The data block and
@@ -97,6 +97,7 @@ public class KidoActivity extends Activity {
     private FrameLayout root, board, launch, menu, hud;
     private MusicView musicView;
     private CalendarView calendarView;
+    private TimelineView timelineView;
     private List<MusicLibrary.Track> musicTracks;
     private boolean musicActive, musicLoading, musicOpenPending;
     private boolean musicPreparationRequested, musicPreparing, musicReady;
@@ -115,11 +116,10 @@ public class KidoActivity extends Activity {
     private int[] musicHudVisibility;
     private String previousFooterZone;
     private GradientDrawable plateBg, subBg, glowBg;
-    private final TextView[] tabText = new TextView[10];
-    private final GlowView[] tabBar = new GlowView[5];
+    private final TextView[] tabText = new TextView[6];
     private final GlowView[] zoneGlow = new GlowView[3];
     private GlowView plateHalo;
-    private final GradientDrawable[] tabBg = new GradientDrawable[5];
+    private final GradientDrawable[] tabBg = new GradientDrawable[6];
     private boolean audioTabActive;
     private TextView dateText;
     private View menuOrigin;
@@ -188,6 +188,7 @@ public class KidoActivity extends Activity {
     private Beeps beeps;
     private SharedPreferences prefs;
     private long lastKeyAt, lastLogAt;
+    private View rightPressOrigin;
     private int inputCount, channelCount, sysCheck = 41;
     private boolean resumed;
     private ValueAnimator alertPulse;
@@ -257,6 +258,7 @@ public class KidoActivity extends Activity {
         root.removeAllViews();
         musicView = null;
         calendarView = null;
+        timelineView = null;
         musicActive = false;
         musicPreparationRequested = false;
         musicPreparing = false;
@@ -283,7 +285,7 @@ public class KidoActivity extends Activity {
 
         board = new FrameLayout(this);
         board.setBackground(Backdrop.hexGrid(getResources(), Kido.withAlpha(Kido.AMBER, 0.07f)));
-        root.addView(board, new FrameLayout.LayoutParams(Kido.px(4620), Kido.px(3340)));
+        root.addView(board, new FrameLayout.LayoutParams(Kido.px(6540), Kido.px(3340)));
         List<App> apps = loadApps();
         channelCount = apps.size();
         appsByPkg.clear();
@@ -315,6 +317,7 @@ public class KidoActivity extends Activity {
         buildNetwork(zone(1), rest);
         buildSystem(zone(2));
         buildCalendar();
+        buildTimeline();
         linkEdges();
 
         buildHud();
@@ -718,7 +721,7 @@ public class KidoActivity extends Activity {
         strip.addView(toast);
         place(z, strip, 122, 830, 1676, 74);
         place(z, text("▲ 主要 " + str(R.string.zone_main_tab), Kido.condBold, 26, Kido.DIM, 0.14f), 122, 966, -1, -1);
-        TextView audioHint = text("▼ 音楽  AUDIO       ▶ 事象  EVENT", Kido.condBold, 26, Kido.DIM, 0.14f);
+        TextView audioHint = text("▼ 音楽  AUDIO       ▶ 事象  EVENTS", Kido.condBold, 26, Kido.DIM, 0.14f);
         audioHint.setGravity(Gravity.END);
         place(z, audioHint, 122, 966, 1676, 34);
     }
@@ -742,12 +745,29 @@ public class KidoActivity extends Activity {
         });
     }
 
+    private void buildTimeline() {
+        timelineView = new TimelineView(this);
+        FrameLayout.LayoutParams room = new FrameLayout.LayoutParams(Kido.px(1920), Kido.px(1080));
+        room.leftMargin = Kido.px(TIMELINE_X);
+        room.topMargin = Kido.px(TIMELINE_Y);
+        board.addView(timelineView, room);
+        timelineView.setOnFocusChangeListener((view, hasFocus) -> {
+            if (!hasFocus) return;
+            boolean byKey = SystemClock.uptimeMillis() - lastKeyAt < 400;
+            if (zone != 5) {
+                if (byKey) beeps.section();
+                moveTo(5);
+            }
+        });
+    }
+
     /** Explicit moves at section edges, so the remote always lands where the arrows on screen point. */
     private void linkEdges() {
         for (View v : favViews) v.setId(View.generateViewId());
         for (View v : hexViews) v.setId(View.generateViewId());
         for (View v : sysViews) v.setId(View.generateViewId());
         calendarView.setId(View.generateViewId());
+        timelineView.setId(View.generateViewId());
         for (int i = 0; i < favViews.size(); i++) {
             View f = favViews.get(i);
             f.setNextFocusUpId(f.getId());
@@ -794,6 +814,8 @@ public class KidoActivity extends Activity {
             View last = sysViews.get(sysViews.size() - 1);
             last.setNextFocusRightId(calendarView.getId());
             calendarView.setNextFocusLeftId(last.getId());
+            calendarView.setNextFocusRightId(timelineView.getId());
+            timelineView.setNextFocusLeftId(calendarView.getId());
         }
     }
 
@@ -836,19 +858,21 @@ public class KidoActivity extends Activity {
         place(hud, dataValues, TAB_X + 148, 76, 220, -1);
         buildNowPlaying(hud);
 
-        for (int i = 0; i < 5; i++) {
+        // Five-column, three-row map: MAIN / APPS, CTRL / EVENT / SEQN, AUDIO.
+        int[] tabRows = {1, 2, 0, 0, 1, 1};
+        int[] tabColumns = {4, 2, 2, 3, 2, 3};
+        for (int i = 0; i < 6; i++) {
+            int x = TAB_X + tabColumns[i] * TAB_STEP;
+            int y = 204 + tabRows[i] * 44;
             FrameLayout tab = new FrameLayout(this);
             tabBg[i] = box(Kido.withAlpha(Kido.GREEN, 0.1f), Kido.withAlpha(Kido.GREEN, 0.45f), 2);
             tab.setBackground(tabBg[i]);
-            tabText[i * 2] = text(TAB_KANJI[i], Kido.mincho, 22, Kido.withAlpha(Kido.LIME, 0.75f), 0);
-            String tabLabel = i == 0 ? "AUDIO" : i == 4 ? "EVENT" : str(ZONE_TABS[i - 1]);
-            tabText[i * 2 + 1] = text(tabLabel, Kido.condBold, 20, Kido.withAlpha(Kido.LIME, 0.85f), 0.1f);
-            place(tab, tabText[i * 2], 10, 6, -1, -1);
-            place(tab, tabText[i * 2 + 1], 10, 38, -1, -1);
-            place(hud, tab, TAB_X + i * TAB_STEP, 214, TAB_W, 74);
-            tabBar[i] = new GlowView(this, Kido.px(12), false);
-            tabBar[i].setColor(Kido.RED);
-            place(hud, tabBar[i], TAB_X - 6 + i * TAB_STEP, 284, TAB_W + 12, 32);
+            String tabLabel = i == 0 ? "SEQN" : i == 1 ? "AUDIO" : i == 5 ? "EVENT" : str(ZONE_TABS[i - 2]);
+            tabText[i] = text(tabLabel, Kido.condBold, 18, Kido.withAlpha(Kido.LIME, 0.85f), 0.1f);
+            tabText[i].setGravity(Gravity.CENTER);
+            tabText[i].setSingleLine(true);
+            place(tab, tabText[i], 0, 0, TAB_W, 36);
+            place(hud, tab, x, y, TAB_W, 36);
         }
 
         plate = new FrameLayout(this);
@@ -944,7 +968,7 @@ public class KidoActivity extends Activity {
             if (has && SystemClock.uptimeMillis() - lastKeyAt < 400) beeps.tick();
         });
         npPanel.setVisibility(View.GONE);
-        place(hud, npPanel, TAB_X, 56, NP_W, 150);
+        place(hud, npPanel, TAB_X, 46, NP_W, 150);
     }
 
     /**
@@ -1249,6 +1273,20 @@ public class KidoActivity extends Activity {
 
     private void moveTo(int z, Runnable onPanEnd) {
         zone = z;
+        if (z == 5) {
+            if (timelineView != null) timelineView.resetToToday();
+            handler.removeCallbacks(arrive);
+            board.animate().translationX(-Kido.px(TIMELINE_X)).translationY(-Kido.px(TIMELINE_Y))
+                    .setDuration(620).setInterpolator(fluid).withEndAction(() -> {
+                        intro(5);
+                        if (onPanEnd != null) onPanEnd.run();
+                    }).start();
+            showTabs(5);
+            footerZone.setText("SEC-06 // TIMELINE");
+            updateTimelineStatus();
+            log(str(R.string.log_sector, 6, "TIMELINE"));
+            return;
+        }
         if (z == 4) {
             handler.removeCallbacks(arrive);
             board.animate().translationX(-Kido.px(CALENDAR_X)).translationY(-Kido.px(CALENDAR_Y))
@@ -1285,6 +1323,10 @@ public class KidoActivity extends Activity {
 
     /** Draws a section in: the frame traces itself, the accent bar extends and the header count runs up. */
     private void intro(int z) {
+        if (z == 5) {
+            if (timelineView != null) timelineView.intro();
+            return;
+        }
         if (z == 4) {
             if (calendarView != null) calendarView.intro();
             return;
@@ -1317,13 +1359,11 @@ public class KidoActivity extends Activity {
     }
 
     private void showTabs(int z) {
-        for (int i = 0; i < 5; i++) {
-            boolean on = audioTabActive ? i == 0 : i == (z == 4 ? 4 : z + 1);
+        for (int i = 0; i < 6; i++) {
+            boolean on = audioTabActive ? i == 1 : i == (z == 4 ? 5 : z == 5 ? 0 : z + 2);
             tabBg[i].setColor(on ? Kido.withAlpha(Kido.RED, 0.18f) : Kido.withAlpha(Kido.GREEN, 0.1f));
             tabBg[i].setStroke(Kido.px(2), on ? Kido.RED : Kido.withAlpha(Kido.GREEN, 0.45f));
-            tabText[i * 2].setTextColor(on ? Kido.RED : Kido.withAlpha(Kido.LIME, 0.75f));
-            tabText[i * 2 + 1].setTextColor(on ? Kido.RED : Kido.withAlpha(Kido.LIME, 0.85f));
-            tabBar[i].setVisibility(on ? View.VISIBLE : View.INVISIBLE);
+            tabText[i].setTextColor(on ? Kido.RED : Kido.withAlpha(Kido.LIME, 0.85f));
         }
     }
 
@@ -1359,16 +1399,35 @@ public class KidoActivity extends Activity {
         if (calendarView != null) calendarView.setEventTagColor(colors[index]);
     }
 
+    private void updateTimelineStatus() {
+        if (timelineView == null) return;
+        TimelineView.Event event = timelineView.getSelectedEvent();
+        int color = TimelineView.categoryColor(event.category);
+        setStatus("事象", "EVENT STREAM", event.category.toUpperCase(Locale.ROOT),
+                "SELECTED", color);
+    }
+
+    private void animateStatusText(TextView view, String value) {
+        if (value.equals(view.getText().toString())) return;
+        view.animate().cancel();
+        view.setText(value);
+        view.setAlpha(0f);
+        view.setTranslationX(-Kido.px(14));
+        view.animate().alpha(1f).translationX(0).setDuration(300).setInterpolator(fluid).start();
+    }
+
     private void setStatus(String kanji, String en, String left, String right, int color) {
         if (!kanji.equals(plateKanji.getText().toString()) || !en.equals(plateEn.getText().toString())) {
             plateKanji.setText(kanji);
             plateEn.setText(en);
             plateKanji.setAlpha(0f);
             plateKanji.setTranslationX(-Kido.px(14));
-            plateKanji.animate().alpha(1f).translationX(0).setDuration(300).start();
+            plateKanji.animate().alpha(1f).translationX(0).setDuration(300).setInterpolator(fluid).start();
         }
-        subLeft.setText(fitStatus(left));
-        subRight.setText(right);
+        animateStatusText(subLeft, fitStatus(left));
+        animateStatusText(subRight, right);
+        subLeft.setTextColor(Kido.CREAM);
+        subRight.setTextColor(Kido.DIM);
         if (color == plateColor) return;
         ValueAnimator anim = ValueAnimator.ofObject(new ArgbEvaluator(), plateColor, color);
         anim.setDuration(450);
@@ -1526,7 +1585,12 @@ public class KidoActivity extends Activity {
         handler.removeCallbacks(goIdle);
         handler.postDelayed(goIdle, IDLE_MS);
         boolean down = event.getAction() == KeyEvent.ACTION_DOWN, up = event.getAction() == KeyEvent.ACTION_UP;
-        if (down) lastKeyAt = SystemClock.uptimeMillis();
+        if (down) {
+            lastKeyAt = SystemClock.uptimeMillis();
+            if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_RIGHT && event.getRepeatCount() == 0) {
+                rightPressOrigin = getCurrentFocus();
+            }
+        }
         if (boot != null) {
             if (up) endBoot();
             return true;
@@ -1564,8 +1628,41 @@ public class KidoActivity extends Activity {
             if (down && event.getRepeatCount() == 0) openMusicView();
             return true;
         }
+        if (zone == 5 && timelineView != null && current == timelineView) {
+            int key = event.getKeyCode();
+            if (key == KeyEvent.KEYCODE_DPAD_LEFT || key == KeyEvent.KEYCODE_DPAD_RIGHT) {
+                long now = SystemClock.uptimeMillis();
+                if (down && (event.getRepeatCount() == 0 || now - lastMoveAt >= HOLD_STEP_MS)) {
+                    lastMoveAt = now;
+                    if (key == KeyEvent.KEYCODE_DPAD_LEFT) timelineView.previousEvent();
+                    else timelineView.nextEvent();
+                    updateTimelineStatus();
+                }
+                return true;
+            }
+            if (key == KeyEvent.KEYCODE_BACK) {
+                if (up && calendarView != null) calendarView.requestFocus();
+                return true;
+            }
+            if (key == KeyEvent.KEYCODE_DPAD_CENTER || key == KeyEvent.KEYCODE_ENTER) {
+                if (down && event.getRepeatCount() == 0) {
+                    timelineView.resetToToday();
+                    updateTimelineStatus();
+                    beeps.tick();
+                }
+                return true;
+            }
+            if (isArrow(key)) return true;
+        }
         if (zone == 4 && calendarView != null && current == calendarView) {
             int key = event.getKeyCode();
+            if (key == KeyEvent.KEYCODE_DPAD_RIGHT) {
+                if (up) {
+                    if (rightPressOrigin == calendarView && timelineView != null) timelineView.requestFocus();
+                    rightPressOrigin = null;
+                }
+                return true;
+            }
             if (key == KeyEvent.KEYCODE_DPAD_LEFT || key == KeyEvent.KEYCODE_BACK) {
                 if (up && !sysViews.isEmpty()) sysViews.get(sysViews.size() - 1).requestFocus();
                 return true;
@@ -1676,6 +1773,10 @@ public class KidoActivity extends Activity {
 
     @Override
     public void onBackPressed() {
+        if (zone == 5 && calendarView != null) {
+            calendarView.requestFocus();
+            return;
+        }
         if (zone == 4 && !sysViews.isEmpty()) {
             sysViews.get(sysViews.size() - 1).requestFocus();
             return;

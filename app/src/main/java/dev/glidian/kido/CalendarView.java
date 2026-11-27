@@ -75,6 +75,10 @@ final class CalendarView extends FrameLayout {
 				Kido.mono, 20, Kido.DIM, 0.08f);
 		monthControls.setGravity(Gravity.CENTER);
 		place(monthControls, 500, 966, 1000, 34);
+		
+		TextView sequence = label("▶  時線  SEQUENCE", Kido.condBold, 26, Kido.DIM, 0.14f);
+		sequence.setGravity(Gravity.END);
+		place(sequence, 122, 966, 1676, 34);
 	}
 
 	private void renderMonth() {
