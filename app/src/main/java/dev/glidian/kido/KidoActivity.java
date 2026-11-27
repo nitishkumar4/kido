@@ -116,10 +116,10 @@ public class KidoActivity extends Activity {
     private int[] musicHudVisibility;
     private String previousFooterZone;
     private GradientDrawable plateBg, subBg, glowBg;
-    private final TextView[] tabText = new TextView[6];
+    private final NavTabView[] navTabs = new NavTabView[6];
     private final GlowView[] zoneGlow = new GlowView[3];
     private GlowView plateHalo;
-    private final GradientDrawable[] tabBg = new GradientDrawable[6];
+
     private boolean audioTabActive;
     private TextView dateText;
     private View menuOrigin;
@@ -858,21 +858,15 @@ public class KidoActivity extends Activity {
         place(hud, dataValues, TAB_X + 148, 76, 220, -1);
         buildNowPlaying(hud);
 
-        // Five-column, three-row map: MAIN / APPS, CTRL / EVENT / SEQN, AUDIO.
+        // Five-column, three-row MAGI module map: MAIN / APPS, CTRL / EVENT / SEQN, AUDIO.
         int[] tabRows = {1, 2, 0, 0, 1, 1};
         int[] tabColumns = {4, 2, 2, 3, 2, 3};
         for (int i = 0; i < 6; i++) {
             int x = TAB_X + tabColumns[i] * TAB_STEP;
             int y = 204 + tabRows[i] * 44;
-            FrameLayout tab = new FrameLayout(this);
-            tabBg[i] = box(Kido.withAlpha(Kido.GREEN, 0.1f), Kido.withAlpha(Kido.GREEN, 0.45f), 2);
-            tab.setBackground(tabBg[i]);
             String tabLabel = i == 0 ? "SEQN" : i == 1 ? "AUDIO" : i == 5 ? "EVENT" : str(ZONE_TABS[i - 2]);
-            tabText[i] = text(tabLabel, Kido.condBold, 18, Kido.withAlpha(Kido.LIME, 0.85f), 0.1f);
-            tabText[i].setGravity(Gravity.CENTER);
-            tabText[i].setSingleLine(true);
-            place(tab, tabText[i], 0, 0, TAB_W, 36);
-            place(hud, tab, x, y, TAB_W, 36);
+            navTabs[i] = new NavTabView(this, tabLabel, i + 1);
+            place(hud, navTabs[i], x, y, TAB_W, 36);
         }
 
         plate = new FrameLayout(this);
@@ -1361,9 +1355,7 @@ public class KidoActivity extends Activity {
     private void showTabs(int z) {
         for (int i = 0; i < 6; i++) {
             boolean on = audioTabActive ? i == 1 : i == (z == 4 ? 5 : z == 5 ? 0 : z + 2);
-            tabBg[i].setColor(on ? Kido.withAlpha(Kido.RED, 0.18f) : Kido.withAlpha(Kido.GREEN, 0.1f));
-            tabBg[i].setStroke(Kido.px(2), on ? Kido.RED : Kido.withAlpha(Kido.GREEN, 0.45f));
-            tabText[i].setTextColor(on ? Kido.RED : Kido.withAlpha(Kido.LIME, 0.85f));
+            navTabs[i].setActive(on);
         }
     }
 
@@ -3272,4 +3264,77 @@ public class KidoActivity extends Activity {
             c.drawPath(path, paint);
         }
     }
+
+    /** Compact MAGI-style navigation module with a chamfered frame and restrained status lighting. */
+    private static final class NavTabView extends View {
+        private final String label;
+        private final String index;
+        private final Paint fillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        private final Paint strokePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        private final Paint detailPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        private final Paint indexPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        private final Paint labelPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        private final Path framePath = new Path();
+        private boolean active;
+
+        NavTabView(Context context, String label, int number) {
+            super(context);
+            this.label = label;
+            this.index = String.format(Locale.ROOT, "%02d", number);
+            labelPaint.setTypeface(Kido.condBold);
+            labelPaint.setTextAlign(Paint.Align.CENTER);
+            labelPaint.setTextSize(Kido.px(14));
+            indexPaint.setTypeface(Kido.mono);
+            indexPaint.setTextSize(Kido.px(7));
+            detailPaint.setStrokeWidth(Kido.px(1));
+            detailPaint.setStyle(Paint.Style.STROKE);
+            setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
+
+        void setActive(boolean active) {
+            if (this.active == active) return;
+            this.active = active;
+            invalidate();
+        }
+
+        @Override
+        protected void onDraw(Canvas canvas) {
+            super.onDraw(canvas);
+            float w = getWidth();
+            float h = getHeight();
+            float cut = Kido.px(7);
+            framePath.reset();
+            framePath.moveTo(0, cut);
+            framePath.lineTo(cut, 0);
+            framePath.lineTo(w - cut - Kido.px(5), 0);
+            framePath.lineTo(w, cut + Kido.px(3));
+            framePath.lineTo(w, h - cut);
+            framePath.lineTo(w - cut, h);
+            framePath.lineTo(0, h);
+            framePath.close();
+
+            int edge = active ? Kido.RED : Kido.withAlpha(Kido.GREEN, 0.72f);
+            fillPaint.setStyle(Paint.Style.FILL);
+            fillPaint.setColor(active ? 0xE51A0909 : 0xD909120E);
+            canvas.drawPath(framePath, fillPaint);
+
+            strokePaint.setStyle(Paint.Style.STROKE);
+            strokePaint.setStrokeWidth(Kido.px(active ? 1.6f : 1.1f));
+            strokePaint.setColor(edge);
+            canvas.drawPath(framePath, strokePaint);
+
+            detailPaint.setColor(active ? Kido.withAlpha(Kido.RED, 0.9f) : Kido.withAlpha(Kido.LIME, 0.62f));
+            canvas.drawLine(Kido.px(8), Kido.px(5), w - Kido.px(17), Kido.px(5), detailPaint);
+            canvas.drawRect(w - Kido.px(9), Kido.px(4), w - Kido.px(5), Kido.px(8), fillPaint);
+            canvas.drawRect(w - Kido.px(9), Kido.px(4), w - Kido.px(5), Kido.px(8), detailPaint);
+            canvas.drawLine(Kido.px(8), h - Kido.px(4), Kido.px(22), h - Kido.px(4), detailPaint);
+
+            indexPaint.setColor(active ? Kido.withAlpha(Kido.RED, 0.95f) : Kido.withAlpha(Kido.LIME, 0.72f));
+            canvas.drawText(index, Kido.px(8), Kido.px(15), indexPaint);
+
+            labelPaint.setColor(active ? Kido.RED : Kido.withAlpha(Kido.LIME, 0.88f));
+            canvas.drawText(label, w / 2f, h - Kido.px(8), labelPaint);
+        }
+    }
+
 }
