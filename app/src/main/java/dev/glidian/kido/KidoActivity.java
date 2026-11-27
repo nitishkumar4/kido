@@ -3284,10 +3284,15 @@ public class KidoActivity extends Activity {
             super.onDraw(canvas);
             float x = Kido.px(10), y1 = Kido.px(18), y2 = Kido.px(62), y3 = Kido.px(106);
             float x2 = Kido.px(102), x3 = Kido.px(194);
-            canvas.drawLine(x, y1, x2, y1, line);       // MAIN — APPS
+            float upper = Kido.px(2), middle = Kido.px(46);
+            canvas.drawLine(x, upper, x2, upper, line); // MAIN — APPS, routed above labels
+            canvas.drawLine(x, upper, x, y1, line);
+            canvas.drawLine(x2, upper, x2, y1, line);
             canvas.drawLine(x, y1, x, y2, line);        // MAIN — CTRL
-            canvas.drawLine(x, y2, x2, y2, line);       // CTRL — EVENT
-            canvas.drawLine(x2, y2, x3, y2, line);      // EVENT — SEQN
+            canvas.drawLine(x, middle, x3, middle, line); // CTRL — EVENT — SEQN
+            canvas.drawLine(x, middle, x, y2, line);
+            canvas.drawLine(x2, middle, x2, y2, line);
+            canvas.drawLine(x3, middle, x3, y2, line);
             canvas.drawLine(x, y2, x, y3, line);        // CTRL — AUDIO
         }
     }
