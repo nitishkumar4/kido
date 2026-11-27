@@ -116,7 +116,7 @@ public class KidoActivity extends Activity {
     private int[] musicHudVisibility;
     private String previousFooterZone;
     private GradientDrawable plateBg, subBg, glowBg;
-    private final NavTabView[] navTabs = new NavTabView[6];
+    private NavStripView navStrip;
     private final GlowView[] zoneGlow = new GlowView[3];
     private GlowView plateHalo;
 
@@ -858,18 +858,11 @@ public class KidoActivity extends Activity {
         place(hud, dataValues, TAB_X + 148, 76, 220, -1);
         buildNowPlaying(hud);
 
-        // Spatial MAGI navigation: connector schematic behind six independent section labels.
-        int[] tabRows = {1, 2, 0, 0, 1, 1};
-        int[] tabColumns = {4, 2, 2, 3, 2, 3};
-        place(hud, new NavMapLines(this), TAB_X + 2 * TAB_STEP, 204,
-                TAB_STEP * 2 + TAB_W, 124);
-        for (int i = 0; i < 6; i++) {
-            int x = TAB_X + tabColumns[i] * TAB_STEP;
-            int y = 204 + tabRows[i] * 44;
-            String tabLabel = i == 0 ? "SEQN" : i == 1 ? "AUDIO" : i == 5 ? "EVENT" : str(ZONE_TABS[i - 2]);
-            navTabs[i] = new NavTabView(this, tabLabel);
-            place(hud, navTabs[i], x, y, TAB_W, 36);
-        }
+        // Contextual navigation: show only the active section and its immediate neighbours.
+        String[] tabLabels = { "SEQN", "AUDIO", str(ZONE_TABS[0]), str(ZONE_TABS[1]),
+                str(ZONE_TABS[2]), "EVENT" };
+        navStrip = new NavStripView(this, tabLabels);
+        place(hud, navStrip, TAB_X - 70, 202, 650, 82);
 
         plate = new FrameLayout(this);
         plateBg = new GradientDrawable();
@@ -1355,10 +1348,12 @@ public class KidoActivity extends Activity {
     }
 
     private void showTabs(int z) {
-        for (int i = 0; i < 6; i++) {
-            boolean on = audioTabActive ? i == 1 : i == (z == 4 ? 5 : z == 5 ? 0 : z + 2);
-            navTabs[i].setActive(on);
-        }
+        int active = audioTabActive ? 1 : z == 4 ? 5 : z == 5 ? 0 : z + 2;
+        // Display order follows the user's section flow, not the internal tab array.
+        int[] order = { 2, 3, 4, 1, 5, 0 };
+        int position = 0;
+        while (position < order.length && order[position] != active) position++;
+        navStrip.setSelection(position);
     }
 
     private void showAudioTab(boolean active) {
@@ -3267,104 +3262,72 @@ public class KidoActivity extends Activity {
         }
     }
 
-    /** Thin spatial links joining the navigation points; drawn once behind the labels. */
-    private static final class NavMapLines extends View {
-        private final Paint line = new Paint(Paint.ANTI_ALIAS_FLAG);
+    /** A focused navigation strip showing the current section and its immediate neighbours. */
+    private static final class NavStripView extends View {
+        private final String[] labels;
+        private final int[] order = { 2, 3, 4, 1, 5, 0 };
+        private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        private int selection = -1;
 
-        NavMapLines(Context context) {
+        NavStripView(Context context, String[] labels) {
             super(context);
+            this.labels = labels;
             setWillNotDraw(false);
-            line.setColor(Kido.withAlpha(Kido.GREEN, 0.34f));
-            line.setStrokeWidth(Kido.px(1));
-            line.setStyle(Paint.Style.STROKE);
         }
 
-        @Override
-        protected void onDraw(Canvas canvas) {
-            super.onDraw(canvas);
-            float x = Kido.px(10), y1 = Kido.px(18), y2 = Kido.px(62), y3 = Kido.px(106);
-            float x2 = Kido.px(102), x3 = Kido.px(194);
-            float upper = Kido.px(2), middle = Kido.px(46);
-            canvas.drawLine(x, upper, x2, upper, line); // MAIN — APPS, routed above labels
-            canvas.drawLine(x, upper, x, y1, line);
-            canvas.drawLine(x2, upper, x2, y1, line);
-            canvas.drawLine(x, y1, x, y2, line);        // MAIN — CTRL
-            canvas.drawLine(x, middle, x3, middle, line); // CTRL — EVENT — SEQN
-            canvas.drawLine(x, middle, x, y2, line);
-            canvas.drawLine(x2, middle, x2, y2, line);
-            canvas.drawLine(x3, middle, x3, y2, line);
-            canvas.drawLine(x, y2, x, y3, line);        // CTRL — AUDIO
-        }
-    }
-
-    /** Unboxed MAGI navigation point with a geometric node and a restrained active targeting mark. */
-    private static final class NavTabView extends View {
-        private final String label;
-        private final Paint nodePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        private final Paint labelPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        private final Paint markerPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        private final Paint bracketPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        private boolean active;
-
-        NavTabView(Context context, String label) {
-            super(context);
-            this.label = label;
-            setWillNotDraw(false);
-            labelPaint.setTypeface(Kido.condBold);
-            labelPaint.setTextAlign(Paint.Align.CENTER);
-            labelPaint.setTextSize(Kido.px(17));
-            nodePaint.setStyle(Paint.Style.STROKE);
-            nodePaint.setStrokeWidth(Kido.px(1.2f));
-            markerPaint.setStyle(Paint.Style.FILL);
-            bracketPaint.setStyle(Paint.Style.STROKE);
-            bracketPaint.setStrokeWidth(Kido.px(1.2f));
-            bracketPaint.setStrokeCap(Paint.Cap.SQUARE);
-        }
-
-        void setActive(boolean active) {
-            if (this.active == active) return;
-            this.active = active;
+        void setSelection(int position) {
+            if (selection == position) return;
+            selection = position;
             invalidate();
         }
 
         @Override
         protected void onDraw(Canvas canvas) {
             super.onDraw(canvas);
-            float w = getWidth(), h = getHeight();
-            int color = active ? Kido.RED : Kido.withAlpha(Kido.LIME, 0.88f);
+            if (selection < 0 || selection >= order.length) return;
 
-            // A small diamond is the actual navigation point; the connector passes beneath it.
-            float cx = Kido.px(10), cy = h / 2f, r = Kido.px(active ? 4.5f : 3.5f);
-            nodePaint.setColor(color);
-            markerPaint.setColor(active ? Kido.RED : Kido.withAlpha(Kido.GREEN, 0.7f));
-            android.graphics.Path diamond = new android.graphics.Path();
-            diamond.moveTo(cx, cy - r);
-            diamond.lineTo(cx + r, cy);
-            diamond.lineTo(cx, cy + r);
-            diamond.lineTo(cx - r, cy);
-            diamond.close();
-            canvas.drawPath(diamond, nodePaint);
-            if (active) canvas.drawCircle(cx, cy, Kido.px(1.8f), markerPaint);
+            float center = getWidth() / 2f;
+            float middle = getHeight() / 2f;
+            drawLabel(canvas, labels[order[selection]], center, middle, 31,
+                    Kido.RED, 1f, true);
 
-            labelPaint.setColor(color);
-            float textX = Kido.px(51);
-            float textY = cy - (labelPaint.ascent() + labelPaint.descent()) / 2f;
-            canvas.drawText(label, textX, textY, labelPaint);
+            if (selection > 0) {
+                drawLabel(canvas, labels[order[selection - 1]], center - Kido.px(215),
+                        middle, 21, Kido.withAlpha(Kido.LIME, 0.78f), 0.82f, false);
+            }
+            if (selection < order.length - 1) {
+                drawLabel(canvas, labels[order[selection + 1]], center + Kido.px(215),
+                        middle, 21, Kido.withAlpha(Kido.LIME, 0.78f), 0.82f, false);
+            }
+        }
+
+        private void drawLabel(Canvas canvas, String label, float x, float y, float size,
+                               int color, float alpha, boolean active) {
+            paint.setTypeface(Kido.condBold);
+            paint.setTextAlign(Paint.Align.CENTER);
+            paint.setTextSize(Kido.px(size));
+            paint.setColor(color);
+            paint.setAlpha(Math.round(255 * alpha));
+            float baseline = y - (paint.ascent() + paint.descent()) / 2f;
+            canvas.drawText(label, x, baseline, paint);
 
             if (active) {
-                float half = labelPaint.measureText(label) / 2f + Kido.px(7);
-                float left = textX - half, right = textX + half;
-                float top = cy - Kido.px(12), bottom = cy + Kido.px(12);
-                float arm = Kido.px(5);
-                bracketPaint.setColor(Kido.withAlpha(Kido.RED, 0.95f));
-                canvas.drawLine(left, top, left + arm, top, bracketPaint);
-                canvas.drawLine(left, top, left, top + arm, bracketPaint);
-                canvas.drawLine(right - arm, top, right, top, bracketPaint);
-                canvas.drawLine(right, top, right, top + arm, bracketPaint);
-                canvas.drawLine(left, bottom - arm, left, bottom, bracketPaint);
-                canvas.drawLine(left, bottom, left + arm, bottom, bracketPaint);
-                canvas.drawLine(right, bottom - arm, right, bottom, bracketPaint);
-                canvas.drawLine(right - arm, bottom, right, bottom, bracketPaint);
+                float half = paint.measureText(label) / 2f + Kido.px(12);
+                float top = y - Kido.px(23);
+                float bottom = y + Kido.px(23);
+                float arm = Kido.px(8);
+                paint.setStyle(Paint.Style.STROKE);
+                paint.setStrokeWidth(Kido.px(1.5f));
+                paint.setColor(Kido.withAlpha(Kido.RED, 0.9f));
+                canvas.drawLine(x - half, top, x - half + arm, top, paint);
+                canvas.drawLine(x - half, top, x - half, top + arm, paint);
+                canvas.drawLine(x + half - arm, top, x + half, top, paint);
+                canvas.drawLine(x + half, top, x + half, top + arm, paint);
+                canvas.drawLine(x - half, bottom - arm, x - half, bottom, paint);
+                canvas.drawLine(x - half, bottom, x - half + arm, bottom, paint);
+                canvas.drawLine(x + half, bottom - arm, x + half, bottom, paint);
+                canvas.drawLine(x + half - arm, bottom, x + half, bottom, paint);
+                paint.setStyle(Paint.Style.FILL);
             }
         }
     }
