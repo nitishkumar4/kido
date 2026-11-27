@@ -3288,7 +3288,6 @@ public class KidoActivity extends Activity {
             indexPaint.setTextSize(Kido.px(7));
             detailPaint.setStrokeWidth(Kido.px(1));
             detailPaint.setStyle(Paint.Style.STROKE);
-            setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
 
         void setActive(boolean active) {
